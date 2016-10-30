@@ -1,0 +1,7 @@
+@import './utilities';
+
+.icon.status {
+  &.in-sync { color: #1bff00; }
+  &.out-sync { color: #ff9a00; }
+  &.out-dated { color: #ff2d00; }
+}

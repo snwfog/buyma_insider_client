@@ -2,12 +2,13 @@
 
 module.exports = function(environment) {
   var ENV = {
+    appName:      'BUYMA バイマ INSIDER',
     modulePrefix: 'buyma-insider-client',
-    environment: environment,
-    rootURL: '/',
+    environment:  environment,
+    rootURL:      '/',
     locationType: 'auto',
-    EmberENV: {
-      FEATURES: {
+    EmberENV:     {
+      FEATURES:          {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       },
@@ -37,7 +38,7 @@ module.exports = function(environment) {
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+    ENV.APP.LOG_VIEW_LOOKUPS      = false;
 
     ENV.APP.rootElement = '#ember-testing';
   }

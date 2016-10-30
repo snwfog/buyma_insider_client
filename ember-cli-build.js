@@ -20,5 +20,9 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('/bower_components/bulma/css/bulma.css');
+  app.import('/bower_components/typicons.font/src/font/typicons.css');
+  app.import('/bower_components/typicons.font/src/font/typicons.woff', { destDir: 'assets' });
+
   return app.toTree();
 };

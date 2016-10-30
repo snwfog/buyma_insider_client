@@ -1,0 +1,48 @@
+<nav class="nav">
+  <div class="nav-left">
+    {{#link-to 'index' class='nav-item is-brand'}}
+      {{appName}}
+    {{/link-to}}
+  </div>
+
+  {{!--<div class="nav-center">--}}
+  {{!--<a class="nav-item" href="#">--}}
+  {{!--<span class="icon typcn typcn-arrow-left"></span>--}}
+  {{!--</a>--}}
+  {{!--<a class="nav-item" href="#">--}}
+  {{!--<span class="icon">--}}
+  {{!--<i class="fa fa-twitter"></i>--}}
+  {{!--</span>--}}
+  {{!--</a>--}}
+  {{!--</div>--}}
+
+  {{!--<div class="nav-right nav-menu">--}}
+  {{!--{{#link-to 'new' class='nav-item'}}New{{/link-to}}--}}
+  {{!--{{#link-to 'status' class='nav-item'}}Status{{/link-to}}--}}
+
+  {{!--<span class="nav-item">--}}
+  {{!--{{#link-to 'status' class='button'}}--}}
+  {{!--<span>Status</span>--}}
+  {{!--{{/link-to}}--}}
+
+  {{!--<a class="button is-primary" href="#">--}}
+  {{!--<span class="icon">--}}
+  {{!--<i class="fa fa-download"></i>--}}
+  {{!--</span>--}}
+  {{!--<span>Download</span>--}}
+  {{!--</a>--}}
+  {{!--</span>--}}
+  {{!--</div>--}}
+</nav>
+<nav class="nav has-shadow">
+  <div class="container">
+    <div class="nav-left">
+      {{#link-to 'new' class='is-tab nav-item' activeClass='is-active'}}New{{/link-to}}
+      {{#link-to 'status' class='is-tab nav-item' activeClass='is-active'}}Status{{/link-to}}
+    </div>
+  </div>
+</nav>
+
+<div class="section">{{outlet}}</div>
+
+{{partial 'partials/footer'}}
