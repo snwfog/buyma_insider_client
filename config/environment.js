@@ -24,6 +24,10 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.APP.SERVER = {
+    endpoint: 'http://localhost:5050'
+  };
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
