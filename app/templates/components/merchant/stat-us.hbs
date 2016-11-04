@@ -8,21 +8,29 @@
     <nav class="level is-mobile">
       <div class="level-item has-text-centered">
         <p class="heading">New Articles</p>
-        <p class="title">{{newArticlesCount}}</p>
+        <p class="title">{{metadata.newArticlesCount}}</p>
       </div>
       <div class="level-item has-text-centered">
         <p class="heading">Total Articles</p>
-        <p class="title">{{totalArticlesCount}}</p>
+        <p class="title">{{metadata.totalArticlesCount}}</p>
       </div>
       <div class="level-item has-text-centered">
-        <p class="heading">Status</p>
-        <p class="title">{{lastSyncedDate}}</p>
+        <p class="heading">Last Sync</p>
+        <p class="title">
+          {{#if metadata.lastSync}}
+            {{capitalize (moment-from-now metadata.lastSync)}}
+          {{else}}
+            Never
+          {{/if}}
+        </p>
       </div>
     </nav>
     {{!--{{ui.ember-chart type='bar' data=exampleData}}--}}
   </div>
   <footer class="card-footer">
-    <a class="card-footer-item">Update Histories</a>
+    {{#link-to 'history' metadata.id class='card-footer-item'}}
+      Update Histories
+    {{/link-to}}
     <a class="card-footer-item">All Articles</a>
     <a class="card-footer-item">View</a>
     <a class="card-footer-item">View</a>
