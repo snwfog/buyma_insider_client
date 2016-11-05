@@ -1,7 +1,5 @@
 import ApplicationAdapter from '../application';
 
 export default ApplicationAdapter.extend({
-  pathForType() {
-    return 'merchant_metadatum';
-  }
+  pathForType: () => 'merchant_metadata',
 });

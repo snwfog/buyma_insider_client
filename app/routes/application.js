@@ -4,7 +4,7 @@ const { hash }  = Ember.RSVP;
 export default Ember.Route.extend({
   model() {
     return hash({
-      merchantMetadatum: this.store.findAll('merchant/metadata'),
+      merchantMetadata: this.store.findAll('merchant/metadatum'),
     });
   },
 });

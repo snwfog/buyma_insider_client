@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import EmberChart from '../ember-chart';
+import EmberChart from 'ember-cli-chartjs/components/ember-chart';
 
 export default EmberChart.extend({
   width:     200,

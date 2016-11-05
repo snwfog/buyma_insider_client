@@ -1,14 +1,14 @@
 import Em from 'ember';
 import DS from 'ember-data';
 
-const { debug } = Em;
-
 export default DS.JSONAPISerializer.extend({
   modelNameFromPayloadKey(payloadKey) {
 //    payloadKey = payloadKey.split('_').join('/')
-//    debug(`modelnameFromPayloadKey ${payloadKey}`);
+//    this.debug(`modelnameFromPayloadKey ${payloadKey}`);
     if (payloadKey === 'merchant-metadata') {
-      return 'merchant/metadata';
+      return 'merchant/metadatum';
+    } else if (payloadKey === 'crawl-sessions') {
+      return 'merchant/crawlSession';
     } else {
       return this._super(payloadKey);
     }

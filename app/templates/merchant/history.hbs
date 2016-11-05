@@ -1,0 +1,15 @@
+<section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        {{capitalize model.metadatum.name}} History
+      </h1>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    {{ui.table.crawl-session model.crawlSessions}}
+  </div>
+</section>
+

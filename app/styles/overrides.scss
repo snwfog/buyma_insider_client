@@ -1,0 +1,11 @@
+// ember-light-table header table should
+// hide the margin on the bottom
+div.lt-head table {
+  margin-bottom: 0 !important;
+}
+
+// ember-light-table body table should
+// hide the margin on the bottom too
+div.lt-body-wrap > table {
+  margin-bottom: 0 !important;
+}

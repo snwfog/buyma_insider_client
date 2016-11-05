@@ -1,34 +1,33 @@
 <div class="card is-fullwidth">
   <header class="card-header">
     <p class="card-header-title">
-    <h3 class="title is-3">{{capitalize metadata.name}}</h3>
+    <h3 class="title is-3">{{capitalize metadatum.name}}</h3>
     </p>
   </header>
   <div class="card-content">
     <nav class="level is-mobile">
       <div class="level-item has-text-centered">
         <p class="heading">New Articles</p>
-        <p class="title">{{metadata.newArticlesCount}}</p>
+        <p class="title">{{metadatum.newArticlesCount}}</p>
       </div>
       <div class="level-item has-text-centered">
         <p class="heading">Total Articles</p>
-        <p class="title">{{metadata.totalArticlesCount}}</p>
+        <p class="title">{{metadatum.totalArticlesCount}}</p>
       </div>
       <div class="level-item has-text-centered">
         <p class="heading">Last Sync</p>
         <p class="title">
-          {{#if metadata.lastSync}}
-            {{capitalize (moment-from-now metadata.lastSync)}}
+          {{#if metadatum.lastSync}}
+            {{capitalize (moment-from-now metadatum.lastSync)}}
           {{else}}
             Never
           {{/if}}
         </p>
       </div>
     </nav>
-    {{!--{{ui.ember-chart type='bar' data=exampleData}}--}}
   </div>
   <footer class="card-footer">
-    {{#link-to 'history' metadata.id class='card-footer-item'}}
+    {{#link-to 'merchant.history' metadatum.id class='card-footer-item'}}
       Update Histories
     {{/link-to}}
     <a class="card-footer-item">All Articles</a>

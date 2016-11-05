@@ -1,9 +1,10 @@
-import Em from 'ember';
 import DS from 'ember-data';
 
-const { attr } = DS;
+const { hasMany, attr } = DS;
 
 export default DS.Model.extend({
+  crawlSessions:      hasMany('merchant/crawlSession', { async: true }),
+
   name:               attr(),
   baseUrl:            attr(),
   pagerCss:           attr(),

@@ -20,13 +20,7 @@ export default Ember.Route.extend({
 
   model(params, transition) {
     return hash({
-      metadata: this.store.find('merchant/metadata', params['merchant_metadata_id'])
-    });
-  },
-
-  renderTemplate(ctrl, model) {
-    this.render('history', {
-      into: 'application',
+      metadatum: this.store.find('merchant/metadatum', params['merchant_metadatum_id'])
     });
   },
 });
