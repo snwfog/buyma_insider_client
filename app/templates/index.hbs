@@ -10,16 +10,16 @@
 <section class="hero is-medium">
   <div class="hero-body">
     <div class="columns">
-      <div class="column is-8 is-offset-2">
+      <div class="column is-10 is-offset-1">
         <p class="control has-addons">
           <span class="select is-large">
-            <select>
-              <option>Zara</option>
-              <option>Getoutside</option>
-              <option>Shoeme</option>
-            </select>
+            {{log merchantMetadata.length}}
+            {{ui.form.ember-select content=merchantMetadata
+                                   optionValuePath='id'
+                                   optionLabelPath='name'}}
           </span>
-          <input class="input is-expanded is-large" type="text" placeholder="Search Items: zar:123323">
+          <input class="input is-expanded is-large" type="text"
+                 placeholder="Search Items: zar:123323">
           <a class="button is-large is-info">Search</a>
         </p>
         <h6 class="subtitle is-6">Hint: Auto-complete is available, try to type "zar" + tab, then type in item name</h6>
