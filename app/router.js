@@ -7,7 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('new');
   this.route('status');
   this.route('merchant', { path: '/:merchant_metadatum_id' }, function() {
     this.route('history');
