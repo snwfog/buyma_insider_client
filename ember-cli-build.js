@@ -5,10 +5,6 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     // Add options here
-    'ember-cli-selectize': {
-      //valid values are `default`, `bootstrap2`, `bootstrap3` or false
-      'theme': false,
-    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -25,8 +21,5 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('/bower_components/bulma/css/bulma.css');
-  app.import('/bower_components/typicons.font/src/font/typicons.css');
-  app.import('/bower_components/typicons.font/src/font/typicons.woff', { destDir: 'assets' });
-
   return app.toTree();
 };
