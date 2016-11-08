@@ -10,7 +10,8 @@ const UiTableCrawlSessionComponent = Ember.Component.extend({
     return [
       {
         label:         'Started On', valuePath: 'startedAt',
-        cellComponent: 'ui.table.cell-datetime'
+        cellComponent: 'ui.table.cell-datetime',
+        sorted:        true,
       },
       {
         label:         'Finished On', valuePath: 'finishedAt',
@@ -36,7 +37,10 @@ const UiTableCrawlSessionComponent = Ember.Component.extend({
   }),
 
   table: computed('crawlSessions', function() {
-    return new Table(this.get('columns'), this.get('crawlSessions').sortBy('createdAt'));
+    return new Table(this.get('columns'),
+      this.get('crawlSessions')
+        .sortBy('startedAt')
+        .reverse());
   }),
 });
 
