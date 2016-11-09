@@ -7,6 +7,19 @@
     </div>
   </div>
 </section>
+<section>
+  {{ui.ember-chart type='bar'
+                   model=model.crawlSessions
+                   dataPath='itemsCount'
+                   labelPath='startedAt'
+  }}
+  {{!--options=options--}}
+  {{!--width='100%'--}}
+  {{!--height='100px'}}--}}
+</section>
+<section>
+  {{ui.sparkline.spark-bar}}
+</section>
 <section class="section">
   <div class="container">
     {{ui.table.crawl-session model.crawlSessions}}

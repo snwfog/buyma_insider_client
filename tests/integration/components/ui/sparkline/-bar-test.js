@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui/ember-chart', 'Integration | Component | ui/ember chart', {
+moduleForComponent('ui/sparkline/-bar', 'Integration | Component | ui/sparkline/ bar', {
   integration: true
 });
 
@@ -9,15 +9,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{ui/ember-chart}}`);
+  this.render(hbs`{{ui/sparkline/-bar}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#ui/ember-chart}}
+    {{#ui/sparkline/-bar}}
       template block text
-    {{/ui/ember-chart}}
+    {{/ui/sparkline/-bar}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
