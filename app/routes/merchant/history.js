@@ -11,6 +11,20 @@ export default Ember.Route.extend({
     });
   },
 
+  setupController(ctrl, { metadatum, crawlSessions }) {
+    this._super(...arguments);
+    let itemsCountSeries = crawlSessions
+      .sortBy('startedAt')
+      .reverse()
+      .slice(0, 20)
+      .map((crawlSession) => {
+        var { itemsCount, invalidItemsCount } = crawlSession.getProperties('itemsCount', 'invalidItemsCount');
+        return `${itemsCount}:${invalidItemsCount}`;
+      });
+
+    ctrl.set('itemsCountSeries', itemsCountSeries);
+  },
+
   renderTemplate() {
     this.render('merchant/history', {
       into: 'merchant',

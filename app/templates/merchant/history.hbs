@@ -8,17 +8,82 @@
   </div>
 </section>
 <section>
-  {{ui.ember-chart type='bar'
-                   model=model.crawlSessions
-                   dataPath='itemsCount'
-                   labelPath='startedAt'
-  }}
-  {{!--options=options--}}
-  {{!--width='100%'--}}
-  {{!--height='100px'}}--}}
 </section>
-<section>
-  {{ui.sparkline.spark-bar}}
+<section class="section">
+  <div class="container">
+
+    <div class="columns">
+
+      <div class="column">
+        <div class="card is-fullwidth">
+          <header class="card-header">
+            <p class="card-header-title">Items Count</p>
+            <span class="card-header-icon">
+              {{fa-icon 'bar-chart'}}
+            </span>
+          </header>
+          <div class="card-content">
+            <div class="content has-text-centered">
+              {{ui.sparkline.spark-bar data=itemsCountSeries}}
+            </div>
+          </div>
+          <footer class="card-footer">
+            <span class="card-footer-item">
+              <span class="tag is-primary">Items</span>
+            </span>
+            <span class="card-footer-item">
+              <span class="tag is-danger">Invalid</span>
+            </span>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card is-fullwidth">
+          <header class="card-header">
+            <p class="card-header-title">Traffic Size</p>
+            <span class="card-header-icon">
+              {{fa-icon 'bar-chart'}}
+            </span>
+          </header>
+          <div class="card-content">
+            <div class="content has-text-centered">
+              {{ui.sparkline.spark-bar
+                  data=(map-by 'trafficSize' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
+            </div>
+          </div>
+          <footer class="card-footer">
+            <span class="card-footer-item">
+              <span class="tag is-primary">Traffic Size (Byte)</span>
+            </span>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card is-fullwidth">
+          <header class="card-header">
+            <p class="card-header-title">Crawl Elapsed Time</p>
+            <span class="card-header-icon">
+              {{fa-icon 'bar-chart'}}
+            </span>
+          </header>
+          <div class="card-content">
+            <div class="content has-text-centered">
+              {{ui.sparkline.spark-bar
+                  data=(map-by 'elapsedTime' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
+            </div>
+          </div>
+          <footer class="card-footer">
+            <span class="card-footer-item">
+              <span class="tag is-primary">Elapsed Time (Seconds)</span>
+            </span>
+          </footer>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 <section class="section">
   <div class="container">

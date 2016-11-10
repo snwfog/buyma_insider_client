@@ -42,7 +42,7 @@
     "ember-debug-logger": "0.3.0",
     "ember-export-application-global": "^1.0.5",
     "ember-font-awesome": "2.2.0",
-    "ember-jquery-sparkline": "0.0.5",
+    "ember-jquery-sparkline": "snwfog/ember-jquery-sparkline",
     "ember-light-table": "1.5.2",
     "ember-load-initializers": "^0.5.1",
     "ember-math-helpers": "1.2.7",
