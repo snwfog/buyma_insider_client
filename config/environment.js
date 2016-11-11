@@ -25,8 +25,8 @@ module.exports = function(environment) {
   };
 
   ENV.APP.SERVER = {
-//    endpoint: 'http://localhost:5050',
-    endpoint: 'http://mini.local:5000',
+    endpoint: 'http://localhost:5050',
+//    endpoint: 'http://mini.local:5000',
   };
 
   if (environment === 'development') {

@@ -1,0 +1,57 @@
+<section class="section">
+  <p class="control has-addons">
+  <span class="select">
+    <select>
+      <option>$</option>
+      <option>£</option>
+      <option>€</option>
+    </select>
+  </span>
+    <input class="input is-expanded" type="text" placeholder="Amount of money">
+    <a class="button is-primary">
+      <span>Search</span>
+      <span class="icon is-small">{{fa-icon 'search'}}</span>
+    </a>
+  </p>
+  <hr>
+  <div class="container">
+    {{#each articles as |article|}}
+      <nav class="nav">
+        <div class="nav-left">
+          <div class="nav-item">
+            <a class="title is-3 has-text-left">
+              {{capitalize article.name}}
+              <p class="subtitle is-5 has-text-left">
+                {{titleize article.description}}
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <p class="nav-item">
+            <p class="title is-3">
+              ${{article.price}}
+            </p>
+          </p>
+          <p class="nav-item">
+            --------------^-------^
+          </p>
+        </div>
+      </nav>
+    {{/each}}
+  </div>
+  <hr>
+  <nav class="pagination">
+    <a class="button">Previous</a>
+    <a class="button">Next page</a>
+    <ul>
+      <li><a class="button">1</a></li>
+      <li><span>...</span></li>
+      <li><a class="button">45</a></li>
+      <li><a class="button is-primary">46</a></li>
+      <li><a class="button">47</a></li>
+      <li><span>...</span></li>
+      <li><a class="button">86</a></li>
+    </ul>
+  </nav>
+</section>

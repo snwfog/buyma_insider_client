@@ -18,9 +18,14 @@ export default Ember.Route.extend({
 //  beforeModel(transition) {},
 //  getModel() {},
 
-  model(params, transition) {
+  model(params) {
     return hash({
       metadatum: this.store.find('merchant/metadatum', params['merchant_metadatum_id'])
     });
   },
+
+  setupController(controller, models) {
+    this._super(...arguments);
+    controller.setProperties(models);
+  }
 });

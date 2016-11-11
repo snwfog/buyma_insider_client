@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import JQuerySparkline from 'ember-jquery-sparkline/components/spark-line';
+// import JQuerySparkline from 'ember-jquery-sparkline/components/spark-line';
 
 const { on } = Ember;
 
@@ -18,8 +18,7 @@ export default Ember.Component.extend({
   },
 
   onDidInsertElement: on('didInsertElement', function() {
-    var sparkline, _this = this;
-
+    var _this      = this;
     let options    = this.get('options') || {};
     let data       = this.get('data');
     let _sparkline = this.$().sparkline(data, options);
@@ -49,7 +48,7 @@ export default Ember.Component.extend({
 
   onWillDestroyElement: on('willDestroyElement', function() {
     let _sparkline = this.get('_sparkline');
-    if (!!_sparkline) _sparkline.remove();
+    if (!!_sparkline) { _sparkline.remove(); }
     this._super(...arguments);
   }),
 });

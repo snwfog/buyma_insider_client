@@ -1,17 +1,5 @@
-<section class="hero is-primary is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        {{capitalize model.metadatum.name}} History
-      </h1>
-    </div>
-  </div>
-</section>
-<section>
-</section>
 <section class="section">
   <div class="container">
-
     <div class="columns">
 
       <div class="column">
@@ -24,7 +12,7 @@
           </header>
           <div class="card-content">
             <div class="content has-text-centered">
-              {{ui.sparkline.spark-bar data=itemsCountSeries}}
+              {{ui.sparkline.-bar data=itemsCountSeries}}
             </div>
           </div>
           <footer class="card-footer">
@@ -48,7 +36,7 @@
           </header>
           <div class="card-content">
             <div class="content has-text-centered">
-              {{ui.sparkline.spark-bar
+              {{ui.sparkline.-bar
                   data=(map-by 'trafficSize' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
             </div>
           </div>
@@ -70,7 +58,7 @@
           </header>
           <div class="card-content">
             <div class="content has-text-centered">
-              {{ui.sparkline.spark-bar
+              {{ui.sparkline.-bar
                   data=(map-by 'elapsedTime' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
             </div>
           </div>

@@ -1,4 +1,4 @@
-<section class="hero is-large">
+<section class="hero is-medium is-bold is-dark">
   <div class="hero-body">
     <div class="columns">
       <div class="column is-10 is-offset-1">
@@ -17,6 +17,28 @@
         </p>
         <h6 class="subtitle is-6">Hint: Auto-complete is available, try to type "zar" + tab, then type in item name</h6>
       </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      {{#each merchantMetadata as |metadatum|}}
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="http://placehold.it/300x225" alt="">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              {{#link-to 'merchant' metadatum.id class='content'}}
+                <h1 class="title">{{capitalize metadatum.name}}</h1>
+              {{/link-to}}
+            </div>
+          </div>
+        </div>
+      {{/each}}
     </div>
   </div>
 </section>
