@@ -8,5 +8,5 @@ export default DS.Model.extend({
   itemsCount:        attr('number'),
   invalidItemsCount: attr('number'),
   trafficSize:       attr('number'),
-  elapsedTime:       attr('number'),
+  elapsedTime:       attr('decimal', { precision: 2 }),
 });
