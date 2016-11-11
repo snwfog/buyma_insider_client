@@ -6,16 +6,6 @@ const { on } = Ember;
 export default Ember.Component.extend({
   tagName:    null,
   classNames: 'component-ui-sparkline sparkline'.w(),
-  options:    {
-    type:            'bar',
-    height:          '50',
-    barWidth:        10,
-    barSpacing:      2,
-    zeroAxis:        false,
-    barColor:        '#00d1b2',
-    negBarColor:     '#ff3860',
-    stackedBarColor: ['#00d1b2', '#ff3860'],
-  },
 
   onDidInsertElement: on('didInsertElement', function() {
     var _this      = this;
