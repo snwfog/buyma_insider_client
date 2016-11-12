@@ -1,58 +1,67 @@
 <section class="section">
-  <p class="control has-addons">
-  <span class="select">
-    <select>
-      <option>$</option>
-      <option>£</option>
-      <option>€</option>
-    </select>
-  </span>
-    <input class="input is-expanded" type="text" placeholder="Amount of money">
-    <a class="button is-primary">
-      <span>Search</span>
-      <span class="icon is-small">{{fa-icon 'search'}}</span>
-    </a>
-  </p>
-  <hr>
   <div class="container">
+
+    {{!--Search bar--}}
+    <p class="control has-addons has-addons-right">
+      <input class="input is-medium" type="text"
+             placeholder="Search for article">
+      <a class="button is-primary is-medium">
+        <span>Search</span>
+        <span class="icon">
+          {{fa-icon 'search'}}
+        </span>
+      </a>
+    </p>
+
+    <hr>
+    {{!--Articles list--}}
     {{#each articles as |article|}}
-      <nav class="nav">
-        <div class="nav-left">
-          <div class="nav-item">
-            {{#link-to 'article' article class='title is-3 has-text-left'}}
-              {{capitalize article.name}}
-              <p class="subtitle is-5 has-text-left">
-                {{titleize article.description}}
+      <div class="columns">
+        <div class="column is-10">
+          <nav class="level">
+            <div class="level-item">
+              {{#link-to 'articles' article class='title is-3 has-text-left'}}
+                {{capitalize article.name}}
+                <p class="subtitle is-5 has-text-left">
+                  {{titleize article.description}}
+                </p>
+              {{/link-to}}
+            </div>
+            <div class="level-right">
+              <p class="level-item">
+                <p class="title is-3">
+                  ${{article.price}}
+                </p>
               </p>
-            {{/link-to}}
+            </div>
+          </nav>
+        </div>
+        <div class="column">
+          <div class="level">
+            <div class="level-right has-text-right">
+              <p class="level-item price-history">
+                {{ui.sparkline.-bar data=(map-by 'price' article.priceHistory)}}
+              </p>
+            </div>
           </div>
         </div>
-        <div class="nav-right">
-          <p class="nav-item">
-            <p class="title is-3">
-              ${{article.price}}
-            </p>
-          </p>
-          <p class="nav-item">
-            {{log (map 'price' article.priceHistory)}}
-            {{ui.sparkline.-line}}
-          </p>
-        </div>
-      </nav>
+      </div>
     {{/each}}
+
+    <hr>
+    {{!--Pagination--}}
+    <nav class="pagination">
+      <a class="button">Previous</a>
+      <a class="button">Next page</a>
+      <ul>
+        <li><a class="button">1</a></li>
+        <li><span>...</span></li>
+        <li><a class="button">45</a></li>
+        <li><a class="button is-primary">46</a></li>
+        <li><a class="button">47</a></li>
+        <li><span>...</span></li>
+        <li><a class="button">86</a></li>
+      </ul>
+    </nav>
   </div>
-  <hr>
-  <nav class="pagination">
-    <a class="button">Previous</a>
-    <a class="button">Next page</a>
-    <ul>
-      <li><a class="button">1</a></li>
-      <li><span>...</span></li>
-      <li><a class="button">45</a></li>
-      <li><a class="button is-primary">46</a></li>
-      <li><a class="button">47</a></li>
-      <li><span>...</span></li>
-      <li><a class="button">86</a></li>
-    </ul>
-  </nav>
 </section>

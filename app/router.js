@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('status');
+  this.route('articles', { path: '/articles/:article_id' });
   this.route('merchant', { path: '/:merchant_metadatum_id' }, function() {
     this.route('index');
     this.route('history');
