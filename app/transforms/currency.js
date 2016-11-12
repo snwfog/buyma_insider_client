@@ -1,23 +1,9 @@
-import Ember from 'ember';
 import DS from 'ember-data';
-
-var empty = Ember.isEmpty;
-
-function isNumber(value) {
-  return value === value
-    && value !== Infinity
-    && value !== -Infinity;
-}
+import numericDecimalRound from '../utils/numeric/decimal-round';
 
 export default DS.Transform.extend({
   deserialize(serialized) {
-    var transformed;
-    if (empty(serialized)) {
-      return null;
-    } else {
-      transformed = Number(serialized).toFixed(2);
-      return isNumber(transformed) ? transformed : null;
-    }
+    return numericDecimalRound(serialized, 2);
   },
 
   serialize(deserialized) {

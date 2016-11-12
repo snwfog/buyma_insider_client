@@ -19,12 +19,12 @@
       <nav class="nav">
         <div class="nav-left">
           <div class="nav-item">
-            <a class="title is-3 has-text-left">
+            {{#link-to 'article' article class='title is-3 has-text-left'}}
               {{capitalize article.name}}
               <p class="subtitle is-5 has-text-left">
                 {{titleize article.description}}
               </p>
-            </a>
+            {{/link-to}}
           </div>
         </div>
         <div class="nav-right">
@@ -34,6 +34,7 @@
             </p>
           </p>
           <p class="nav-item">
+            {{log (map 'price' article.priceHistory)}}
             {{ui.sparkline.-line}}
           </p>
         </div>
