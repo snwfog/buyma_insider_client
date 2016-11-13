@@ -40,7 +40,9 @@
           <div class="level">
             <div class="level-right has-text-right">
               <p class="level-item price-history">
-                {{ui.sparkline.-bar data=(map-by 'price' article.priceHistory)}}
+                {{ui.sparkline.-line
+                    data=(map-by 'price' (reverse (take 45
+                           (sort-by 'createdAt:desc' article.priceHistory))))}}
               </p>
             </div>
           </div>
