@@ -1,1 +1,79 @@
-{{outlet}}
+<section class="section">
+  <div class="container">
+
+    <div class="columns">
+      <div class="column is-8">
+
+        <p class="title is-3">{{article.name}}</p>
+        <hr>
+        <p class="subtitle is-5">{{article.description}}</p>
+
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <p class="heading">Created On</p>
+            <p class="title">July 20, 2016</p>
+          </div>
+          <div class="level-item has-text-centered">
+            <p class="heading">Modified On</p>
+            <p class="title">November 20, 2016</p>
+          </div>
+        </nav>
+        
+        <!--Article control-->
+        <p class="has-text-right">
+          <a class="button is-link">
+            <span class="icon is-small">
+              {{fa-icon 'globe'}}
+            </span>
+            <span>Official Site</span>
+          </a>
+
+          <a class="button is-link">
+            <span class="icon is-small">
+              {{fa-icon 'star-o'}}
+            </span>
+            <span>Watch</span>
+          </a>
+        </p>
+
+      </div>
+
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-content has-text-right">
+            <p class="title is-1">${{ui.-money article.price}}</p>
+          </div>
+          <div class="card-content">
+            {{ui.sparkline.-line data=(map-by 'price'
+                (reverse (sort-by 'createdAt:desc' article.priceHistory)))}}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <hr>
+    <div class="title is-3 has-text-right">Related</div>
+    <div class="columns">
+      {{#each (repeat 6) as |empty|}}
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="http://placehold.it/300x225" alt="">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Article 1</p>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+    </div>
+  </div>
+</section>

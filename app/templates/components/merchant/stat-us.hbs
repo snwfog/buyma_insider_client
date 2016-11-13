@@ -30,7 +30,9 @@
     {{#link-to 'merchant.history' metadatum.id class='card-footer-item'}}
       Update Histories
     {{/link-to}}
-    <a class="card-footer-item">All Articles</a>
+    {{#link-to 'merchant.edit' metadatum.id class='card-footer-item'}}
+      Edit
+    {{/link-to}}
     <a class="card-footer-item">View</a>
     <a class="card-footer-item">View</a>
   </footer>

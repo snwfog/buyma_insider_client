@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('merchant', { path: '/:merchant_metadatum_id' }, function() {
     this.route('index');
     this.route('history');
+    this.route('edit');
   });
 });
 
