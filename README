@@ -1,2 +1,5 @@
 # BUYMA バイマ INSIDER
 
+TODO:
+- Improve the loading bar, to use page loaded event to move forward the bar
+

@@ -16,9 +16,6 @@
 npm-debug.log*
 testem.log
 /.gitignore
-app/routes/status.js
-app/templates/status.hbs
-tests/unit/routes/
 ### Node template
 # Logs
 logs
