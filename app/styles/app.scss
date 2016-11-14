@@ -25,3 +25,9 @@ table tr {
   &.is-primary { color: $green !important }
 }
 
+// price container so the overflow is hidden
+.price-history-container {
+  overflow: hidden;
+}
+
+
