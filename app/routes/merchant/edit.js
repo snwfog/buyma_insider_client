@@ -8,5 +8,10 @@ export default Ember.Route.extend({
     return hash({
       metadatum,
     });
+  },
+
+  setupController(controller, models) {
+    this._super(...arguments);
+    controller.setProperties(models);
   }
 });
