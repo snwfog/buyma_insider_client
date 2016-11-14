@@ -18,7 +18,7 @@
             <p class="title">November 20, 2016</p>
           </div>
         </nav>
-        
+
         <!--Article control-->
         <p class="has-text-right">
           <a class="button is-link">
@@ -39,15 +39,36 @@
       </div>
 
       <div class="column is-4">
-        <div class="card">
+        <div class="card is-fullwidth">
           <div class="card-content has-text-right">
-            <p class="title is-1">${{ui.-money article.price}}</p>
+            <p class="title is-1">
+              <span class="icon">{{fa-icon 'arrow-up' class='is-primary'}}</span> ${{ui.-money article.price}}
+            </p>
           </div>
           <div class="card-content">
             {{ui.sparkline.-line data=(map-by 'price'
                 (reverse (sort-by 'createdAt:desc' article.priceHistory)))}}
           </div>
         </div>
+
+        <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
+          <tbody>
+          <tr>
+            <td><b>Highest</b></td>
+            <td>$29.99</td>
+            <td>Seen 20 days ago</td>
+          </tr>
+          <tr>
+            <td><b>Lowest</b></td>
+            <td>$19.99</td>
+            <td>Seen 10 days ago</td>
+          </tr>
+          <tr>
+            <td><b>Average</b></td>
+            <td>$29.99</td>
+          </tr>
+          </tbody>
+        </table>
 
       </div>
 
