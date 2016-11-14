@@ -11,7 +11,8 @@ let UiMoneyComponent = Ember.Component.extend({
 
   change: computed('amount', function() {
     var amount = this.get('amount');
-    return Math.floor(Number(amount) * 100) % 100;
+    var decimal = Math.floor(Number(amount) * 100) % 100;
+    return decimal < 10 ? '0' + decimal : decimal;
   }),
 });
 
