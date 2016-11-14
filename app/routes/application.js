@@ -4,7 +4,7 @@ import LoadingSliderMixin from '../mixins/loading-slider';
 const { hash }  = Ember.RSVP;
 
 export default Ember.Route.extend(
-  LoadingSliderMixin,
+  LoadingSliderMixin, // Loading slider addon
   {
     model() {
       return hash({

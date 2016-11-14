@@ -1,13 +1,14 @@
 /* jshint node: true */
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   var ENV = {
-    appName:      'BUYMA バイマ INSIDER',
-    modulePrefix: 'buyma-insider-client',
-    environment:  environment,
-    rootURL:      '/',
-    locationType: 'auto',
-    EmberENV:     {
+    appName:                  'BUYMA バイマ INSIDER',
+    modulePrefix:             'buyma-insider-client',
+    environment:              environment,
+    rootURL:                  '/',
+    locationType:             'router-scroll',
+    historySupportMiddleware: true,
+    EmberENV:                 {
       FEATURES:          {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true

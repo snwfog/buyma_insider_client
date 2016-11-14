@@ -3,9 +3,9 @@
 @import './overrides';
 
 .icon.status {
-  &.in-sync   { color: #1bff00; }
-  &.out-sync  { color: #ff9a00; }
-  &.out-dated { color: #ff2d00; }
+  &.in-sync   { color: $green; }
+  &.out-sync  { color: $yellow; }
+  &.out-dated { color: $red; }
 }
 
 .component-ui-sparkline.sparkline {
