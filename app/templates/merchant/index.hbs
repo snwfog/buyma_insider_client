@@ -6,27 +6,30 @@
         {{!--Merchant bar--}}
         <div class="tabs is-medium">
           <ul>
-            <li class="is-active">
-              <a {{action '_newArticles'}}>New
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='new') tagName='li' activeClass='is-active'}}
+              {{#link-to 'merchant.index' metadatum.id (query-params filter='new')}}
+                New
                 <span class="tag is-success ml-1">
                   {{articles.meta.new-count}}
                 </span>
-              </a>
-            </li>
-            <li>
-              <a>Sales
+              {{/link-to}}
+            {{/link-to}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='sale') tagName='li' activeClass='is-active'}}
+              {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')}}
+                Sale
                 <span class="tag is-success ml-1">
                   {{articles.meta.sale-count}}
                 </span>
-              </a>
-            </li>
-            <li>
-              <a>All
+              {{/link-to}}
+            {{/link-to}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='all') tagName='li' activeClass='is-active'}}
+              {{#link-to 'merchant.index' metadatum.id (query-params filter='all')}}
+                All
                 <span class="tag is-dark ml-1">
                   {{articles.meta.total-count}}
                 </span>
-              </a>
-            </li>
+              {{/link-to}}
+            {{/link-to}}
           </ul>
         </div>
       </div>
