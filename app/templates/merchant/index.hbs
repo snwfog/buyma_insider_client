@@ -7,13 +7,25 @@
         <div class="tabs is-medium">
           <ul>
             <li class="is-active">
-              <a>New <span class="tag is-success ml-1">213</span></a>
+              <a {{action '_newArticles'}}>New
+                <span class="tag is-success ml-1">
+                  {{articles.meta.new-count}}
+                </span>
+              </a>
             </li>
             <li>
-              <a>Sales <span class="tag is-success ml-1">324</span></a>
+              <a>Sales
+                <span class="tag is-success ml-1">
+                  {{articles.meta.sale-count}}
+                </span>
+              </a>
             </li>
             <li>
-              <a>All <span class="tag is-dark ml-1">10023</span></a>
+              <a>All
+                <span class="tag is-dark ml-1">
+                  {{articles.meta.total-count}}
+                </span>
+              </a>
             </li>
           </ul>
         </div>
@@ -34,19 +46,9 @@
     </div>
 
     {{!--Pagination--}}
-    <nav class="pagination">
-      <a class="button">Previous</a>
-      <a class="button">Next page</a>
-      <ul>
-        <li><a class="button">1</a></li>
-        <li><span>...</span></li>
-        <li><a class="button">45</a></li>
-        <li><a class="button is-primary">46</a></li>
-        <li><a class="button">47</a></li>
-        <li><span>...</span></li>
-        <li><a class="button">86</a></li>
-      </ul>
-    </nav>
+    {{ui.-pager current=articles.meta.current-page
+                count=articles.meta.total-pages
+                change=(action '_pageChanged')}}
     <hr>
 
     {{!--Articles list--}}
@@ -55,7 +57,8 @@
         <div class="column is-10">
           <nav class="level">
             <div class="level-item">
-              {{#link-to 'articles' article.id class='title is-4 has-text-left'}}
+              {{#link-to 'articles' article.id
+                         class='title is-4 has-text-left'}}
                 {{capitalize article.name}}
                 <p class="subtitle is-6 has-text-left">
                   {{titleize article.description}}
@@ -88,18 +91,8 @@
     <hr>
 
     {{!--Pagination--}}
-    <nav class="pagination">
-      <a class="button">Previous</a>
-      <a class="button">Next page</a>
-      <ul>
-        <li><a class="button">1</a></li>
-        <li><span>...</span></li>
-        <li><a class="button">45</a></li>
-        <li><a class="button is-primary">46</a></li>
-        <li><a class="button">47</a></li>
-        <li><span>...</span></li>
-        <li><a class="button">86</a></li>
-      </ul>
-    </nav>
+    {{ui.-pager current=articles.meta.current-page
+                count=articles.meta.total-pages
+                change=(action '_pageChanged')}}
   </div>
 </section>
