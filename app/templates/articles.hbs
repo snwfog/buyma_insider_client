@@ -6,9 +6,27 @@
       <div class="column is-4">
         <div class="card is-fullwidth">
           <div class="card-content has-text-right">
-            <p class="title is-1">
-              <span class="icon align-bottom">{{fa-icon 'arrow-up' class='is-primary'}}</span> ${{ui.-money article.price}}
-            </p>
+            <div class="columns is-mobile">
+              <div class="column is-9">
+                <h1 class="title is-1">
+                  <span class="icon">{{fa-icon 'arrow-up' class='is-primary'}}</span>
+                  {{ui.-money article.price}}
+                </h1>
+              </div>
+              <div class="column is-3 has-text-left">
+                <h3 class="subtitle is-3 is-uppercase">CAD</h3>
+              </div>
+            </div>
+            <div class="columns is-mobile">
+              <div class="column is-9">
+                <h3 class="subtitle is-3">
+                  {{ui.-money article.price 'jpy'}}
+                </h3>
+              </div>
+              <div class="column is-3 has-text-left">
+                <h3 class="subtitle is-3 is-uppercase">JPY</h3>
+              </div>
+            </div>
           </div>
           <div class="card-content has-text-left">
             <div class="price-history-container is-fullwidth">
@@ -31,7 +49,7 @@
           </tr>
           <tr>
             <td><b>Average</b></td>
-            <td>$29.99</td>
+            <td colspan="2">$29.99</td>
           </tr>
           </tbody>
         </table>
@@ -39,7 +57,7 @@
 
       <!--Article panel-->
       <div class="column is-8">
-        <p class="title is-3">{{article.name}}</p>
+        <p class="title is-3 is-capitalize">{{article.name}}</p>
         <hr>
         <p class="subtitle is-5">{{article.description}}</p>
 

@@ -10,9 +10,16 @@
 .mb-2 { margin-bottom: 2em; }
 
 // Alignment
-.align-top    { vertical-align: top !important; }
-.align-middle { vertical-align: middle !important; }
-.align-bottom { vertical-align: bottom !important; }
+.align-top, .is-align-top, .has-text-top          { vertical-align: top !important; }
+.align-middle, .is-align-middle, .has-text-middle { vertical-align: middle !important; }
+.align-bottom, .is-align-bottom, .has-text-bottom { vertical-align: bottom !important; }
 
 // Flex utilities to go with Bulma
 .is-row-reverse { flex-direction: row-reverse; }
+
+// Text
+.is-uppercase { text-transform: uppercase !important }
+.is-lowercase { text-transform: lowercase !important }
+.is-capitalize { text-transform: capitalize !important }
+
+.is-semi-bold { font-weight: 400 !important; }

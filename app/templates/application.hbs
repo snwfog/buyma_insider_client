@@ -10,7 +10,18 @@
     <div class="nav-center">
       {{#link-to 'status' class='is-tab nav-item' activeClass='is-active'}}Status{{/link-to}}
     </div>
-    <div class="nav-right"></div>
+    <div class="nav-right">
+      <span class="nav-item">
+        <span class="title is-4">
+          {{ui.-money oneDollar 'jpy' showCode=true}}
+        </span>
+      </span>
+      <span class="nav-item">
+        <span class="title is-4">
+          {{ui.-money oneDollar 'usd' showCode=true}}
+        </span>
+      </span>
+    </div>
   </div>
 </nav>
 

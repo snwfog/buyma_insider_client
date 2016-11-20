@@ -26,9 +26,12 @@ export default Ember.Route.extend({
 
     controller.reopen({
       queryParams: [ 'page', 'count', 'filter' ],
-      page:        getWithDefault(controller, 'page', 1),
-      count:       getWithDefault(controller, 'count', 20),
-      filter:      getWithDefault(controller, 'filter', 'all'),
+//       page:        getWithDefault(controller, 'page', 1),
+//       count:       getWithDefault(controller, 'count', 20),
+//       filter:      getWithDefault(controller, 'filter', 'new'),
+      page:        1,
+      count:       20,
+      filter:      'new',
 
       actions: {
         '_pageChanged'(nextPage, currPage) {
@@ -45,7 +48,7 @@ export default Ember.Route.extend({
     if (isExiting) {
       controller.set('page', 1);
       controller.set('count', 20);
-      controller.set('filter', 'all');
+      controller.set('filter', 'new');
     }
   },
 });

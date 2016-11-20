@@ -1,23 +1,36 @@
-import Ember from 'ember';
-const { computed } = Ember;
+import Ember from "ember";
+const { computed, inject } = Ember;
 
 let UiMoneyComponent = Ember.Component.extend({
-  tagName:   'span',
-  separator: '.',
-  whole:     computed('amount', function() {
-    var amount = this.get('amount');
-    return Math.floor(Number(amount));
-  }),
+  tagName:    'span',
+  classNames: 'component-ui-money is-semi-bold',
 
-  change: computed('amount', function() {
-    var amount = this.get('amount');
-    var decimal = Math.floor(Number(amount) * 100) % 100;
-    return decimal < 10 ? '0' + decimal : decimal;
+  amount:        null,
+  // This is the widget base, could be different than
+  // the actual amount base
+  displayBase:   'cad',
+  separator:     '.',
+  showCode:      false,
+  displayAmount: computed('amount', 'displayBase', function () {
+    var amount      = this.get('amount');
+    var amountBase  = this.get('amount.base');
+    var displayBase = this.get('displayBase');
+
+    var exchangeRatesService = this.get('exchangeRatesService');
+    var { locale, code }     = exchangeRatesService.lookup(this.get('displayBase'));
+    var convertedAmount      = exchangeRatesService.convertCurrency(amountBase, displayBase, amount.get('amount'));
+
+    var formatter = new Intl.NumberFormat(locale, {
+      style:    'currency',
+      currency: code
+    });
+
+    return formatter.format(convertedAmount);
   }),
 });
 
 UiMoneyComponent.reopenClass({
-  positionalParams: ['amount'],
+  positionalParams: [ 'amount', 'displayBase' ],
 });
 
 export default UiMoneyComponent;
