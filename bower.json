@@ -8,6 +8,7 @@
     "typicons.font": "typicons#^2.0.8",
     "chartjs": "2.1.6",
     "selectize": "miguelcobain/selectize.js#master",
-    "jquery.sparkline.bower": "lennonjesus/jquery.sparkline.bower#^2.1.2"
+    "jquery.sparkline.bower": "lennonjesus/jquery.sparkline.bower#^2.1.2",
+    "moment": "^2.16.0"
   }
 }

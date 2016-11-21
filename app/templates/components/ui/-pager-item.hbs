@@ -1,0 +1,6 @@
+{{#if isDots}}
+  <a class="button">{{page}}</a>
+{{else}}
+  <a class="button {{if isActive 'is-primary'}}"
+     href="{{url}}" {{action 'select'}}>{{page}}</a>
+{{/if}}

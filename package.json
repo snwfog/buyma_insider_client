@@ -44,7 +44,6 @@
     "ember-export-application-global": "^1.0.5",
     "ember-font-awesome": "2.2.0",
     "ember-jquery-sparkline": "snwfog/ember-jquery-sparkline",
-    "pagination-pager": "snwfog/pagination-pager",
     "ember-light-table": "1.5.2",
     "ember-load-initializers": "^0.5.1",
     "ember-math-helpers": "1.2.7",
@@ -53,7 +52,9 @@
     "ember-responsive": "2.0.0",
     "ember-router-scroll": "0.0.6",
     "ember-simple-select": "0.6.0",
+    "ember-string-helpers": "0.0.9",
     "ember-truth-helpers": "1.2.0",
-    "loader.js": "^4.0.10"
+    "loader.js": "^4.0.10",
+    "pagination-pager": "snwfog/pagination-pager"
   }
 }
