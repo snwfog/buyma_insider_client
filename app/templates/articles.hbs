@@ -8,10 +8,10 @@
           <div class="card-content has-text-right">
             <div class="columns is-mobile">
               <div class="column is-9">
-                <h1 class="title is-1">
+                <h3 class="title is-3">
                   <span class="icon">{{fa-icon 'arrow-up' class='is-primary'}}</span>
                   {{ui.-money article.price}}
-                </h1>
+                </h3>
               </div>
               <div class="column is-3 has-text-left">
                 <h3 class="subtitle is-3 is-uppercase">CAD</h3>
@@ -39,17 +39,17 @@
           <tbody>
           <tr>
             <td><b>Highest</b></td>
-            <td>$29.99</td>
-            <td>Seen 20 days ago</td>
+            <td>${{article.priceSummary.max.price}}</td>
+            <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
           </tr>
           <tr>
             <td><b>Lowest</b></td>
-            <td>$19.99</td>
-            <td>Seen 10 days ago</td>
+            <td>${{article.priceSummary.min.price}}</td>
+            <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
           </tr>
           <tr>
             <td><b>Average</b></td>
-            <td colspan="2">$29.99</td>
+            <td colspan="2">${{article.priceSummary.avg.price}}</td>
           </tr>
           </tbody>
         </table>
