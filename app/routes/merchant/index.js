@@ -15,23 +15,21 @@ export default Ember.Route.extend({
     return hash({
                 metadatum,
       articles: this.store.query('article',
-        merge({ merchant: metadatum.id }, params)),
+        merge({ merchant: metadatum.get('name') }, params)),
     });
   },
 
-  setupController(controller, models) {
+  setupController(controller, models, transition) {
     this._super(...arguments);
-    var route = this;
-    controller.setProperties(models);
+    var route       = this;
+    var queryParams = transition.queryParams;
 
+    controller.setProperties(models);
     controller.reopen({
-      queryParams: [ 'page', 'count', 'filter' ],
-//       page:        getWithDefault(controller, 'page', 1),
-//       count:       getWithDefault(controller, 'count', 20),
-//       filter:      getWithDefault(controller, 'filter', 'new'),
-      page:        1,
-      count:       20,
-      filter:      'new',
+      queryParams: ['page', 'count', 'filter'],
+      page:        getWithDefault(queryParams, 'page', 1),
+      count:       getWithDefault(queryParams, 'count', 20),
+      filter:      getWithDefault(queryParams, 'filter', 'new'),
 
       actions: {
         '_pageChanged'(nextPage, currPage) {

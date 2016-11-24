@@ -4,33 +4,37 @@
     <div class="columns">
       <div class="column is-one-half">
         {{!--Merchant bar--}}
-        <nav class="nav is-medium">
-          <div class="container">
-            <div class="nav-left">
-              {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
-                         class='nav-item is-tab' activeClass='is-active'}}
+        <div class="tabs">
+          <ul>
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
+                       tagName='li' activeClass='is-active'}}
+              {{#link-to 'merchant.index' metadatum.id (query-params filter='new')}}
                 New
                 <span class="tag is-success ml-1">
                   {{articles.meta.new-count}}
                 </span>
               {{/link-to}}
-              {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
-                         class='nav-item is-tab' activeClass='is-active'}}
+            {{/link-to}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
+                       tagName='li' activeClass='is-active'}}
+              {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')}}
                 Sale
                 <span class="tag is-success ml-1">
                   {{articles.meta.sale-count}}
                 </span>
               {{/link-to}}
-              {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
-                         class='nav-item is-tab' activeClass='is-active'}}
+            {{/link-to}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
+                       tagName='li' activeClass='is-active'}}
+              {{#link-to 'merchant.index' metadatum.id (query-params filter='all')}}
                 All
                 <span class="tag is-dark ml-1">
                   {{articles.meta.total-count}}
                 </span>
               {{/link-to}}
-            </div>
-          </div>
-        </nav>
+            {{/link-to}}
+          </ul>
+        </div>
       </div>
       <div class="column is-one-half">
         {{!--Search bar--}}
