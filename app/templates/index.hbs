@@ -22,24 +22,30 @@
 </section>
 <section class="section">
   <div class="container">
-    <div class="columns">
-      {{#each merchantMetadata as |metadatum|}}
-        <div class="column is-one-quarter">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by3">
-                {{ui.asset.-img (concat 'images/' metadatum.name '.jpg')}}
-              </figure>
-            </div>
-            <div class="card-content has-text-centered">
-              {{#link-to 'merchant' metadatum.id class='content'}}
-                <h1 class="title">{{capitalize metadatum.name}}</h1>
-              {{/link-to}}
+    {{#each (chunk 3 merchantMetadata) as |row|}}
+      <div class="columns">
+        {{#each row as |metadatum|}}
+          <div class="column is-4">
+            <div class="box">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    {{ui.asset.-img (concat 'images/' metadatum.name '.jpg')}}
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <div class="content">
+                    {{#link-to 'merchant' metadatum.id class='content'}}
+                      <h1 class="title">{{capitalize metadatum.name}}</h1>
+                    {{/link-to}}
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
-        </div>
-      {{/each}}
-    </div>
+        {{/each}}
+      </div>
+    {{/each}}
   </div>
 </section>
 
