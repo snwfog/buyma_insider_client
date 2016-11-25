@@ -26,8 +26,8 @@
       <div class="columns">
         {{#each row as |metadatum|}}
           <div class="column is-4">
-            <div class="box">
-              <article class="media">
+            <div class="box is-paddingless">
+              <article class="media is-align-items-center">
                 <div class="media-left">
                   <figure class="image is-64x64">
                     {{ui.asset.-img (concat 'images/' metadatum.name '.jpg')}}
@@ -36,7 +36,7 @@
                 <div class="media-content">
                   <div class="content">
                     {{#link-to 'merchant' metadatum.id class='content'}}
-                      <h1 class="title">{{capitalize metadatum.name}}</h1>
+                      <p class="title is-3">{{capitalize metadatum.name}}</p>
                     {{/link-to}}
                   </div>
                 </div>
