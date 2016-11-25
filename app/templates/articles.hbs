@@ -37,20 +37,28 @@
 
         <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
           <tbody>
-          <tr>
-            <td><b>Highest</b></td>
-            <td>${{article.priceSummary.max.price}}</td>
-            <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
-          </tr>
-          <tr>
-            <td><b>Lowest</b></td>
-            <td>${{article.priceSummary.min.price}}</td>
-            <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
-          </tr>
-          <tr>
-            <td><b>Average</b></td>
-            <td colspan="2">${{article.priceSummary.avg.price}}</td>
-          </tr>
+            {{#if article.priceSummary.max}}
+              <tr>
+                <td><b>Highest</b></td>
+                <td>${{article.priceSummary.max.price}}</td>
+                <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
+              </tr>
+            {{/if}}
+
+            {{#if article.priceSummary.min}}
+              <tr>
+                <td><b>Lowest</b></td>
+                <td>${{article.priceSummary.min.price}}</td>
+                <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
+              </tr>
+            {{/if}}
+
+            {{#if article.priceSummary.avg}}
+              <tr>
+                <td><b>Average</b></td>
+                <td colspan="2">${{article.priceSummary.avg.price}}</td>
+              </tr>
+            {{/if}}
           </tbody>
         </table>
       </div>
@@ -64,11 +72,11 @@
         <nav class="level">
           <div class="level-item has-text-centered">
             <p class="heading">Created On</p>
-            <p class="title">July 20, 2016</p>
+            <p class="title">{{moment-format article.createdAt 'LL'}}</p>
           </div>
           <div class="level-item has-text-centered">
             <p class="heading">Modified On</p>
-            <p class="title">November 20, 2016</p>
+            <p class="title">{{moment-format article.updatedAt 'LL'}}</p>
           </div>
         </nav>
 

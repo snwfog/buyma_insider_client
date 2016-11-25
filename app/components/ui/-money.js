@@ -13,8 +13,8 @@ let UiMoneyComponent = Ember.Component.extend({
   showCode:      false,
   displayAmount: computed('amount', 'displayBase', function () {
     var amount      = this.get('amount');
-    var amountBase  = this.get('amount.base');
-    var displayBase = this.get('displayBase');
+    var amountBase  = this.get('amount.base') || 'cad';
+    var displayBase = this.get('displayBase') || 'cad';
 
     var exchangeRatesService = this.get('exchangeRatesService');
     var { locale, code }     = exchangeRatesService.lookup(this.get('displayBase'));

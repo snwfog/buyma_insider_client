@@ -6,7 +6,7 @@ const { hash }                  = Ember.RSVP;
 export default Ember.Route.extend({
   queryParams: {
     page:   { refreshModel: true },
-    count:  20,
+    count:  { refreshModel: true },
     filter: { refreshModel: true },
   },
 
