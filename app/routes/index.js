@@ -4,8 +4,8 @@ import config from '../config/environment';
 const { hash } = Ember.RSVP;
 export default Ember.Route.extend({
   model() {
-    var { merchantMetadata } = this.modelFor('application');
-    return hash({ merchantMetadata });
+    var { merchants } = this.modelFor('application');
+    return hash({ merchants });
   },
 
   setupController(controller, models) {

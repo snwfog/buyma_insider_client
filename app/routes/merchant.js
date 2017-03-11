@@ -20,7 +20,7 @@ export default Ember.Route.extend({
 
   model(params) {
     return hash({
-      metadatum: this.store.find('merchant/metadatum', params['merchant_metadatum_id'])
+      merchant: this.store.find('merchant', params['merchant_id'])
     });
   },
 

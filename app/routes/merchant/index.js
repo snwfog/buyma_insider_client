@@ -6,16 +6,16 @@ const { hash }                  = Ember.RSVP;
 export default Ember.Route.extend({
   queryParams: {
     page:   { refreshModel: true },
-    count:  20,
+    limit:  20,
     filter: { refreshModel: true },
   },
 
   model(params) {
-    var { metadatum } = this.modelFor('merchant');
+    var { merchant } = this.modelFor('merchant');
     return hash({
-                metadatum,
+                merchant,
       articles: this.store.query('article',
-        merge({ merchant: metadatum.id }, params)),
+        merge({ merchant_id: merchant.id }, params)),
     });
   },
 
@@ -25,7 +25,7 @@ export default Ember.Route.extend({
     controller.setProperties(models);
 
     controller.reopen({
-      queryParams: [ 'page', 'count', 'filter' ],
+      queryParams: [ 'page', 'limit', 'filter' ],
 //       page:        getWithDefault(controller, 'page', 1),
 //       count:       getWithDefault(controller, 'count', 20),
 //       filter:      getWithDefault(controller, 'filter', 'new'),
@@ -47,7 +47,7 @@ export default Ember.Route.extend({
     this._super(...arguments);
     if (isExiting) {
       controller.set('page', 1);
-      controller.set('count', 20);
+      controller.set('limit', 20);
       controller.set('filter', 'new');
     }
   },

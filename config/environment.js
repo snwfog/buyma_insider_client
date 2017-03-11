@@ -26,7 +26,7 @@ module.exports = function (environment) {
   };
 
   ENV.APP.SERVER = {
-    endpoint: 'http://192.168.0.14:5050',
+    endpoint: 'http://localhost:9292',
     // Using bonjour DNS is slow from 2-3s on
     // windows machine trying to connect to mac
 //    endpoint: 'http://mini.local:5000',

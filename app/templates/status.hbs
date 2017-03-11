@@ -9,10 +9,10 @@
 </section>
 <div class="section">
   <div class="container">
-    {{#each model.merchantMetadata as |metadata|}}
+    {{#each model.merchants as |merchant|}}
       <div class="columns">
         <div class="column is-full">
-          {{merchant.stat-us metadata}}
+          {{merchant.stat-us merchant}}
         </div>
       </div>
     {{/each}}

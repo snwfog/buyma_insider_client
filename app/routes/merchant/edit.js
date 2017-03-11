@@ -1,17 +1,21 @@
-import Ember from 'ember';
+import Ember from "ember";
 
-const { hash } = Ember.RSVP;
+const { hash }  = Ember.RSVP;
+const { alias } = Ember.computed;
 
 export default Ember.Route.extend({
   model() {
-    var { metadatum } = this.modelFor('merchant');
+    var { merchant } = this.modelFor('merchant');
     return hash({
-      metadatum,
+      merchant,
     });
   },
 
   setupController(controller, models) {
     this._super(...arguments);
     controller.setProperties(models);
+    controller.reopen({
+      metadatum: alias('merchant.metadatum')
+    });
   }
 });

@@ -4,10 +4,10 @@ const { hash } = Ember.RSVP;
 
 export default Ember.Route.extend({
   model() {
-    var { metadatum } = this.modelFor('merchant');
+    var { merchant } = this.modelFor('merchant');
     return hash({
-                     metadatum,
-      crawlSessions: this.store.query('merchant/crawl_session', { merchant: metadatum.id }),
+                     merchant,
+      crawlSessions: merchant.get('crawlSessions'),
     });
   },
 

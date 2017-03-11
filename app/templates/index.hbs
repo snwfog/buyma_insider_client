@@ -4,7 +4,7 @@
       <div class="column is-10 is-offset-1">
         <p class="control has-addons">
           <span class="select is-large">
-            {{ui.form.ember-select content=merchantMetadata
+            {{ui.form.ember-select content=merchants
                                    optionValuePath='id'
                                    optionLabelPath='name'}}
           </span>
@@ -23,7 +23,7 @@
 <section class="section">
   <div class="container">
     <div class="columns">
-      {{#each merchantMetadata as |metadatum|}}
+      {{#each merchants as |merchant|}}
         <div class="column is-one-quarter">
           <div class="card">
             <div class="card-image">
@@ -32,8 +32,8 @@
               </figure>
             </div>
             <div class="card-content has-text-centered">
-              {{#link-to 'merchant' metadatum.id class='content'}}
-                <h1 class="title">{{capitalize metadatum.name}}</h1>
+              {{#link-to 'merchant' merchant.id class='content'}}
+                <h1 class="title">{{capitalize merchant.name}}</h1>
               {{/link-to}}
             </div>
           </div>

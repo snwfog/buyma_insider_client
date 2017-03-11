@@ -1,15 +1,15 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 let { computed }            = Ember;
 let MerchantStatusComponent = Ember.Component.extend({
-  merchantMetadatum: null,
-  metadatum:         computed.alias('merchantMetadatum'),
-  meta:              computed.alias('merchantMetadatum'),
-  lastSyncedDate:    computed(() => `${Math.ceil(Math.random() * 10)} days ago`),
+  merchant:       null,
+  metadatum:      computed.alias('merchant.metadatum'),
+  meta:           computed.alias('merchant.metadatum'),
+  lastSyncedDate: computed(() => `${Math.ceil(Math.random() * 10)} days ago`),
 });
 
 MerchantStatusComponent.reopenClass({
-  positionalParams: 'merchantMetadatum'.w(),
+  positionalParams: 'merchant'.w(),
 });
 
 export default MerchantStatusComponent;

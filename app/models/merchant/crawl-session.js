@@ -1,8 +1,9 @@
-import DS from 'ember-data';
+import DS from "ember-data";
 
-const { attr } = DS;
+const { belongsTo, attr } = DS;
 
 export default DS.Model.extend({
+  merchant:          belongsTo('merchant', { async: true }),
   startedAt:         attr('datetime'),
   finishedAt:        attr('datetime'),
   itemsCount:        attr('number'),
