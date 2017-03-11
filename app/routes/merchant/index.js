@@ -6,7 +6,8 @@ const { hash }                  = Ember.RSVP;
 export default Ember.Route.extend({
   queryParams: {
     page:   { refreshModel: true },
-    limit:  20,
+//     limit:  20,
+    count:  { refreshModel: true },
     filter: { refreshModel: true },
   },
 
@@ -19,18 +20,19 @@ export default Ember.Route.extend({
     });
   },
 
-  setupController(controller, models) {
+  setupController(controller, models, transition) {
     this._super(...arguments);
-    var route = this;
-    controller.setProperties(models);
+    var route       = this;
+    var queryParams = transition.queryParams;
 
+    controller.setProperties(models);
     controller.reopen({
       queryParams: [ 'page', 'limit', 'filter' ],
 //       page:        getWithDefault(controller, 'page', 1),
-//       count:       getWithDefault(controller, 'count', 20),
+//       limit:       getWithDefault(controller, 'limit', 20),
 //       filter:      getWithDefault(controller, 'filter', 'new'),
       page:        1,
-      count:       20,
+      limit:       20,
       filter:      'new',
 
       actions: {

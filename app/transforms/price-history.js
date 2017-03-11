@@ -11,8 +11,11 @@ export default DS.Transform.extend({
 
     Object.keys(serialized)
       .forEach((recordedTime) => {
+        // TODO: Fix backend price history hash
+        // to use array and proper UTC timestamps
+        // instead of hacking front end
         priceHistories.push({
-          createdAt: moment.utc(recordedTime).local(),
+          createdAt: moment.utc(recordedTime, 'YYYY-MM-DD HH:mm:ss Z').local(),
           price:     numericDecimalRound(serialized[recordedTime]),
         });
       });

@@ -8,6 +8,7 @@ export default DS.Model.extend({
   link:         attr('uri'),
   description:  attr(),
   priceHistory: attr('price-history'),
+  priceSummary: attr('price-summary'),
   createdAt:    attr('datetime'),
   updatedAt:    attr('datetime'),
 });

@@ -16,6 +16,7 @@
 
 // Flex utilities to go with Bulma
 .is-row-reverse { flex-direction: row-reverse; }
+.is-align-items-center { align-items: center; }
 
 // Text
 .is-uppercase { text-transform: uppercase !important }
@@ -23,3 +24,6 @@
 .is-capitalize { text-transform: capitalize !important }
 
 .is-semi-bold { font-weight: 400 !important; }
+
+// Color
+//.is-primary { background-color: $turquoise; }

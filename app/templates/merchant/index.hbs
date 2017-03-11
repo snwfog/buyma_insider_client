@@ -4,9 +4,10 @@
     <div class="columns">
       <div class="column is-one-half">
         {{!--Merchant bar--}}
-        <div class="tabs is-medium">
+        <div class="tabs">
           <ul>
-            {{#link-to 'merchant.index' metadatum.id (query-params filter='new') tagName='li' activeClass='is-active'}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
+                       tagName='li' activeClass='is-active'}}
               {{#link-to 'merchant.index' metadatum.id (query-params filter='new')}}
                 New
                 <span class="tag is-success ml-1">
@@ -14,7 +15,8 @@
                 </span>
               {{/link-to}}
             {{/link-to}}
-            {{#link-to 'merchant.index' metadatum.id (query-params filter='sale') tagName='li' activeClass='is-active'}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
+                       tagName='li' activeClass='is-active'}}
               {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')}}
                 Sale
                 <span class="tag is-success ml-1">
@@ -22,7 +24,8 @@
                 </span>
               {{/link-to}}
             {{/link-to}}
-            {{#link-to 'merchant.index' metadatum.id (query-params filter='all') tagName='li' activeClass='is-active'}}
+            {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
+                       tagName='li' activeClass='is-active'}}
               {{#link-to 'merchant.index' metadatum.id (query-params filter='all')}}
                 All
                 <span class="tag is-dark ml-1">
