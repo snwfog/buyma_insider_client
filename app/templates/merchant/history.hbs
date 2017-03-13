@@ -29,7 +29,7 @@
       <div class="column">
         <div class="card is-fullwidth">
           <header class="card-header">
-            <p class="card-header-title">Traffic Size</p>
+            <p class="card-header-title">Traffic Size (kB)</p>
             <span class="card-header-icon">
               {{fa-icon 'bar-chart'}}
             </span>
@@ -37,12 +37,12 @@
           <div class="card-content">
             <div class="content has-text-centered">
               {{ui.sparkline.-bar
-                  data=(map-by 'trafficSize' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
+                  data=(map-by 'trafficSizeKb' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
             </div>
           </div>
           <footer class="card-footer">
             <span class="card-footer-item">
-              <span class="tag is-primary">Traffic Size (Byte)</span>
+              <span class="tag is-primary">Traffic Size (kB)</span>
             </span>
           </footer>
         </div>
@@ -51,7 +51,7 @@
       <div class="column">
         <div class="card is-fullwidth">
           <header class="card-header">
-            <p class="card-header-title">Crawl Elapsed Time</p>
+            <p class="card-header-title">Crawl Elapsed (s)</p>
             <span class="card-header-icon">
               {{fa-icon 'bar-chart'}}
             </span>
@@ -59,12 +59,12 @@
           <div class="card-content">
             <div class="content has-text-centered">
               {{ui.sparkline.-bar
-                  data=(map-by 'elapsedTime' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
+                  data=(map-by 'elapsedTimeS' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
             </div>
           </div>
           <footer class="card-footer">
             <span class="card-footer-item">
-              <span class="tag is-primary">Elapsed Time (Seconds)</span>
+              <span class="tag is-primary">Elapsed Time (s)</span>
             </span>
           </footer>
         </div>

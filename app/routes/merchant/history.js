@@ -10,6 +10,7 @@ export default Ember.Route.extend({
       crawlSessions: merchant.get('crawlSessions'),
     });
   },
+  
 
   setupController(ctrl, { metadatum, crawlSessions }) {
     this._super(...arguments);

@@ -3,43 +3,58 @@
     <div class="columns">
       <div class="column is-10 is-offset-1">
         <p class="control has-addons">
-          <span class="select is-large">
-            {{ui.form.ember-select content=merchants
-                                   optionValuePath='id'
-                                   optionLabelPath='name'}}
-          </span>
-          <input class="input is-expanded is-large" type="text"
-                 placeholder="Search Items: zar:123323">
+          <!--<span class="select is-large">-->
+            {{!--{{ui.form.ember-select content=merchants-->
+                                   <!--optionValuePath='id'-->
+                                   <!--optionLabelPath='name'}}--}}
+          <!--</span>-->
+          {{input list="articles" class="input is-expanded is-large" type="text"
+                 placeholder="Search items..."
+                 enter='_searchArticles'}}
+          <datalist id="articles">
+            {{#each searchArticles as |articleAutocomplete|}}
+              <option value="{{{articleAutocomplete.autocomplete}}}">
+                {{articleAutocomplete.id}}
+              </option>
+            {{/each}}
+          </datalist>
           <a class="button is-large is-primary">
-            <span>Search</span>
+            <!--<span>Search</span>-->
             <span class="icon">{{fa-icon 'search'}}</span>
           </a>
         </p>
-        <h6 class="subtitle is-6">Hint: Auto-complete is available, try to type "zar" + tab, then type in item name</h6>
+        <h6 class="subtitle is-6">
+          <ul>
+            <li>Hint: Auto-complete is available</li>
+            <li>Hint: 'zar:&lt;query&gt;' will limit search to Zara</li>
+          </ul>
+        </h6>
       </div>
     </div>
   </div>
 </section>
 <section class="section">
   <div class="container">
-    <div class="columns">
-      {{#each merchants as |merchant|}}
-        <div class="column is-one-quarter">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="http://placehold.it/300x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content has-text-centered">
-              {{#link-to 'merchant' merchant.id class='content'}}
-                <h1 class="title">{{capitalize merchant.name}}</h1>
-              {{/link-to}}
+    {{#each (chunk 3 merchants) as |merchants_chunk|}}
+      <div class="columns">
+        {{#each merchants_chunk as |merchant|}}
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="http://placehold.it/1289x960" alt="">
+                </figure>
+              </div>
+              <div class="card-content has-text-centered">
+                {{#link-to 'merchant' merchant.id class='content'}}
+                  <h1 class="title">{{capitalize merchant.name}} [{{merchant.id}}]</h1>
+                {{/link-to}}
+              </div>
             </div>
           </div>
-        </div>
-      {{/each}}
-    </div>
+        {{/each}}
+      </div>
+    {{/each}}
   </div>
 </section>
 

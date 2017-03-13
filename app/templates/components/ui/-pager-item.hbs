@@ -1,6 +1,6 @@
 {{#if isDots}}
-  <a class="button">{{page}}</a>
+  <a class="pagination-ellipsis">{{page}}</a>
 {{else}}
-  <a class="button {{if isActive 'is-primary'}}"
+  <a class="pagination-link {{if isActive 'is-current'}}"
      href="{{url}}" {{action 'select'}}>{{page}}</a>
 {{/if}}

@@ -26,9 +26,10 @@ module.exports = function(environment) {
   };
 
   ENV.APP.SERVER = {
-    endpoint: 'http://localhost:9292',
-    // Using bonjour DNS is slow from 2-3s on
+    // Using bonjour DNS will slow from 2-3s on
     // windows machine trying to connect to mac
+//     endpoint: 'http://192.168.0.16:9292', // air.local
+    endpoint: 'http://localhost:9292',
   };
 
   if (environment === 'development') {

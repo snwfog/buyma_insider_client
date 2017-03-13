@@ -14,23 +14,11 @@ const UiTableCrawlSessionComponent = Ember.Component.extend({
         sorted:        true,
       },
       {
-        label:         'Finished On', valuePath: 'finishedAt',
-        cellComponent: 'ui.table.cell-datetime'
-      },
-      {
-        label:         'Items Count', valuePath: 'itemsCount',
+        label:         'Traffic Size (kB)', valuePath: 'trafficSizeKb',
         cellComponent: 'ui.table.cell-integer'
       },
       {
-        label:         'Invalid Items Count', valuePath: 'invalidItemsCount',
-        cellComponent: 'ui.table.cell-integer'
-      },
-      {
-        label:         'Traffic Size (byte)', valuePath: 'trafficSize',
-        cellComponent: 'ui.table.cell-integer'
-      },
-      {
-        label:         'Elapsed Time (s)', valuePath: 'elapsedTime',
+        label:         'Elapsed Time (s)', valuePath: 'elapsedTimeS',
         cellComponent: 'ui.table.cell-integer'
       },
     ];

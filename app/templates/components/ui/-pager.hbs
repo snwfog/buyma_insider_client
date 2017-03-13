@@ -1,25 +1,15 @@
-<a class="button {{if pagerSpread 'previous'}} {{if isFirstDisabled 'disabled'}}"
+<a class="pagination-previous {{if isFirstDisabled 'is-disabled'}}"
    href="{{previousUrl}}" {{action 'previous'}}>
   {{{pagerPrevious}}}
 </a>
-<a class="button {{if pagerSpread 'next'}} {{if isLastDisabled 'disabled'}}"
+<a class="pagination-next {{if isLastDisabled 'is-disabled'}}"
    href="{{nextUrl}}" {{action 'next'}}>
   {{{pagerNext}}}
 </a>
-<ul>
+<ul class="pagination-list">
   {{#each pages key='@index' as |page|}}
     {{ui.-pager-item disabled=disabled page=page
                 selected=this.current seperator=seperator
                 urlTemplate=urlTemplate pageSet='pageChanged'}}
   {{/each}}
 </ul>
-
-{{!--<ul>--}}
-{{!--<li><a class="button">1</a></li>--}}
-{{!--<li><span>...</span></li>--}}
-{{!--<li><a class="button">45</a></li>--}}
-{{!--<li><a class="button is-primary">46</a></li>--}}
-{{!--<li><a class="button">47</a></li>--}}
-{{!--<li><span>...</span></li>--}}
-{{!--<li><a class="button">86</a></li>--}}
-{{!--</ul>--}}

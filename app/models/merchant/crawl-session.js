@@ -8,6 +8,6 @@ export default DS.Model.extend({
   finishedAt:        attr('datetime'),
   itemsCount:        attr('number'),
   invalidItemsCount: attr('number'),
-  trafficSize:       attr('number'),
-  elapsedTime:       attr('decimal', { precision: 2 }),
+  trafficSizeKb:     attr('number'),
+  elapsedTimeS:      attr('decimal', { precision: 2 }),
 });
