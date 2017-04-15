@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('transform:price-history', 'Unit | Transform | price history', {
+moduleFor('transform:list', 'Unit | Transform | list', {
   // Specify the other units that are required for this test.
   // needs: ['serializer:foo']
 });

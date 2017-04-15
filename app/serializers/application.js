@@ -1,17 +1,19 @@
-import Ember from 'ember';
-import DS from 'ember-data';
+import DS from "ember-data";
 
 export default DS.JSONAPISerializer.extend({
   modelNameFromPayloadKey(payloadKey) {
 //    payloadKey = payloadKey.split('_').join('/')
 //    this.debug(`modelnameFromPayloadKey ${payloadKey}`);
-    if (payloadKey === 'merchant-metadata') {
-      return 'merchant/metadatum';
-    } else if (payloadKey === 'crawl-sessions') {
-      return 'merchant/crawlSession';
-    } else {
-      return this._super(payloadKey);
-    }
+    // TODO: Change this to hash
+    var dict = {
+      'merchant-metadata': 'merchant/metadatum',
+      'crawl-sessions':    'merchant/crawl-session',
+      'index-pages':       'merchant/index-page',
+      'price-histories':   'article/price-history'
+    };
+
+    var modelKey = dict[payloadKey];
+    return !!modelKey ? modelKey : this._super(payloadKey);
   },
 
   payloadKeyFromModelName(key) {

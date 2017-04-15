@@ -60,9 +60,9 @@
     {{!--Articles list--}}
     {{#each articles as |article|}}
       <div class="columns">
-        <div class="column is-10">
+        <div class="column is-10 buyma-article">
           <nav class="level">
-            <div class="level-item">
+            <div class="level-left">
               {{#link-to 'articles' article.id
                          class='title is-4 has-text-left'}}
                 {{capitalize article.name}}

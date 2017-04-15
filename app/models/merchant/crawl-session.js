@@ -11,3 +11,5 @@ export default DS.Model.extend({
   trafficSizeKb:     attr('number'),
   elapsedTimeS:      attr('decimal', { precision: 2 }),
 });
+
+

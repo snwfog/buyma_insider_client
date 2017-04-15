@@ -1,14 +1,17 @@
 import DS from "ember-data";
 
-const { attr } = DS;
+const { attr, belongsTo } = DS;
 
 export default DS.Model.extend({
+  priceHistory: belongsTo('article/price-history', { async: false }),
+
   name:         attr(),
   price:        attr('money', { code: 'cad' }),
   link:         attr('uri'),
   description:  attr(),
-  priceHistory: attr('price-history'),
+
   priceSummary: attr('price-summary'),
+
   createdAt:    attr('datetime'),
   updatedAt:    attr('datetime'),
 });

@@ -3,4 +3,8 @@ import config from '../config/environment';
 
 export default DS.JSONAPIAdapter.extend({
   host: config.APP.SERVER.endpoint,
+
+  findHasMany() {
+    this._super(...arguments);
+  },
 });

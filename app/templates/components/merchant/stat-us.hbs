@@ -11,18 +11,22 @@
         <!--<p class="title">{{merchant.newArticlesCount}}</p>-->
       <!--</div>-->
       <div class="level-item has-text-centered">
-        <p class="heading">Total Articles</p>
-        <p class="title">{{merchant.totalArticlesCount}}</p>
+        <div>
+          <p class="heading">Total Articles</p>
+          <p class="title">{{merchant.totalArticlesCount}}</p>
+        </div>
       </div>
       <div class="level-item has-text-centered">
-        <p class="heading">Last Sync</p>
-        <p class="title">
-          {{#if merchant.lastSyncAt}}
-            {{capitalize (moment-from-now merchant.lastSyncAt)}}
-          {{else}}
-            Never
-          {{/if}}
-        </p>
+        <div>
+          <p class="heading">Last Sync</p>
+          <p class="title">
+            {{#if merchant.lastSyncAt}}
+              {{capitalize (moment-from-now merchant.lastSyncAt)}}
+            {{else}}
+              Never
+            {{/if}}
+          </p>
+        </div>
       </div>
     </nav>
   </div>

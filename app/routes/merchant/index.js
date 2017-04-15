@@ -15,8 +15,7 @@ export default Ember.Route.extend({
     var { merchant } = this.modelFor('merchant');
     return hash({
                 merchant,
-      articles: this.store.query('article',
-        merge({ merchant_id: merchant.id }, params)),
+      articles: this.store.query('article', merge({ merchant_id: merchant.id }, params)),
     });
   },
 
@@ -28,12 +27,9 @@ export default Ember.Route.extend({
     controller.setProperties(models);
     controller.reopen({
       queryParams: [ 'page', 'limit', 'filter' ],
-//       page:        getWithDefault(controller, 'page', 1),
-//       limit:       getWithDefault(controller, 'limit', 20),
-//       filter:      getWithDefault(controller, 'filter', 'new'),
-      page:        1,
-      limit:       20,
-      filter:      'new',
+      page:        getWithDefault(queryParams, 'page', 1),
+      limit:       getWithDefault(queryParams, 'limit', 20),
+      filter:      getWithDefault(queryParams, 'filter', 'new'),
 
       actions: {
         '_pageChanged'(nextPage, currPage) {
@@ -50,7 +46,7 @@ export default Ember.Route.extend({
     if (isExiting) {
       controller.set('page', 1);
       controller.set('limit', 20);
-      controller.set('filter', 'new');
+      controller.set('filter', '');
     }
   },
 });

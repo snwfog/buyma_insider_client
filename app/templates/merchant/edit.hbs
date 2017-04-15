@@ -42,5 +42,22 @@
       </div>
     </div>
 
+    <div class="control is-horizontal">
+      <div class="control-label">
+        <label class="label title is-4">Index Pages</label>
+      </div>
+      {{#each merchant.indexPages as |indexPage|}}
+        <div class="control is-grouped">
+          <p class="control has-icon is-expanded">
+            <span class="icon is-small">
+              {{fa-icon 'circle' class=(concat 'is-' indexPage.health)}}
+            </span>
+            {{input class='input is-disabled is-medium'
+                    value=indexPage.fullUrl}}
+          </p>
+        </div>
+      {{/each}}
+    </div>
+
   </div>
 </section>

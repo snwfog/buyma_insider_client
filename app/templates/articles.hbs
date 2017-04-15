@@ -1,5 +1,15 @@
 <section class="section">
   <div class="container">
+    <nav>{{#link-to 'index' class='button is-light'}}Back{{/link-to}}</nav>
+    <hr>
+    <p class="title content is-capitalize has-text-right">{{article.name}}</p>
+    <p class="subtitle content has-text-right is-small mb-1">
+      Indexed <bold>{{moment-from-now article.createdAt}}</bold>
+    </p>
+  </div>
+
+
+  <div class="container">
     <div class="columns is-row-reverse">
 
       <!--Price panel-->
@@ -30,7 +40,7 @@
           </div>
           <div class="card-content has-text-left">
             <div class="price-history-container is-fullwidth">
-              {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory))}}
+              {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory.history))}}
             </div>
           </div>
         </div>
@@ -65,20 +75,10 @@
 
       <!--Article panel-->
       <div class="column is-8">
-        <p class="title is-3 is-capitalize">{{article.name}}</p>
-        <hr>
-        <p class="subtitle is-5">{{article.description}}</p>
-
-        <nav class="level">
-          <div class="level-item has-text-centered">
-            <p class="heading">Created On</p>
-            <p class="title">{{moment-format article.createdAt 'LL'}}</p>
-          </div>
-          <div class="level-item has-text-centered">
-            <p class="heading">Modified On</p>
-            <p class="title">{{moment-format article.updatedAt 'LL'}}</p>
-          </div>
-        </nav>
+        <article class="message">
+          <div class="message-header">Description</div>
+          <div class="message-body">{{article.description}}</div>
+        </article>
 
         <!--Article control-->
         <p class="has-text-right">

@@ -2,9 +2,13 @@
 @import './utilities';
 @import './overrides';
 
+html {
+  background-color: whitesmoke;
+}
+
 .icon.status {
-  &.in-sync   { color: $green; }
-  &.out-sync  { color: $yellow; }
+  &.in-sync { color: $green; }
+  &.out-sync { color: $yellow; }
   &.out-dated { color: $red; }
 }
 
@@ -28,6 +32,12 @@ table tr {
 // price container so the overflow is hidden
 .price-history-container {
   overflow: hidden;
+}
+
+// merchant/index
+.buyma-article {
+  cursor: pointer;
+  &:hover { background-color: rgba(100, 100, 100, 0.1) }
 }
 
 
