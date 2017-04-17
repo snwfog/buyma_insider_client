@@ -7,6 +7,13 @@ export function initialize(application) {
 //   window.BuymaInsiderClient = application;
 //   window.PreloadStore = preloadstore;
 
+  $.ajaxSetup({
+    xhrFields: {
+      withCredentials: true,
+      crossDomain:     true
+    }
+  });
+
   application.deferReadiness();
   $.getJSON(config.settings.path.bootstrap, function (bootstrapsPackage) {
     console.log(bootstrapsPackage);

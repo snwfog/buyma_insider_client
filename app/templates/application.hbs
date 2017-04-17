@@ -20,9 +20,12 @@
       {{#link-to 'status' class='is-tab nav-item'
                  activeClass='is-active'}}Status{{/link-to}}
 
-      {{#link-to 'login' class='is-tab nav-item'
-                 activeClass='is-active'}}Login{{/link-to}}
-
+      {{#if currentUser}}
+        {{log currentUser}}
+      {{else}}
+        {{#link-to 'login' class='is-tab nav-item'
+                   activeClass='is-active'}}Login{{/link-to}}
+      {{/if}}
     </div>
 
     <div class="nav-right">

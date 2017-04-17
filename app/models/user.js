@@ -13,10 +13,11 @@ const User = DS.Model.extend({
 User.reopenClass(SingletonMixin,
   {
     createCurrent() {
-      const userJson = PreloadStore.get('current_user') || {};
+      const userJson = PreloadStore.get('current_user');
       if (userJson) {
-        const store = BuymaInsider.lookup('service:store');
-        return store.createRecord('user', userJson);
+        userJson.data.type = 'user';
+        const store        = BuymaInsider.lookup('service:store');
+        return store.push(userJson);
       }
 
       return null;
