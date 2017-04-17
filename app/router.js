@@ -10,6 +10,9 @@ const Router = Ember.Router.extend(
   });
 
 Router.map(function () {
+  this.route('login');
+  this.route('signup');
+
   this.route('status');
   this.route('articles', { path: '/articles/:article_id' });
   this.route('merchant', { path: '/:merchant_id' }, function () {

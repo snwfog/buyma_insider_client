@@ -32,7 +32,17 @@ module.exports = function(environment) {
     endpoint: 'http://localhost:9292',
   };
 
+  // TODO: Merge this with endpoint
+  ENV.settings = {
+    path: {
+      login:     '/login',
+      bootstrap: '/bootstrap',
+    },
+  };
+
   if (environment === 'development') {
+    ENV.settings.path.login     = ENV.APP.SERVER.endpoint + ENV.settings.path.login;
+    ENV.settings.path.bootstrap = ENV.APP.SERVER.endpoint + ENV.settings.path.bootstrap;
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
 //    ENV.APP.LOG_TRANSITIONS          = true;

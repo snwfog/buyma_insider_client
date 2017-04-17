@@ -8,7 +8,7 @@ export default DS.Model.extend({
   merchant:           belongsTo('merchant'),
 
   name:               attr(),
-  baseUrl:            attr(),
+  domain:             attr(),
   pagerCss:           attr(),
   itemCss:            attr(),
   indexPages:         attr('array'),

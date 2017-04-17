@@ -1,5 +1,4 @@
-import Ember from 'ember';
-import config from '../config/environment';
+import config from "../config/environment";
 
 //const { log, info, warn, error, debug } = Ember.Logger;
 
@@ -18,6 +17,7 @@ export function initialize(/* application */) {
 }
 
 export default {
-  name: '02-environment-configuration',
-        initialize
+  name:  '01-environment',
+  after: '00-bootstrap',
+         initialize
 };

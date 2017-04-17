@@ -1,63 +1,69 @@
 <section class="section">
   <div class="container">
 
-    <div class="control is-horizontal">
-      <div class="control-label">
+    <div class="field is-horizontal">
+      <div class="field-label">
         <label class="label title is-4">Name</label>
       </div>
-      <div class="control is-grouped">
-        <p class="control is-expanded">
-          {{input class='input is-disabled is-medium' value=metadatum.name}}
-        </p>
+      <div class="field-body">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            {{input class='input is-disabled is-medium' value=metadatum.name}}
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="control is-horizontal">
-      <div class="control-label">
-        <label class="label title is-4">Base URL</label>
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label title is-4">Domain</label>
       </div>
-      <div class="control is-grouped">
-        <p class="control">
-          <span class="select is-disabled is-medium">
-            <select>
-              <option>https:</option>
-              <option>http:</option>
-            </select>
-          </span>
-        </p>
-        <p class="control is-expanded">
-          {{input class='input is-disabled is-medium' value=metadatum.baseUrl}}
-        </p>
+      <div class="field-body">
+        <div class="field is-grouped">
+          <p class="control">
+            <span class="select is-disabled is-medium">
+              <select>
+                <option>https:</option>
+                <option>http:</option>
+              </select>
+            </span>
+          </p>
+          <p class="control is-expanded">
+            {{input class='input is-disabled is-medium' value=metadatum.domain}}
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="control is-horizontal">
-      <div class="control-label">
+    <div class="field is-horizontal">
+      <div class="field-label">
         <label class="label title is-4">Pager CSS</label>
       </div>
-      <div class="control is-grouped">
-        <p class="control is-expanded">
-          {{input class='input is-disabled is-medium' value=metadatum.pagerCss}}
-        </p>
+      <div class="field-body">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            {{input class='input is-disabled is-medium' value=metadatum.pagerCss}}
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="control is-horizontal">
-      <div class="control-label">
-        <label class="label title is-4">Index Pages</label>
-      </div>
+    <div class="section">
+      <h5>Index Pages</h5>
       {{#each merchant.indexPages as |indexPage|}}
-        <div class="control is-grouped">
-          <p class="control has-icon is-expanded">
-            <span class="icon is-small">
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label title is-4">
               {{fa-icon 'circle' class=(concat 'is-' indexPage.health)}}
-            </span>
-            {{input class='input is-disabled is-medium'
-                    value=indexPage.fullUrl}}
-          </p>
+            </label>
+          </div>
+          <div class="field-body">
+            <div class="field is-grouped">
+              {{input class='input is-disabled is-medium' value=indexPage.fullUrl}}
+            </div>
+          </div>
         </div>
       {{/each}}
     </div>
-
   </div>
 </section>
