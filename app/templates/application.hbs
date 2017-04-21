@@ -1,42 +1,8 @@
 {{loading-slider isLoading=loading}}
 
-<nav class="nav has-shadow">
-  <div class="container">
-
-    <div class="nav-left">
-      <span class="nav-item">
-        <span class="title is-4">
-          {{ui.-money oneDollar 'jpy' showCode=true}}
-        </span>
-      </span>
-      <span class="nav-item">
-        <span class="title is-4">
-          {{ui.-money oneDollar 'usd' showCode=true}}
-        </span>
-      </span>
-    </div>
-
-    <div class="nav-center">
-      {{#link-to 'status' class='is-tab nav-item'
-                 activeClass='is-active'}}Status{{/link-to}}
-
-      {{#if currentUser}}
-        {{log currentUser}}
-      {{else}}
-        {{#link-to 'login' class='is-tab nav-item'
-                   activeClass='is-active'}}Login{{/link-to}}
-      {{/if}}
-    </div>
-
-    <div class="nav-right">
-      {{#link-to 'index' class='nav-item is-brand'}}
-        {{appName}}
-      {{/link-to}}
-    </div>
-
-  </div>
-</nav>
+{{partial 'partials/navbar'}}
 
 {{outlet}}
+
 {{partial 'partials/footer'}}
 {{partial 'partials/hidden/login-form'}}

@@ -5,6 +5,8 @@ import SingletonMixin from "../mixins/singleton";
 const { hasMany, belongsTo, attr } = DS;
 
 const User = DS.Model.extend({
+  watchedArticles: hasMany('user/watchedArticle'),
+
   username:  attr(),
   createdAt: attr('datetime'),
   updatedAt: attr('datetime')
@@ -13,11 +15,11 @@ const User = DS.Model.extend({
 User.reopenClass(SingletonMixin,
   {
     createCurrent() {
-      const userJson = PreloadStore.get('current_user');
-      if (userJson) {
-        userJson.data.type = 'user';
-        const store        = BuymaInsider.lookup('service:store');
-        return store.push(userJson);
+      const currentUserJson = PreloadStore.get('current_user');
+      if (currentUserJson) {
+        const store = BuymaInsider.lookup('service:store');
+        store.pushPayload('user', currentUserJson);
+        return store.peekRecord('user', currentUserJson.data.id);
       }
 
       return null;

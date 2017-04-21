@@ -14,11 +14,19 @@ Router.map(function () {
   this.route('signup');
 
   this.route('status');
-  this.route('articles', { path: '/articles/:article_id' });
+  this.route('articles', { path: '/articles/:article_id' }, function() {
+    this.route('index');
+  });
+
   this.route('merchant', { path: '/:merchant_id' }, function () {
     this.route('index');
     this.route('history');
     this.route('edit');
+  });
+  this.route('logout');
+
+  this.route('user', function() {
+    this.route('profile');
   });
 });
 

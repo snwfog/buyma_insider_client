@@ -1,6 +1,8 @@
 # BUYMA バイマ INSIDER
 
 TODO:
+- Add ember cp validation
+- Add ember features
 - Quick currency calculator, next to every article, and on the main page
 - Search history / View history
 - Improve the loading bar, to use page loaded event to move forward the bar

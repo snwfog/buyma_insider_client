@@ -19,8 +19,9 @@
 // Flex utilities to go with Bulma
 .is-row-reverse { flex-direction: row-reverse; }
 .is-align-items-center { align-items: center; }
+.is-fullwidth { width: 100% }
 
-// Text
+  // Text
 .is-uppercase { text-transform: uppercase !important }
 .is-lowercase { text-transform: lowercase !important }
 .is-capitalize { text-transform: capitalize !important }

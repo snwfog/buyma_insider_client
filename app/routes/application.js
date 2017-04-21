@@ -19,12 +19,9 @@ export default Ember.Route.extend(
     setupController(controller, models) {
       this._super(...arguments);
       controller.reopen({
-        oneDollar:   this.store.createRecord('money', {
-          base:   'cad', amount: 1 }),
-        oneUsDollar: this.store.createRecord('money', {
-          base:   'usd', amount: 1 }),
-        oneYen:      this.store.createRecord('money', {
-          base:   'jpy', amount: 1 }),
+        oneDollar:   this.store.createRecord('money', { base: 'cad', amount: 1 }),
+        oneUsDollar: this.store.createRecord('money', { base: 'usd', amount: 1 }),
+        oneYen:      this.store.createRecord('money', { base: 'jpy', amount: 1 }),
       });
     }
   });

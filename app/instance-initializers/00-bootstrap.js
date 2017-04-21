@@ -9,6 +9,7 @@ export function initialize(appInstance) {
   appInstance.inject('route',      'currentUser', 'current-user:main');
   appInstance.inject('controller', 'currentUser', 'current-user:main');
   appInstance.inject('component',  'currentUser', 'current-user:main');
+  appInstance.inject('ability',  'currentUser', 'current-user:main');
 
   appInstance.inject('adapter', 'debug', 'debug-logger:main');
 }

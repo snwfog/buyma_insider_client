@@ -1,0 +1,71 @@
+<nav class="nav has-shadow">
+  <div class="container">
+
+    <div class="nav-left">
+      {{#link-to 'index' class='nav-item is-brand is-hidden-mobile'}}
+        {{appName}}
+      {{/link-to}}
+
+      {{#link-to 'index' class='nav-item is-brand is-hidden-tablet'}}
+        {{fa-icon 'bold'}}
+      {{/link-to}}
+    </div>
+
+    <div class="nav-center">
+      <span class="nav-item is-hidden-tablet">
+        {{input class="input"
+                type="text"
+                placeholder="Search..."}}
+      </span>
+
+      <span class="nav-item is-hidden-mobile">
+        <span class="title is-4">
+          {{ui.-money oneDollar 'jpy' showCode=true}}
+        </span>
+      </span>
+
+      <span class="nav-item is-hidden-mobile">
+        <span class="title is-4">
+          {{ui.-money oneDollar 'usd' showCode=true}}
+        </span>
+      </span>
+    </div>
+
+    <span class="nav-toggle {{if navBarIsActive 'is-active'}}" {{action (toggle 'navBarIsActive' this)}}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+
+    <div class="nav-right nav-menu {{if navBarIsActive 'is-active'}}">
+      <!--Show these currency exchange on mobile+tablet-->
+      <span class="nav-item is-hidden-tablet">
+        <span class="level is-mobile is-fullwidth">
+          <span class="level-item">
+            {{ui.-money oneDollar 'jpy' showCode=true}}
+          </span>
+          <span class="level-item">
+            {{ui.-money oneDollar 'usd' showCode=true}}
+          </span>
+        </span>
+      </span>
+
+      {{#link-to 'status' class='is-tab nav-item' activeClass='is-active'}}Status{{/link-to}}
+
+      {{#if currentUser}}
+        {{#link-to 'user.profile' class='is-tab nav-item' activeClass='is-active'}}
+          <figure class="image is-16x16 mr-1">
+            <img src="http://bulma.io/images/jgthms.png" alt="">
+          </figure>
+          {{currentUser.username}}
+        {{/link-to}}
+
+        {{#link-to 'logout' class='is-tab nav-item' activeClass='is-active'}}Logout{{/link-to}}
+      {{else}}
+        {{#link-to 'login' class='is-tab nav-item' activeClass='is-active'}}Login{{/link-to}}
+      {{/if}}
+    </div>
+
+
+  </div>
+</nav>

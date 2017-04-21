@@ -37,17 +37,6 @@
         </div>
       </div>
       <div class="column is-one-half">
-        {{!--Search bar--}}
-        <p class="control has-addons has-addons-right">
-          <input class="input is-medium is-expanded" type="text"
-                 placeholder="Search for article">
-          <a class="button is-primary is-medium">
-            <span>Search</span>
-            <span class="icon">
-              {{fa-icon 'search'}}
-            </span>
-          </a>
-        </p>
       </div>
     </div>
 
@@ -60,35 +49,28 @@
     {{!--Articles list--}}
     {{#each articles as |article|}}
       <div class="columns">
-        <div class="column is-10 buyma-article">
-          <nav class="level">
-            <div class="level-left">
-              {{#link-to 'articles' article.id
-                         class='title is-4 has-text-left'}}
-                {{capitalize article.name}}
-                <p class="subtitle is-6 has-text-left">
+        <div class="column buyma-article">
+          <div class="level">
+            {{#link-to 'articles.index' article.id class='title is-4 level-item has-text-left'}}
+              <div class="has-text-left">
+                <p class="title is-4">
+                  {{capitalize article.name}}
+                </p>
+                <p class="heading">
                   {{titleize article.description}}
                 </p>
-              {{/link-to}}
-            </div>
-            <div class="level-right">
-              <p class="level-item">
-                <p class="title is-4">
-                  {{ui.-money article.price showCode=true}}
-                </p>
+              </div>
+            {{/link-to}}
+            <p class="level-item has-text-right">
+              <p class="title is-4">
+                {{ui.-money article.price showCode=true}}
               </p>
-            </div>
-          </nav>
-        </div>
-        <div class="column">
-          <div class="level">
-            <div class="level-right has-text-right">
-              <p class="level-item price-history">
-                {{ui.sparkline.-line
-                    data=(map-by 'price' (reverse (take 45
-                        (sort-by 'createdAt:desc' article.priceHistory))))}}
-              </p>
-            </div>
+            </p>
+            <p class="level-item price-history">
+              {{ui.sparkline.-line
+                  data=(map-by 'price' (reverse (take 45
+                      (sort-by 'createdAt:desc' article.priceHistory))))}}
+            </p>
           </div>
         </div>
       </div>

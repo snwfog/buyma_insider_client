@@ -6,14 +6,15 @@ export default DS.JSONAPISerializer.extend({
 //    this.debug(`modelnameFromPayloadKey ${payloadKey}`);
     // TODO: Change this to hash
     var dict = {
-      'merchant-metadata':  'merchant/metadatum',
-      'crawl-sessions':     'merchant/crawl-session',
-      'index-pages':        'merchant/index-page',
-      'price-histories':    'article/price-history',
-      'user-session-token': 'user/session-token',
+      'merchant-metadata':     'merchant/metadatum',
+      'crawl-sessions':        'merchant/crawl-session',
+      'index-pages':           'merchant/index-page',
+      'price-histories':       'article/price-history',
+      'user-session-tokens':   'user/session-token',
+      'user-watched-articles': 'user/watched-article',
     };
 
-    var modelKey = dict[payloadKey];
+    var modelKey = dict[ payloadKey ];
     return !!modelKey ? modelKey : this._super(payloadKey);
   },
 

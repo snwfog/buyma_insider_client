@@ -21,6 +21,11 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import(app.bowerDirectory + '/bulma/css/bulma.css');
+
   app.import(app.bowerDirectory + '/jquery.sparkline.bower/src/jquery.sparkline.js');
+
+  app.import(app.bowerDirectory + '/alertifyjs/dist/js/alertify.js');
+  app.import(app.bowerDirectory + '/alertifyjs/dist/css/alertify.css');
+  app.import('vendor/shims/alertify.js');
   return app.toTree();
 };
