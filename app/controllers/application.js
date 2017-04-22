@@ -6,4 +6,11 @@ export default Ember.Controller.extend({
   loginPath: config.settings.path.login,
 
   navBarIsActive: false,
+
+  actions: {
+    '_toast'(message, severity) {
+      severity = severity || 'log';
+      this.toastService[ severity ](message);
+    },
+  }
 });

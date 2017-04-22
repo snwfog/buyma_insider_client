@@ -12,7 +12,7 @@ export default EmberAsyncButtonComponent.extend({
     'isRejected:is-danger',
     'isFulfilled:is-outlined',
     'isFulfilled:is-success',
-    'isFulfilled:is-disabled',
+//     'isFulfilled:is-disabled',
     'isResolved:is-outlined',
     'isResolved:is-success',
     'isResolved:is-disabled',

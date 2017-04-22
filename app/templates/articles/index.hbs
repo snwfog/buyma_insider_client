@@ -5,7 +5,7 @@
       <div class="field is-grouped">
 
         <p class="control">
-          <a class="button">
+          <a class="button" {{action '_toast' 'Hello from this item'}}>
             <span class="icon is-small">
               {{fa-icon 'globe'}}
             </span>
@@ -13,61 +13,9 @@
           </a>
         </p>
 
-        {{#if (await (can 'unwatch article' article))}}
-          <p class="control">
-            <a class="button is-primary is-disabled">
-              <span class="icon is-small">
-                {{fa-icon 'eye'}}
-              </span>
-            </a>
-          </p>
-        {{else}}{{#if (await (can 'watch article' article))}}
-          <p class="control">
-            {{#ui.form.-async-button class='button is-primary'
-                                     disableWhen=(not currentUser)
-                                     action=(action '_watchArticle' article) as |component state|}}
-              {{#if state.isRejected}}
-                <span class="icon is-small">
-                  {{fa-icon 'exclamation-circle'}}
-                </span>
-                <span>Error</span>
-              {{else}}{{#if state.isFulfilled}}
-                <span class="icon is-small">
-                  {{fa-icon 'check-circle-o'}}
-                </span>
-              {{else}}
-                <span class="icon is-small">
-                  {{fa-icon 'eye'}}
-                </span>
-                <span>Watch</span>
-              {{/if}}{{/if}}
-            {{/ui.form.-async-button}}
-          </p>
-        {{/if}}{{/if}}
-
-        <p class="control">
-          {{#ui.form.-async-button class='button is-success'
-                                   disableWhen=(not currentUser)
-                                   action=(action '_soldArticle' article) as |component state|}}
-            {{#if state.isRejected}}
-              <span class="icon is-small">
-                {{fa-icon 'exclamation-circle'}}
-              </span>
-              <span>Error</span>
-            {{else}}{{#if state.isFulfilled}}
-              <span class="icon is-small">
-                {{fa-icon 'check-circle-o'}}
-              </span>
-              <span>Watched</span>
-            {{else}}
-              <span class="icon is-small">
-                {{fa-icon 'shopping-bag'}}
-              </span>
-              <span>Sold</span>
-            {{/if}}{{/if}}
-          {{/ui.form.-async-button}}
-        </p>
-
+        {{article.watch-button article=article watch=(action '_watchArticle' article)}}
+        {{article.sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
+                                                                 (action '_toast' 'Congratulation!'))}}
       </div>
     </nav>
     <hr>
@@ -83,44 +31,55 @@
 
       <!--Price panel-->
       <div class="column is-4">
-        <div class="card is-fullwidth">
-          <div class="level">
-            <div class="level-item">
-              <span class="icon">{{fa-icon 'arrow-up' class='is-primary'}}</span>
-            </div>
-            <div class="level-item">
-              {{ui.-money article.price 'cad' showCode=true}}
-            </div>
-            <div class="level-item">
-              {{ui.-money article.price 'jpy' showCode=true}}
-            </div>
-          </div>
-          <div class="level">
-            <div class="level-item price-history-container">
-              {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory.history))}}
+        <div class="columns is-gapless">
+          <div class="card is-fullwidth padding-1">
+            <div class="level is-mobile">
+              <div class="level-item">
+                <span class="icon">{{fa-icon 'arrow-up' class='is-primary'}}</span>
+              </div>
+              <div class="level-item">
+                {{ui.-money article.price 'cad' showCode=true}}
+              </div>
+              <div class="level-item">
+                {{ui.-money article.price 'jpy' showCode=true}}
+              </div>
             </div>
           </div>
         </div>
 
-        <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
-          <tbody>
-          {{#if article.priceSummary.max}}
-            <tr>
-              <td><b>Highest</b></td>
-              <td>${{article.priceSummary.max.price}}</td>
-              <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
-            </tr>
-          {{/if}}
+        <div class="columns is-gapless">
+          <div class="card is-fullwidth padding-1">
+            <div class="level is-mobile">
+              <div class="level-item price-history-container">
+                {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory.history))}}
+              </div>
+            </div>
+          </div>
+        </div>
 
-          {{#if article.priceSummary.min}}
-            <tr>
-              <td><b>Lowest</b></td>
-              <td>${{article.priceSummary.min.price}}</td>
-              <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
-            </tr>
-          {{/if}}
-          </tbody>
-        </table>
+        <div class="columns is-gapless">
+          <div class="card is-fullwidth padding-1">
+            <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
+              <tbody>
+              {{#if article.priceSummary.max}}
+                <tr>
+                  <td><b>Highest</b></td>
+                  <td>${{article.priceSummary.max.price}}</td>
+                  <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
+                </tr>
+              {{/if}}
+
+              {{#if article.priceSummary.min}}
+                <tr>
+                  <td><b>Lowest</b></td>
+                  <td>${{article.priceSummary.min.price}}</td>
+                  <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
+                </tr>
+              {{/if}}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <!--Article panel-->
@@ -129,9 +88,7 @@
           <div class="message-header">Description</div>
           <div class="message-body">{{article.description}}</div>
         </article>
-
       </div>
-
 
     </div>
   </div>

@@ -1,0 +1,20 @@
+{{#ui.form.-async-button class='button is-success'
+                         disableWhen=(not currentUser)
+                         action=(action 'sell') as |component state|}}
+  {{#if state.isRejected}}
+    <span class="icon is-small">
+      {{fa-icon 'exclamation-circle'}}
+    </span>
+    <span>Error</span>
+  {{else}}{{#if state.isFulfilled}}
+    <span class="icon is-small">
+      {{fa-icon 'check-circle-o'}}
+    </span>
+    <span>Sold</span>
+  {{else}}
+    <span class="icon is-small">
+      {{fa-icon 'shopping-bag'}}
+    </span>
+    <span>+1 Sell</span>
+  {{/if}}{{/if}}
+{{/ui.form.-async-button}}
