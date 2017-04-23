@@ -132,9 +132,10 @@
             <div class="media-content">
               <div class="content">
                 <p class="title is-4">
-                  {{ui.-money (await soldArticle.article.price)
-                              exchangeRate=(await soldArticle.exchangeRate)
-                              showCode=true}}
+                  {{ui.-money (await soldArticle.article.price) 'cad' showCode=true
+                              exchangeRate=(await soldArticle.exchangeRate)}}
+                  {{ui.-money (await soldArticle.article.price) 'jpy' showCode=true
+                              exchangeRate=(await soldArticle.exchangeRate)}}
                 </p>
                 <p class="subtitle is-6">
                   {{moment-format soldArticle.createdAt}}
@@ -145,13 +146,8 @@
               </div>
               <div class="content">
                 <p class="title is-6">
-                  {{ui.-money 1 'jpy' exchangeRate=soldArticle.exchangeRate showCode=true}}
-                </p>
-                <p class="title is-6">
-                  {{ui.-money 1 'cad' exchangeRate=soldArticle.exchangeRate showCode=true}}
-                </p>
-                <p class="title is-6">
-                  On {{moment-format soldArticle.rate.timestamp}}
+                  {{ui.-money oneDollar 'jpy' exchangeRate=(await soldArticle.exchangeRate)}}
+                  {{moment-format (await soldArticle.exchangeRate.timestamp)}}
                 </p>
               </div>
             </div>
