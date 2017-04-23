@@ -4,6 +4,8 @@ import {Ability} from "ember-can";
 const { computed } = Ember;
 
 export default Ability.extend({
+  canSell:  computed.notEmpty('currentUser'),
+
   canWatch: computed('currentUser.watchedArticles.[]', function() {
     const article     = this.model;
     const currentUser = this.currentUser;

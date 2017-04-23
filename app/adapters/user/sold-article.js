@@ -6,12 +6,16 @@ export default ApplicationAdapter.extend({
   },
 
   buildURL(modelName, id, snapshot, requestType, query) {
-    modelName = `articles/${snapshot.record.get('article.id')}/watch`;
+    modelName = `articles/${snapshot.record.get('article.id')}/sell`;
     return this._super(modelName, id, snapshot, requestType, query);
   },
 
   urlForDeleteRecord(id, modelName, snapshot) {
-    modelName = `articles/${snapshot.record.get('article.id')}/watch`;
+    // We can either
+    modelName = `articles/${snapshot.record.get('article.id')}/sell`;
     return this._super(null, modelName, snapshot);
+    // or
+//     modelName = `user_sold_articles/${id}`;
+//     return this._super(id, 'user_sold_articles', snapshot);
   }
 });

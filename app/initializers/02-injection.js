@@ -2,8 +2,9 @@ export function initialize(application) {
 
 //   var exchangeRatesService = ExchangeRatesService.create();
 //   application.register('service:exchange-rates', exchangeRatesService, { instantiate: false })
-  application.inject('route', 'exchangeRatesService', 'service:exchange-rates');
-  application.inject('component', 'exchangeRatesService', 'service:exchange-rates');
+  application.inject('route',      'exchangeRatesService', 'service:exchange-rates');
+  application.inject('controller', 'exchangeRatesService', 'service:exchange-rates');
+  application.inject('component',  'exchangeRatesService', 'service:exchange-rates');
   
     // Toast service
   application.inject('model',      'toastService', 'service:toast');

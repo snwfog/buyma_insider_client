@@ -5,11 +5,8 @@
       <div class="field is-grouped">
 
         <p class="control">
-          <a class="button" {{action '_toast' 'Hello from this item'}}>
-            <span class="icon is-small">
-              {{fa-icon 'globe'}}
-            </span>
-            <span>Official</span>
+          <a class="button">
+            <span class="icon is-small">{{fa-icon 'globe'}}</span>
           </a>
         </p>
 
@@ -18,11 +15,15 @@
                                                                  (action '_toast' 'Congratulation!'))}}
       </div>
     </nav>
+
     <hr>
-    <p class="title content is-capitalize has-text-right">{{article.name}}</p>
-    <p class="subtitle content has-text-right is-small mb-1">
-      Indexed <bold>{{moment-from-now article.createdAt}}</bold>
-    </p>
+
+    <div class="content mb-1">
+      <p class="title is-4 is-capitalize has-text-right">{{article.name}}</p>
+      <p class="subtitle is-6 has-text-right">
+        Indexed <bold>{{moment-from-now article.createdAt}}</bold>
+      </p>
+    </div>
   </div>
 
 
@@ -35,13 +36,17 @@
           <div class="card is-fullwidth padding-1">
             <div class="level is-mobile">
               <div class="level-item">
-                <span class="icon">{{fa-icon 'arrow-up' class='is-primary'}}</span>
+                <span class="icon">{{fa-icon 'arrow-up'}}</span>
               </div>
               <div class="level-item">
-                {{ui.-money article.price 'cad' showCode=true}}
+                <p class="title is-4">
+                  {{ui.-money article.price 'cad' showCode=true}}
+                </p>
               </div>
               <div class="level-item">
-                {{ui.-money article.price 'jpy' showCode=true}}
+                <p class="title is-4">
+                  {{ui.-money article.price 'jpy' showCode=true}}
+                </p>
               </div>
             </div>
           </div>
@@ -84,10 +89,82 @@
 
       <!--Article panel-->
       <div class="column is-8">
-        <article class="message">
-          <div class="message-header">Description</div>
-          <div class="message-body">{{article.description}}</div>
-        </article>
+        <div class="content">
+          <blockquote>{{article.description}}</blockquote>
+        </div>
+
+        {{#if watchedArticle}}
+          <article class="media">
+            <div class="media-left">
+              <p class="title is-2">
+                <span class="icon">
+                  {{fa-icon 'eye'}}
+                </span>
+              </p>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p class="title is-4 is-capitalize">{{moment-from-now watchedArticle.createdAt}}</p>
+                <p class="subtitle is-6">{{moment-format watchedArticle.createdAt}}</p>
+              </div>
+            </div>
+            <div class="media-right">
+              <span class="tag is-danger">
+                {{#ui.form.-async-button tagName='button'
+                                         class='delete is-small'
+                                         action=(action '_unwatchArticle' watchedArticle)}}
+                {{/ui.form.-async-button}}
+              </span>
+            </div>
+
+          </article>
+        {{/if}}
+
+        {{#each (sort-by 'createdAt:desc' soldArticles) as |soldArticle|}}
+          <article class="media">
+            <div class="media-left">
+              <p class="title is-2">
+                <span class="icon">
+                  {{fa-icon 'shopping-bag' class='is-success'}}
+                </span>
+              </p>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p class="title is-4">
+                  {{ui.-money (await soldArticle.article.price)
+                              exchangeRate=(await soldArticle.exchangeRate)
+                              showCode=true}}
+                </p>
+                <p class="subtitle is-6">
+                  {{moment-format soldArticle.createdAt}}
+                </p>
+                <p class="subtitle is-6 is-capitalize">
+                  {{moment-from-now soldArticle.createdAt}}
+                </p>
+              </div>
+              <div class="content">
+                <p class="title is-6">
+                  {{ui.-money 1 'jpy' exchangeRate=soldArticle.exchangeRate showCode=true}}
+                </p>
+                <p class="title is-6">
+                  {{ui.-money 1 'cad' exchangeRate=soldArticle.exchangeRate showCode=true}}
+                </p>
+                <p class="title is-6">
+                  On {{moment-format soldArticle.rate.timestamp}}
+                </p>
+              </div>
+            </div>
+            <div class="media-right">
+              <span class="tag is-danger">
+                {{#ui.form.-async-button tagName='button'
+                                         class='delete is-small'
+                                         action=(action '_unsellArticle' soldArticle)}}
+                {{/ui.form.-async-button}}
+              </span>
+            </div>
+          </article>
+        {{/each}}
       </div>
 
     </div>

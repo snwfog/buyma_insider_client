@@ -32,6 +32,7 @@ export default Ember.Service.extend({
   EXPIRES_IN: 3600, // expires in 1 hour in seconds
 
   exchangeRates: null,
+  latest:        computed.alias('exchangeRates'),
   store:         inject.service('store'),
 
 //   init() {
@@ -71,18 +72,18 @@ export default Ember.Service.extend({
 //     }
   },
 
-  convertCurrency(from, to, amount = 1) {
+  convertCurrency(from, to, amount = 1, rate) {
     if (from === to) {
       return amount;
     }
 
-    var latestRates  = this.get('exchangeRates');
-    var exchangeBase = this.get('exchangeRates.base').toLowerCase();
+    var exchangeRates  = rate || this.get('latest');
+    var exchangeBase = exchangeRates.get('base').toLowerCase();
     if (from === exchangeBase) {
-      return latestRates.get(`rates.${to}`) * amount;
+      return exchangeRates.get(`rates.${to}`) * amount;
     } else {
-      var fromRate    = latestRates.get(`rates.${from}`);
-      var toRate      = latestRates.get(`rates.${to}`);
+      var fromRate    = exchangeRates.get(`rates.${from}`);
+      var toRate      = exchangeRates.get(`rates.${to}`);
       var newBaseRate = toRate / Number(fromRate);
       return newBaseRate * amount;
     }

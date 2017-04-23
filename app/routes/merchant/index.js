@@ -14,22 +14,23 @@ export default Ember.Route.extend({
   model(params) {
     var { merchant } = this.modelFor('merchant');
     return hash({
-                merchant,
-      articles: this.store.query('article', merge({ merchant_id: merchant.id }, params)),
+                 merchant,
+      metadatum: merchant.get('metadatum'),
+      articles:  this.store.query('article', merge({ merchant_id: merchant.id }, params)),
     });
   },
 
   setupController(controller, models, transition) {
     this._super(...arguments);
     var route       = this;
-    var queryParams = transition.queryParams;
-
     controller.setProperties(models);
+
+    var queryParams = transition.queryParams;
     controller.reopen({
       queryParams: [ 'page', 'limit', 'filter' ],
       page:        getWithDefault(queryParams, 'page', 1),
       limit:       getWithDefault(queryParams, 'limit', 20),
-      filter:      getWithDefault(queryParams, 'filter', 'new'),
+      filter:      getWithDefault(queryParams, 'filter', 'all'),
 
       actions: {
         '_pageChanged'(nextPage, currPage) {
@@ -46,7 +47,7 @@ export default Ember.Route.extend({
     if (isExiting) {
       controller.set('page', 1);
       controller.set('limit', 20);
-      controller.set('filter', '');
+      controller.set('filter', 'all');
     }
   },
 });

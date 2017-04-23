@@ -1,3 +1,4 @@
+@import './elements';
 @import './variables';
 @import './utilities';
 @import './overrides';
@@ -26,7 +27,7 @@ table tr {
 
 // fa-icon with Bulma color
 .icon i.fa {
-  &.is-primary { color: $green !important }
+  &.is-success { color: $green !important }
 }
 
 // price container so the overflow is hidden

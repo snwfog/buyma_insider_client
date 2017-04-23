@@ -44,21 +44,20 @@
 </section>
 <section class="section">
   <div class="container">
-    {{#each (chunk 3 merchants) as |merchants_chunk|}}
-      <div class="columns">
-        {{#each merchants_chunk as |merchant|}}
-          <div class="column is-one-third">
-            <div class="card">
-              <div class="card-content has-text-centered">
-                {{#link-to 'merchant' merchant.id class='content'}}
-                  <h1 class="title">{{capitalize merchant.name}} [{{merchant.id}}]</h1>
-                {{/link-to}}
-              </div>
-            </div>
-          </div>
-        {{/each}}
+    <div class="columns">
+      <div class="column is-4">
+        <nav class="panel">
+          <p class="panel-heading">Merchants</p>
+          <p class="panel-tabs"></p>
+          {{#each merchants as |merchant|}}
+            {{#link-to 'merchant' merchant.id class='panel-block'}}
+              <span class="panel-icon">{{fa-icon 'shopping-bag'}}</span>
+              {{capitalize merchant.name}} [{{merchant.id}}]
+            {{/link-to}}
+          {{/each}}
+        </nav>
       </div>
-    {{/each}}
+    </div>
   </div>
 </section>
 

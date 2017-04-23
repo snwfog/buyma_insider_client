@@ -5,20 +5,26 @@ let UiMoneyComponent = Ember.Component.extend({
   tagName:    'span',
   classNames: 'component-ui-money is-semi-bold',
 
-  amount:        null,
+  amount:       null,
   // This is the widget base, could be different than
   // the actual amount base
-  displayBase:   'cad',
-  separator:     '.',
-  showCode:      false,
+  displayBase:  'cad',
+  separator:    '.',
+  showCode:     false,
+  exchangeRate: null,
+  rate:         computed.alias('exchangeRate'),
   displayAmount: computed('amount', 'displayBase', function () {
-    var amount      = this.get('amount');
-    var amountBase  = this.get('amount.base') || 'cad';
-    var displayBase = this.get('displayBase') || 'cad';
+    const amount      = this.get('amount');
+    const amountBase  = this.get('amount.base') || 'cad';
+    const displayBase = this.get('displayBase') || 'cad';
+    const exchangeRate = this.get('exchangeRate');
 
     var exchangeRatesService = this.get('exchangeRatesService');
     var { locale, code }     = exchangeRatesService.lookup(this.get('displayBase'));
-    var convertedAmount      = exchangeRatesService.convertCurrency(amountBase, displayBase, amount.get('amount'));
+    var convertedAmount      = exchangeRatesService.convertCurrency(amountBase,
+                                                                    displayBase,
+                                                                    amount.get('amount'),
+                                                                    exchangeRate);
 
     var formatter = new Intl.NumberFormat(locale, {
       style:    'currency',

@@ -1,77 +1,69 @@
 <section class="section">
   <div class="container">
 
+    {{!--Merchant article options--}}
     <div class="columns">
-      <div class="column is-one-half">
-        {{!--Merchant bar--}}
-        <div class="tabs">
-          <ul>
-            {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
-                       tagName='li' activeClass='is-active'}}
-              {{#link-to 'merchant.index' metadatum.id (query-params filter='new')}}
-                New
-                <span class="tag is-success ml-1">
-                  {{articles.meta.new-count}}
-                </span>
-              {{/link-to}}
-            {{/link-to}}
-            {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
-                       tagName='li' activeClass='is-active'}}
-              {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')}}
-                Sale
-                <span class="tag is-success ml-1">
-                  {{articles.meta.sale-count}}
-                </span>
-              {{/link-to}}
-            {{/link-to}}
-            {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
-                       tagName='li' activeClass='is-active'}}
-              {{#link-to 'merchant.index' metadatum.id (query-params filter='all')}}
-                All
-                <span class="tag is-dark ml-1">
-                  {{articles.meta.total-count}}
-                </span>
-              {{/link-to}}
-            {{/link-to}}
-          </ul>
+      <div class="column is-half">
+        <div class="content">
+          {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
+                     class='button is-outlined is-primary'
+                     activeClass='is-primary is-active'}}New{{/link-to}}
+          {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
+                     class='button is-outlined is-primary'
+                     activeClass='is-primary is-active'}}Sale{{/link-to}}
+          {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
+                     class='button is-outlined is-primary'
+                     activeClass='is-primary is-primary'}}All{{/link-to}}
         </div>
-      </div>
-      <div class="column is-one-half">
+        <div class="content">
+          <a href="" class="button is-outlined is-primary">Name</a>
+          <a href="" class="button is-outlined is-primary">Price</a>
+        </div>
       </div>
     </div>
 
     {{!--Pagination--}}
-    {{ui.-pager current=articles.meta.current-page
-                count=articles.meta.total-pages
-                change=(action '_pageChanged')}}
-    <hr>
+    <div class="columns">
+      <div class="column">
+        {{ui.-pager current=articles.meta.current-page
+                    count=articles.meta.total-pages
+                    change=(action '_pageChanged')}}
+      </div>
+    </div>
 
     {{!--Articles list--}}
     {{#each articles as |article|}}
       <div class="columns">
-        <div class="column buyma-article">
-          <div class="level">
-            {{#link-to 'articles.index' article.id class='title is-4 level-item has-text-left'}}
-              <div class="has-text-left">
-                <p class="title is-4">
-                  {{capitalize article.name}}
-                </p>
-                <p class="heading">
-                  {{titleize article.description}}
-                </p>
+        <div class="column is-half">
+          <div class="media">
+            <div class="media-left">
+              <button class="button is-light">
+                {{fa-icon 'eye'}}
+              </button>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                {{#link-to 'articles.index' article.id}}
+                  <p class="title is-4">
+                    {{article.name}}
+                  </p>
+                  <p class="subtitle is-6">
+                    {{article.description}}
+                  </p>
+                {{/link-to}}
               </div>
-            {{/link-to}}
-            <p class="level-item has-text-right">
-              <p class="title is-4">
-                {{ui.-money article.price showCode=true}}
-              </p>
-            </p>
-            <p class="level-item price-history">
-              {{ui.sparkline.-line
-                  data=(map-by 'price' (reverse (take 45
-                      (sort-by 'createdAt:desc' article.priceHistory))))}}
-            </p>
+            </div>
           </div>
+        </div>
+        <div class="column is-3">
+          <p class="title is-4">
+            {{ui.-money article.price showCode=true}}
+          </p>
+        </div>
+        <div class="column is-3">
+          <p class="price-history">
+            {{ui.sparkline.-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' article.priceHistory))))}}
+          </p>
         </div>
       </div>
     {{/each}}
