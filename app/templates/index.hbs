@@ -51,8 +51,20 @@
           <p class="panel-tabs"></p>
           {{#each merchants as |merchant|}}
             {{#link-to 'merchant' merchant.id class='panel-block'}}
-              <span class="panel-icon">{{fa-icon 'shopping-bag'}}</span>
-              {{capitalize merchant.name}} [{{merchant.id}}]
+              <span class="panel-icon">
+                {{fa-icon 'shopping-bag'}}
+              </span>
+              <div class="media is-fullwidth">
+                <div class="media-left">
+                  {{capitalize merchant.name}}
+                </div>
+                <div class="media-content"></div>
+                <div class="media-right">
+                  <span class="tag is-success">
+                    {{merchant.id}}:{{merchant.totalArticlesCount}}
+                  </span>
+                </div>
+              </div>
             {{/link-to}}
           {{/each}}
         </nav>

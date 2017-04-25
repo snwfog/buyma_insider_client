@@ -20,6 +20,16 @@
 .align-bottom, .is-align-bottom, .has-text-bottom { vertical-align: bottom !important; }
 
 // Flex utilities to go with Bulma
+
+@each $flex in align-items align-self justify-content {
+  @each $property in flex-start flex-end center space-between space-around {
+    .is-flex-#{$flex}-#{$property} {
+      #{$flex}: #{$property};
+    }
+  }
+}
+
+.is-space-around { justify-content: space-around; }
 .is-row-reverse { flex-direction: row-reverse; }
 .is-align-items-center { align-items: center; }
 .is-fullwidth { width: 100% }

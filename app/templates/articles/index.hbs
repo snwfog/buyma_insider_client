@@ -21,7 +21,8 @@
     <div class="content mb-1">
       <p class="title is-4 is-capitalize has-text-right">{{article.name}}</p>
       <p class="subtitle is-6 has-text-right">
-        Indexed <bold>{{moment-from-now article.createdAt}}</bold>
+        First indexed {{moment-from-now article.createdAt}}.
+        Last indexed {{moment-from-now article.updatedAt}}.
       </p>
     </div>
   </div>

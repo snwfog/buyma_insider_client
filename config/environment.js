@@ -40,6 +40,10 @@ module.exports = function(environment) {
     },
   };
 
+  ENV.moment = {
+    outputFormat: 'MM/DD/YY HH:mm:SS'
+  };
+
   if (environment === 'development') {
     ENV.settings.path.login     = ENV.APP.SERVER.endpoint + ENV.settings.path.login;
     ENV.settings.path.bootstrap = ENV.APP.SERVER.endpoint + ENV.settings.path.bootstrap;

@@ -7,17 +7,44 @@
         <div class="content">
           {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
                      class='button is-outlined is-primary'
-                     activeClass='is-primary is-active'}}New{{/link-to}}
+                     activeClass='is-active'}}New{{/link-to}}
           {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
                      class='button is-outlined is-primary'
                      activeClass='is-primary is-active'}}Sale{{/link-to}}
           {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
                      class='button is-outlined is-primary'
-                     activeClass='is-primary is-primary'}}All{{/link-to}}
+                     activeClass='is-primary'}}All{{/link-to}}
         </div>
         <div class="content">
-          <a href="" class="button is-outlined is-primary">Name</a>
-          <a href="" class="button is-outlined is-primary">Price</a>
+          {{#link-to 'merchant.index' metadatum.id (query-params order='name')
+                     class='button is-outlined is-primary'
+                     activeClass='is-active'}}
+            Name
+          {{/link-to}}
+          {{#link-to 'merchant.index' metadatum.id (query-params order='price')
+                     class='button is-outlined is-primary'
+                     activeClass='is-active'}}
+            <span class="icon is-small">
+              {{fa-icon 'money'}}
+            </span>
+            <span>Price</span>
+          {{/link-to}}
+          {{#link-to 'merchant.index' metadatum.id (query-params order='created_at')
+                     class='button is-outlined is-primary'
+                     activeClass='is-active'}}
+            <span class="icon is-small">
+              {{fa-icon 'calendar-o'}}
+            </span>
+            <span>Created</span>
+          {{/link-to}}
+          {{#link-to 'merchant.index' metadatum.id (query-params order='updated_at')
+                     class='button is-outlined is-primary'
+                     activeClass='is-active'}}
+            <span class="icon is-small">
+              {{fa-icon 'calendar-o'}}
+            </span>
+            <span>Updated</span>
+          {{/link-to}}
         </div>
       </div>
     </div>

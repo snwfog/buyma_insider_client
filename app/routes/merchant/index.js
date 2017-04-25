@@ -9,6 +9,7 @@ export default Ember.Route.extend({
 //     limit:  20,
     count:  { refreshModel: true },
     filter: { refreshModel: true },
+    order:  { refreshModel: true },
   },
 
   model(params) {
@@ -28,9 +29,10 @@ export default Ember.Route.extend({
     var queryParams = transition.queryParams;
     controller.reopen({
       queryParams: [ 'page', 'limit', 'filter' ],
-      page:        getWithDefault(queryParams, 'page', 1),
-      limit:       getWithDefault(queryParams, 'limit', 20),
+      page:        getWithDefault(queryParams, 'page',   1),
+      limit:       getWithDefault(queryParams, 'limit',  20),
       filter:      getWithDefault(queryParams, 'filter', 'all'),
+      order:       getWithDefault(queryParams, 'order',  'created_at:desc'),
 
       actions: {
         '_pageChanged'(nextPage, currPage) {
@@ -48,6 +50,7 @@ export default Ember.Route.extend({
       controller.set('page', 1);
       controller.set('limit', 20);
       controller.set('filter', 'all');
+      controller.set('order', 'created_at:desc');
     }
   },
 });
