@@ -17,5 +17,13 @@ export default ApplicationAdapter.extend({
     // or
 //     modelName = `user_sold_articles/${id}`;
 //     return this._super(id, 'user_sold_articles', snapshot);
+  },
+
+  urlForFindRecord(id, modelName, snapshot) {
+    return this._super(id, 'user_sold_articles', snapshot);
+  },
+
+  urlForUpdateRecord(id, modelName, snapshot) {
+    return this._super(id, 'user_sold_articles', snapshot);
   }
 });

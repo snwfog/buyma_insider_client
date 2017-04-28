@@ -1,6 +1,8 @@
 import Ember from "ember";
 import ApplicationController from "../application";
 
+import config from '../../config/environment';
+
 const { computed } = Ember;
 
 export default ApplicationController.extend({
@@ -13,11 +15,13 @@ export default ApplicationController.extend({
   // TODO: This properties cause ember-moment to log error
   // In sum, this is recomputed before adapter replies saved
   // We should take care with this instead of just filtering out
-  soldArticles: computed('currentUser.soldArticles.[]', function () {
+  soldArticles: computed('currentUser.soldArticles.[]', 'model.article', function () {
     const article                 = this.get('article');
     const currentUserSoldArticles = this.currentUser.get('soldArticles');
     return currentUserSoldArticles.filterBy('article.id', article.get('id'));
   }),
+
+  currencies: config.APP.currencies,
 
   actions: {
     '_watchArticle'(article) {

@@ -34,12 +34,16 @@
 .is-align-items-center { align-items: center; }
 .is-fullwidth { width: 100% }
 
-  // Text
+// Text
 .is-uppercase { text-transform: uppercase !important }
 .is-lowercase { text-transform: lowercase !important }
 .is-capitalize { text-transform: capitalize !important }
 
 .is-semi-bold { font-weight: 400 !important; }
+
+// Shadow
+.is-1-1
+
 
 // Color
 .is-red      { color: $red; }

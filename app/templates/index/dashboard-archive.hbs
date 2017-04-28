@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="columns is-mobile">
+    <div class="column one-half">
+      <p class="title is-4 is-capitalize has-text-left">
+        {{moment-format currentDate 'MMM-D-YYYY'}}
+      </p>
+    </div>
+    <div class="column one-half">
+      <p class="title is-4 has-text-right">
+        Archive
+      </p>
+    </div>
+  </div>
+  <hr>
+  <div class="content buyma-timeline-pager">
+    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format prevYear 'M-D-YY'))
+               class='button is-light mb-1' activeClass='is-active'}}
+      <span class="year is-uppercase">
+        {{moment-format prevYear 'YYYY'}}
+      </span>
+    {{/link-to}}
+
+    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format prevMonth 'M-D-YY'))
+               class='button is-warning mb-1' activeClass='is-active'}}
+      <span class="month is-uppercase">
+        {{moment-format prevMonth 'MMM'}}
+      </span>
+    {{/link-to}}
+
+    {{#each dates as |calendarDate index|}}
+      {{#if (is-same currentDate calendarDate)}}
+        <a class="button is-primary is-active mb-1">
+          <span class="day">
+            {{moment-format calendarDate 'D'}}
+          </span>
+          <span class="month is-uppercase">
+            {{moment-format calendarDate 'MMM'}}
+          </span>
+        </a>
+      {{else}}
+        {{#link-to 'index.dashboard_archive' (query-params date=(moment-format calendarDate 'M-D-YY'))
+                   class='button is-primary is-outlined mb-1'
+                   activeClass='is-active'}}
+          <span class="day">
+            {{moment-format calendarDate 'D'}}
+          </span>
+          <span class="month is-uppercase">
+            {{moment-format calendarDate 'MMM'}}
+          </span>
+        {{/link-to}}
+      {{/if}}
+    {{/each}}
+
+    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format nextMonth 'M-D-YY'))
+               class='button is-warning mb-1' activeClass='is-active'}}
+      <span class="month is-uppercase">
+        {{moment-format nextMonth 'MMM'}}
+      </span>
+    {{/link-to}}
+
+    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format nextYear 'M-D-YY'))
+               class='button is-light mb-1' activeClass='is-active'}}
+      <span class="year is-uppercase">
+        {{moment-format nextYear 'YYYY'}}
+      </span>
+    {{/link-to}}
+
+  </div>
+</div>

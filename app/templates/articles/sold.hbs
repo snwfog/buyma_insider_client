@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container">
+    <div class="level">
+      {{#each soldArticleStatus as |status|}}
+        <div class="level-item has-text-centered">
+          <div>
+            <span class="tag is-medium {{if (eq status soldArticle.status) 'is-success'}}">
+              <p class="is-capitalize">{{status}}</p>
+            </span>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

@@ -1,6 +1,7 @@
 import DS from "ember-data";
 
 export default DS.JSONAPISerializer.extend({
+
   modelNameFromPayloadKey(payloadKey) {
 //    payloadKey = payloadKey.split('_').join('/')
 //    this.debug(`modelnameFromPayloadKey ${payloadKey}`);

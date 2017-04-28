@@ -3,10 +3,10 @@
     <!--Nav and article control-->
     <nav>
       <div class="field is-grouped">
-
         <p class="control">
-          <a class="button">
+          <a class="button" target="_blank" href="{{article.link}}">
             <span class="icon is-small">{{fa-icon 'globe'}}</span>
+            <span>Link</span>
           </a>
         </p>
 
@@ -18,12 +18,30 @@
 
     <hr>
 
-    <div class="content mb-1">
-      <p class="title is-4 is-capitalize has-text-right">{{article.name}}</p>
-      <p class="subtitle is-6 has-text-right">
-        First indexed {{moment-from-now article.createdAt}}.
-        Last indexed {{moment-from-now article.updatedAt}}.
-      </p>
+    <div class="content">
+      <div class="columns">
+        <div class="column is-half has-text-left is-capitalize">
+          {{#if (eq article.health 1)}}
+            <p class="tag is-success">{{moment-from-now article.syncedAt}}</p>
+          {{else}}{{#if (eq article.health 2)}}
+            <p class="tag is-warning">{{moment-from-now article.syncedAt}}</p>
+          {{else}}{{#if (eq article.health 3)}}
+            <p class="tag is-danger">{{moment-from-now article.syncedAt}}</p>
+          {{else}}{{#if (eq article.health 4)}}
+            <p class="tag">{{moment-from-now article.syncedAt}}</p>
+          {{else}}
+            <p class="tag">Never</p>
+          {{/if}}{{/if}}{{/if}}{{/if}}
+        </div>
+        <div class="column is-half">
+          <p class="title is-4 is-capitalize has-text-right">
+            {{article.name}}
+          </p>
+          <p class="subtitle is-6 has-text-right">
+            Created on {{moment-format article.createdAt 'L'}}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -56,8 +74,8 @@
         <div class="columns is-gapless">
           <div class="card is-fullwidth padding-1">
             <div class="level is-mobile">
-              <div class="level-item price-history-container">
-                {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory.history))}}
+              <div class="level-item price-history">
+                {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
               </div>
             </div>
           </div>
@@ -99,7 +117,7 @@
             <div class="media-left">
               <p class="title is-2">
                 <span class="icon">
-                  {{fa-icon 'eye'}}
+                  {{fa-icon 'eye' class='is-info'}}
                 </span>
               </p>
             </div>
@@ -110,17 +128,16 @@
               </div>
             </div>
             <div class="media-right">
-              <span class="tag is-danger">
-                {{#ui.form.-async-button tagName='button'
-                                         class='delete is-small'
-                                         action=(action '_unwatchArticle' watchedArticle)}}
-                {{/ui.form.-async-button}}
-              </span>
+              {{#ui.form.-async-button tagName='button'
+                                       class='delete is-small'
+                                       action=(action '_unwatchArticle' watchedArticle)}}
+              {{/ui.form.-async-button}}
             </div>
 
           </article>
         {{/if}}
 
+        <!--Sold articles-->
         {{#each (sort-by 'createdAt:desc' soldArticles) as |soldArticle|}}
           <article class="media">
             <div class="media-left">
@@ -132,33 +149,68 @@
             </div>
             <div class="media-content">
               <div class="content">
-                <p class="title is-4">
-                  {{ui.-money (await soldArticle.article.price) 'cad' showCode=true
-                              exchangeRate=(await soldArticle.exchangeRate)}}
-                  {{ui.-money (await soldArticle.article.price) 'jpy' showCode=true
-                              exchangeRate=(await soldArticle.exchangeRate)}}
-                </p>
-                <p class="subtitle is-6">
-                  {{moment-format soldArticle.createdAt}}
-                </p>
-                <p class="subtitle is-6 is-capitalize">
-                  {{moment-from-now soldArticle.createdAt}}
+                <div class="columns">
+                  <div class="column one-half">
+                    {{#if soldArticle.soldPrice}}
+                      <p class="title is-4">
+                        {{ui.-money soldArticle.soldPrice 'cad'}}
+                        {{ui.-money soldArticle.soldPrice 'jpy'}}
+                      </p>
+                    {{/if}}
+                  </div>
+                  <div class="column one-half">
+                    <p class="{{if soldArticle.soldPrice 'subtitle is-6' 'title is-4'}}">
+                      {{ui.-money article.price 'cad' exchangeRate=(await soldArticle.exchangeRate)}}
+                      {{ui.-money article.price 'jpy' exchangeRate=(await soldArticle.exchangeRate)}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="content">
+                <p class="title is-6">
+                  Sold about {{moment-from-now soldArticle.createdAt}} on {{moment-format soldArticle.createdAt 'LL'}}
                 </p>
               </div>
               <div class="content">
                 <p class="title is-6">
-                  {{ui.-money oneDollar 'jpy' exchangeRate=(await soldArticle.exchangeRate)}}
-                  {{moment-format (await soldArticle.exchangeRate.timestamp)}}
+                  @rates {{ui.-money oneDollar 'jpy'
+                                     exchangeRate=(await soldArticle.exchangeRate)
+                                     showCode=false}} of {{moment-format (await soldArticle.exchangeRate.timestamp) 'MMM-D-YY'}}
                 </p>
               </div>
             </div>
             <div class="media-right">
-              <span class="tag is-danger">
-                {{#ui.form.-async-button tagName='button'
-                                         class='delete is-small'
-                                         action=(action '_unsellArticle' soldArticle)}}
-                {{/ui.form.-async-button}}
-              </span>
+              {{#ui.form.-async-button tagName='button'
+                                       class='delete is-small'
+                                       action=(action '_unsellArticle' soldArticle)}}
+              {{/ui.form.-async-button}}
+            </div>
+          </article>
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                {{#if (eq soldArticle.status 'confirmed')}}
+                  <span class="tag is-info is-capitalize">
+                    {{soldArticle.status}}
+                  </span>
+                {{/if}}{{#if (eq soldArticle.status 'shipped')}}
+                  <span class="tag is-info is-warning is-capitalize">
+                    {{soldArticle.status}}
+                  </span>
+                {{/if}}{{#if (eq soldArticle.status 'received')}}
+                  <span class="tag is-info is-success is-capitalize">
+                    {{soldArticle.status}}
+                  </span>
+                {{/if}}{{#if (eq soldArticle.status 'cancelled')}}
+                  <span class="tag is-info is-danger is-capitalize">
+                    {{soldArticle.status}}
+                  </span>
+                {{/if}}{{#if (eq soldArticle.status 'returned')}}
+                  <span class="tag is-info is-danger is-capitalize">
+                    {{soldArticle.status}}
+                  </span>
+                {{/if}}
+              </div>
             </div>
           </article>
         {{/each}}

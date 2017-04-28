@@ -1,7 +1,7 @@
 import Ember from "ember";
 import config from "../config/environment";
 
-const { hash } = Ember.RSVP;
+const { hash }     = Ember.RSVP;
 const { computed } = Ember;
 
 export default Ember.Route.extend({
@@ -16,7 +16,26 @@ export default Ember.Route.extend({
     controller.setProperties(models);
     controller.reopen({
       searchArticles: [],
-      articlesAutocomplete: computed('searchArticles.[]', function(completes) {
+
+      jpyValue: computed('cadValue', 'exchangeRatesService.exchangeRates', function () {
+        var cadValue             = this.get('cadValue');
+        var { locale, code }     = this.exchangeRatesService.lookup('jpy');
+        var formatter            = new Intl.NumberFormat(locale, {
+          style:    'currency',
+          currency: 'jpy'
+        });
+        var convertedAmount      = this.exchangeRatesService.cad2jpy(cadValue);
+        return formatter.format(convertedAmount);
+      }),
+
+      cadValue: null,
+
+//       cadValue: computed('jpyValue', 'exchangeRatesService.exchangeRates', function() {
+//         var jpyValue = this.get('jpyValue');
+//         return this.exchangeRatesService.convertCurrency('jpy', 'cad', jpyValue);
+//       }),
+
+      articlesAutocomplete: computed('searchArticles.[]', function (completes) {
         return completes.inject((prev, item) => {
           prev.concat(item);
         }, []);

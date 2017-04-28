@@ -1,7 +1,7 @@
 {
   "name": "buyma-insider-client",
   "version": "0.0.0",
-  "description": "Small description for buyma-insider-client goes here",
+  "description": "Buyma Insider",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -48,6 +48,7 @@
     "ember-load-initializers": "^0.5.1",
     "ember-math-helpers": "1.2.7",
     "ember-moment": "stefanpenner/ember-moment",
+    "ember-resize": "0.0.17",
     "ember-resolver": "^2.0.3",
     "ember-responsive": "2.0.0",
     "ember-router-scroll": "0.0.6",

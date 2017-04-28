@@ -13,6 +13,6 @@ export default DS.Transform.extend({
   },
 
   serialize(deserialized) {
-    return deserialized;
+    return deserialized.get('amount');
   }
 });

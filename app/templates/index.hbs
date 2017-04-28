@@ -1,4 +1,4 @@
-<section class="hero is-medium is-bold is-dark is-hidden-mobile">
+<section class="hero is-small is-bold is-dark is-hidden-mobile">
   <div class="hero-body">
     <div class="columns">
       <div class="column is-10 is-offset-1">
@@ -10,7 +10,7 @@
                                    <!--optionLabelPath='name'}}--}}
           <!--</span>-->
           <div class="control is-expanded">
-            {{input list="articles" class="input is-large"
+            {{input list="articles" class="input is-medium"
                     type="text"
                     placeholder="Item description or sku..."
                     enter='_searchArticles'}}
@@ -24,8 +24,8 @@
             </datalist>
           </div>
           <div class="control">
-            <a class="button is-large is-primary">
-              <span class="icon is-medium">{{fa-icon 'search'}}</span>
+            <a class="button is-medium is-primary">
+              <span class="icon">{{fa-icon 'search'}}</span>
               <span>Find</span>
             </a>
           </div>
@@ -46,6 +46,8 @@
   <div class="container">
     <div class="columns">
       <div class="column is-4">
+
+        <!-- Merchant panel -->
         <nav class="panel">
           <p class="panel-heading">Merchants</p>
           <p class="panel-tabs"></p>
@@ -68,6 +70,52 @@
             {{/link-to}}
           {{/each}}
         </nav>
+
+        <!-- Currency calculator -->
+        <div class="columns">
+          <p class="help is-success">Look, this is green</p>
+        </div>
+        <div class="columns is-mobile">
+          <div class="column is-5">
+            <div class="field is-grouped">
+              <p class="control is-expanded has-icons-left">
+                {{input class='input is-medium has-text-right'
+                        type='text'
+                        value=cadValue
+                        placehodler='CAD'}}
+                <span class="icon is-medium is-left">
+                  {{fa-icon 'dollar'}}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="column is-2 has-text-centered">
+            <p class="field">
+              <a href="" disabled class="button is-medium is-light">
+                <span class="icon is-medium">
+                  {{fa-icon 'exchange'}}
+                </span>
+              </a>
+            </p>
+          </div>
+          <div class="column is-5">
+            <div class="field is-grouped">
+              <p class="control is-expanded has-icons-left">
+                {{input class='input is-medium is-success has-text-right'
+                        type='text'
+                        disabled=true
+                        value=jpyValue
+                        placehodler='JPY'}}
+                <span class="icon is-medium is-left">
+                  {{fa-icon 'jpy'}}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-8">
+        {{outlet}}
       </div>
     </div>
   </div>

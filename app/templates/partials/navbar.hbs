@@ -2,11 +2,11 @@
   <div class="container">
 
     <div class="nav-left">
-      {{#link-to 'index' class='nav-item is-brand is-hidden-mobile'}}
+      {{#link-to 'index.dashboard' class='nav-item is-brand is-hidden-mobile'}}
         {{appName}}
       {{/link-to}}
 
-      {{#link-to 'index' class='nav-item is-brand is-hidden-tablet'}}
+      {{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
         {{fa-icon 'bold'}}
       {{/link-to}}
     </div>
@@ -54,19 +54,35 @@
         </span>
       </span>
 
-      {{#link-to 'status' class='is-tab nav-item' activeClass='is-active'}}Status{{/link-to}}
+      {{#link-to-with-action 'status'
+                             class='is-tab nav-item'
+                             invokeAction=(toggle 'navBarIsActive' this)
+                             activeClass='is-active'}}Status{{/link-to-with-action}}
 
       {{#if currentUser}}
-        {{#link-to 'user.profile' class='is-tab nav-item' activeClass='is-active'}}
+        {{#link-to-with-action 'index.dashboard_archive'
+                               class='is-tab nav-item'
+                               invokeAction=(toggle 'navBarIsActive' this)
+                               activeClass='is-active'}}Archive{{/link-to-with-action}}
+        {{#link-to-with-action 'user.profile'
+                               class='is-tab nav-item'
+                               invokeAction=(toggle 'navBarIsActive' this)
+                               activeClass='is-active'}}
           <figure class="image is-16x16 mr-1">
             <img src="http://bulma.io/images/jgthms.png" alt="">
           </figure>
           {{currentUser.username}}
-        {{/link-to}}
+        {{/link-to-with-action}}
 
-        {{#link-to 'logout' class='is-tab nav-item' activeClass='is-active'}}Logout{{/link-to}}
+        {{#link-to-with-action 'logout'
+                               class='is-tab nav-item'
+                               invokeAction=(toggle 'navBarIsActive' this)
+                               activeClass='is-active'}}Logout{{/link-to-with-action}}
       {{else}}
-        {{#link-to 'login' class='is-tab nav-item' activeClass='is-active'}}Login{{/link-to}}
+        {{#link-to-with-action 'login'
+                               class='is-tab nav-item'
+                               invokeAction=(toggle 'navBarIsActive' this)
+                               activeClass='is-active'}}Login{{/link-to-with-action}}
       {{/if}}
     </div>
 

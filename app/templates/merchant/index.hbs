@@ -18,33 +18,16 @@
         <div class="content">
           {{#link-to 'merchant.index' metadatum.id (query-params order='name')
                      class='button is-outlined is-primary'
-                     activeClass='is-active'}}
-            Name
-          {{/link-to}}
+                     activeClass='is-active'}}Name{{/link-to}}
           {{#link-to 'merchant.index' metadatum.id (query-params order='price')
                      class='button is-outlined is-primary'
-                     activeClass='is-active'}}
-            <span class="icon is-small">
-              {{fa-icon 'money'}}
-            </span>
-            <span>Price</span>
-          {{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'money'}}</span><span>Price</span>{{/link-to}}
           {{#link-to 'merchant.index' metadatum.id (query-params order='created_at')
                      class='button is-outlined is-primary'
-                     activeClass='is-active'}}
-            <span class="icon is-small">
-              {{fa-icon 'calendar-o'}}
-            </span>
-            <span>Created</span>
-          {{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Created</span>{{/link-to}}
           {{#link-to 'merchant.index' metadatum.id (query-params order='updated_at')
                      class='button is-outlined is-primary'
-                     activeClass='is-active'}}
-            <span class="icon is-small">
-              {{fa-icon 'calendar-o'}}
-            </span>
-            <span>Updated</span>
-          {{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Updated</span>{{/link-to}}
         </div>
       </div>
     </div>
@@ -83,13 +66,12 @@
           </div>
         </div>
         <div class="column is-3">
-          <p class="title is-4">
-            {{ui.-money article.price}}
-          </p>
+          <p class="title is-4">{{ui.-money article.price}}</p>
+          <p class="subtitle is-6">{{ui.-money article.price 'jpy'}}</p>
         </div>
         <div class="column is-3">
           <p class="price-history">
-            {{ui.sparkline.-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' article.priceHistory))))}}
+            {{ui.sparkline.-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' article.priceHistory.history))))}}
           </p>
         </div>
       </div>
