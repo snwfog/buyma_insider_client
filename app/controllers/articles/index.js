@@ -1,7 +1,6 @@
 import Ember from "ember";
 import ApplicationController from "../application";
-
-import config from '../../config/environment';
+import config from "../../config/environment";
 
 const { computed } = Ember;
 
@@ -26,13 +25,19 @@ export default ApplicationController.extend({
   actions: {
     '_watchArticle'(article) {
       this.debug(`watched this article ${article.get('name')}`);
-      const store       = this.store;
-      const currentUser = this.currentUser;
-      return store
-        .createRecord('user/watchedArticle', { article, user: currentUser })
+      const store              = this.store;
+      const currentUser        = this.currentUser;
+      const userWatchedArticle = store
+        .createRecord('user/watchedArticle', { article, user: currentUser });
+
+      return userWatchedArticle
         .save()
         .then((watchedArticle) => {
-          currentUser.get('watchedArticles').pushObject(watchedArticle); });
+          currentUser.get('watchedArticles').pushObject(watchedArticle); })
+        .catch((error) => {
+          this.debug(error);
+          currentUser.get('watchedArticles').removeObject(userWatchedArticle);
+          return Ember.RSVP.reject(); });
     },
 
     '_unwatchArticle'(watchedArticle) {
@@ -59,7 +64,11 @@ export default ApplicationController.extend({
       return userSoldArticle
         .save()
         .then((soldArticle) => {
-          currentUser.get('soldArticles').pushObject(soldArticle); });
+          currentUser.get('soldArticles').pushObject(soldArticle); })
+        .catch((error) => {
+          this.debug(error);
+          currentUser.get('soldArticles').removeObject(userSoldArticle);
+          return Ember.RSVP.reject(); });
     },
 
     '_unsellArticle'(soldArticle) {
