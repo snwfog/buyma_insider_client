@@ -5,19 +5,19 @@ import config from "../../config/environment";
 const { computed } = Ember;
 
 export default ApplicationController.extend({
-  watchedArticle: computed('currentUser.watchedArticles.[]', 'model.article', function () {
+  articleWatched: computed('currentUser.articleWatcheds.[]', 'model.article', function () {
     const article                    = this.get('article');
-    const currentUserWatchedArticles = this.currentUser.get('watchedArticles');
-    return currentUserWatchedArticles.findBy('article.id', article.get('id'));
+    const currentUserArticleWatcheds = this.currentUser.get('articleWatcheds');
+    return currentUserArticleWatcheds.findBy('article.id', article.get('id'));
   }),
 
   // TODO: This properties cause ember-moment to log error
   // In sum, this is recomputed before adapter replies saved
   // We should take care with this instead of just filtering out
-  soldArticles: computed('currentUser.soldArticles.[]', 'model.article', function () {
+  articleSolds: computed('currentUser.articleSolds.[]', 'model.article', function () {
     const article                 = this.get('article');
-    const currentUserSoldArticles = this.currentUser.get('soldArticles');
-    return currentUserSoldArticles.filterBy('article.id', article.get('id'));
+    const currentUserArticleSolds = this.currentUser.get('articleSolds');
+    return currentUserArticleSolds.filterBy('article.id', article.get('id'));
   }),
 
   currencies: config.APP.currencies,
@@ -27,27 +27,27 @@ export default ApplicationController.extend({
       this.debug(`watched this article ${article.get('name')}`);
       const store              = this.store;
       const currentUser        = this.currentUser;
-      const userWatchedArticle = store
-        .createRecord('user/watchedArticle', { article, user: currentUser });
+      const userArticleWatched = store
+        .createRecord('user/articleWatched', { article, user: currentUser });
 
-      return userWatchedArticle
+      return userArticleWatched
         .save()
-        .then((watchedArticle) => {
-          currentUser.get('watchedArticles').pushObject(watchedArticle); })
+        .then((articleWatched) => {
+          currentUser.get('articleWatcheds').pushObject(articleWatched); })
         .catch((error) => {
           this.debug(error);
-          currentUser.get('watchedArticles').removeObject(userWatchedArticle);
+          currentUser.get('articleWatcheds').removeObject(userArticleWatched);
           return Ember.RSVP.reject(); });
     },
 
-    '_unwatchArticle'(watchedArticle) {
-      this.debug(`unsell article ${watchedArticle.get('article.name')}`);
+    '_unwatchArticle'(articleWatched) {
+      this.debug(`unsell article ${articleWatched.get('article.name')}`);
       const currentUser = this.currentUser;
-      watchedArticle.deleteRecord();
-      return watchedArticle
+      articleWatched.deleteRecord();
+      return articleWatched
         .save()
-        .then((watchedArticle) => {
-          currentUser.get('watchedArticle').removeObject(watchedArticle); });
+        .then((articleWatched) => {
+          currentUser.get('articleWatched').removeObject(articleWatched); });
     },
 
     '_sellArticle'(article) {
@@ -55,30 +55,30 @@ export default ApplicationController.extend({
       const store               = this.store;
       const currentUser         = this.currentUser;
       const latestExchangeRates = this.get('exchangeRatesService.latest');
-      const userSoldArticle     = store.createRecord('user/soldArticle', {
+      const userArticleSold     = store.createRecord('user/articleSold', {
                       article,
         user:         currentUser,
         exchangeRate: latestExchangeRates
       });
 
-      return userSoldArticle
+      return userArticleSold
         .save()
-        .then((soldArticle) => {
-          currentUser.get('soldArticles').pushObject(soldArticle); })
+        .then((articleSold) => {
+          currentUser.get('articleSolds').pushObject(articleSold); })
         .catch((error) => {
           this.debug(error);
-          currentUser.get('soldArticles').removeObject(userSoldArticle);
+          currentUser.get('articleSolds').removeObject(userArticleSold);
           return Ember.RSVP.reject(); });
     },
 
-    '_unsellArticle'(soldArticle) {
-      this.debug(`unsell article ${soldArticle.get('article.name')}`);
+    '_unsellArticle'(articleSold) {
+      this.debug(`unsell article ${articleSold.get('article.name')}`);
       const currentUser = this.currentUser;
-      soldArticle.deleteRecord();
-      return soldArticle
+      articleSold.deleteRecord();
+      return articleSold
         .save()
-        .then((soldArticle) => {
-          currentUser.get('soldArticles').removeObject(soldArticle); });
+        .then((articleSold) => {
+          currentUser.get('articleSolds').removeObject(articleSold); });
     },
   }
 });

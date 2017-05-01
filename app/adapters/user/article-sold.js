@@ -15,15 +15,15 @@ export default ApplicationAdapter.extend({
     modelName = `articles/${snapshot.record.get('article.id')}/sell`;
     return this._super(null, modelName, snapshot);
     // or
-//     modelName = `user_sold_articles/${id}`;
-//     return this._super(id, 'user_sold_articles', snapshot);
+//     modelName = `user_article_solds/${id}`;
+//     return this._super(id, 'user_article_solds', snapshot);
   },
 
   urlForFindRecord(id, modelName, snapshot) {
-    return this._super(id, 'user_sold_articles', snapshot);
+    return this._super(id, 'user_article_solds', snapshot);
   },
 
   urlForUpdateRecord(id, modelName, snapshot) {
-    return this._super(id, 'user_sold_articles', snapshot);
+    return this._super(id, 'user_article_solds', snapshot);
   }
 });

@@ -3,7 +3,7 @@
     Dashboard
   </p>
   <hr>
-  {{#each-in (group-by 'createdAtDay' soldArticles) as |createdAtDay soldArticles|}}
+  {{#each-in (group-by 'createdAtDay' articleSolds) as |createdAtDay articleSolds|}}
     <article class="message is-primary">
       <div class="message-header">
         <p class="has-text-right">
@@ -11,15 +11,15 @@
         </p>
       </div>
     </article>
-    {{#each soldArticles as |soldArticle|}}
+    {{#each articleSolds as |articleSold|}}
       <div class="columns">
         <div class="column">
           <div class="card">
             <header class="card-header">
               <div class="card-header-title">
-                {{#link-to 'articles.index' soldArticle.article.id
+                {{#link-to 'articles.index' articleSold.article.id
                            class='button is-link'}}
-                  {{soldArticle.article.name}}
+                  {{articleSold.article.name}}
                 {{/link-to}}
               </div>
               <div class="card-header-icon">
@@ -28,7 +28,7 @@
             </header>
             <div class="card-content">
               <div class="content">
-                {{moment-format soldArticle.createdAt 'LT'}}
+                {{moment-format articleSold.createdAt 'LT'}}
               </div>
             </div>
             <footer class="card-footer">
@@ -36,11 +36,11 @@
                 <div class="level is-fullwidth">
                   {{#each (array 'confirmed' 'shipped' 'received') as |state index|}}
                     <div class="level-item">
-                      <span class="tag {{if (eq state soldArticle.status) 'is-success'}} is-capitalize">
-                        {{#if (eq state soldArticle.status)}}
+                      <span class="tag {{if (eq state articleSold.status) 'is-success'}} is-capitalize">
+                        {{#if (eq state articleSold.status)}}
                           {{inc index}}. {{state}}
                         {{else}}
-                          {{#ui.form.-async-button tagName='a' action=(action state soldArticle)}}
+                          {{#ui.form.-async-button tagName='a' action=(action state articleSold)}}
                             {{inc index}}. {{state}}
                           {{/ui.form.-async-button}}
                         {{/if}}
@@ -53,11 +53,11 @@
                 <div class="level is-fullwidth">
                   {{#each (array 'cancelled' 'returned') as |state index|}}
                     <div class="level-item">
-                      <span class="tag {{if (eq state soldArticle.status) 'is-danger'}} is-capitalize">
-                        {{#if (eq state soldArticle.status)}}
+                      <span class="tag {{if (eq state articleSold.status) 'is-danger'}} is-capitalize">
+                        {{#if (eq state articleSold.status)}}
                           {{inc index}}. {{state}}
                         {{else}}
-                          {{#ui.form.-async-button tagName='a' action=(action state soldArticle)}}
+                          {{#ui.form.-async-button tagName='a' action=(action state articleSold)}}
                             {{inc index}}. {{state}}
                           {{/ui.form.-async-button}}
                         {{/if}}
@@ -69,17 +69,17 @@
             </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' soldArticle.article.id soldArticle.id}}
+                {{#link-to 'articles.sold' articleSold.article.id articleSold.id}}
                   Detail <span class="icon">{{fa-icon 'bar-chart'}}</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' soldArticle.article.id soldArticle.id}}
+                {{#link-to 'articles.sold' articleSold.article.id articleSold.id}}
                   Archive <span class="icon">{{fa-icon 'trash-o'}}</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' soldArticle.article.id soldArticle.id}}
+                {{#link-to 'articles.sold' articleSold.article.id articleSold.id}}
                   Delete <span class="icon">{{fa-icon 'trash-o'}}</span>
                 {{/link-to}}
               </div>

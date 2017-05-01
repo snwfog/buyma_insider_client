@@ -6,7 +6,7 @@ export default Ember.Route.extend({
   model() {
     const currentUser = this.currentUser;
     return hash({
-      soldArticles: currentUser.get('soldArticles'),
+      articleSolds: currentUser.get('articleSolds'),
     });
   },
 
@@ -15,29 +15,29 @@ export default Ember.Route.extend({
     controller.setProperties(models);
     controller.reopen({
       actions: {
-        'confirmed'(soldArticle) {
-          soldArticle.set('status', 'confirmed');
-          return soldArticle.save().catch((error) => soldArticle.rollbackAttributes());
+        'confirmed'(articleSold) {
+          articleSold.set('status', 'confirmed');
+          return articleSold.save().catch((error) => articleSold.rollbackAttributes());
         },
 
-        'shipped'(soldArticle) {
-          soldArticle.set('status', 'shipped');
-          return soldArticle.save().catch((error) => soldArticle.rollbackAttributes());
+        'shipped'(articleSold) {
+          articleSold.set('status', 'shipped');
+          return articleSold.save().catch((error) => articleSold.rollbackAttributes());
         },
 
-        'cancelled'(soldArticle) {
-          soldArticle.set('status', 'cancelled');
-          return soldArticle.save().catch((error) => soldArticle.rollbackAttributes());
+        'cancelled'(articleSold) {
+          articleSold.set('status', 'cancelled');
+          return articleSold.save().catch((error) => articleSold.rollbackAttributes());
         },
 
-        'received'(soldArticle) {
-          soldArticle.set('status', 'received');
-          return soldArticle.save().catch((error) => soldArticle.rollbackAttributes());
+        'received'(articleSold) {
+          articleSold.set('status', 'received');
+          return articleSold.save().catch((error) => articleSold.rollbackAttributes());
         },
 
-        'returned'(soldArticle) {
-          soldArticle.set('status', 'returned');
-          return soldArticle.save().catch((error) => soldArticle.rollbackAttributes());
+        'returned'(articleSold) {
+          articleSold.set('status', 'returned');
+          return articleSold.save().catch((error) => articleSold.rollbackAttributes());
         },
       }
     });

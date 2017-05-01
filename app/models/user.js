@@ -7,8 +7,8 @@ const { hasMany, belongsTo, attr } = DS;
 const { computed }                 = Ember;
 
 const User = DS.Model.extend({
-  watchedArticles:          hasMany('user/watchedArticle'),
-  soldArticles:             hasMany('user/soldArticle'),
+  articleWatcheds:          hasMany('user/articleWatched'),
+  articleSolds:             hasMany('user/articleSold'),
   username:                 attr(),
   createdAt:                attr('datetime'),
   updatedAt:                attr('datetime')

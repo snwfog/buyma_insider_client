@@ -6,21 +6,21 @@ const { computed } = Ember;
 export default Ability.extend({
   canSell:  computed.notEmpty('currentUser'),
 
-  canWatch: computed('currentUser.watchedArticles.[]', function() {
+  canWatch: computed('currentUser.articleWatcheds.[]', function() {
     const article     = this.model;
     const currentUser = this.currentUser;
     return currentUser
-      .get('watchedArticles')
-      .then((watchedArticles) => {
-        return !watchedArticles.findBy('article.id', article.get('id')); });
+      .get('articleWatcheds')
+      .then((articleWatcheds) => {
+        return !articleWatcheds.findBy('article.id', article.get('id')); });
   }),
 
-  canUnwatch: computed('currentUser.watchedArticles.[]', function() {
+  canUnwatch: computed('currentUser.articleWatcheds.[]', function() {
     const article     = this.model;
     const currentUser = this.currentUser;
     return currentUser
-      .get('watchedArticles')
-      .then((watchedArticles) => {
-        return !!watchedArticles.findBy('article.id', article.get('id')); });
+      .get('articleWatcheds')
+      .then((articleWatcheds) => {
+        return !!articleWatcheds.findBy('article.id', article.get('id')); });
   }),
 });

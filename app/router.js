@@ -21,7 +21,7 @@ Router.map(function () {
   this.route('status');
   this.route('articles', { path: '/articles/:article_id' }, function() {
     this.route('index');
-    this.route('sold', { path: '/sold/:user_sold_article_id' });
+    this.route('sold', { path: '/sold/:user_article_sold_id' });
   });
 
   this.route('merchant', { path: '/:merchant_id' }, function () {

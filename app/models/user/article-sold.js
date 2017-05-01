@@ -21,7 +21,7 @@ const statusAttrs = Object
     return memoStatus;
   }, Ember.copy(STATUS));
 
-const UserSoldArticle = DS.Model.extend(statusAttrs, {
+const UserArticleSold = DS.Model.extend(statusAttrs, {
   user:             belongsTo('user'),
   article:          belongsTo('article'),
   exchangeRate:     belongsTo('exchange-rate'),
@@ -38,8 +38,8 @@ const UserSoldArticle = DS.Model.extend(statusAttrs, {
   }),
 });
 
-UserSoldArticle.reopenClass({
+UserArticleSold.reopenClass({
   STATUS
 });
 
-export default UserSoldArticle;
+export default UserArticleSold;

@@ -12,8 +12,8 @@ export default DS.JSONAPISerializer.extend({
       'index-pages':           'merchant/index-page',
       'price-histories':       'article/price-history',
       'user-session-tokens':   'user/session-token',
-      'user-watched-articles': 'user/watched-article',
-      'user-sold-articles':    'user/sold-article',
+      'user-article-watcheds': 'user/article-watched',
+      'user-article-solds':    'user/article-sold',
     };
 
     var modelKey = dict[ payloadKey ];

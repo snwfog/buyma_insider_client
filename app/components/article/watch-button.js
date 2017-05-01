@@ -6,11 +6,11 @@ export default Ember.Component.extend({
   tagName:    'p',
   classNames: 'control',
 
-  watchedArticle: computed('article', 'currentUser.watchedArticles.[]', function () {
+  articleWatched: computed('article', 'currentUser.articleWatcheds.[]', function () {
     const article         = this.get('article');
-    const watchedArticles = this.get('currentUser.watchedArticles');
+    const articleWatcheds = this.get('currentUser.articleWatcheds');
 
-    return watchedArticles.findBy('article.id', article.get('id'));
+    return articleWatcheds.findBy('article.id', article.get('id'));
   }),
 
   article: null,
