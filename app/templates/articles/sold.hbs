@@ -81,13 +81,6 @@
                   {{fa-icon 'jpy'}}
                 </span>
               </p>
-              <p class="control">
-                {{#ui.form.-async-button class='button is-success'
-                                         disableWhen=(not allowEditSoldArticlePrice)
-                                         action=(toggle 'allowEditSoldArticlePrice' this)}}
-                  Set Price
-                {{/ui.form.-async-button}}
-              </p>
             </div>
           </div>
         </div>
@@ -101,11 +94,11 @@
           </div>
           <div class="column is-3">
             {{#if (lte profit.amount 0)}}
-              <span class="is-red">
+              <span class="is-red title is-5">
                 ({{ui.-money profit 'jpy' showCode=false}})
               </span>
             {{else}}
-              <span class="is-green">
+              <span class="is-green title is-5">
                 {{ui.-money profit 'jpy' showCode=false}}
               </span>
             {{/if}}
