@@ -29,10 +29,15 @@
   }
 }
 
-.is-space-around { justify-content: space-around; }
-.is-row-reverse { flex-direction: row-reverse; }
+.is-flex-grow-2        { flex-grow: 2; }
+.is-flex-grow-3        { flex-grow: 3; }
+.is-flex-grow-4        { flex-grow: 4; }
+.is-flex-grow-5        { flex-grow: 5; }
+
+.is-space-around       { justify-content: space-around; }
+.is-row-reverse        { flex-direction: row-reverse; }
 .is-align-items-center { align-items: center; }
-.is-fullwidth { width: 100% }
+.is-fullwidth          { width: 100% }
 
 // Text
 .is-uppercase { text-transform: uppercase !important }
@@ -42,8 +47,6 @@
 .is-semi-bold { font-weight: 400 !important; }
 
 // Shadow
-.is-1-1
-
 
 // Color
 .is-red      { color: $red; }

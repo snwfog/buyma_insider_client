@@ -20,7 +20,9 @@ module.exports = function (environment) {
     },
 
     APP: {
-      currencies: [ 'cad', 'jpy', 'usd' ],
+      buymaCutPct: 5.5,
+      saleTaxPct:  15,
+      currencies:  [ 'cad', 'jpy', 'usd' ],
     }
   };
 

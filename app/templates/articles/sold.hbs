@@ -1,15 +1,418 @@
 <section class="section">
   <div class="container">
-    <div class="level">
-      {{#each soldArticleStatus as |status|}}
-        <div class="level-item has-text-centered">
-          <div>
-            <span class="tag is-medium {{if (eq status soldArticle.status) 'is-success'}}">
-              <p class="is-capitalize">{{status}}</p>
+    <div class="columns">
+      <div class="column is-half">
+        {{#link-to 'articles.index' article.id class='button is-light'}}Back{{/link-to}}
+      </div>
+      <div class="column is-half">
+        <p class="title is-4 is-capitalize has-text-right">
+          {{article.name}}
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="columns">
+      <!--Article price-balance sheet-->
+      <div class="column is-half">
+
+        <div class="columns is-mobile">
+          <div class="column is-4">
+            <label class="label">Article Price</label>
+          </div>
+          <div class="column is-3">
+            <span class="is-red">
+              ({{ui.-money soldArticle.price 'jpy' showCode=false}})
             </span>
           </div>
+          <div class="column is-5">
+            {{ui.-money soldArticle.price showCode=false}} @ {{ui.-money oneDollar 'jpy' showCode=false}}
+          </div>
         </div>
-      {{/each}}
+
+        <div class="columns is-mobile">
+          <div class="column is-4">
+            <label class="label">With Sales Tax</label>
+          </div>
+          <div class="column is-3">
+            <span class="is-red">
+              ({{ui.-money soldArticlePriceWithSaleTax 'jpy' showCode=false}})
+            </span>
+          </div>
+          <div class="column is-5">
+            {{ui.-money soldArticlePriceWithSaleTax showCode=false}} @ {{saleTaxPct}}%
+          </div>
+        </div>
+
+        <div class="columns is-mobile">
+          <div class="column is-4">
+            <label class="label">Sold Price</label>
+          </div>
+          <div class="column is-3">
+            <span class="is-green">
+              {{ui.-money soldArticle.soldPrice 'jpy' showCode=false}}
+            </span>
+          </div>
+          <div class="column is-5">
+            <div class="field has-addons">
+              <p class="control">
+                {{#if allowEditSoldArticlePrice}}
+                  <button class="button is-success is-outlined">
+                          <span class="icon" {{action (toggle 'allowEditSoldArticlePrice' this)}}>
+                            {{fa-icon 'toggle-on'}}
+                          </span>
+                  </button>
+                {{else}}
+                  <button class="button is-danger is-outlined">
+                          <span class="icon" {{action (toggle 'allowEditSoldArticlePrice' this)}}>
+                            {{fa-icon 'toggle-off'}}
+                          </span>
+                  </button>
+                {{/if}}
+              </p>
+              <p class="control has-icons-left">
+                {{input class='input has-text-right'
+                        classBinding='allowEditSoldArticlePrice:is-success'
+                        value=soldArticle.soldPrice.amount
+                        disabled=(not allowEditSoldArticlePrice)
+                        type='text'}}
+                <span class="icon is-left">
+                  {{fa-icon 'jpy'}}
+                </span>
+              </p>
+              <p class="control">
+                {{#ui.form.-async-button class='button is-success'
+                                         disableWhen=(not allowEditSoldArticlePrice)
+                                         action=(toggle 'allowEditSoldArticlePrice' this)}}
+                  Set Price
+                {{/ui.form.-async-button}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <!--Profit-->
+        <div class="columns is-mobile">
+          <div class="column is-4">
+            <label class="label">Profit</label>
+          </div>
+          <div class="column is-3">
+            {{#if (lte profit.amount 0)}}
+              <span class="is-red">
+                ({{ui.-money profit 'jpy' showCode=false}})
+              </span>
+            {{else}}
+              <span class="is-green">
+                {{ui.-money profit 'jpy' showCode=false}}
+              </span>
+            {{/if}}
+          </div>
+          <div class="column is-5">
+            {{priceMarginPct}}%
+          </div>
+        </div>
+
+        <!--Buyma cut-->
+        <div class="columns is-mobile">
+          <div class="column is-4">
+            <label class="label">Buyma Cut</label>
+          </div>
+          <div class="column is-3">
+            <span class="is-red">
+              ({{ui.-money buymaCut 'jpy' showCode=false}})
+            </span>
+          </div>
+          <div class="column is-5">
+            @ {{buymaCutPct}}%
+          </div>
+        </div>
+
+
+        <!--Shipping Services-->
+        {{#each (await soldArticle.shippingServices) as |shippingService index|}}
+          <div class="columns is-mobile">
+            {{#if (eq index 0)}}
+              <div class="column is-4">
+                <label class="label">Shipping Costs</label>
+              </div>
+            {{else}}
+              <div class="column is-4"></div>
+            {{/if}}
+            <div class="column is-3">
+              <span class="is-red">
+                ({{ui.-money shippingService.rate 'jpy' showCode=false}})
+              </span>
+            </div>
+            <div class="column is-4">
+              <div class="media">
+                <div class="media-left">
+                  <button class="button is-danger is-small">
+                    <span class="icon is-small">
+                      {{fa-icon 'minus-circle'}}
+                    </span>
+                  </button>
+                </div>
+                <div class="media-content">
+                  <span class="is-capitalize">
+                    {{shippingService.serviceName}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{else}}
+          <div class="columns is-mobile">
+            <div class="column is-4">
+              <label class="label">Shipping Costs</label>
+            </div>
+            <div class="column is-3">
+              -
+            </div>
+            <div class="column is-4"></div>
+          </div>
+        {{/each}}
+
+        <hr>
+
+        <!--Total Earned-->
+        <div class="columns is-mobile">
+          <div class="column is-4">
+            <label class="label">Total Earned</label>
+          </div>
+          <div class="column is-3">
+            {{#if (lte totalEarned.amount 0)}}
+              <span class="is-red title is-5">
+                ({{ui.-money totalEarned 'jpy' showCode=false}})
+              </span>
+            {{else}}
+              <span class="is-green title is-5">
+                {{ui.-money totalEarned 'jpy' showCode=false}}
+              </span>
+            {{/if}}
+          </div>
+          <div class="column is-5"></div>
+        </div>
+
+        <hr>
+        <div class="columns">
+          <div class="column">
+            <p class="control is-grouped">
+              {{#ui.form.-async-button class='button is-danger'
+                                       action=(action '_deleteSoldArticle')}}
+                <span class="icon">
+                  {{fa-icon 'trash-o'}}
+                </span>
+                <span>Delete</span>
+              {{/ui.form.-async-button}}
+
+              {{#ui.form.-async-button class='button is-success'
+                                       action=(action '_saveSoldArticle')}}
+                <span class="icon">
+                  {{fa-icon 'floppy-o'}}
+                </span>
+                <span>Save</span>
+              {{/ui.form.-async-button}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="column is-half">
+        <div class="columns">
+          <div class="column">
+
+            <div class="card">
+              <div class="card-footer">
+                <div class="card-footer-item">
+                  <p class="title is-4">
+                    {{ui.-money soldArticle.soldPrice 'cad'}}
+                  </p>
+                </div>
+                <div class="card-footer-item">
+                  <p class="title is-4">
+                    {{ui.-money soldArticle.soldPrice 'jpy'}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+
+              <!--Shipping services-->
+              <footer class="card-footer">
+                <div class="card-footer-item">
+                  <div class="field is-horizontal is-fullwidth">
+                    <div class="field-label">
+                      <label class="label">Shipping</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field has-addons">
+                        <p class="control">
+                          <span class="select">
+                            {{ui.form.-select content=(await allShippingServices)
+                                              prompt='Shipping Options'
+                                              optionValuePath='id'
+                                              optionLabelPath='serviceName'
+                                              action=(action '_assignSelectShippingService')}}
+                          </span>
+                        </p>
+                        <p class="control">
+                          {{#ui.form.-async-button class='button is-success'
+                                                   action=(action '_addShippingService')}}
+                            {{fa-icon 'plus-circle'}}
+                          {{/ui.form.-async-button}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+
+              <!--Selected shipping service-->
+              {{#if selectShippingService}}
+                <div class="card-content padding-1">
+                  {{#with selectShippingService as |service|}}
+                    <div class="field is-horizontal is-fullwidth">
+                      <div class="field-label"><label class="label"></label></div>
+                      <div class="field-body">
+                        <p class="control is-capitalize">
+                          {{service.serviceName}}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="field is-horizontal is-fullwidth">
+                      <div class="field-label is-flex-grow-2"><label class="label">Rate</label></div>
+                      <div class="field-body">
+                        <p class="control title is-5">
+                          {{ui.-money service.rate}}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="field is-horizontal is-fullwidth">
+                      <div class="field-label is-flex-grow-2"><label class="label">Weight</label></div>
+                      <div class="field-body">
+                        <p class="control">
+                          {{service.weightInKg}} Kg
+                        </p>
+                      </div>
+                    </div>
+                    <div class="field is-horizontal is-fullwidth">
+                      <div class="field-label is-flex-grow-2"><label class="label">Arrive In Days</label></div>
+                      <div class="field-body">
+                        <p class="control">
+                          {{service.arriveInDays}} Days
+                        </p>
+                      </div>
+                    </div>
+                    <div class="field is-horizontal is-fullwidth">
+                      <div class="field-label is-flex-grow-2"><label class="label">Tracking</label></div>
+                      <div class="field-body">
+                        <p class="control">
+                          {{input type='checkbox' disabled=true name='tracked' checked=service.tracked}}
+                        </p>
+                      </div>
+                    </div>
+                  {{/with}}
+                </div>
+              {{/if}}
+
+              <!--Margin options-->
+              <footer class="card-footer">
+                <div class="card-footer-item">
+                  <div class="field is-horizontal is-fullwidth">
+                    <div class="field-label">
+                      <label class="label">Profit Margins</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field is-grouped">
+                        <p class="control">
+                          <a class="button is-primary is-outlined">10%</a>
+                          <a class="button is-primary is-outlined">20%</a>
+                          <a class="button is-primary is-outlined">30%</a>
+                          <a class="button is-primary is-outlined">40%</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column">
+            <p class="title is-6">Price</p>
+            <div class="card">
+              <div class="card-footer">
+                <div class="card-footer-item">
+                  <p class="title is-4">
+                    {{ui.-money soldArticle.price}}
+                  </p>
+                </div>
+                <div class="card-footer-item">
+                  <p class="title is-4">
+                    {{ui.-money soldArticle.price 'jpy'}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column">
+            <p class="title is-6">Current Price</p>
+            <div class="card">
+              <div class="card-footer">
+                <div class="card-footer-item">
+                  <p class="title is-4">
+                    {{ui.-money article.price}}
+                  </p>
+                </div>
+                <div class="card-footer-item">
+                  <p class="title is-4">
+                    {{ui.-money article.price 'jpy'}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="level">
+              {{#each-in soldArticleStatuses as |status happenedAt|}}
+                <div class="level-item has-text-centered">
+                  <div>
+                <span class="tag is-medium {{if (eq status soldArticle.status) 'is-success'}}">
+                  <p class="is-capitalize">{{status}}</p>
+                </span>
+                    {{#if happenedAt}}
+                      <p class="title is-5 is-uppercase mt-1">
+                        {{moment-format happenedAt 'MMM-D-YYYY'}}
+                      </p>
+                      <p class="title is-6 is-uppercase">
+                        {{moment-format happenedAt 'HH:mm'}}
+                      </p>
+                    {{/if}}
+                  </div>
+                </div>
+              {{/each-in}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

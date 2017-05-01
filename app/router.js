@@ -34,6 +34,7 @@ Router.map(function () {
   this.route('user', function() {
     this.route('profile');
   });
+  this.route('calculator');
 });
 
 export default Router;

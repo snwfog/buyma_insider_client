@@ -1,3 +1,4 @@
+import Ember from "ember";
 // Copy pasted from discourse preload store
 // 1. Used on app boots to store json data, reason for not using store is
 // to avoid calling serialization codes.
@@ -50,7 +51,9 @@ export default {
   },
 
   remove(key) {
-    if (this.data[key]) delete this.data[key];
+    if (this.data[key]) {
+      delete this.data[ key ];
+    }
   },
 
   reset() {

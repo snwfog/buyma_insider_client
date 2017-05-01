@@ -69,17 +69,17 @@
             </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' (await soldArticle.article) soldArticle}}
+                {{#link-to 'articles.sold' soldArticle.article.id soldArticle.id}}
                   Detail <span class="icon">{{fa-icon 'bar-chart'}}</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' (await soldArticle.article) soldArticle}}
+                {{#link-to 'articles.sold' soldArticle.article.id soldArticle.id}}
                   Archive <span class="icon">{{fa-icon 'trash-o'}}</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' (await soldArticle.article) soldArticle}}
+                {{#link-to 'articles.sold' soldArticle.article.id soldArticle.id}}
                   Delete <span class="icon">{{fa-icon 'trash-o'}}</span>
                 {{/link-to}}
               </div>
