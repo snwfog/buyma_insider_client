@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:calculator', 'Unit | Route | calculator', {
+moduleFor('route:archive/year/month', 'Unit | Route | archive/year/month', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

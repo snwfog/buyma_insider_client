@@ -20,7 +20,6 @@
 .align-bottom, .is-align-bottom, .has-text-bottom { vertical-align: bottom !important; }
 
 // Flex utilities to go with Bulma
-
 @each $flex in align-items align-self justify-content {
   @each $property in flex-start flex-end center space-between space-around {
     .is-flex-#{$flex}-#{$property} {
@@ -40,9 +39,9 @@
 .is-fullwidth          { width: 100% }
 
 // Text
-.is-uppercase { text-transform: uppercase !important }
-.is-lowercase { text-transform: lowercase !important }
-.is-capitalize { text-transform: capitalize !important }
+.is-uppercase { text-transform: uppercase !important; }
+.is-lowercase { text-transform: lowercase !important; }
+.is-capitalize { text-transform: capitalize !important; }
 
 .is-semi-bold { font-weight: 400 !important; }
 
@@ -53,4 +52,7 @@
 .is-orange   { color: $orange; }
 .is-green    { color: $green; }
 .is-green-bg { background-color: $green; }
+
+// Shape
+.is-pill { border-radius: 290486px !important; }
 

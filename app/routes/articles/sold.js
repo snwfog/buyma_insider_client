@@ -12,7 +12,7 @@ export default Ember.Route.extend({
     const articleSold       = this.store.find('user/article_sold', params.user_article_sold_id);
     return hash(Ember.merge({
       article,
-      articleSold,
+      articleSold
     }, applicationModels));
   },
 
@@ -104,11 +104,14 @@ export default Ember.Route.extend({
 
       actions: {
         '_saveArticleSold'() {
-          return this.get('articleSold').save();
+          const currentUser = this.currentUser;
+          const articleSold = this.get('articleSold');
+          articleSold.setProperties({ user: currentUser });
+          return articleSold.save();
         },
 
         '_deleteArticleSold'() {
-          return Ember.RSVP.resolve();
+          return this.get('articleSold').destroyRecord();
         },
 
         '_assignSelectShippingService'(shippingService, shippingServiceId) {
@@ -120,7 +123,12 @@ export default Ember.Route.extend({
           Ember.assert('Must have a valid shipping service', !!shippingService);
           var articleSold = this.get('articleSold');
           articleSold.get('shippingServices').pushObject(shippingService);
+          this.set('selectShippingService', null);
           return Ember.RSVP.resolve();
+        },
+
+        '_removeShippingService'(shippingService) {
+          this.get('articleSold.shippingServices').removeObject(shippingService);
         }
       }
     });

@@ -22,10 +22,10 @@ const statusAttrs = Object
   }, Ember.copy(STATUS));
 
 const UserArticleSold = DS.Model.extend(statusAttrs, {
-  user:             belongsTo('user'),
-  article:          belongsTo('article'),
-  exchangeRate:     belongsTo('exchange-rate'),
-  shippingServices: hasMany('shipping-service'),
+  user:                        belongsTo('user'),
+  article:                     belongsTo('article'),
+  exchangeRate:                belongsTo('exchange-rate'),
+  shippingServices:            hasMany('shipping-service'),
 
   status:    attr(),
   price:     attr('money', { code: 'cad' }),
@@ -33,9 +33,7 @@ const UserArticleSold = DS.Model.extend(statusAttrs, {
   createdAt: attr('datetime'),
   updatedAt: attr('datetime'),
 
-  createdAtDay: computed('createdAt', function () {
-    return this.get('createdAt').format('DDDD');
-  }),
+  createdAtDay: computed('createdAt', function () { return this.get('createdAt').format('DDDD'); }),
 });
 
 UserArticleSold.reopenClass({

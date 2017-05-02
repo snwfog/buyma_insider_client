@@ -28,37 +28,45 @@
         <div class="columns">
           <div class="card is-fullwidth">
             <header class="card-header">
-              <p class="card-header-title title is-4 is-capitalize has-text-right">
+              <p class="card-header-title title is-4 is-capitalize is-flex-justify-content-flex-end">
                 {{article.name}}
-                Created on {{moment-format article.createdAt 'L'}}
               </p>
             </header>
 
-            <header class="card-header">
-              <p class="card-header-title">
+            <!--Last indexed at-->
+            <div class="card-header">
+              <p class="card-header-title is-flex-justify-content-flex-end">
                 {{#if (eq article.health 1)}}
-                  <p class="tag is-success">{{moment-from-now article.syncedAt}}</p>
+                  <span class="tag is-success">Indexed {{moment-from-now article.syncedAt}}</span>
                 {{else}}{{#if (eq article.health 2)}}
-                  <p class="tag is-warning">{{moment-from-now article.syncedAt}}</p>
+                  <span class="tag is-warning">Indexed {{moment-from-now article.syncedAt}}</span>
                 {{else}}{{#if (eq article.health 3)}}
-                  <p class="tag is-danger">{{moment-from-now article.syncedAt}}</p>
+                  <span class="tag is-danger">Indexed {{moment-from-now article.syncedAt}}</span>
                 {{else}}{{#if (eq article.health 4)}}
-                  <p class="tag">{{moment-from-now article.syncedAt}}</p>
+                  <span class="tag">Indexed {{moment-from-now article.syncedAt}}</span>
                 {{else}}
-                  <p class="tag">Never</p>
+                  <span class="tag">Never Indexed</span>
                 {{/if}}{{/if}}{{/if}}{{/if}}
               </p>
-            </header>
+            </div>
+
+            <!--Created at-->
+            <div class="card-header">
+              <p class="card-header-title is-flex-justify-content-flex-end">
+                <span class="tag">
+                  Created {{moment-from-now article.createdAt}}
+                </span>
+              </p>
+            </div>
 
             <div class="card-content">
-              <div class="content">
-                <blockquote>{{article.description}}</blockquote>
+              <div class="content is-medium">
+                {{article.description}}
               </div>
             </div>
 
             <footer class="card-footer">
               <div class="card-footer-item">
-                <span class="icon">{{fa-icon 'arrow-up'}}</span>
                 <p class="title is-4">
                   {{ui.-money article.price 'cad' showCode=true}}
                 </p>
@@ -114,8 +122,12 @@
             </div>
             <div class="media-content">
               <div class="content">
-                <p class="title is-4 is-capitalize">{{moment-from-now articleWatched.createdAt}}</p>
-                <p class="subtitle is-6">{{moment-format articleWatched.createdAt}}</p>
+                <p class="title is-4 is-capitalize">
+                  {{moment-from-now articleWatched.createdAt}}
+                </p>
+                <p class="subtitle is-6">
+                  {{moment-format articleWatched.createdAt 'LL'}}
+                </p>
               </div>
             </div>
             <div class="media-right">
@@ -159,7 +171,7 @@
               </div>
               <div class="content">
                 <p class="title is-6">
-                  Sold about {{moment-from-now articleSold.createdAt}} on {{moment-format articleSold.createdAt 'LL'}}
+                  Sold {{moment-from-now articleSold.createdAt}} on {{moment-format articleSold.createdAt 'LL'}}
                 </p>
               </div>
               <div class="content">
@@ -201,6 +213,10 @@
                     {{articleSold.status}}
                   </span>
                 {{/if}}
+
+                {{#link-to 'articles.sold' article.id articleSold.id
+                           class='button is-light is-small is-pill'}}Detail{{/link-to}}
+
               </div>
             </div>
           </article>

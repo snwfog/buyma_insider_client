@@ -56,21 +56,6 @@
           </div>
           <div class="column is-5">
             <div class="field has-addons">
-              <p class="control">
-                {{#if allowEditArticleSoldPrice}}
-                  <button class="button is-success is-outlined">
-                          <span class="icon" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
-                            {{fa-icon 'toggle-on'}}
-                          </span>
-                  </button>
-                {{else}}
-                  <button class="button is-danger is-outlined">
-                          <span class="icon" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
-                            {{fa-icon 'toggle-off'}}
-                          </span>
-                  </button>
-                {{/if}}
-              </p>
               <p class="control has-icons-left">
                 {{input class='input has-text-right'
                         classBinding='allowEditArticleSoldPrice:is-success'
@@ -80,6 +65,21 @@
                 <span class="icon is-left">
                   {{fa-icon 'jpy'}}
                 </span>
+              </p>
+              <p class="control">
+                {{#if allowEditArticleSoldPrice}}
+                  <button class="button is-success is-outlined">
+                    <span class="icon" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
+                      {{fa-icon 'toggle-on'}}
+                    </span>
+                  </button>
+                {{else}}
+                  <button class="button is-danger is-outlined">
+                    <span class="icon" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
+                      {{fa-icon 'toggle-off'}}
+                    </span>
+                  </button>
+                {{/if}}
               </p>
             </div>
           </div>
@@ -142,11 +142,12 @@
             <div class="column is-4">
               <div class="media">
                 <div class="media-left">
-                  <button class="button is-danger is-small">
+                  {{#ui.form.-async-button class='button is-danger is-small'
+                                           action=(action '_removeShippingService' shippingService)}}
                     <span class="icon is-small">
                       {{fa-icon 'minus-circle'}}
                     </span>
-                  </button>
+                  {{/ui.form.-async-button}}
                 </div>
                 <div class="media-content">
                   <span class="is-capitalize">
@@ -193,6 +194,7 @@
         <div class="columns">
           <div class="column">
             <p class="control is-grouped">
+              {{!--
               {{#ui.form.-async-button class='button is-danger'
                                        action=(action '_deleteArticleSold')}}
                 <span class="icon">
@@ -200,9 +202,12 @@
                 </span>
                 <span>Delete</span>
               {{/ui.form.-async-button}}
+              --}}
 
               {{#ui.form.-async-button class='button is-success'
-                                       action=(action '_saveArticleSold')}}
+                                       action=(pipe-action (action '_saveArticleSold')
+                                                           (toast 'Saved!')
+                                                           (disable 'allowEditArticleSoldPrice' this))}}
                 <span class="icon">
                   {{fa-icon 'floppy-o'}}
                 </span>
@@ -243,8 +248,8 @@
                       <label class="label">Shipping</label>
                     </div>
                     <div class="field-body">
-                      <div class="field has-addons">
-                        <p class="control">
+                      <div class="field">
+                        <div class="control">
                           <span class="select">
                             {{ui.form.-select content=(await allShippingServices)
                                               prompt='Shipping Options'
@@ -252,13 +257,8 @@
                                               optionLabelPath='serviceName'
                                               action=(action '_assignSelectShippingService')}}
                           </span>
-                        </p>
-                        <p class="control">
-                          {{#ui.form.-async-button class='button is-success'
-                                                   action=(action '_addShippingService')}}
-                            {{fa-icon 'plus-circle'}}
-                          {{/ui.form.-async-button}}
-                        </p>
+                        </div>
+                        <p class="help">Nothing fit? <a>Add more shipping options</a>.</p>
                       </div>
                     </div>
                   </div>
@@ -278,7 +278,7 @@
                       </div>
                     </div>
                     <div class="field is-horizontal is-fullwidth">
-                      <div class="field-label is-flex-grow-2"><label class="label">Rate</label></div>
+                      <div class="field-label is-flex-grow-3"><label class="label">Rate</label></div>
                       <div class="field-body">
                         <p class="control title is-5">
                           {{ui.-money service.rate}}
@@ -286,7 +286,7 @@
                       </div>
                     </div>
                     <div class="field is-horizontal is-fullwidth">
-                      <div class="field-label is-flex-grow-2"><label class="label">Weight</label></div>
+                      <div class="field-label is-flex-grow-3"><label class="label">Weight</label></div>
                       <div class="field-body">
                         <p class="control">
                           {{service.weightInKg}} Kg
@@ -294,7 +294,7 @@
                       </div>
                     </div>
                     <div class="field is-horizontal is-fullwidth">
-                      <div class="field-label is-flex-grow-2"><label class="label">Arrive In Days</label></div>
+                      <div class="field-label is-flex-grow-3"><label class="label">Arrive In Days</label></div>
                       <div class="field-body">
                         <p class="control">
                           {{service.arriveInDays}} Days
@@ -302,10 +302,24 @@
                       </div>
                     </div>
                     <div class="field is-horizontal is-fullwidth">
-                      <div class="field-label is-flex-grow-2"><label class="label">Tracking</label></div>
+                      <div class="field-label is-flex-grow-3"><label class="label">Is Tracked?</label></div>
                       <div class="field-body">
                         <p class="control">
                           {{input type='checkbox' disabled=true name='tracked' checked=service.tracked}}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="field is-horizontal is-fullwidth">
+                      <div class="field-label is-flex-grow-3"></div>
+                      <div class="field-body">
+                        <p class="control">
+                          {{#ui.form.-async-button class='button is-success'
+                                                   action=(action '_addShippingService')}}
+                            <span class="icon">
+                              {{fa-icon 'plus-circle'}}
+                            </span>
+                            <span>Add shipping</span>
+                          {{/ui.form.-async-button}}
                         </p>
                       </div>
                     </div>
@@ -331,6 +345,19 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </footer>
+
+              <!--Sold article actions-->
+              <footer class="card-footer">
+                <div class="card-footer-item">
+                  {{#ui.form.-async-button tagName='a'
+                                           action=(pipe-action (action '_saveArticleSold')
+                                                               (toast 'Saved!')
+                                                               (disable 'allowEditArticleSoldPrice' this))}}
+                    <span class="icon">{{fa-icon 'floppy-o'}}</span>
+                    <span>Save</span>
+                  {{/ui.form.-async-button}}
                 </div>
               </footer>
             </div>

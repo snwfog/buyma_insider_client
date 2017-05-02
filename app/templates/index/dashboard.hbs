@@ -17,18 +17,17 @@
           <div class="card">
             <header class="card-header">
               <div class="card-header-title">
-                {{#link-to 'articles.index' articleSold.article.id
-                           class='button is-link'}}
-                  {{articleSold.article.name}}
-                {{/link-to}}
+                {{articleSold.article.name}}
               </div>
               <div class="card-header-icon">
-                <a class="delete"></a>
+                {{moment-format articleSold.createdAt 'LT'}}
               </div>
             </header>
             <div class="card-content">
               <div class="content">
-                {{moment-format articleSold.createdAt 'LT'}}
+                <span class="title is-5">
+                  {{ui.-money articleSold.soldPrice showCode=false}}
+                </span>
               </div>
             </div>
             <footer class="card-footer">
@@ -69,18 +68,21 @@
             </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
-                {{#link-to 'articles.sold' articleSold.article.id articleSold.id}}
-                  Detail <span class="icon">{{fa-icon 'bar-chart'}}</span>
+                {{#link-to 'articles.index' articleSold.article.id}}
+                  <span class="icon">{{fa-icon 'shopping-basket'}}</span>
+                  <span>Article</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
                 {{#link-to 'articles.sold' articleSold.article.id articleSold.id}}
-                  Archive <span class="icon">{{fa-icon 'trash-o'}}</span>
+                  <span class="icon">{{fa-icon 'area-chart'}}</span>
+                  <span>Detail</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
                 {{#link-to 'articles.sold' articleSold.article.id articleSold.id}}
-                  Delete <span class="icon">{{fa-icon 'trash-o'}}</span>
+                  <span class="icon">{{fa-icon 'handshake-o'}}</span>
+                  <span>Archive</span>
                 {{/link-to}}
               </div>
             </footer>

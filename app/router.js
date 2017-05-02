@@ -13,9 +13,17 @@ Router.map(function () {
   this.route('login');
   this.route('signup');
 
+  this.route('estimator');
+
   this.route('index', function() {
     this.route('dashboard');
-    this.route('dashboard_archive', { path: '/archive' });
+    this.route('dashboard_archive', { path: '/archive' }, function() {
+      this.route('year',    { path: '/year/:year_id'   }, function() {
+        this.route('month', { path: '/month/:month_id' }, function() {
+          this.route('day', { path: '/day/:day_id'     });
+        });
+      });
+    });
   });
 
   this.route('status');
@@ -34,7 +42,6 @@ Router.map(function () {
   this.route('user', function() {
     this.route('profile');
   });
-  this.route('calculator');
 });
 
 export default Router;
