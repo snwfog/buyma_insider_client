@@ -3,10 +3,15 @@ import PreloadStore from "../preload-store";
 export function initialize(appInstance) {
   window.BuymaInsider = appInstance;
 
+  const store                   = appInstance.lookup('service:store');
+
+  // Shipping services
   const shippingServicesPayload = PreloadStore.get('shipping_services');
-  appInstance
-    .lookup('service:store')
-    .pushPayload('shippingService', shippingServicesPayload);
+  store.pushPayload('shippingService', shippingServicesPayload);
+
+  // Article notification criteria
+  const articleNotificationCriteriaPayload = PreloadStore.get('article_notification_criteria');
+  store.pushPayload('article/notificationCriterium', articleNotificationCriteriaPayload);
 }
 
 export default {

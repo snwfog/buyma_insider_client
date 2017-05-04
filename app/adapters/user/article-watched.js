@@ -13,5 +13,10 @@ export default ApplicationAdapter.extend({
   urlForDeleteRecord(id, modelName, snapshot) {
     modelName = `articles/${snapshot.record.get('article.id')}/watch`;
     return this._super(null, modelName, snapshot);
+  },
+
+  urlForUpdateRecord(id, modelName, snapshot) {
+    modelName = `user_article_watcheds`;
+    return this._super(id, modelName, snapshot);
   }
 });

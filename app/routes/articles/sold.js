@@ -10,10 +10,7 @@ export default Ember.Route.extend({
     const applicationModels = this.modelFor('application');
     const { article }       = this.modelFor('articles');
     const articleSold       = this.store.find('user/article_sold', params.user_article_sold_id);
-    return hash(Ember.merge({
-      article,
-      articleSold
-    }, applicationModels));
+    return hash(Ember.merge({ article, articleSold }, applicationModels));
   },
 
   setupController(controller, models) {
@@ -32,6 +29,8 @@ export default Ember.Route.extend({
       allShippingServices: computed(function() {
         return this.store.peekAll('shippingService');
       }),
+
+      selectShippingService: null,
 
       // Article price-balance sheet variable
       articleSoldPrice: computed('articleSold.price.amount', function () {

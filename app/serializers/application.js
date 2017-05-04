@@ -3,18 +3,17 @@ import DS from "ember-data";
 export default DS.JSONAPISerializer.extend({
 
   modelNameFromPayloadKey(payloadKey) {
-//    payloadKey = payloadKey.split('_').join('/')
-//    this.debug(`modelnameFromPayloadKey ${payloadKey}`);
-    // TODO: Change this to hash
     var dict = {
-      'merchant-metadata':     'merchant/metadatum',
-      'crawl-sessions':        'merchant/crawl-session',
-      'index-pages':           'merchant/index-page',
-      'price-histories':       'article/price-history',
-      'user-session-tokens':   'user/session-token',
-      'user-article-watcheds': 'user/article-watched',
-      'user-article-solds':    'user/article-sold',
-      'user-article-sold-shipping-services': 'user/article-sold-shipping-service',
+      'merchant-metadata':                              'merchant/metadatum',
+      'crawl-sessions':                                 'merchant/crawl-session',
+      'index-pages':                                    'merchant/index-page',
+      'price-histories':                                'article/price-history',
+      'article-notification-criteria':                  'article/notification-criterium',
+      'discount-percent-article-notification-criteria': 'article/notification-criterium/discount-percent',
+      'user-session-tokens':                            'user/session-token',
+      'user-article-watcheds':                          'user/article-watched',
+      'user-article-solds':                             'user/article-sold',
+      'user-article-sold-shipping-services':            'user/article-sold-shipping-service',
     };
 
     var modelKey = dict[ payloadKey ];

@@ -14,6 +14,7 @@ export default ApplicationController.extend({
   // TODO: This properties cause ember-moment to log error
   // In sum, this is recomputed before adapter replies saved
   // We should take care with this instead of just filtering out
+  // Update: Using {{with}} helper will resolve this
   articleSolds: computed('currentUser.articleSolds.[]', 'model.article', function () {
     const article                 = this.get('article');
     const currentUserArticleSolds = this.currentUser.get('articleSolds');
@@ -21,6 +22,13 @@ export default ApplicationController.extend({
   }),
 
   currencies: config.APP.currencies,
+
+  // Temporarily just return all discount percent criteria
+  allCriteria: computed(function() {
+    return this.store.peekAll('article/notificationCriterium/discountPercent');
+  }),
+
+  selectArticleWatchCriterium: null,
 
   actions: {
     '_watchArticle'(article) {
@@ -80,5 +88,21 @@ export default ApplicationController.extend({
         .then((articleSold) => {
           currentUser.get('articleSolds').removeObject(articleSold); });
     },
+
+    '_assignSelectArticleWatchCriterium'(articleWatchCriterium, articleWatchCriteriumId) {
+      this.set('selectArticleWatchCriterium', articleWatchCriterium);
+    },
+
+    '_addArticleWatchCriterium'() {
+      var articleWatchCriterium = this.get('selectArticleWatchCriterium');
+      Ember.assert('Must have a valid article watch criterium', !!articleWatchCriterium);
+      var articleWatched = this.get('articleWatched');
+      articleWatched.get('notificationCriteria').pushObject(articleWatchCriterium);
+      return articleWatched
+        .save()
+        .then((articleWatched) => {
+          this.set('selectArticleWatchCriterium', null);
+        });
+    }
   }
 });

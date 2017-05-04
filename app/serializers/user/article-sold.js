@@ -2,8 +2,8 @@ import ApplicationSerializer from "../application";
 import UserArticleSold from "../../models/user/article-sold";
 
 const attrs = {
-  createdAt:    { serialize: false },
-  updatedAt:    { serialize: false },
+  createdAt: { serialize: false },
+  updatedAt: { serialize: false },
 };
 
 Object.keys(UserArticleSold.STATUS)
