@@ -48,6 +48,7 @@ export default Ember.Route.extend({
             extension: '_autocomplete'
           };
 
+          this.transitionToRoute('index.search');
           this.store
             .query('article', query)
             .then(function (articles) {

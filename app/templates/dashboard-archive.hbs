@@ -13,14 +13,14 @@
   </div>
   <hr>
   <div class="content buyma-timeline-pager">
-    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format prevYear 'M-D-YY'))
+    {{#link-to 'dashboard_archive' (query-params date=(moment-format prevYear 'M-D-YY'))
                class='button is-light mb-1' activeClass='is-active'}}
       <span class="year is-uppercase">
         {{moment-format prevYear 'YYYY'}}
       </span>
     {{/link-to}}
 
-    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format prevMonth 'M-D-YY'))
+    {{#link-to 'dashboard_archive' (query-params date=(moment-format prevMonth 'M-D-YY'))
                class='button is-warning mb-1' activeClass='is-active'}}
       <span class="month is-uppercase">
         {{moment-format prevMonth 'MMM'}}
@@ -38,7 +38,7 @@
           </span>
         </a>
       {{else}}
-        {{#link-to 'index.dashboard_archive' (query-params date=(moment-format calendarDate 'M-D-YY'))
+        {{#link-to 'dashboard_archive' (query-params date=(moment-format calendarDate 'M-D-YY'))
                    class='button is-primary is-outlined mb-1'
                    activeClass='is-active'}}
           <span class="day">
@@ -51,14 +51,14 @@
       {{/if}}
     {{/each}}
 
-    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format nextMonth 'M-D-YY'))
+    {{#link-to 'dashboard_archive' (query-params date=(moment-format nextMonth 'M-D-YY'))
                class='button is-warning mb-1' activeClass='is-active'}}
       <span class="month is-uppercase">
         {{moment-format nextMonth 'MMM'}}
       </span>
     {{/link-to}}
 
-    {{#link-to 'index.dashboard_archive' (query-params date=(moment-format nextYear 'M-D-YY'))
+    {{#link-to 'dashboard_archive' (query-params date=(moment-format nextYear 'M-D-YY'))
                class='button is-light mb-1' activeClass='is-active'}}
       <span class="year is-uppercase">
         {{moment-format nextYear 'YYYY'}}

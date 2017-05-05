@@ -5,27 +5,27 @@
     <div class="columns">
       <div class="column is-half">
         <div class="content">
-          {{#link-to 'merchant.index' metadatum.id (query-params filter='new')
+          {{#link-to 'merchant' metadatum.id (query-params filter='new')
                      class='button is-outlined is-primary'
                      activeClass='is-active'}}New{{/link-to}}
-          {{#link-to 'merchant.index' metadatum.id (query-params filter='sale')
+          {{#link-to 'merchant' metadatum.id (query-params filter='sale')
                      class='button is-outlined is-primary'
                      activeClass='is-primary is-active'}}Sale{{/link-to}}
-          {{#link-to 'merchant.index' metadatum.id (query-params filter='all')
+          {{#link-to 'merchant' metadatum.id (query-params filter='all')
                      class='button is-outlined is-primary'
                      activeClass='is-primary'}}All{{/link-to}}
         </div>
         <div class="content">
-          {{#link-to 'merchant.index' metadatum.id (query-params order='name')
+          {{#link-to 'merchant' metadatum.id (query-params order='name')
                      class='button is-outlined is-primary'
                      activeClass='is-active'}}Name{{/link-to}}
-          {{#link-to 'merchant.index' metadatum.id (query-params order='price')
+          {{#link-to 'merchant' metadatum.id (query-params order='price')
                      class='button is-outlined is-primary'
                      activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'money'}}</span><span>Price</span>{{/link-to}}
-          {{#link-to 'merchant.index' metadatum.id (query-params order='created_at')
+          {{#link-to 'merchant' metadatum.id (query-params order='created_at')
                      class='button is-outlined is-primary'
                      activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Created</span>{{/link-to}}
-          {{#link-to 'merchant.index' metadatum.id (query-params order='updated_at')
+          {{#link-to 'merchant' metadatum.id (query-params order='updated_at')
                      class='button is-outlined is-primary'
                      activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Updated</span>{{/link-to}}
         </div>
@@ -53,7 +53,7 @@
             </div>
             <div class="media-content">
               <div class="content">
-                {{#link-to 'articles.index' article.id}}
+                {{#link-to 'articles' article.id}}
                   <p class="title is-4">
                     {{article.name}}
                   </p>

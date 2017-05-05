@@ -68,7 +68,7 @@
             </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
-                {{#link-to 'articles.index' articleSold.article.id}}
+                {{#link-to 'articles' articleSold.article.id}}
                   <span class="icon">{{fa-icon 'shopping-basket'}}</span>
                   <span>Article</span>
                 {{/link-to}}
@@ -93,6 +93,6 @@
   {{/each-in}}
 
   <p class="has-text-right">
-    {{#link-to 'index.dashboard_archive' class='button is-link'}}<span>Go to archived</span><span class="icon is-small">{{fa-icon 'angle-right'}}</span>{{/link-to}}
+    {{#link-to 'dashboard_archive' class='button is-link'}}<span>Go to archived</span><span class="icon is-small">{{fa-icon 'angle-right'}}</span>{{/link-to}}
   </p>
 </div>

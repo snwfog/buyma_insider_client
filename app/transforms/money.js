@@ -14,7 +14,7 @@ export default DS.Transform.extend({
 
   serialize(deserialized) {
     if (!!deserialized) {
-      return deserialized.get('amount');
+      return Number(deserialized.get('amount'));
     }
   }
 });

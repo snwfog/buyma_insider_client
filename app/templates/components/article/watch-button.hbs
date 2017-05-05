@@ -1,11 +1,11 @@
 {{#if (await (can 'unwatch article' article))}}
-  <a disabled class="button is-primary">
+  <a disabled class="button is-warning">
     <span class="icon is-small">
-      {{fa-icon 'eye'}}
+      {{fa-icon 'star'}}
     </span>
   </a>
 {{else}}{{#if (await (can 'watch article' article))}}
-  {{#ui.form.-async-button class='button is-primary'
+  {{#ui.form.-async-button class='button is-warning'
                            disableWhen=(not currentUser)
                            action=(action 'watch') as |component state|}}
     {{#if state.isRejected}}
@@ -19,7 +19,7 @@
       </span>
     {{else}}
       <span class="icon is-small">
-        {{fa-icon 'eye'}}
+        {{fa-icon 'star-o'}}
       </span>
       <span>Watch</span>
     {{/if}}{{/if}}
