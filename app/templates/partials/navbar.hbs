@@ -2,11 +2,11 @@
   <div class="container">
 
     <div class="nav-left">
-      {{#link-to 'dashboard' class='nav-item is-brand is-hidden-mobile'}}
+      {{#link-to 'index.dashboard' class='nav-item is-brand is-hidden-mobile'}}
         {{appName}}
       {{/link-to}}
 
-      {{#link-to 'dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
+      {{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
         {{fa-icon 'bold'}}
       {{/link-to}}
     </div>
@@ -60,7 +60,7 @@
                              activeClass='is-active'}}Status{{/link-to-with-action}}
 
       {{#if currentUser}}
-        {{#link-to-with-action 'dashboard_archive'
+        {{#link-to-with-action 'index.dashboard_archive'
                                class='is-tab nav-item'
                                invokeAction=(toggle 'navBarIsActive' this)
                                activeClass='is-active'}}Archive{{/link-to-with-action}}
