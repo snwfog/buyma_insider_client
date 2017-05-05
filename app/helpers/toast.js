@@ -3,11 +3,9 @@ import Ember from "ember";
 export default Ember.Helper.extend({
   toastService: Ember.inject.service('toast'),
 
-  compute(params, hash) {
+  compute([message, type = 'log']) {
     const toastService = this.get('toastService');
-    return function () {
-      toastService.success(`Selected! ${params}, ${hash}`);
-    };
+    return function () { toastService[ type ](message); };
   }
 });
 

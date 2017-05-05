@@ -16,3 +16,12 @@ div.lt-body-wrap > table {
 .loading-slider span {
   background-color: $turquoise;
 }
+
+// alertifyjs
+.alertify-logs {
+  opacity:    0.9;
+
+  > *.success { background: $green; }
+  > *.error { background: $red; }
+  > *.default { background: $turquoise; }
+}

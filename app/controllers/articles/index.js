@@ -24,11 +24,11 @@ export default ApplicationController.extend({
   currencies: config.APP.currencies,
 
   // Temporarily just return all discount percent criteria
-  allCriteria: computed(function() {
+  allArticleNotificationCriteria: computed(function() {
     return this.store.peekAll('article/notificationCriterium/discountPercent');
   }),
 
-  selectArticleWatchCriterium: null,
+  selectArticleNotificationCriterium: null,
 
   actions: {
     '_watchArticle'(article) {
@@ -89,20 +89,29 @@ export default ApplicationController.extend({
           currentUser.get('articleSolds').removeObject(articleSold); });
     },
 
-    '_assignSelectArticleWatchCriterium'(articleWatchCriterium, articleWatchCriteriumId) {
-      this.set('selectArticleWatchCriterium', articleWatchCriterium);
+    '_assignSelectArticleNotificationCriterium'(articleNotificationCriterium, articleNotificationCriteriumId) {
+      this.set('selectArticleNotificationCriterium', articleNotificationCriterium);
     },
 
-    '_addArticleWatchCriterium'() {
-      var articleWatchCriterium = this.get('selectArticleWatchCriterium');
-      Ember.assert('Must have a valid article watch criterium', !!articleWatchCriterium);
+    '_addArticleNotificationCriterium'() {
+      var articleNotificationCriterium = this.get('selectArticleNotificationCriterium');
+      Ember.assert('Must have an article notification criterium', !!articleNotificationCriterium);
       var articleWatched = this.get('articleWatched');
-      articleWatched.get('notificationCriteria').pushObject(articleWatchCriterium);
+      articleWatched.get('notificationCriteria').pushObject(articleNotificationCriterium);
       return articleWatched
         .save()
         .then((articleWatched) => {
-          this.set('selectArticleWatchCriterium', null);
-        });
-    }
+          this.set('selectArticleNotificationCriterium', null); });
+    },
+
+    '_removeArticleNotificationCriterium'(articleNotificationCriterium) {
+      var articleWatched = this.get('articleWatched');
+      Ember.assert('Must have an article notification criterium', !!articleNotificationCriterium);
+      articleWatched.get('notificationCriteria').removeObject(articleNotificationCriterium);
+      return articleWatched
+        .save()
+        .catch((error) => {
+          articleWatched.get('notificationCriteria').pushObject(articleNotificationCriterium); });
+    },
   }
 });

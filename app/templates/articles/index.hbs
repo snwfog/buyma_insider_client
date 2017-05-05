@@ -136,12 +136,31 @@
                     <div class="field">
                       <div class="control">
                         <span class="select">
-                          {{ui.form.-select content=(await allCriteria)
-                                            prompt='Article Watch Criteria'
-                                            optionValuePath='id'
-                                            optionLabelPath='name'
-                                            selection=selectArticleWatchCriterium
-                                            action=(action '_assignSelectArticleWatchCriterium')}}
+                          {{#ui.form.-select content=(await allArticleNotificationCriteria)
+                                             prompt='Article Watch Criteria'
+                                             optionValuePath='id'
+                                             optionLabelPath='name'
+                                             selection=selectArticleNotificationCriterium
+                                             action=(action '_assignSelectArticleNotificationCriterium')
+                                             as |articleNotificationCriterium|}}
+                            {{#with (map-by 'id' (await articleWatched.notificationCriteria))
+                                                 as |articleWatchedNotificationCriteriumIds|}}
+                              {{#if (contains articleNotificationCriterium.id articleWatchedNotificationCriteriumIds)}}
+                                <option disabled value="{{articleNotificationCriterium.id}}">
+                                  {{capitalize articleNotificationCriterium.name}}
+                                </option>
+                              {{else}}
+                                <option value="{{articleNotificationCriterium.id}}">
+                                  {{capitalize articleNotificationCriterium.name}}
+                                </option>
+                              {{/if}}
+                            {{else}}
+                              {{!--Make sure to render if there are any criteria--}}
+                              <option value="{{articleNotificationCriterium.id}}">
+                                {{capitalize articleNotificationCriterium.name}}
+                              </option>
+                            {{/with}}
+                          {{/ui.form.-select}}
                         </span>
                       </div>
                       <p class="help">Nothing fit? <a>Add more article watch criterium options</a>.</p>
@@ -149,7 +168,7 @@
                     <div class="field">
                       <div class="control">
                         {{#ui.form.-async-button class='button is-success'
-                                               action=(action '_addArticleWatchCriterium')}}
+                                               action=(action '_addArticleNotificationCriterium')}}
 
                           <span class="icon">
                             {{fa-icon 'plus-circle'}}
@@ -174,8 +193,13 @@
               <div class="media-left"></div>
               <div class="media-content">
                 {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
-                  <span class="tag is-info">
+                  <span class="tag is-light">
                     {{capitalize notificationCriterium.name}}
+                    {{#ui.form.-async-button tagName='button'
+                                            class='delete is-small'
+                                            action=(pipe-action (action '_removeArticleNotificationCriterium' notificationCriterium)
+                                                                (toast 'Notification criterium was removed.'))}}
+                    {{/ui.form.-async-button}}
                   </span>
                 {{else}}
                 {{/each}}
