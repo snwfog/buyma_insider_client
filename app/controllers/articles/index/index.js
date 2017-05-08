@@ -1,6 +1,6 @@
 import Ember from "ember";
-import ApplicationController from "../application";
-import config from "../../config/environment";
+import ApplicationController from "../../application";
+import config from "../../../config/environment";
 
 const { computed } = Ember;
 

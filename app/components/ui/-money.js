@@ -15,6 +15,10 @@ let UiMoneyComponent = Ember.Component.extend({
 //     const amountBase   = this.getWithDefault('amount.base', 'cad'); Get with default works with null only
 //     const displayBase  = this.getWithDefault('displayBase', 'cad');
     const amount       = this.get('amountMoney');
+    if (!amount) {
+      return '-';
+    }
+
     const amountBase   = this.get('amountMoney.base') || 'cad';
     const displayBase  = this.get('displayBase') || 'cad';
     const exchangeRate = this.get('exchangeRate');

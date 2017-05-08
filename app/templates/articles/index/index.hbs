@@ -1,0 +1,322 @@
+<section class="section">
+  <div class="container">
+    <!--Nav and article control-->
+    <nav>
+      <div class="field is-grouped">
+        <p class="control">
+          <a class="button" target="_blank" href="{{article.link}}">
+            <span class="icon is-small">{{fa-icon 'globe'}}</span>
+            <span>Link</span>
+          </a>
+        </p>
+
+        {{article.watch-button article=article watch=(action '_watchArticle' article)}}
+        {{article.sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
+            (action '_toast' 'Congratulation!'))}}
+      </div>
+    </nav>
+
+    <hr>
+  </div>
+
+
+  <div class="container">
+    <div class="columns is-row-reverse">
+
+      <!--Price panel-->
+      <div class="column is-4">
+        <div class="columns">
+          <div class="card is-fullwidth">
+            <header class="card-header">
+              <p class="card-header-title title is-4 is-capitalize is-flex-justify-content-flex-end">
+                {{article.name}}
+              </p>
+            </header>
+
+            <!--Last indexed at-->
+            <div class="card-header">
+              <p class="card-header-title is-flex-justify-content-flex-end">
+                {{#if (eq article.health 1)}}
+                  <span class="tag is-success">Indexed {{moment-from-now article.syncedAt}}</span>
+                {{else}}{{#if (eq article.health 2)}}
+                  <span class="tag is-warning">Indexed {{moment-from-now article.syncedAt}}</span>
+                {{else}}{{#if (eq article.health 3)}}
+                  <span class="tag is-danger">Indexed {{moment-from-now article.syncedAt}}</span>
+                {{else}}{{#if (eq article.health 4)}}
+                  <span class="tag">Indexed {{moment-from-now article.syncedAt}}</span>
+                {{else}}
+                  <span class="tag">Never Indexed</span>
+                {{/if}}{{/if}}{{/if}}{{/if}}
+              </p>
+            </div>
+
+            <!--Created at-->
+            <div class="card-header">
+              <p class="card-header-title is-flex-justify-content-flex-end">
+                <span class="tag">
+                  Created {{moment-from-now article.createdAt}}
+                </span>
+              </p>
+            </div>
+
+            <div class="card-content">
+              <div class="content is-medium">
+                {{article.description}}
+              </div>
+            </div>
+
+            <footer class="card-footer">
+              <div class="card-footer-item">
+                <p class="title is-4">
+                  {{ui.-money article.price 'cad' showCode=true}}
+                </p>
+              </div>
+              <div class="card-footer-item">
+                <p class="title is-4">
+                  {{ui.-money article.price 'jpy' showCode=true}}
+                </p>
+              </div>
+            </footer>
+            <footer class="card-footer">
+              <div class="card-footer-item">
+                <div class="level-item price-history">
+                  {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
+                </div>
+              </div>
+            </footer>
+            <footer class="card-footer">
+              <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
+                <tbody>
+                {{#if article.priceSummary.max}}
+                  <tr>
+                    <td><b>Highest</b></td>
+                    <td>${{article.priceSummary.max.price}}</td>
+                    <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
+                  </tr>
+                {{/if}}
+
+                {{#if article.priceSummary.min}}
+                  <tr>
+                    <td><b>Lowest</b></td>
+                    <td>${{article.priceSummary.min.price}}</td>
+                    <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
+                  </tr>
+                {{/if}}
+                </tbody>
+              </table>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+      <!--Article panel-->
+      <div class="column is-8">
+        {{#if articleWatched}}
+          <article class="media">
+            <div class="media-left">
+              <p class="title is-2">
+                <span class="icon">
+                  {{fa-icon 'star' class='is-yellow'}}
+                </span>
+              </p>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p class="title is-4 is-capitalize">
+                  {{moment-from-now articleWatched.createdAt}}
+                </p>
+                <p class="subtitle is-6">
+                  {{moment-format articleWatched.createdAt 'LL'}}
+                </p>
+                <div class="field is-horizontal">
+                  <div class="field-label">
+                    <label class="label">Criterium</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        <span class="select">
+                          {{#ui.form.-select content=(await allArticleNotificationCriteria)
+                                             prompt='Article Watch Criteria'
+                                             optionValuePath='id'
+                                             optionLabelPath='name'
+                                             selection=selectArticleNotificationCriterium
+                                             action=(action '_assignSelectArticleNotificationCriterium')
+                          as |articleNotificationCriterium|}}
+                            {{#with (map-by 'id' (await articleWatched.notificationCriteria))
+                            as |articleWatchedNotificationCriteriumIds|}}
+                              {{#if (contains articleNotificationCriterium.id articleWatchedNotificationCriteriumIds)}}
+                                <option disabled value="{{articleNotificationCriterium.id}}">
+                                  {{capitalize articleNotificationCriterium.name}}
+                                </option>
+                              {{else}}
+                                <option value="{{articleNotificationCriterium.id}}">
+                                  {{capitalize articleNotificationCriterium.name}}
+                                </option>
+                              {{/if}}
+                            {{else}}
+                            {{!--Make sure to render if there are any criteria--}}
+                              <option value="{{articleNotificationCriterium.id}}">
+                                {{capitalize articleNotificationCriterium.name}}
+                              </option>
+                            {{/with}}
+                          {{/ui.form.-select}}
+                        </span>
+                      </div>
+                      <p class="help">Nothing fit? <a>Add more article watch criterium options</a>.</p>
+                    </div>
+                    <div class="field">
+                      <div class="control">
+                        {{#ui.form.-async-button class='button is-success'
+                                                 action=(action '_addArticleNotificationCriterium')}}
+
+                          <span class="icon">
+                            {{fa-icon 'plus-circle'}}
+                          </span>
+                          <span>Add Criterium</span>
+                        {{/ui.form.-async-button}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="media-right">
+              {{#ui.form.-async-button tagName='button'
+                                       class='delete is-small'
+                                       action=(action '_unwatchArticle' articleWatched)}}
+              {{/ui.form.-async-button}}
+            </div>
+          </article>
+          {{#with (await articleWatched.notificationCriteria) as |notificationCriteria|}}
+            <article class="media">
+              <div class="media-left"></div>
+              <div class="media-content">
+                {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
+                  <span class="tag is-light">
+                    {{capitalize notificationCriterium.name}}
+                    {{#ui.form.-async-button tagName='button'
+                                             class='delete is-small'
+                                             action=(pipe-action (action '_removeArticleNotificationCriterium' notificationCriterium)
+                                                 (toast 'Notification criterium was removed.'))}}
+                    {{/ui.form.-async-button}}
+                  </span>
+                {{else}}
+                {{/each}}
+              </div>
+            </article>
+          {{/with}}
+        {{/if}}
+
+        <!--Sold articles-->
+        {{#each (sort-by 'createdAt:desc' articleSolds) as |articleSold|}}
+          {{#with articleSold as |articleSold|}}
+            <article class="media">
+              <div class="media-left">
+                <p class="title is-2">
+                <span class="icon">
+                  {{fa-icon 'shopping-bag' class='is-success'}}
+                </span>
+                </p>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <div class="columns">
+                    <div class="column one-half">
+                      {{#if articleSold.soldPrice}}
+                        <p class="title is-4">
+                          {{ui.-money articleSold.soldPrice 'cad'}}
+                          {{ui.-money articleSold.soldPrice 'jpy'}}
+                        </p>
+                      {{/if}}
+                    </div>
+                    <div class="column one-half">
+                      <p class="{{if articleSold.soldPrice 'subtitle is-6' 'title is-4'}}">
+                        {{ui.-money article.price 'cad' exchangeRate=(await articleSold.exchangeRate)}}
+                        {{ui.-money article.price 'jpy' exchangeRate=(await articleSold.exchangeRate)}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="content">
+                  <p class="title is-6">
+                    {{#with articleSold.createdAt as |createdAt|}}
+                      Sold {{moment-from-now createdAt}} on {{moment-format createdAt 'LL'}}
+                    {{/with}}
+                  </p>
+                </div>
+                <div class="content">
+                  <p class="title is-6">
+                    {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
+                      Rates @ {{ui.-money oneDollar 'jpy'
+                                          exchangeRate=exchangeRate
+                                          showCode=false}} of {{moment-format exchangeRate.timestamp 'MMM-D-YY'}}
+                    {{/with}}
+                  </p>
+                </div>
+              </div>
+              <div class="media-right">
+                {{#ui.form.-async-button tagName='button'
+                                         class='delete is-small'
+                                         action=(action '_unsellArticle' articleSold)}}
+                {{/ui.form.-async-button}}
+              </div>
+            </article>
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  {{#if (eq articleSold.status 'confirmed')}}
+                    <span class="tag is-info is-capitalize">
+                      {{articleSold.status}}
+                    </span>
+                  {{/if}}{{#if (eq articleSold.status 'shipped')}}
+                  <span class="tag is-info is-warning is-capitalize">
+                    {{articleSold.status}}
+                  </span>
+                {{/if}}{{#if (eq articleSold.status 'received')}}
+                  <span class="tag is-info is-success is-capitalize">
+                    {{articleSold.status}}
+                  </span>
+                {{/if}}{{#if (eq articleSold.status 'cancelled')}}
+                  <span class="tag is-info is-danger is-capitalize">
+                    {{articleSold.status}}
+                  </span>
+                {{/if}}{{#if (eq articleSold.status 'returned')}}
+                  <span class="tag is-info is-danger is-capitalize">
+                    {{articleSold.status}}
+                  </span>
+                {{/if}}
+                  {{#link-to 'articles.index.sold' article.id articleSold.id
+                             class='button is-light is-small is-pill'}}Detail{{/link-to}}
+                </div>
+              </div>
+            </article>
+          {{/with}}
+        {{/each}}
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <hr>
+    <div class="title is-3 has-text-right">Related</div>
+    <div class="columns">
+      {{#each (repeat 6) as |empty|}}
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="http://placehold.it/300x225" alt="">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Article 1</p>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

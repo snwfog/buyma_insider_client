@@ -1,6 +1,6 @@
 import Ember from "ember";
-import config from "../../config/environment";
-import UserArticleSold from "../../models/user/article-sold";
+import config from "../../../config/environment";
+import UserArticleSold from "../../../models/user/article-sold";
 
 const { APP: { saleTaxPct, buymaCutPct } }     = config;
 const { computed, RSVP: { hash } } = Ember;
@@ -8,9 +8,9 @@ const { computed, RSVP: { hash } } = Ember;
 export default Ember.Route.extend({
   model(params, transition) {
     const applicationModels = this.modelFor('application');
-    const { article }       = this.modelFor('articles');
+    const { article }       = this.modelFor('articles.index');
     const articleSold       = this.store.find('user/article_sold', params.user_article_sold_id);
-    return hash(Ember.merge({ article, articleSold }, applicationModels));
+    return hash(Ember.merge(applicationModels, { article, articleSold }));
   },
 
   setupController(controller, models) {

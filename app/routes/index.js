@@ -42,18 +42,18 @@ export default Ember.Route.extend({
       }),
 
       actions: {
-        '_searchArticles'(q) {
-          var query = {
-                       q,
-            extension: '_autocomplete'
-          };
+        '_searchArticles'() {
+          var q     = this.get('inputSearchArticleQuery');
+          if (!q) {
+            return Ember.RSVP.reject();
+          }
 
-          this.transitionToRoute('index.search');
-          this.store
-            .query('article', query)
-            .then(function (articles) {
-              controller.set('searchArticles', articles.get('meta.autocompletes'));
-            });
+          var queryParams = { q, extension: '_search' };
+          return this.transitionToRoute('articles._search.index', { queryParams });
+//           return this.store
+//             .query('article', query)
+//             .then(function (articles) {
+//               controller.set('searchArticles', articles.get('meta.autocompletes')); });
         }
       }
     });

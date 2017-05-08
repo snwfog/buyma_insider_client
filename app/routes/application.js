@@ -6,6 +6,8 @@ const { all, hash }  = Ember.RSVP;
 export default Ember.Route.extend(
   LoadingSliderMixin, // Loading slider addon
   {
+    // Bubble the loading option so that we can restore original ember loading
+    bubbleLoadingSlider: true,
     beforeModel() {
       return all([ this.get('exchangeRatesService').setup() ]);
     },

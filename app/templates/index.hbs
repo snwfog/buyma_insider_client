@@ -1,47 +1,5 @@
-<section class="hero is-small is-bold is-dark is-hidden-mobile">
-  <div class="hero-body">
-    <div class="columns">
-      <div class="column is-10 is-offset-1">
+{{partial 'partials/hero-article-search'}}
 
-        <div class="field has-addons">
-          <!--<span class="select is-large">-->
-            {{!--{{ui.form.ember-select content=merchants-->
-                                   <!--optionValuePath='id'-->
-                                   <!--optionLabelPath='name'}}--}}
-          <!--</span>-->
-          <div class="control is-expanded">
-            {{input list="articles" class="input is-medium"
-                    type="text"
-                    placeholder="Item description or sku..."
-                    enter='_searchArticles'}}
-
-            <datalist id="articles">
-              {{#each searchArticles as |articleAutocomplete|}}
-                <option value="{{{articleAutocomplete.autocomplete}}}">
-                  {{articleAutocomplete.id}}
-                </option>
-              {{/each}}
-            </datalist>
-          </div>
-          <div class="control">
-            <a class="button is-medium is-primary">
-              <span class="icon">{{fa-icon 'search'}}</span>
-              <span>Find</span>
-            </a>
-          </div>
-        </div>
-
-        <h6 class="subtitle is-6">
-          <ul>
-            <li>Hint: Auto-complete is available</li>
-            <li>Hint: 'zar:&lt;query&gt;' will limit search to Zara</li>
-          </ul>
-        </h6>
-
-      </div>
-    </div>
-  </div>
-</section>
 <section class="section">
   <div class="container">
     <div class="columns">
