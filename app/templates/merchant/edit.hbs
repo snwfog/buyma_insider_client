@@ -48,22 +48,40 @@
       </div>
     </div>
 
-    <div class="section">
-      <h5>Index Pages</h5>
-      {{#each merchant.indexPages as |indexPage|}}
-        <div class="field is-horizontal">
-          <div class="field-label">
-            <label class="label title is-4">
-              {{fa-icon 'circle' class=(concat 'is-' indexPage.health)}}
-            </label>
-          </div>
-          <div class="field-body">
-            <div class="field is-grouped">
-              {{input class='input is-disabled is-medium' value=indexPage.fullUrl}}
-            </div>
-          </div>
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label title is-4">Index Pages</label>
+      </div>
+      <div class="field-body">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            {{#each merchant.indexPages as |indexPage|}}
+              <div class="columns is-mobile">
+                <div class="column is-8">
+                  <div class="field is-grouped">
+                    {{input class='input is-disabled is-medium'
+                            value=indexPage.fullUrl}}</div>
+                </div>
+                <div class="column is-4">
+                  {{#if (eq indexPage.health 'green')}}
+                    <span class="tag is-large is-success">
+                      {{capitalize indexPage.health}}
+                    </span>
+                  {{else}}{{#if (eq indexPage.health 'orange')}}
+                    <span class="tag is-large is-warning">
+                      {{capitalize indexPage.health}}
+                    </span>
+                  {{else}}{{#if (eq indexPage.health 'red')}}
+                    <span class="tag is-large is-danger">
+                      {{capitalize indexPage.health}}
+                    </span>
+                  {{/if}}{{/if}}{{/if}}
+                </div>
+              </div>
+            {{/each}}
+          </p>
         </div>
-      {{/each}}
+      </div>
     </div>
   </div>
 </section>

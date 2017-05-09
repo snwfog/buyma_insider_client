@@ -10,13 +10,13 @@ export default Ember.Route.extend({
     // If we pass id, then it will automatically
     // call adapter to refetch.
     const applicationModels = this.modelFor('application');
-    return hash(merge(applicationModels, {
-        article: this.store.find('article', params[ 'article_id' ]) }));
+    const article           = this.store.findRecord('article', params[ 'article_id' ]);
+    return hash(merge(applicationModels, { article, }));
   },
 
   // has controller
   setupController(controller, models) {
-    this._super(...arguments);
     controller.setProperties(models);
+    return this._super(...arguments);
   }
 });

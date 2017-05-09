@@ -20,5 +20,9 @@ export default ApplicationAdapter.extend({
     } else {
       return this._super(...arguments);
     }
-  }
+  },
+
+  urlForFindHasMany(id, modelName, snapshot) {
+    return this._super(...arguments);
+  },
 });

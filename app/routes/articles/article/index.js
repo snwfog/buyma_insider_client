@@ -17,7 +17,7 @@ export default Ember.Route.extend({
 
   // has controller
   setupController(controller, models) {
-    this._super(...arguments);
     controller.setProperties(models);
+    return this._super(...arguments);
   }
 });

@@ -3,11 +3,12 @@ import DS from "ember-data";
 
 import moment from "moment";
 
-const { attr, belongsTo } = DS;
+const { attr, belongsTo, hasMany } = DS;
 const { computed } = Ember;
 
 export default DS.Model.extend({
-  priceHistory: belongsTo('article/price-history', { async: false }),
+  priceHistory:    belongsTo('article/price-history', { async: false }),
+  articleRelateds: hasMany('article', { async: true }),
 
   name:         attr(),
   price:        attr('money', { code: 'cad' }),

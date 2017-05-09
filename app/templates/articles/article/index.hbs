@@ -15,10 +15,10 @@
             (action '_toast' 'Congratulation!'))}}
       </div>
     </nav>
-
-    <hr>
   </div>
+</section>
 
+<section class="section">
   <div class="container">
 
     <div class="columns is-row-reverse">
@@ -115,14 +115,14 @@
           <ul>
             {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
               {{#link-to 'articles.article.index.information' article.id}}
-                <span class="icon">{{fa-icon 'globe'}}</span>
+                <span class="icon">{{fa-icon 'info'}}</span>
                 <span>Information</span>
               {{/link-to}}
             {{/link-to}}
 
             {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
               {{#link-to 'articles.article.index.history' article.id}}
-                <span class="icon">{{fa-icon 'globe'}}</span>
+                <span class="icon">{{fa-icon 'history'}}</span>
                 <span>History</span>
               {{/link-to}}
             {{/link-to}}
@@ -142,20 +142,27 @@
     <hr>
     <div class="title is-3 has-text-right">Related</div>
     <div class="columns">
-      {{#each (repeat 6) as |empty|}}
-        <div class="column is-2">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="http://placehold.it/300x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="title is-6">Article 1</p>
+      {{#with article.articleRelateds as |articleRelateds|}}
+        {{#each articleRelateds as |article|}}
+          <div class="column is-2">
+            <div class="card">
+              <div class="card-header">
+                <p class="card-header-title">
+                  {{ui.-money article.price 'cad' showCode=false}}
+                </p>
+              </div>
+              <div class="card-content padding-1">
+                <p class="title is-6">{{article.name}}</p>
+              </div>
+              <div class="card-footer">
+                <div class="card-footer-item">
+                  {{#link-to 'articles.article.index' article.id}}View{{/link-to}}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      {{/each}}
+        {{/each}}
+      {{/with}}
     </div>
   </div>
 </section>
