@@ -10,7 +10,7 @@ export default Ember.Route.extend({
     // If we pass id, then it will automatically
     // call adapter to refetch.
     const applicationModels  = this.modelFor('application');
-    const articleIndexModels = this.modelFor('articles.index');
+    const articleIndexModels = this.modelFor('articles.article');
 
     return hash(merge(applicationModels, articleIndexModels));
   },

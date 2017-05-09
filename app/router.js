@@ -32,7 +32,7 @@ Router.map(function () {
       this.route('index', { path: '/' });
     });
 
-    this.route('index', { path: '/:article_id' }, function () {
+    this.route('article', { path: '/:article_id' }, function () {
       this.route('index');
       this.route('sold', { path: '/sold/:user_article_sold_id' });
     });

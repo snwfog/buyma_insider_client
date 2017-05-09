@@ -68,19 +68,19 @@
             </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
-                {{#link-to 'articles' articleSold.article.id}}
+                {{#link-to 'articles.article' articleSold.article.id}}
                   <span class="icon">{{fa-icon 'shopping-basket'}}</span>
                   <span>Article</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
-                {{#link-to 'articles.index.sold' articleSold.article.id articleSold.id}}
+                {{#link-to 'articles.article.sold' articleSold.article.id articleSold.id}}
                   <span class="icon">{{fa-icon 'area-chart'}}</span>
                   <span>Detail</span>
                 {{/link-to}}
               </div>
               <div class="card-footer-item">
-                {{#link-to 'articles.index.sold' articleSold.article.id articleSold.id}}
+                {{#link-to 'articles.article.sold' articleSold.article.id articleSold.id}}
                   <span class="icon">{{fa-icon 'handshake-o'}}</span>
                   <span>Archive</span>
                 {{/link-to}}
