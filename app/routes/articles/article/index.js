@@ -15,6 +15,7 @@ export default Ember.Route.extend({
     return hash(merge(applicationModels, articleIndexModels));
   },
 
+  // has controller
   setupController(controller, models) {
     this._super(...arguments);
     controller.setProperties(models);

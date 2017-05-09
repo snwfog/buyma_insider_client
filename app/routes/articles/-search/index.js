@@ -34,7 +34,7 @@ export default Ember.Route.extend({
     this._super(...arguments);
     controller.setProperties(models);
     var queryParams = transition.queryParams;
-    controller.set('inputSearchArticleQuery', getWithDefault(queryParams, 'q', ''));
+//     controller.set('inputSearchArticleQuery', getWithDefault(queryParams, 'q', ''));
     controller.reopen({
       queryParams: [ 'q', 'page', 'count', 'order', 'extension' ],
       q:           getWithDefault(queryParams, 'q', ''),

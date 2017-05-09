@@ -48,16 +48,6 @@ export default ApplicationController.extend({
           return Ember.RSVP.reject(); });
     },
 
-    '_unwatchArticle'(articleWatched) {
-      this.debug(`unsell article ${articleWatched.get('article.name')}`);
-      const currentUser = this.currentUser;
-      articleWatched.deleteRecord();
-      return articleWatched
-        .save()
-        .then((articleWatched) => {
-          currentUser.get('articleWatched').removeObject(articleWatched); });
-    },
-
     '_sellArticle'(article) {
       this.debug(`sold this article ${article.get('name')}`);
       const store               = this.store;
@@ -77,6 +67,16 @@ export default ApplicationController.extend({
           this.debug(error);
           currentUser.get('articleSolds').removeObject(userArticleSold);
           return Ember.RSVP.reject(); });
+    },
+
+    '_unwatchArticle'(articleWatched) {
+      this.debug(`unsell article ${articleWatched.get('article.name')}`);
+      const currentUser = this.currentUser;
+      articleWatched.deleteRecord();
+      return articleWatched
+        .save()
+        .then((articleWatched) => {
+          currentUser.get('articleWatched').removeObject(articleWatched); });
     },
 
     '_unsellArticle'(articleSold) {

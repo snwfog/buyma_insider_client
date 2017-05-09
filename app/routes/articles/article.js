@@ -14,6 +14,7 @@ export default Ember.Route.extend({
         article: this.store.find('article', params[ 'article_id' ]) }));
   },
 
+  // has controller
   setupController(controller, models) {
     this._super(...arguments);
     controller.setProperties(models);

@@ -33,7 +33,11 @@ Router.map(function () {
     });
 
     this.route('article', { path: '/:article_id' }, function () {
-      this.route('index');
+      this.route('index', function () {
+        this.route('information');
+        this.route('history');
+      });
+
       this.route('sold', { path: '/sold/:user_article_sold_id' });
     });
   });

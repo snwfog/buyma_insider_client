@@ -8,16 +8,10 @@ export default Ember.Route.extend({
     return this._super(...arguments);
   },
 
+  // has controller
   setupController(controller, models, transition) {
-    this._super(...arguments);
-    var { q } = controller.get('target.router.activeTransition.queryParams');
-    controller.set('inputSearchArticleQuery', q);
-    controller.reopen({
-      actions: {
-        '_searchArticles'() {
-
-        }
-      }
-    });
+    return this._super(...arguments);
+//     var { q } = controller.get('target.router.activeTransition.queryParams');
+//     controller.set('inputSearchArticleQuery', q);
   }
 });

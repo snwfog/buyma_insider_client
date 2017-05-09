@@ -10,5 +10,15 @@ export default Ember.Controller.extend({
       severity = severity || 'log';
       this.toastService[ severity ](message);
     },
+
+    '_searchArticles'() {
+      var q = this.get('inputSearchArticleQuery');
+      if (!q) {
+        return Ember.RSVP.reject();
+      }
+
+      var queryParams = { q, extension: '_search' };
+      return this.transitionToRoute('articles._search.index', { queryParams });
+    }
   }
 });

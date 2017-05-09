@@ -19,11 +19,10 @@
     <hr>
   </div>
 
-
   <div class="container">
-    <div class="columns is-row-reverse">
 
-      <!--Price panel-->
+    <div class="columns is-row-reverse">
+      <!--Price panel right side-->
       <div class="column is-4">
         <div class="columns">
           <div class="card is-fullwidth">
@@ -109,195 +108,35 @@
         </div>
       </div>
 
+      <!--Tabs-->
       <!--Article panel-->
       <div class="column is-8">
-        {{#if articleWatched}}
-          <article class="media">
-            <div class="media-left">
-              <p class="title is-2">
-                <span class="icon">
-                  {{fa-icon 'star' class='is-yellow'}}
-                </span>
-              </p>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p class="title is-4 is-capitalize">
-                  {{moment-from-now articleWatched.createdAt}}
-                </p>
-                <p class="subtitle is-6">
-                  {{moment-format articleWatched.createdAt 'LL'}}
-                </p>
-                <div class="field is-horizontal">
-                  <div class="field-label">
-                    <label class="label">Criterium</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control">
-                        <span class="select">
-                          {{#ui.form.-select content=(await allArticleNotificationCriteria)
-                                             prompt='Article Watch Criteria'
-                                             optionValuePath='id'
-                                             optionLabelPath='name'
-                                             selection=selectArticleNotificationCriterium
-                                             action=(action '_assignSelectArticleNotificationCriterium')
-                          as |articleNotificationCriterium|}}
-                            {{#with (map-by 'id' (await articleWatched.notificationCriteria))
-                            as |articleWatchedNotificationCriteriumIds|}}
-                              {{#if (contains articleNotificationCriterium.id articleWatchedNotificationCriteriumIds)}}
-                                <option disabled value="{{articleNotificationCriterium.id}}">
-                                  {{capitalize articleNotificationCriterium.name}}
-                                </option>
-                              {{else}}
-                                <option value="{{articleNotificationCriterium.id}}">
-                                  {{capitalize articleNotificationCriterium.name}}
-                                </option>
-                              {{/if}}
-                            {{else}}
-                            {{!--Make sure to render if there are any criteria--}}
-                              <option value="{{articleNotificationCriterium.id}}">
-                                {{capitalize articleNotificationCriterium.name}}
-                              </option>
-                            {{/with}}
-                          {{/ui.form.-select}}
-                        </span>
-                      </div>
-                      <p class="help">Nothing fit? <a>Add more article watch criterium options</a>.</p>
-                    </div>
-                    <div class="field">
-                      <div class="control">
-                        {{#ui.form.-async-button class='button is-success'
-                                                 action=(action '_addArticleNotificationCriterium')}}
+        <div class="tabs is-left">
+          <ul>
+            {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
+              {{#link-to 'articles.article.index.information' article.id}}
+                <span class="icon">{{fa-icon 'globe'}}</span>
+                <span>Information</span>
+              {{/link-to}}
+            {{/link-to}}
 
-                          <span class="icon">
-                            {{fa-icon 'plus-circle'}}
-                          </span>
-                          <span>Add Criterium</span>
-                        {{/ui.form.-async-button}}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="media-right">
-              {{#ui.form.-async-button tagName='button'
-                                       class='delete is-small'
-                                       action=(action '_unwatchArticle' articleWatched)}}
-              {{/ui.form.-async-button}}
-            </div>
-          </article>
-          {{#with (await articleWatched.notificationCriteria) as |notificationCriteria|}}
-            <article class="media">
-              <div class="media-left"></div>
-              <div class="media-content">
-                {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
-                  <span class="tag is-light">
-                    {{capitalize notificationCriterium.name}}
-                    {{#ui.form.-async-button tagName='button'
-                                             class='delete is-small'
-                                             action=(pipe-action (action '_removeArticleNotificationCriterium' notificationCriterium)
-                                                 (toast 'Notification criterium was removed.'))}}
-                    {{/ui.form.-async-button}}
-                  </span>
-                {{else}}
-                {{/each}}
-              </div>
-            </article>
-          {{/with}}
-        {{/if}}
+            {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
+              {{#link-to 'articles.article.index.history' article.id}}
+                <span class="icon">{{fa-icon 'globe'}}</span>
+                <span>History</span>
+              {{/link-to}}
+            {{/link-to}}
+          </ul>
+        </div>
 
-        <!--Sold articles-->
-        {{#each (sort-by 'createdAt:desc' articleSolds) as |articleSold|}}
-          {{#with articleSold as |articleSold|}}
-            <article class="media">
-              <div class="media-left">
-                <p class="title is-2">
-                <span class="icon">
-                  {{fa-icon 'shopping-bag' class='is-success'}}
-                </span>
-                </p>
-              </div>
-              <div class="media-content">
-                <div class="content">
-                  <div class="columns">
-                    <div class="column one-half">
-                      {{#if articleSold.soldPrice}}
-                        <p class="title is-4">
-                          {{ui.-money articleSold.soldPrice 'cad'}}
-                          {{ui.-money articleSold.soldPrice 'jpy'}}
-                        </p>
-                      {{/if}}
-                    </div>
-                    <div class="column one-half">
-                      <p class="{{if articleSold.soldPrice 'subtitle is-6' 'title is-4'}}">
-                        {{ui.-money article.price 'cad' exchangeRate=(await articleSold.exchangeRate)}}
-                        {{ui.-money article.price 'jpy' exchangeRate=(await articleSold.exchangeRate)}}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="content">
-                  <p class="title is-6">
-                    {{#with articleSold.createdAt as |createdAt|}}
-                      Sold {{moment-from-now createdAt}} on {{moment-format createdAt 'LL'}}
-                    {{/with}}
-                  </p>
-                </div>
-                <div class="content">
-                  <p class="title is-6">
-                    {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
-                      Rates @ {{ui.-money oneDollar 'jpy'
-                                          exchangeRate=exchangeRate
-                                          showCode=false}} of {{moment-format exchangeRate.timestamp 'MMM-D-YY'}}
-                    {{/with}}
-                  </p>
-                </div>
-              </div>
-              <div class="media-right">
-                {{#ui.form.-async-button tagName='button'
-                                         class='delete is-small'
-                                         action=(action '_unsellArticle' articleSold)}}
-                {{/ui.form.-async-button}}
-              </div>
-            </article>
-            <article class="media">
-              <div class="media-content">
-                <div class="content">
-                  {{#if (eq articleSold.status 'confirmed')}}
-                    <span class="tag is-info is-capitalize">
-                      {{articleSold.status}}
-                    </span>
-                  {{/if}}{{#if (eq articleSold.status 'shipped')}}
-                  <span class="tag is-info is-warning is-capitalize">
-                    {{articleSold.status}}
-                  </span>
-                {{/if}}{{#if (eq articleSold.status 'received')}}
-                  <span class="tag is-info is-success is-capitalize">
-                    {{articleSold.status}}
-                  </span>
-                {{/if}}{{#if (eq articleSold.status 'cancelled')}}
-                  <span class="tag is-info is-danger is-capitalize">
-                    {{articleSold.status}}
-                  </span>
-                {{/if}}{{#if (eq articleSold.status 'returned')}}
-                  <span class="tag is-info is-danger is-capitalize">
-                    {{articleSold.status}}
-                  </span>
-                {{/if}}
-                  {{#link-to 'articles.article.sold' article.id articleSold.id
-                             class='button is-light is-small is-pill'}}Detail{{/link-to}}
-                </div>
-              </div>
-            </article>
-          {{/with}}
-        {{/each}}
+        {{outlet}}
       </div>
 
     </div>
   </div>
 </section>
+
+<!--Related articles-->
 <section class="section">
   <div class="container">
     <hr>
