@@ -27,7 +27,7 @@ export default Ember.Route.extend({
     }
 
     return hash(merge({ searchArticles }, applicationModel, articlesModel));
-//     return new Ember.RSVP.Promise((resolve) => Ember.run.later(null, resolve, 10000));
+//     return new Ember.RSVP.Promise((resolve) => Ember.run.later(null, resolve, 1000000));
   },
 
   setupController(controller, models, transition) {

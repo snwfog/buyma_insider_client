@@ -34,7 +34,7 @@
 
             <!--Last indexed at-->
             <div class="card-header">
-              <p class="card-header-title is-flex-justify-content-flex-end">
+              <p class="card-header-title">
                 {{#if (eq article.health 1)}}
                   <span class="tag is-success">Indexed {{moment-from-now article.syncedAt}}</span>
                 {{else}}{{#if (eq article.health 2)}}
@@ -51,7 +51,7 @@
 
             <!--Created at-->
             <div class="card-header">
-              <p class="card-header-title is-flex-justify-content-flex-end">
+              <p class="card-header-title">
                 <span class="tag">
                   Created {{moment-from-now article.createdAt}}
                 </span>

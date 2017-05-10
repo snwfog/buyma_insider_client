@@ -19,5 +19,10 @@ export default Ember.Route.extend({
   setupController(controller, models) {
     controller.setProperties(models);
     return this._super(...arguments);
+  },
+
+  // Always default to information route
+  redirect(models, transition) {
+    this.transitionTo('articles.article.index.information', models.article);
   }
 });

@@ -1,6 +1,7 @@
+@import './variables';
+@import './spinner';
 @import './components';
 @import './elements';
-@import './variables';
 @import './utilities';
 @import './overrides';
 
@@ -39,7 +40,7 @@ table tr {
 // fa-icon with Bulma color
 .icon i.fa {
   &.is-success { color: $green !important }
-  &.is-info    { color: $blue !important }
+  &.is-info { color: $blue !important }
 }
 
 
