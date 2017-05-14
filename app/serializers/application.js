@@ -13,6 +13,7 @@ export default DS.JSONAPISerializer.extend({
       'user-session-tokens':                            'user/session-token',
       'user-article-watcheds':                          'user/article-watched',
       'user-article-solds':                             'user/article-sold',
+      'user-article-notifieds':                         'user/article-notified',
       'user-article-sold-shipping-services':            'user/article-sold-shipping-service',
     };
 

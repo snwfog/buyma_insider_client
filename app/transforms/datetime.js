@@ -13,7 +13,7 @@ export default DS.Transform.extend({
 
   serialize(deserialized) {
     if (!isEmpty(deserialized)) {
-      return moment(deserialized).utc();
+      return moment(deserialized).utc().format(); // Convert to iso8601
     }
   }
 });

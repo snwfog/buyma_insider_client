@@ -12,7 +12,7 @@
 
         {{article.watch-button article=article watch=(action '_watchArticle' article)}}
         {{article.sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
-            (action '_toast' 'Congratulation!'))}}
+                                                                 (action '_toast' 'Congratulation!'))}}
       </div>
     </nav>
   </div>
@@ -123,7 +123,7 @@
             {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
               {{#link-to 'articles.article.index.history' article.id}}
                 <span class="icon">{{fa-icon 'history'}}</span>
-                <span>History</span>
+                <span>Transaction History</span>
               {{/link-to}}
             {{/link-to}}
           </ul>

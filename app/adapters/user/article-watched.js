@@ -1,4 +1,4 @@
-import ApplicationAdapter from '../application';
+import ApplicationAdapter from "../application";
 
 export default ApplicationAdapter.extend({
   pathForType(modelName) {
@@ -16,7 +16,7 @@ export default ApplicationAdapter.extend({
   },
 
   urlForUpdateRecord(id, modelName, snapshot) {
-    modelName = `user_article_watcheds`;
+    modelName = 'user_article_watcheds';
     return this._super(id, modelName, snapshot);
   }
 });

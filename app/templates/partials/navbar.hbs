@@ -7,18 +7,30 @@
       {{/link-to}}
 
       {{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
-        {{fa-icon 'bold'}}
+        <span class="icon">
+          {{fa-icon 'bold'}}
+        </span>
       {{/link-to}}
     </div>
 
     <div class="nav-center">
       <span class="nav-item is-hidden-tablet">
-        {{input class="input"
+        {{input class="input is-small"
                 type="text"
                 value=inputSearchArticleQuery
                 enter=(action '_searchArticles')
                 placeholder="Search..."}}
       </span>
+
+      {{#link-to 'notification' class='nav-item is-hidden-tablet'}}
+        {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
+          {{#if (gt unreadArticleNotifieds.length 0)}}
+            <span class="tag is-warning is-bold">
+              {{unreadArticleNotifieds.length}}
+            </span>
+          {{/if}}
+        {{/with}}
+      {{/link-to}}
 
       <span class="nav-item is-hidden-mobile">
         <span class="title is-4">
@@ -58,17 +70,17 @@
 
       {{#link-to-with-action 'status'
                              class='is-tab nav-item'
-                             invokeAction=(toggle 'navBarIsActive' this)
+                             invokeAction=(action (disable 'navBarIsActive' this))
                              activeClass='is-active'}}Status{{/link-to-with-action}}
 
       {{#if currentUser}}
         {{#link-to-with-action 'index.dashboard-archive'
                                class='is-tab nav-item'
-                               invokeAction=(toggle 'navBarIsActive' this)
+                               invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Archive{{/link-to-with-action}}
         {{#link-to-with-action 'user.profile'
                                class='is-tab nav-item'
-                               invokeAction=(toggle 'navBarIsActive' this)
+                               invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}
           <figure class="image is-16x16 mr-1">
             <img src="http://bulma.io/images/jgthms.png" alt="">
@@ -76,14 +88,31 @@
           {{currentUser.username}}
         {{/link-to-with-action}}
 
+        {{#link-to-with-action 'notification' class='is-tab nav-item'
+                                              invokeAction=(action (disable 'navBarIsActive' this))
+                                              actionClass='is-active'}}
+          <span class="icon is-small">
+            {{fa-icon 'envelope-o'}}
+          </span>
+
+          {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
+            {{#if (gt unreadArticleNotifieds.length 0)}}
+              <span class="tag is-warning is-bold">
+                {{unreadArticleNotifieds.length}}
+              </span>
+            {{/if}}
+          {{/with}}
+
+        {{/link-to-with-action}}
+
         {{#link-to-with-action 'logout'
                                class='is-tab nav-item'
-                               invokeAction=(toggle 'navBarIsActive' this)
+                               invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Logout{{/link-to-with-action}}
       {{else}}
         {{#link-to-with-action 'login'
                                class='is-tab nav-item'
-                               invokeAction=(toggle 'navBarIsActive' this)
+                               invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Login{{/link-to-with-action}}
       {{/if}}
     </div>

@@ -11,8 +11,10 @@
 .ml-2 { margin-left:   2em; }
 .mb-2 { margin-bottom: 2em; }
 
-.padding-1 { padding: 0.75em; }
-.margin-1  { margin:  0.75em; }
+.padding-one-half { padding: 0.35em; }
+.padding-1        { padding: 0.75em; }
+.margin-one-half  { margin:  0.35em; }
+.margin-1         { margin:  0.75em; }
 
 // Alignment
 .align-top, .is-align-top, .has-text-top          { vertical-align: top !important; }
@@ -34,17 +36,21 @@
 .is-flex-grow-5        { flex-grow: 5; }
 
 .is-space-around       { justify-content: space-around; }
-.is-center             { justify-content: center;}
+.is-content-center     { justify-content: center;}
+.is-items-center       { align-items: center;}
 .is-row-reverse        { flex-direction: row-reverse; }
 .is-align-items-center { align-items: center; }
 .is-fullwidth          { width: 100% }
 
 // Text
-.is-uppercase { text-transform: uppercase !important; }
-.is-lowercase { text-transform: lowercase !important; }
+.is-uppercase  { text-transform: uppercase !important; }
+.is-lowercase  { text-transform: lowercase !important; }
 .is-capitalize { text-transform: capitalize !important; }
 
 .is-semi-bold { font-weight: 400 !important; }
+.is-bold      { font-weight: 800 !important; }
+
+.is-underline-dashed { border-bottom: 1px dashed $grey; }
 
 // Shadow
 
@@ -55,6 +61,7 @@
 .is-green    { color: $green; }
 .is-green-bg { background-color: $green; }
 
-// Shape
-.is-pill { border-radius: 290486px !important; }
+// Border
+.is-pill            { border-radius: 290486px !important; }
+.is-border-radius-2 { border-radius: 2px; }
 

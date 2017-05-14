@@ -14,23 +14,24 @@ Router.map(function () {
   this.route('logout');
   this.route('status');
   this.route('signup');
+  this.route('notification');
   this.route('estimator');
 
-  this.route('index',               { path: '/' },             function () {
+  this.route('index', { path: '/' }, function () {
     this.route('dashboard');
-    this.route('dashboard-archive', { path: '/archive' },      function () {
-      this.route('index',           { path: '/' });
+    this.route('dashboard-archive', { path: '/archive' }, function () {
+      this.route('index', { path: '/' });
 
       // archives
-      this.route('year',            { path: '/year' },         function () {
+      this.route('year', { path: '/year' }, function () {
         this.route('overview');         // all years overview
-        this.route('index',         { path: '/:year' },        function() {
+        this.route('index', { path: '/:year' }, function () {
           this.route('overview');       // year_overview
-          this.route('month',         { path: '/month' },      function () {
+          this.route('month', { path: '/month' }, function () {
             this.route('overview');     // all months overview
-            this.route('index',       { path: '/:month' },     function() {
+            this.route('index', { path: '/:month' }, function () {
               this.route('overview');   // month_overview
-              this.route('day',         { path: '/day/:day' }, function () {
+              this.route('day', { path: '/day/:day' }, function () {
                 this.route('overview'); // day_overview
               });
             });
@@ -62,7 +63,11 @@ Router.map(function () {
   });
 
   this.route('user', function () {
-    this.route('profile');
+    this.route('profile', function () {
+      this.route('index', { path: '/' }, function () {
+
+      });
+    });
   });
 });
 

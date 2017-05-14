@@ -1,7 +1,7 @@
 import Ember from "ember";
 import LoadingSliderMixin from "../mixins/loading-slider";
 
-const { all, hash }  = Ember.RSVP;
+const { computed, RSVP: { all, hash } } = Ember;
 
 export default Ember.Route.extend(
   LoadingSliderMixin, // Loading slider addon
@@ -13,7 +13,9 @@ export default Ember.Route.extend(
     },
 
     model() {
+      var articleNotifieds = this.currentUser.get('articleNotifieds');
       return hash({
+        articleNotifieds,
         merchants:   this.store.findAll('merchant'),
         oneDollar:   this.store.createRecord('money', { base: 'cad', amount: 1 }),
         oneUsDollar: this.store.createRecord('money', { base: 'usd', amount: 1 }),
@@ -21,8 +23,9 @@ export default Ember.Route.extend(
       });
     },
 
+    // has own controller
     setupController(controller, models) {
-      this._super(...arguments);
       controller.setProperties(models);
+      return this._super(...arguments);
     }
   });
