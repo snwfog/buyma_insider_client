@@ -4,24 +4,40 @@ module.exports = function (deployTarget) {
   var ENV = {
     build: {
       outputPath: 'dist',
-    }
+    },
+
+    gzip: {
+      keep: false,
+    },
+
     // include other plugin configuration that applies to all deploy targets here
   };
 
-  ENV.gzip = {
-    keep: true,
-  };
 
   if (deployTarget === 'development') {
     ENV.build.environment = 'development';
-    ENV.redis = {
+    ENV.redis             = {
       revisionKey: '__development__',
     };
+
+    ENV.cp = {};
     // configure other plugins for development deploy target here
   }
 
   if (deployTarget === 'staging') {
     ENV.build.environment = 'production';
+
+    ENV.redis = {
+      host:           process.env.STAGING_HOST,
+      allowOverwrite: true
+    };
+
+    ENV.sftp = {
+      host:       process.env.STAGING_HOST,
+      remoteUser: process.env.STAGING_REMOTE_USER,
+      remoteDir:  process.env.STAGING_REMOTE_DIR,
+      privateKey: process.env.STAGING_PRIVATE_KEY,
+    };
     // configure other plugins for staging deploy target here
   }
 

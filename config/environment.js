@@ -66,6 +66,10 @@ module.exports = function (environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  if (environment === 'staging') {
+    ENV.APP.SERVER.endpoint = 'http://retina.local:9292';
+  }
+
   if (environment === 'production') {
 
   }

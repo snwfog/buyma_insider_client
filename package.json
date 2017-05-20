@@ -32,6 +32,7 @@
     "ember-cli-deploy-gzip": "1.0.0",
     "ember-cli-deploy-redis": "1.0.2",
     "ember-cli-deploy-revision-data": "1.0.0",
+    "ember-cli-deploy-sftp": "0.1.0",
     "ember-cli-document-title": "0.3.3",
     "ember-cli-htmlbars": "^1.0.10",
     "ember-cli-htmlbars-inline-precompile": "^0.3.3",
