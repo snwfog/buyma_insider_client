@@ -7,7 +7,7 @@ module.exports = function (deployTarget) {
     },
 
     gzip: {
-      keep: false,
+      keep: true,
     },
 
     // include other plugin configuration that applies to all deploy targets here
@@ -25,7 +25,7 @@ module.exports = function (deployTarget) {
   }
 
   if (deployTarget === 'staging') {
-    ENV.build.environment = 'production';
+    ENV.build.environment = 'staging';
 
     ENV.redis = {
       host:           process.env.STAGING_HOST,

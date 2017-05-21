@@ -26,13 +26,6 @@ module.exports = function (environment) {
     }
   };
 
-  ENV.APP.SERVER = {
-    // Using bonjour DNS will slow from 2-3s on
-    // windows machine trying to connect to mac
-//     endpoint: 'http://192.168.0.16:9292', // air.local
-    endpoint: 'http://localhost:9292',
-  };
-
   // TODO: Merge this with endpoint
   ENV.settings = {
     path: {
@@ -46,6 +39,12 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
+    ENV.APP.SERVER = {
+      // Using bonjour DNS will slow from 2-3s on
+      // windows machine trying to connect to mac
+  //     endpoint: 'http://192.168.0.16:9292', // air.local
+      endpoint: 'http://localhost:9292',
+    };
     ENV.settings.path.login     = ENV.APP.SERVER.endpoint + ENV.settings.path.login;
     ENV.settings.path.bootstrap = ENV.APP.SERVER.endpoint + ENV.settings.path.bootstrap;
     // ENV.APP.LOG_RESOLVER = true;
@@ -67,7 +66,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'staging') {
-    ENV.APP.SERVER.endpoint = 'http://retina.local:9292';
+    // ENV.APP.SERVER.endpoint = 'http://retina.local:9292';
   }
 
   if (environment === 'production') {

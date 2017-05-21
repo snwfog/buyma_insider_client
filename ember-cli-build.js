@@ -4,7 +4,22 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+    sourcemaps: {
+      enabled: EmberApp.env() !== 'production',
+      extensions: ['js'],
+    },
     // Add options here
+    SRI: {
+      enabled: false,
+    },
+
+    minifyJS: {
+      enabled: EmberApp.env() === 'production',
+    },
+
+    minifyCSS: {
+      enabled: EmberApp.env() === 'production',
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -20,7 +35,13 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import(app.bowerDirectory + '/bulma/css/bulma.css');
+  // Example of different import environment
+  // @see https://guides.emberjs.com/v2.0.0/addons-and-dependencies/managing-dependencies/
+  app.import({
+    development: app.bowerDirectory + '/bulma/css/bulma.css',
+    staging:     app.bowerDirectory + '/bulma/css/bulma.css',
+    production:  app.bowerDirectory + '/bulma/css/bulma.css',
+  });
 
   app.import(app.bowerDirectory + '/jquery.sparkline.bower/src/jquery.sparkline.js');
 
