@@ -107,7 +107,8 @@
 
         {{#link-to-with-action 'logout'
                                class='is-tab nav-item'
-                               invokeAction=(action (disable 'navBarIsActive' this))
+                               invokeAction=(pipe-action (action '_logout')
+                                                         (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Logout{{/link-to-with-action}}
       {{else}}
         {{#link-to-with-action 'login'

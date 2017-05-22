@@ -34,6 +34,7 @@ module.exports = function (environment) {
   ENV.settings = {
     path: {
       login:     '/login',
+      logout:    '/logout',
       bootstrap: '/bootstrap',
     },
   };
@@ -48,6 +49,7 @@ module.exports = function (environment) {
     //     endpoint: 'http://192.168.0.16:9292', // air.local
     ENV.APP.SERVER.endpoint     = 'http://localhost:9292';
     ENV.settings.path.login     = ENV.APP.SERVER.endpoint + ENV.settings.path.login;
+    ENV.settings.path.logout    = ENV.APP.SERVER.endpoint + ENV.settings.path.logout;
     ENV.settings.path.bootstrap = ENV.APP.SERVER.endpoint + ENV.settings.path.bootstrap;
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

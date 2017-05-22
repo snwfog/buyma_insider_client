@@ -18,6 +18,7 @@ Router.map(function () {
   this.route('estimator');
 
   this.route('index', { path: '/' }, function () {
+    this.route('hello');
     this.route('dashboard');
     this.route('dashboard-archive', { path: '/archive' }, function () {
       this.route('index', { path: '/' });

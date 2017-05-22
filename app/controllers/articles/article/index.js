@@ -1,24 +1,41 @@
 import Ember from "ember";
-import ApplicationController from "../../application";
+import { extractError } from "../../../lib/ajax-error";
 import config from "../../../config/environment";
+import ApplicationController from "../../application";
 
-const { computed } = Ember;
+const { computed, assert, A } = Ember;
 
 export default ApplicationController.extend({
   articleWatched: computed('currentUser.articleWatcheds.[]', 'model.article', function () {
-    const article                    = this.get('article');
-    const currentUserArticleWatcheds = this.currentUser.get('articleWatcheds');
-    return currentUserArticleWatcheds.findBy('article.id', article.get('id'));
+    const article = this.get('article');
+    assert('Must have article', !!article);
+    const currentUserArticleWatcheds = this.get('currentUser.articleWatcheds');
+    if (!currentUserArticleWatcheds) { return A(); }
+    else {
+      return currentUserArticleWatcheds.findBy('article.id', article.get('id'));
+    }
   }),
 
   // TODO: This properties cause ember-moment to log error
   // In sum, this is recomputed before adapter replies saved
   // We should take care with this instead of just filtering out
   // Update: Using {{with}} helper will resolve this
-  articleSolds: computed('currentUser.articleSolds.[]', 'model.article', function () {
+  articleSolds: computed('currentUser.articleSolds.[]', 'model.article', function() {
     const article                 = this.get('article');
-    const currentUserArticleSolds = this.currentUser.get('articleSolds');
-    return currentUserArticleSolds.filterBy('article.id', article.get('id'));
+    assert('Must have article', !!article);
+    const currentUserArticleSolds = this.get('currentUser.articleSolds');
+    if (!currentUserArticleSolds) { return A(); }
+    else {
+      return currentUserArticleSolds.filterBy('article.id', article.get('id'));
+    }
+  }),
+
+  articleRelateds: computed('model.article.articleRelateds.[]', function() {
+    const article = this.get('article');
+    assert('Must have article', !!article);
+    return article.get('articleRelateds')
+        .then((relatedArticles) => relatedArticles)
+        .catch(extractError);
   }),
 
   currencies: config.APP.currencies,

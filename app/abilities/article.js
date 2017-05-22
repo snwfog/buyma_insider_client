@@ -6,7 +6,7 @@ const { computed } = Ember;
 export default Ability.extend({
   canSell: computed.notEmpty('currentUser'),
 
-  canWatch: computed('currentUser.articleWatcheds.[]', function () {
+  canWatch: computed('currentUser.articleWatcheds.[]', function() {
     const article     = this.model;
     const currentUser = this.currentUser;
     if (!currentUser) {
@@ -20,7 +20,7 @@ export default Ability.extend({
         });
   }),
 
-  canUnwatch: computed('currentUser.articleWatcheds.[]', function () {
+  canUnwatch: computed('currentUser.articleWatcheds.[]', function() {
     const article     = this.model;
     const currentUser = this.currentUser;
     if (!currentUser) {

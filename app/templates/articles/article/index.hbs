@@ -10,9 +10,11 @@
           </a>
         </p>
 
-        {{article.watch-button article=article watch=(action '_watchArticle' article)}}
-        {{article.sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
-                                                                 (action '_toast' 'Congratulation!'))}}
+        {{#if currentUser}}
+          {{article.watch-button article=article watch=(action '_watchArticle' article)}}
+          {{article.sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
+                                                                   (action '_toast' 'Congratulation!'))}}
+        {{/if}}
       </div>
     </nav>
   </div>
@@ -142,7 +144,7 @@
     <hr>
     <div class="title is-3 has-text-right">Related</div>
     <div class="columns">
-      {{#with article.articleRelateds as |articleRelateds|}}
+      {{#with articleRelateds as |articleRelateds|}}
         {{#each articleRelateds as |article|}}
           <div class="column is-2">
             <div class="card">

@@ -1,16 +1,18 @@
 import Ember from "ember";
-
-const { hash } = Ember.RSVP;
+const { A, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
-  model() {
-    const currentUser   = this.currentUser;
-    var dashboardModels = {};
-    if (!!currentUser) {
-      dashboardModels.articleSolds = currentUser.get('articleSolds');
+  beforeModel(transition) {
+    if (!this.currentUser) {
+      transition.abort();
+      this.transitionTo('index.hello');
     }
+  },
 
-    return hash(dashboardModels);
+  model() {
+    return hash({
+      articleSolds: this.get('currentUser.articleSolds') || A(),
+    });
   },
 
   // has controller

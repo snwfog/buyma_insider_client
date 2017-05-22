@@ -11,6 +11,5 @@ export default Ember.Service.extend({
 
   currentUser: null,
   current() {
-
   }
 });

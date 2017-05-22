@@ -5,4 +5,9 @@
 {{outlet}}
 
 {{partial 'partials/footer'}}
-{{partial 'partials/hidden/login-form'}}
+
+{{#if currentUser}}
+  {{partial 'partials/hidden/logout-form'}}
+{{else}}
+  {{partial 'partials/hidden/login-form'}}
+{{/if}}
