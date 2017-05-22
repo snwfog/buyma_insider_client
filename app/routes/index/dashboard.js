@@ -4,10 +4,13 @@ const { hash } = Ember.RSVP;
 
 export default Ember.Route.extend({
   model() {
-    const currentUser = this.currentUser;
-    return hash({
-      articleSolds: currentUser.get('articleSolds'),
-    });
+    const currentUser   = this.currentUser;
+    var dashboardModels = {};
+    if (!!currentUser) {
+      dashboardModels.articleSolds = currentUser.get('articleSolds');
+    }
+
+    return hash(dashboardModels);
   },
 
   // has controller

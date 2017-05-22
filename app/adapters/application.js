@@ -1,10 +1,7 @@
-import Ember from 'ember';
-import DS from 'ember-data';
-import config from '../config/environment';
+import DS from "ember-data";
+import config from "../config/environment";
 
-var adapterProp = {};
-if (config.environment === 'development') {
-  adapterProp.host = config.APP.SERVER.endpoint;
-}
-
-export default DS.JSONAPIAdapter.extend(adapterProp);
+export default DS.JSONAPIAdapter.extend({
+  namespace: config.APP.SERVER.namespace,
+  host:      config.APP.SERVER.endpoint,
+});

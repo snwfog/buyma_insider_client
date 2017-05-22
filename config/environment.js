@@ -23,6 +23,10 @@ module.exports = function (environment) {
       buymaCutPct: 5.5,
       saleTaxPct:  15,
       currencies:  [ 'cad', 'jpy', 'usd' ],
+
+      SERVER: {
+        namespace: 'api/v1',
+      }
     }
   };
 
@@ -39,12 +43,10 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
-    ENV.APP.SERVER = {
-      // Using bonjour DNS will slow from 2-3s on
-      // windows machine trying to connect to mac
-  //     endpoint: 'http://192.168.0.16:9292', // air.local
-      endpoint: 'http://localhost:9292',
-    };
+    // Using bonjour DNS will slow from 2-3s on
+    // windows machine trying to connect to mac
+    //     endpoint: 'http://192.168.0.16:9292', // air.local
+    ENV.APP.SERVER.endpoint     = 'http://localhost:9292';
     ENV.settings.path.login     = ENV.APP.SERVER.endpoint + ENV.settings.path.login;
     ENV.settings.path.bootstrap = ENV.APP.SERVER.endpoint + ENV.settings.path.bootstrap;
     // ENV.APP.LOG_RESOLVER = true;
