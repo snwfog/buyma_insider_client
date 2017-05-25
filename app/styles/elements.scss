@@ -6,6 +6,11 @@
   }
 }
 
+.media:hover {
+  p.title    { text-decoration: underline; }
+  p.subtitle { text-decoration: underline;}
+}
+
 .tag {
   &.is-small {
     font-size: 0.6em;
@@ -13,7 +18,7 @@
 }
 
 .section {
-  &.has-small-padding {
+  &.is-small {
     padding: 1.5em 0.75em;
   }
 }

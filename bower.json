@@ -11,5 +11,8 @@
     "jquery.sparkline.bower": "lennonjesus/jquery.sparkline.bower#^2.1.2",
     "moment": "^2.16.0",
     "alertifyjs": "~1.0.11"
+  },
+  "resolutions": {
+    "jquery": "2.1.2"
   }
 }

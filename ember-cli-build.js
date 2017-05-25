@@ -43,7 +43,11 @@ module.exports = function(defaults) {
     production:  app.bowerDirectory + '/bulma/css/bulma.css',
   });
 
-  app.import(app.bowerDirectory + '/jquery.sparkline.bower/src/jquery.sparkline.js');
+  app.import({
+    development: app.bowerDirectory + '/jquery.sparkline.bower/src/jquery.sparkline.js',
+    staging:     app.bowerDirectory + '/jquery.sparkline.bower/src/jquery.sparkline.js',
+    production:  app.bowerDirectory + '/jquery.sparkline.bower/dist/jquery.sparkline.min.js',
+  });
 
   app.import(app.bowerDirectory + '/alertifyjs/dist/js/alertify.js');
   app.import(app.bowerDirectory + '/alertifyjs/dist/css/alertify.css');

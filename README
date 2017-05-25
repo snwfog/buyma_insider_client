@@ -1,5 +1,8 @@
 # BUYMA バイマ INSIDER
 
+## Note
+- Adding ember-cli-app-version increased build time by 10s ish
+
 TODO:
 - Add ember cp validation
 - Add ember features

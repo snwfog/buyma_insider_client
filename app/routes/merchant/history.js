@@ -14,16 +14,16 @@ export default Ember.Route.extend({
 
   setupController(ctrl, { metadatum, crawlSessions }) {
     this._super(...arguments);
-    let itemsCountSeries = crawlSessions
+    let articlesCountSeries = crawlSessions
       .sortBy('startedAt')
       .reverse()
       .slice(0, 20)
       .map((crawlSession) => {
-        var { itemsCount, invalidItemsCount } = crawlSession.getProperties('itemsCount', 'invalidItemsCount');
-        return `${itemsCount}:${invalidItemsCount}`;
+        var { articlesCount, invalidArticlesCount } = crawlSession.getProperties('itemsCount', 'invalidItemsCount');
+        return `${articlesCount}:${invalidArticlesCount}`;
       });
 
-    ctrl.set('itemsCountSeries', itemsCountSeries);
+    ctrl.set('articlesCountSeries', articlesCountSeries);
   },
 
   renderTemplate() {
