@@ -20,7 +20,7 @@
         <div>
           <p class="heading">Last Sync</p>
           <p class="title">
-            {{#if merchant.lastSyncAt}}
+            {{#if merchant.lastSyncedAt}}
               {{capitalize (moment-from-now merchant.lastSyncAt)}}
             {{else}}
               Never

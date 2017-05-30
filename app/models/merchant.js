@@ -11,5 +11,5 @@ export default DS.Model.extend({
 
   name:               attr(),
   totalArticlesCount: attr('number'),
-  lastSyncAt:         attr('datetime')
+  lastSyncedAt:         attr('datetime')
 });

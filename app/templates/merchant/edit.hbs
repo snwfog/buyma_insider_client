@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section is-small">
   <div class="container">
 
     <div class="field is-horizontal">
@@ -8,7 +8,9 @@
       <div class="field-body">
         <div class="field is-grouped">
           <p class="control is-expanded">
-            {{input class='input is-disabled is-medium' value=metadatum.name}}
+            {{input class='input is-medium'
+                    value=metadatum.name
+                    disabled=(cannot 'edit metadatum' metadatum)}}
           </p>
         </div>
       </div>
@@ -21,7 +23,7 @@
       <div class="field-body">
         <div class="field is-grouped">
           <p class="control">
-            <span class="select is-disabled is-medium">
+            <span class="select is-medium">
               <select>
                 <option>https:</option>
                 <option>http:</option>
@@ -29,7 +31,9 @@
             </span>
           </p>
           <p class="control is-expanded">
-            {{input class='input is-disabled is-medium' value=metadatum.domain}}
+            {{input class='input is-medium'
+                    value=metadatum.domain
+                    disabled=(cannot 'edit metadatum' metadatum)}}
           </p>
         </div>
       </div>
@@ -42,7 +46,9 @@
       <div class="field-body">
         <div class="field is-grouped">
           <p class="control is-expanded">
-            {{input class='input is-disabled is-medium' value=metadatum.pagerCss}}
+            {{input class='input is-medium'
+                    value=metadatum.pagerCss
+                    disabled=(cannot 'edit metadatum' metadatum)}}
           </p>
         </div>
       </div>
@@ -58,24 +64,35 @@
             {{#each merchant.indexPages as |indexPage|}}
               <div class="columns is-mobile">
                 <div class="column is-8">
-                  <div class="field is-grouped">
-                    {{input class='input is-disabled is-medium'
-                            value=indexPage.fullUrl}}</div>
+                  <div class="field">
+                    <p class="control has-icons-left is-expanded">
+                      {{input class='input'
+                              value=indexPage.fullUrl
+                              disabled=(cannot 'edit metadatum' metadatum)}}
+                      <span class="icon is-small is-left">
+                        {{#if (eq indexPage.health 'green')}}
+                          {{fa-icon 'check-circle' class='is-green'}}
+                        {{else}}{{#if (eq indexPage.health 'orange')}}
+                          {{fa-icon 'exclamation-triangle' class='is-yellow'}}
+                        {{else}}{{#if (eq indexPage.health 'red')}}
+                          {{fa-icon 'exclamation-circle' class='is-red'}}
+                        {{/if}}{{/if}}{{/if}}
+                      </span>
+                    </p>
+                    {{#if indexPage.lastSyncedAt}}
+                      <p class="help">
+                        Last updated: {{moment-from-now indexPage.lastSyncedAt}}.
+                      </p>
+                    {{/if}}
+                  </div>
                 </div>
                 <div class="column is-4">
-                  {{#if (eq indexPage.health 'green')}}
-                    <span class="tag is-large is-success">
-                      {{capitalize indexPage.health}}
+                  <button class="button is-warning">
+                    <span class="icon is-small">
+                      {{fa-icon 'bug'}}
                     </span>
-                  {{else}}{{#if (eq indexPage.health 'orange')}}
-                    <span class="tag is-large is-warning">
-                      {{capitalize indexPage.health}}
-                    </span>
-                  {{else}}{{#if (eq indexPage.health 'red')}}
-                    <span class="tag is-large is-danger">
-                      {{capitalize indexPage.health}}
-                    </span>
-                  {{/if}}{{/if}}{{/if}}
+                    <span>Update</span>
+                  </button>
                 </div>
               </div>
             {{/each}}

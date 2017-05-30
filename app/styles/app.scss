@@ -37,10 +37,4 @@ table tr {
   vertical-align: middle !important;
 }
 
-// fa-icon with Bulma color
-.icon i.fa {
-  &.is-success { color: $green !important }
-  &.is-info { color: $blue !important }
-}
-
 
