@@ -42,23 +42,24 @@
     </div>
 
     {{!--Articles list--}}
-    {{#each searchArticles as |article|}}
+    {{#each searchedArticlesOrderedByScore as |articleHash|}}
       <div class="columns">
         <div class="column is-half">
           <div class="media">
             <div class="media-left">
-              <button class="button is-light">
-                {{fa-icon 'eye'}}
-              </button>
+              <small>{{number-format articleHash.score decimals=2}}</small>
+              <!--<button class="button is-light">-->
+                {{!--{{fa-icon 'eye'}}--}}
+              <!--</button>-->
             </div>
             <div class="media-content">
               <div class="content">
-                {{#link-to 'articles.article.index' article.id}}
+                {{#link-to 'articles.article.index' articleHash.article.id}}
                   <p class="title is-4">
-                    {{article.name}}
+                    {{articleHash.article.name}}
                   </p>
                   <p class="subtitle is-6">
-                    {{article.description}}
+                    {{articleHash.article.description}}
                   </p>
                 {{/link-to}}
               </div>
@@ -66,12 +67,12 @@
           </div>
         </div>
         <div class="column is-3">
-          <p class="title is-4">{{ui.-money article.price}}</p>
-          <p class="subtitle is-6">{{ui.-money article.price 'jpy'}}</p>
+          <p class="title is-4">{{ui.-money articleHash.article.price}}</p>
+          <p class="subtitle is-6">{{ui.-money articleHash.article.price 'jpy'}}</p>
         </div>
         <div class="column is-3">
           <p class="price-history">
-            {{ui.sparkline.-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' article.priceHistory.history))))}}
+            {{ui.sparkline.-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' articleHash.article.priceHistory.history))))}}
           </p>
         </div>
       </div>
@@ -80,8 +81,8 @@
     <hr>
 
     {{!--Pagination--}}
-    {{ui.-pager current=searchArticles.meta.current-page
-                count=searchArticles.meta.total-pages
+    {{ui.-pager current=searchedArticles.meta.current-page
+                count=searchedArticles.meta.total-pages
                 change=(action '_pageChanged')}}
   </div>
 </section>

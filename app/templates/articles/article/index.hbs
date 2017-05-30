@@ -112,27 +112,29 @@
 
       <!--Tabs-->
       <!--Article panel-->
-      <div class="column is-8">
-        <div class="tabs is-left">
-          <ul>
-            {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
-              {{#link-to 'articles.article.index.information' article.id}}
-                <span class="icon">{{fa-icon 'info'}}</span>
-                <span>Information</span>
+      {{#if currentUser}}
+        <div class="column is-8">
+          <div class="tabs is-left">
+            <ul>
+              {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
+                {{#link-to 'articles.article.index.information' article.id}}
+                  <span class="icon">{{fa-icon 'info'}}</span>
+                  <span>Information</span>
+                {{/link-to}}
               {{/link-to}}
-            {{/link-to}}
 
-            {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
-              {{#link-to 'articles.article.index.history' article.id}}
-                <span class="icon">{{fa-icon 'history'}}</span>
-                <span>Transaction History</span>
+              {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
+                {{#link-to 'articles.article.index.history' article.id}}
+                  <span class="icon">{{fa-icon 'history'}}</span>
+                  <span>Transaction History</span>
+                {{/link-to}}
               {{/link-to}}
-            {{/link-to}}
-          </ul>
+            </ul>
+          </div>
+
+          {{outlet}}
         </div>
-
-        {{outlet}}
-      </div>
+      {{/if}}
 
     </div>
   </div>

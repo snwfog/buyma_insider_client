@@ -60,6 +60,7 @@
     "ember-responsive": "2.0.0",
     "ember-router-scroll": "0.0.6",
     "ember-simple-select": "0.6.0",
+    "ember-string-helpers": "1.0.2",
     "ember-truth-helpers": "1.2.0",
     "loader.js": "^4.0.10",
     "pagination-pager": "snwfog/pagination-pager"

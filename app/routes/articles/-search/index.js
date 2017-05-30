@@ -1,7 +1,7 @@
 import Ember from "ember";
 
-const { merge, getWithDefault } = Ember;
-const { hash }                  = Ember.RSVP;
+const { merge, getWithDefault, computed } = Ember;
+const { hash }                            = Ember.RSVP;
 
 export default Ember.Route.extend({
   queryParams: {
@@ -21,12 +21,12 @@ export default Ember.Route.extend({
   model(params, transition) {
     var articlesModel    = this.modelFor('articles');
     var applicationModel = this.modelFor('application');
-    var searchArticles   = {};
+    var searchedArticles = {};
     if (!!params.q) {
-      searchArticles = this.store.query('article', params);
+      searchedArticles = this.store.query('article', params);
     }
 
-    return hash(merge({ searchArticles }, applicationModel, articlesModel));
+    return hash(merge({ searchedArticles }, applicationModel, articlesModel));
 //     return new Ember.RSVP.Promise((resolve) => Ember.run.later(null, resolve, 1000000));
   },
 
@@ -35,14 +35,26 @@ export default Ember.Route.extend({
     controller.setProperties(models);
     var queryParams = transition.queryParams;
 //     controller.set('inputSearchArticleQuery', getWithDefault(queryParams, 'q', ''));
+
     controller.reopen({
-      queryParams: [ 'q', 'page', 'count', 'order', 'extension' ],
-      q:           getWithDefault(queryParams, 'q', ''),
-      page:        getWithDefault(queryParams, 'page', 1),
-      limit:       getWithDefault(queryParams, 'limit', 20),
+      queryParams:                    [ 'q', 'page', 'count', 'order', 'extension' ],
+      q:                              getWithDefault(queryParams, 'q', ''),
+      page:                           getWithDefault(queryParams, 'page', 1),
+      limit:                          getWithDefault(queryParams, 'limit', 20),
 //       filter:      getWithDefault(queryParams, 'filter', 'all'),
-      order:       getWithDefault(queryParams, 'order', 'created_at:desc'),
-      extension:   getWithDefault(queryParams, 'extension', '_search'),
+      order:                          getWithDefault(queryParams, 'order', 'created_at:desc'),
+      extension:                      getWithDefault(queryParams, 'extension', '_search'),
+      searchedArticlesOrderedByScore: computed('searchedArticles.[]', function() {
+        let searchedArticleScores = this.get('searchedArticles.meta.scores');
+        let store                 = this.store;
+        return searchedArticleScores.map(function(articleScoreDocument) {
+          return {
+            score:   articleScoreDocument[ 'score' ],
+            article: store.peekRecord('article', articleScoreDocument[ 'article-id' ])
+          };
+        });
+      }),
+
       actions: {
         '_pageChanged'() {
 
