@@ -18,10 +18,10 @@
       </div>
       <div class="level-item has-text-centered">
         <div>
-          <p class="heading">Last Sync</p>
+          <p class="heading">Last Synced</p>
           <p class="title">
             {{#if merchant.lastSyncedAt}}
-              {{capitalize (moment-from-now merchant.lastSyncAt)}}
+              {{capitalize (moment-from-now merchant.lastSyncedAt)}}
             {{else}}
               Never
             {{/if}}
