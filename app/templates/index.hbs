@@ -10,7 +10,7 @@
           <p class="panel-heading">Merchants</p>
           <p class="panel-tabs"></p>
           {{#each merchants as |merchant|}}
-            {{#link-to 'merchant' merchant.id class='panel-block'}}
+            {{#link-to 'merchant.index' merchant.id class='panel-block'}}
               <span class="panel-icon">
                 {{fa-icon 'shopping-bag'}}
               </span>

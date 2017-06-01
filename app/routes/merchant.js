@@ -15,8 +15,8 @@ export default Ember.Route.extend({
   // 2. Use :id instead of object
   deserialize: null,
 
-//  beforeModel(transition) {},
-//  getModel() {},
+  // beforeModel(transition) { return this._super(...arguments); },
+  // getModel() {},
 
   model(params) {
     return hash({
@@ -25,7 +25,7 @@ export default Ember.Route.extend({
   },
 
   setupController(controller, models) {
-    this._super(...arguments);
     controller.setProperties(models);
+    return this._super(...arguments);
   }
 });

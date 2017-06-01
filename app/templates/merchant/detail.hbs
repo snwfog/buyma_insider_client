@@ -23,7 +23,7 @@
       <div class="field-body">
         <div class="field is-grouped">
           <p class="control">
-            <span class="select is-medium">
+            <span class="select">
               <select>
                 <option>https:</option>
                 <option>http:</option>
@@ -31,7 +31,7 @@
             </span>
           </p>
           <p class="control is-expanded">
-            {{input class='input is-medium'
+            {{input class='input'
                     value=metadatum.domain
                     disabled=(cannot 'edit metadatum' metadatum)}}
           </p>
@@ -46,7 +46,7 @@
       <div class="field-body">
         <div class="field is-grouped">
           <p class="control is-expanded">
-            {{input class='input is-medium'
+            {{input class='input'
                     value=metadatum.pagerCss
                     disabled=(cannot 'edit metadatum' metadatum)}}
           </p>
@@ -59,15 +59,15 @@
         <label class="label title is-4">Index Pages</label>
       </div>
       <div class="field-body">
-        <div class="field is-grouped">
+        <div class="field">
           <p class="control is-expanded">
             {{#each merchant.indexPages as |indexPage|}}
-              <div class="columns is-mobile">
+              <div class="columns">
                 <div class="column is-8">
                   <div class="field">
-                    <p class="control has-icons-left is-expanded">
+                    <p class="control has-icons-left">
                       {{input class='input'
-                              value=indexPage.fullUrl
+                              value=indexPage.relativePath
                               disabled=(cannot 'edit metadatum' metadatum)}}
                       <span class="icon is-small is-left">
                         {{#if (eq indexPage.health 'green')}}
