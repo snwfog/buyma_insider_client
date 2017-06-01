@@ -1,7 +1,7 @@
 {
   "name": "buyma-insider-client",
   "dependencies": {
-    "ember": "components/ember#canary",
+    "ember": "canary",
     "ember-cli-shims": "~0.1.1",
     "bulma": "^0.4.0",
     "font-awesome": "^4.7.0",

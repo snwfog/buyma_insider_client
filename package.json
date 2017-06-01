@@ -47,10 +47,11 @@
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-composable-helpers": "1.1.2",
-    "ember-data": "^2.9.0",
+    "ember-data": "emberjs/data#master",
     "ember-debug-logger": "0.3.0",
     "ember-export-application-global": "^1.0.5",
     "ember-font-awesome": "2.2.0",
+    "ember-inflector": "^2.0.0",
     "ember-light-table": "1.5.2",
     "ember-load-initializers": "^0.5.1",
     "ember-math-helpers": "1.2.7",
@@ -67,6 +68,7 @@
   },
   "dependencies": {
     "ember-can": "0.8.1",
+    "ember-inflector": "^2.0.0",
     "ember-promise-helpers": "git+https://github.com/fivetanley/ember-promise-helpers.git"
   }
 }
