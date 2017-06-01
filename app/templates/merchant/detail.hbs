@@ -80,19 +80,21 @@
                       </span>
                     </p>
                     {{#if indexPage.lastSyncedAt}}
-                      <p class="help">
+                      <p class="help is-success">
                         Last updated: {{moment-from-now indexPage.lastSyncedAt}}.
                       </p>
                     {{/if}}
                   </div>
                 </div>
                 <div class="column is-4">
-                  <button class="button is-warning">
+                  {{#ui/form/-async-button class='button is-warning'
+                                           disable=(cannot 'refresh indexPage' indexPage)
+                                           action=(action '_refreshIndexPage' indexPage)}}
                     <span class="icon is-small">
                       {{fa-icon 'bug'}}
                     </span>
                     <span>Update</span>
-                  </button>
+                  {{/ui/form/-async-button}}
                 </div>
               </div>
             {{/each}}

@@ -1,9 +1,7 @@
 import ApplicationAdapter from '../application';
 
 export default ApplicationAdapter.extend({
-  pathForType(modelName) {
-    return modelName;
-  },
+  pathForType: (modelName) => modelName,
 
   urlForUpdateRecord(id, modelName, snapshot) {
     modelName = 'user_article_notifieds';

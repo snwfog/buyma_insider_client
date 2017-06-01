@@ -11,12 +11,9 @@ export default Ember.Route.extend({
     });
   },
 
+  // has controller
   setupController(controller, models) {
     controller.setProperties(models);
-    controller.reopen({
-      metadatum: alias('merchant.metadatum')
-    });
-
     return this._super(...arguments);
   }
 });
