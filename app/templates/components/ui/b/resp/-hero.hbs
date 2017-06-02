@@ -1,0 +1,21 @@
+<section class="hero {{is}} is-hidden-mobile">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        {{yield}}
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section is-small is-hidden-tablet">
+  {{#if (hasBlock "inverse")}}
+    {{yield to="inverse"}}
+  {{else}}
+    <div class="container">
+      <p class="title is-3">
+        {{yield}}
+      </p>
+      <hr>
+    </div>
+  {{/if}}
+</section>

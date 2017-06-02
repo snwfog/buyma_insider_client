@@ -1,18 +1,4 @@
-<section class="hero is-dark is-hidden-mobile">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title is-1 is-capitalize">
-        {{merchant.name}}
-      </h1>
-    </div>
-  </div>
-</section>
-<section class="section is-small is-hidden-tablet">
-  <div class="container">
-    <p class="title is-3">
-      {{merchant.name}}
-    </p>
-    <hr>
-  </div>
-</section>
+{{#ui/b/resp/-hero is='dark'}}
+  {{capitalize merchant.name}}
+{{/ui/b/resp/-hero}}
 {{outlet}}
