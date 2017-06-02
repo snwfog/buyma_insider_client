@@ -8,7 +8,7 @@
 </a>
 <ul class="pagination-list is-fullwidth">
   {{#each pages key='@index' as |page|}}
-    {{ui.-pager-item disabled=disabled page=page
+    {{ui/-pager-item disabled=disabled page=page
                 selected=this.current seperator=seperator
                 urlTemplate=urlTemplate pageSet='pageChanged'}}
   {{/each}}

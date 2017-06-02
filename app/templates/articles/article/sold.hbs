@@ -23,11 +23,11 @@
           </div>
           <div class="column is-3">
             <span class="is-red">
-              ({{ui.-money articleSold.price 'jpy' showCode=false}})
+              ({{ui/-money articleSold.price 'jpy' showCode=false}})
             </span>
           </div>
           <div class="column is-5">
-            {{ui.-money articleSold.price showCode=false}} @ {{ui.-money oneDollar 'jpy' showCode=false}}
+            {{ui/-money articleSold.price showCode=false}} @ {{ui/-money oneDollar 'jpy' showCode=false}}
           </div>
         </div>
 
@@ -37,11 +37,11 @@
           </div>
           <div class="column is-3">
             <span class="is-red">
-              ({{ui.-money articleSoldPriceWithSaleTax 'jpy' showCode=false}})
+              ({{ui/-money articleSoldPriceWithSaleTax 'jpy' showCode=false}})
             </span>
           </div>
           <div class="column is-5">
-            {{ui.-money articleSoldPriceWithSaleTax showCode=false}} @ {{saleTaxPct}}%
+            {{ui/-money articleSoldPriceWithSaleTax showCode=false}} @ {{saleTaxPct}}%
           </div>
         </div>
 
@@ -51,7 +51,7 @@
           </div>
           <div class="column is-3">
             <span class="is-green">
-              {{ui.-money articleSold.soldPrice 'jpy' showCode=false}}
+              {{ui/-money articleSold.soldPrice 'jpy' showCode=false}}
             </span>
           </div>
           <div class="column is-5">
@@ -95,11 +95,11 @@
           <div class="column is-3">
             {{#if (lte profit.amount 0)}}
               <span class="is-red title is-5">
-                ({{ui.-money profit 'jpy' showCode=false}})
+                ({{ui/-money profit 'jpy' showCode=false}})
               </span>
             {{else}}
               <span class="is-green title is-5">
-                {{ui.-money profit 'jpy' showCode=false}}
+                {{ui/-money profit 'jpy' showCode=false}}
               </span>
             {{/if}}
           </div>
@@ -115,7 +115,7 @@
           </div>
           <div class="column is-3">
             <span class="is-red">
-              ({{ui.-money buymaCut 'jpy' showCode=false}})
+              ({{ui/-money buymaCut 'jpy' showCode=false}})
             </span>
           </div>
           <div class="column is-5">
@@ -136,7 +136,7 @@
             {{/if}}
             <div class="column is-3">
               <span class="is-red">
-                ({{ui.-money shippingService.rate 'jpy' showCode=false}})
+                ({{ui/-money shippingService.rate 'jpy' showCode=false}})
               </span>
             </div>
             <div class="column is-4">
@@ -179,22 +179,22 @@
           <div class="column is-3">
             {{#if (lte totalEarned.amount 0)}}
               <span class="is-red title is-5">
-                ({{ui.-money totalEarned 'jpy' showCode=false}})
+                ({{ui/-money totalEarned 'jpy' showCode=false}})
               </span>
             {{else}}
               <span class="is-green title is-5">
-                {{ui.-money totalEarned 'jpy' showCode=false}}
+                {{ui/-money totalEarned 'jpy' showCode=false}}
               </span>
             {{/if}}
           </div>
           <div class="column is-5">
             {{#if (lte totalEarned.amount 0)}}
               <span class="is-red title is-5">
-                ({{ui.-money totalEarned 'cad' showCode=false}})
+                ({{ui/-money totalEarned 'cad' showCode=false}})
               </span>
             {{else}}
               <span class="is-green title is-5">
-                {{ui.-money totalEarned 'cad' showCode=false}}
+                {{ui/-money totalEarned 'cad' showCode=false}}
               </span>
             {{/if}}
           </div>
@@ -237,12 +237,12 @@
               <div class="card-footer">
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui.-money articleSold.soldPrice 'cad'}}
+                    {{ui/-money articleSold.soldPrice 'cad'}}
                   </p>
                 </div>
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui.-money articleSold.soldPrice 'jpy'}}
+                    {{ui/-money articleSold.soldPrice 'jpy'}}
                   </p>
                 </div>
               </div>
@@ -309,7 +309,7 @@
                       <div class="field-label is-flex-grow-3"><label class="label">Rate</label></div>
                       <div class="field-body">
                         <p class="control title is-5">
-                          {{ui.-money service.rate}}
+                          {{ui/-money service.rate}}
                         </p>
                       </div>
                     </div>
@@ -400,12 +400,12 @@
               <div class="card-footer">
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui.-money articleSold.price}}
+                    {{ui/-money articleSold.price}}
                   </p>
                 </div>
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui.-money articleSold.price 'jpy'}}
+                    {{ui/-money articleSold.price 'jpy'}}
                   </p>
                 </div>
               </div>
@@ -420,12 +420,12 @@
               <div class="card-footer">
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui.-money article.price}}
+                    {{ui/-money article.price}}
                   </p>
                 </div>
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui.-money article.price 'jpy'}}
+                    {{ui/-money article.price 'jpy'}}
                   </p>
                 </div>
               </div>

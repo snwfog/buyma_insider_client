@@ -3,7 +3,7 @@
 
     <div class="nav-left">
       {{#link-to 'index.dashboard' class='nav-item is-brand is-hidden-mobile'}}
-        {{appName}}
+        {{app-name}}
       {{/link-to}}
 
       {{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
@@ -34,13 +34,13 @@
 
       <span class="nav-item is-hidden-mobile">
         <span class="title is-4">
-          {{ui.-money oneDollar 'jpy'}}
+          {{ui/-money oneDollar 'jpy'}}
         </span>
       </span>
 
       <span class="nav-item is-hidden-mobile">
         <span class="title is-4">
-          {{ui.-money oneDollar 'usd'}}
+          {{ui/-money oneDollar 'usd'}}
         </span>
       </span>
     </div>
@@ -57,12 +57,12 @@
         <span class="level is-mobile is-fullwidth">
           <span class="level-item">
             <span class="title is-5">
-              {{ui.-money oneDollar 'jpy'}}
+              {{ui/-money oneDollar 'jpy'}}
             </span>
           </span>
           <span class="level-item">
             <span class="title is-5">
-              {{ui.-money oneDollar 'usd'}}
+              {{ui/-money oneDollar 'usd'}}
             </span>
           </span>
         </span>

@@ -26,7 +26,7 @@
                 <div class="field">
                   <div class="control">
                     <span class="select">
-                      {{#ui.form.-select content=(await allArticleNotificationCriteria)
+                      {{#ui/form/-select content=(await allArticleNotificationCriteria)
                                          prompt='Article Watch Criteria'
                                          optionValuePath='id'
                                          optionLabelPath='name'
@@ -50,7 +50,7 @@
                             {{capitalize articleNotificationCriterium.name}}
                           </option>
                         {{/with}}
-                      {{/ui.form.-select}}
+                      {{/ui/form/-select}}
                     </span>
                   </div>
                   <p class="help">Nothing fit? <a>Add more article watch criterium options</a>.</p>
@@ -115,15 +115,15 @@
                 <div class="column one-half">
                   {{#if articleSold.soldPrice}}
                     <p class="title is-4">
-                      {{ui.-money articleSold.soldPrice 'cad'}}
-                      {{ui.-money articleSold.soldPrice 'jpy'}}
+                      {{ui/-money articleSold.soldPrice 'cad'}}
+                      {{ui/-money articleSold.soldPrice 'jpy'}}
                     </p>
                   {{/if}}
                 </div>
                 <div class="column one-half">
                   <p class="{{if articleSold.soldPrice 'subtitle is-6' 'title is-4'}}">
-                    {{ui.-money article.price 'cad' exchangeRate=(await articleSold.exchangeRate)}}
-                    {{ui.-money article.price 'jpy' exchangeRate=(await articleSold.exchangeRate)}}
+                    {{ui/-money article.price 'cad' exchangeRate=(await articleSold.exchangeRate)}}
+                    {{ui/-money article.price 'jpy' exchangeRate=(await articleSold.exchangeRate)}}
                   </p>
                 </div>
               </div>
@@ -138,7 +138,7 @@
             <div class="content">
               <p class="title is-6">
                 {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
-                  Rates @ {{ui.-money oneDollar 'jpy'
+                  Rates @ {{ui/-money oneDollar 'jpy'
                                       exchangeRate=exchangeRate
                                       showCode=false}} of {{moment-format exchangeRate.timestamp 'MMM-D-YY'}}
                 {{/with}}

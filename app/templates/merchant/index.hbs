@@ -35,7 +35,7 @@
     {{!--Pagination--}}
     <div class="columns">
       <div class="column">
-        {{ui.-pager current=articles.meta.current-page
+        {{ui/-pager current=articles.meta.current-page
                     count=articles.meta.total-pages
                     change=(action '_pageChanged')}}
       </div>
@@ -66,12 +66,12 @@
           </div>
         </div>
         <div class="column is-3">
-          <p class="title is-4">{{ui.-money article.price}}</p>
-          <p class="subtitle is-6">{{ui.-money article.price 'jpy'}}</p>
+          <p class="title is-4">{{ui/-money article.price}}</p>
+          <p class="subtitle is-6">{{ui/-money article.price 'jpy'}}</p>
         </div>
         <div class="column is-3">
           <p class="price-history">
-            {{ui.sparkline.-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' article.priceHistory.history))))}}
+            {{ui/sparkline/-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' article.priceHistory.history))))}}
           </p>
         </div>
       </div>
@@ -80,7 +80,7 @@
     <hr>
 
     {{!--Pagination--}}
-    {{ui.-pager current=articles.meta.current-page
+    {{ui/-pager current=articles.meta.current-page
                 count=articles.meta.total-pages
                 change=(action '_pageChanged')}}
   </div>

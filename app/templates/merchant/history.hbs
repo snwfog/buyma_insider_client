@@ -12,7 +12,7 @@
           </header>
           <div class="card-content">
             <div class="content has-text-centered">
-              {{ui.sparkline.-bar data=articlesCountSeries}}
+              {{ui/sparkline/-bar data=articlesCountSeries}}
             </div>
           </div>
           <footer class="card-footer">
@@ -36,7 +36,7 @@
           </header>
           <div class="card-content">
             <div class="content has-text-centered">
-              {{ui.sparkline.-bar
+              {{ui/sparkline/-bar
                   data=(map-by 'trafficSizeKb' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
             </div>
           </div>
@@ -58,7 +58,7 @@
           </header>
           <div class="card-content">
             <div class="content has-text-centered">
-              {{ui.sparkline.-bar
+              {{ui/sparkline/-bar
                   data=(map-by 'elapsedTimeS' (take 20 (sort-by "startedAt:desc" model.crawlSessions)))}}
             </div>
           </div>
@@ -75,7 +75,7 @@
 </section>
 <section class="section">
   <div class="container">
-    {{ui.table.crawl-session model.crawlSessions}}
+    {{ui/table/crawl-session model.crawlSessions}}
   </div>
 </section>
 

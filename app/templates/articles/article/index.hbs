@@ -69,19 +69,19 @@
             <footer class="card-footer">
               <div class="card-footer-item">
                 <p class="title is-4">
-                  {{ui.-money article.price 'cad' showCode=true}}
+                  {{ui/-money article.price 'cad' showCode=true}}
                 </p>
               </div>
               <div class="card-footer-item">
                 <p class="title is-4">
-                  {{ui.-money article.price 'jpy' showCode=true}}
+                  {{ui/-money article.price 'jpy' showCode=true}}
                 </p>
               </div>
             </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
                 <div class="level-item price-history">
-                  {{ui.sparkline.-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
+                  {{ui/sparkline/-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
                 </div>
               </div>
             </footer>
@@ -152,7 +152,7 @@
             <div class="card">
               <div class="card-header">
                 <p class="card-header-title">
-                  {{ui.-money article.price 'cad' showCode=false}}
+                  {{ui/-money article.price 'cad' showCode=false}}
                 </p>
               </div>
               <div class="card-content padding-1">
