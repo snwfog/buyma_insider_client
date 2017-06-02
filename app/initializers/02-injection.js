@@ -11,7 +11,6 @@ export function initialize(application) {
   application.inject('route',      'toastService', 'service:toast');
   application.inject('controller', 'toastService', 'service:toast');
 
-
 //   application.inject('route',      'currentUserService', 'service:current-user');
 //   application.inject('controller', 'currentUserService', 'service:current-user');
 }
