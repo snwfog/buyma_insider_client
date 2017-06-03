@@ -11,8 +11,8 @@
         </p>
 
         {{#if currentUser}}
-          {{article.watch-button article=article watch=(action '_watchArticle' article)}}
-          {{article.sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
+          {{article/watch-button article=article watch=(action '_watchArticle' article)}}
+          {{article/sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
                                                                    (action '_toast' 'Congratulation!'))}}
         {{/if}}
       </div>
@@ -146,33 +146,31 @@
     <hr>
     <div class="title is-3 has-text-right">Related</div>
     <div class="columns">
-      {{#with (await articleRelateds) as |articleRelateds|}}
-        {{#each articleRelateds as |article|}}
-          <div class="column is-2">
-            <div class="card">
-              <div class="card-header">
-                <p class="card-header-title">
-                  {{ui/-money article.price 'cad' showCode=false}}
-                </p>
-              </div>
-              <div class="card-content padding-1">
-                <p class="title is-6">{{article.name}}</p>
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item">
-                  {{#link-to 'articles.article.index' article.id}}View{{/link-to}}
-                </div>
+      {{#each articleRelateds as |article|}}
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-header">
+              <p class="card-header-title">
+                {{ui/-money article.price 'cad' showCode=false}}
+              </p>
+            </div>
+            <div class="card-content padding-1">
+              <p class="title is-6">{{article.name}}</p>
+            </div>
+            <div class="card-footer">
+              <div class="card-footer-item">
+                {{#link-to 'articles.article.index' article.id}}View{{/link-to}}
               </div>
             </div>
           </div>
-        {{/each}}
+        </div>
       {{else}}
         <div class="column is-12">
           <p class="has-text-right">
             Not Available
           </p>
         </div>
-      {{/with}}
+      {{/each}}
     </div>
   </div>
 </section>

@@ -7,6 +7,6 @@ export default DS.Model.extend({
   article:              belongsTo('article'),
   notificationCriteria: hasMany('article/notificationCriterium'),
 
-  createdAt: attr('datetime'),
-  updatedAt: attr('datetime'),
+  createdAt:            attr('datetime'),
+  updatedAt:            attr('datetime'),
 });

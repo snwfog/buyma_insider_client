@@ -2,7 +2,7 @@
   <div class="container">
     <div class="columns">
       <div class="column is-half">
-        {{#link-to 'articles.article' article.id class='button is-light'}}Back{{/link-to}}
+        {{#link-to 'articles.article.index' article.id class='button is-light'}}Back{{/link-to}}
       </div>
       <div class="column is-half">
         <p class="title is-4 is-capitalize has-text-right">
@@ -125,7 +125,7 @@
 
 
         <!--Shipping Services-->
-        {{#each (await articleSold.shippingServices) as |shippingService index|}}
+        {{#each articleSoldShippingServices as |shippingService index|}}
           <div class="columns is-mobile">
             {{#if (eq index 0)}}
               <div class="column is-4">
@@ -142,12 +142,12 @@
             <div class="column is-4">
               <div class="media">
                 <div class="media-left">
-                  {{#ui.form.-async-button class='button is-danger is-small'
+                  {{#ui/form/-async-button class='button is-danger is-small'
                                            action=(action '_removeShippingService' shippingService)}}
                     <span class="icon is-small">
                       {{fa-icon 'minus-circle'}}
                     </span>
-                  {{/ui.form.-async-button}}
+                  {{/ui/form/-async-button}}
                 </div>
                 <div class="media-content">
                   <span class="is-capitalize">
@@ -168,7 +168,6 @@
             <div class="column is-4"></div>
           </div>
         {{/each}}
-
         <hr>
 
         <!--Total Earned-->
@@ -261,29 +260,20 @@
                       <div class="field">
                         <div class="control">
                           <span class="select">
-                            {{#ui.form.-select content=(await allShippingServices)
-                                               prompt='Shipping Options'
+                            {{#ui/form/-select content=allShippingServices
+                                               prompt='Shipping Services'
                                                selection=selectShippingService
-                                               action=(action '_assignSelectShippingService')
-                                               as |shippingService|}}
-                              {{#with (map-by 'id' (await articleSold.shippingServices))
-                                      as |articleSoldShippingServiceIds|}}
-                                {{#if (contains shippingService.id articleSoldShippingServiceIds)}}
-                                  <option disabled value="{{shippingService.id}}">
-                                    {{capitalize shippingService.serviceName}}
-                                  </option>
-                                {{else}}
-                                  <option value="{{shippingService.id}}">
-                                    {{capitalize shippingService.serviceName}}
-                                  </option>
-                                {{/if}}
+                                               action=(action '_assignSelectShippingService') as |shippingService|}}
+                              {{#if (contains shippingService.id articleSoldShippingServiceIds)}}
+                                <option disabled value="{{shippingService.id}}">
+                                  {{capitalize shippingService.serviceName}}
+                                </option>
                               {{else}}
-                                {{!--Make sure to render if there are any selected shipping services--}}
                                 <option value="{{shippingService.id}}">
                                   {{capitalize shippingService.serviceName}}
                                 </option>
-                              {{/with}}
-                            {{/ui.form.-select}}
+                              {{/if}}
+                            {{/ui/form/-select}}
                           </span>
                         </div>
                         <p class="help">Nothing fit? <a>Add more shipping options</a>.</p>
@@ -294,9 +284,8 @@
               </footer>
 
               <!--Selected shipping service-->
-              {{#if selectShippingService}}
+              {{#with selectShippingService as |service|}}
                 <div class="card-content padding-1">
-                  {{#with selectShippingService as |service|}}
                     <div class="field is-horizontal is-fullwidth">
                       <div class="field-label"><label class="label"></label></div>
                       <div class="field-body">
@@ -341,19 +330,18 @@
                       <div class="field-label is-flex-grow-3"></div>
                       <div class="field-body">
                         <p class="control">
-                          {{#ui.form.-async-button class='button is-success'
+                          {{#ui/form/-async-button class='button is-success'
                                                    action=(action '_addShippingService')}}
                             <span class="icon">
                               {{fa-icon 'plus-circle'}}
                             </span>
                             <span>Add shipping</span>
-                          {{/ui.form.-async-button}}
+                          {{/ui/form/-async-button}}
                         </p>
                       </div>
                     </div>
-                  {{/with}}
                 </div>
-              {{/if}}
+              {{/with}}
 
               <!--Margin options-->
               <footer class="card-footer">
@@ -379,13 +367,13 @@
               <!--Sold article actions-->
               <footer class="card-footer">
                 <div class="card-footer-item">
-                  {{#ui.form.-async-button tagName='a'
+                  {{#ui/form/-async-button tagName='a'
                                            action=(pipe-action (action '_saveArticleSold')
                                                                (toast 'Sold article is saved.' 'success')
                                                                (disable 'allowEditArticleSoldPrice' this))}}
                     <span class="icon">{{fa-icon 'floppy-o'}}</span>
                     <span>Save</span>
-                  {{/ui.form.-async-button}}
+                  {{/ui/form/-async-button}}
                 </div>
               </footer>
             </div>
@@ -413,6 +401,7 @@
           </div>
         </div>
 
+        {{log 'article' article}}
         <div class="columns">
           <div class="column">
             <p class="title is-6">Current Price</p>

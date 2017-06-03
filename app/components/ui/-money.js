@@ -10,7 +10,7 @@ let UiMoneyComponent = Ember.Component.extend({
   showCode:      true,
   exchangeRate:  null,
   rate:          computed.alias('exchangeRate'),
-  displayAmount: computed('amountMoney', 'amountMoney.amount', 'displayBase', function () {
+  displayAmount: computed('amountMoney', 'amountMoney.amount', 'displayBase', 'exchangeRate', function () {
     // Get with default only works with undefined
 //     const amountBase   = this.getWithDefault('amount.base', 'cad'); Get with default works with null only
 //     const displayBase  = this.getWithDefault('displayBase', 'cad');

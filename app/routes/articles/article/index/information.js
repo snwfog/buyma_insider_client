@@ -1,12 +1,13 @@
 import Ember from "ember";
 
-const { merge, RSVP: { hash } } = Ember;
+const { assign, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
   model(params, transition) {
-    const applicationModels  = this.modelFor('application');
-    const articleIndexModels = this.modelFor('articles.article.index');
-    return hash(merge(applicationModels, articleIndexModels));
+    const models                     = {};
+    const articlesArticleIndexModels = this.modelFor('articles.article.index');
+    assign(models, articlesArticleIndexModels);
+    return hash(models);
   },
 
   setupController(controller, models) {

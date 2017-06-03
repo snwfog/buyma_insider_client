@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-const { merge, RSVP: { hash } } = Ember;
+const { assign, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
   model(params) {
@@ -9,9 +9,11 @@ export default Ember.Route.extend({
     // call adapter again to refetch the model
     // If we pass id, then it will automatically
     // call adapter to refetch.
+    const models            = {};
     const applicationModels = this.modelFor('application');
     const article           = this.store.findRecord('article', params[ 'article_id' ]);
-    return hash(merge(applicationModels, { article, }));
+    assign(models, applicationModels, { article, });
+    return hash(models);
   },
 
   // has controller

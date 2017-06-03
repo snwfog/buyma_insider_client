@@ -1,4 +1,5 @@
 import Ember from "ember";
+import { extractError } from "../../lib/ajax-error";
 
 const { computed: { alias }, assert } = Ember;
 
@@ -9,10 +10,7 @@ export default Ember.Controller.extend({
       assert('Must have index page', !!indexPage);
       return this.store
           .createRecord('action/index-page/-refresh', { indexPage })
-          .save()
-          .catch((error) => {
-            this.debug(arguments);
-          });
+          .save();
     }
   }
 });

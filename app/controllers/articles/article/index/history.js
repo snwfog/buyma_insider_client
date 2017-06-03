@@ -1,4 +1,6 @@
 import Ember from "ember";
-import ArticlesArticleIndexController from "../index";
+import ApplicationController from "../../../application";
 
-export default ArticlesArticleIndexController.extend({});
+const { computed } = Ember;
+
+export default ApplicationController.extend({});

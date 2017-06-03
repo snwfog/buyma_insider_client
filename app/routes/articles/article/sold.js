@@ -3,23 +3,23 @@ import config from "../../../config/environment";
 import UserArticleSold from "../../../models/user/article-sold";
 
 const { APP: { saleTaxPct, buymaCutPct } }     = config;
-const { computed, RSVP: { hash } } = Ember;
+const { assign, computed, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
   model(params, transition) {
-    const applicationModels = this.modelFor('application');
-    const { article }       = this.modelFor('articles.article');
-    const articleSold       = this.store.find('user/article_sold', params.user_article_sold_id);
-    return hash(Ember.merge(applicationModels, { article, articleSold }));
+    const models                = {};
+    const applicationModels     = this.modelFor('application');
+    const articlesArticleModels = this.modelFor('articles.article');
+    const articleSold           = this.store.findRecord('user/article_sold', params.user_article_sold_id);
+    return hash(assign(models, applicationModels, articlesArticleModels, { articleSold }));
   },
 
   setupController(controller, models) {
-    this._super(...arguments);
     controller.setProperties(models);
     controller.reopen({
       articleSoldStatuses: computed(function () {
-        var statuses    = Ember.copy(UserArticleSold.STATUS);
-        var articleSold = models.articleSold;
+        const statuses    = Ember.copy(UserArticleSold.STATUS);
+        const articleSold = models.articleSold;
         return Object.keys(statuses).reduce((memoStatus, status) => {
           memoStatus[ status ] = articleSold.get(`${status}At`);
           return memoStatus;
@@ -28,9 +28,13 @@ export default Ember.Route.extend({
 
       allShippingServices: computed(function() {
         return this.store.peekAll('shippingService');
-      }),
+      }).readOnly(),
 
-      selectShippingService: null,
+      selectShippingService:         null,
+      articleSoldShippingServiceIds: computed.mapBy('articleSoldShippingServices', 'id'),
+      articleSoldShippingServices:   computed('model.articleSold.shippingServices.[]', function() {
+        return this.get('articleSold.shippingServices');
+      }).readOnly(),
 
       // Article price-balance sheet variable
       articleSoldPrice: computed('articleSold.price.amount', function () {
@@ -131,5 +135,6 @@ export default Ember.Route.extend({
         }
       }
     });
+    return this._super(...arguments);
   }
 });

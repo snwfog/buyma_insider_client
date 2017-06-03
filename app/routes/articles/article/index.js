@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-const { merge, RSVP: { hash } } = Ember;
+const { assign, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
   model(params) {
@@ -9,10 +9,18 @@ export default Ember.Route.extend({
     // call adapter again to refetch the model
     // If we pass id, then it will automatically
     // call adapter to refetch.
-    const applicationModels  = this.modelFor('application');
-    const articleIndexModels = this.modelFor('articles.article');
+    const models                         = {};
+    const articlesArticleModels          = this.modelFor('articles.article');
+    const allArticleNotificationCriteria = this.store.peekAll('article/notificationCriterium/discountPercent');
+    assign(models, articlesArticleModels, { allArticleNotificationCriteria });
+    // if (!!this.currentUser) {
+    //   const currentUserArticleWatcheds = this.currentUser.get('articleWatcheds');
+    //   const currentUserArticleSolds    = this.currentUser.get('articleSolds');
+    //   assign(models, { currentUserArticleWatcheds,
+    //                    currentUserArticleSolds });
+    // }
 
-    return hash(merge(applicationModels, articleIndexModels));
+    return hash(models);
   },
 
   // has controller
@@ -22,7 +30,7 @@ export default Ember.Route.extend({
   },
 
   // Always default to information route
-  redirect(models, transition) {
-    this.transitionTo('articles.article.index.information', models.article);
-  }
+  // redirect(models, transition) {
+  //   this.transitionTo('articles.article.index.information', models.article);
+  // }
 });

@@ -2,7 +2,6 @@
   "name": "buyma-insider-client",
   "version": "0.0.0",
   "description": "Buyma Insider",
-  "private": true,
   "author": "Charles Yang",
   "license": "MIT",
   "directories": {
