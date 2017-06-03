@@ -10,3 +10,7 @@ TODO:
 - Search history / View history
 - Improve the loading bar, to use page loaded event to move forward the bar
 
+## Deployment
+- em deploy <deployTarget> (staging, production) --verbose
+- em deploy:activate <deployTarget> (staging, production) --revision <sha>
+- em deploy:list <deployTarget> (staging, production)
