@@ -1,6 +1,6 @@
 import config from "../config/environment";
 
-//const { log, info, warn, error, debug } = Ember.Logger;
+const { log, info, warn, error, debug } = Ember.Logger;
 
 export function initialize(/* application */) {
   // application.inject('route', 'foo', 'service:foo');
@@ -17,7 +17,7 @@ export function initialize(/* application */) {
 }
 
 export default {
-  name:  '01-environment',
-  after: '00-bootstrap',
-         initialize
+  name:  '02-environment',
+  after: '01-bootstrap',
+  initialize
 };

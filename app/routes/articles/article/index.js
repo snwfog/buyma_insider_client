@@ -30,6 +30,7 @@ export default Ember.Route.extend({
   },
 
   // Always default to information route
+  // Update: This redirect messed up all subroute modelFor methods...
   // redirect(models, transition) {
   //   this.transitionTo('articles.article.index.information', models.article);
   // }

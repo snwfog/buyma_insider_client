@@ -1,8 +1,10 @@
 import Ember from "ember";
+import DS from 'ember-data';
 import config from "../../../config/environment";
 import { extractError } from "../../../lib/ajax-error";
 import ApplicationController from "../../application";
 
+const { UnauthorizedError } = DS;
 const { computed, assert, A } = Ember;
 
 export default ApplicationController.extend({
@@ -29,7 +31,7 @@ export default ApplicationController.extend({
           currentUser.get('articleWatcheds').pushObject(articleWatched); })
         .catch((error) => {
           currentUser.get('articleWatcheds').removeObject(userArticleWatched);
-          return Ember.RSVP.reject(); });
+          return Ember.RSVP.reject(error); });
     },
 
     '_sellArticle'(article) {
@@ -48,9 +50,8 @@ export default ApplicationController.extend({
         .then((articleSold) => {
           currentUser.get('articleSolds').pushObject(articleSold); })
         .catch((error) => {
-          this.debug(error);
           currentUser.get('articleSolds').removeObject(userArticleSold);
-          return Ember.RSVP.reject(); });
+          return Ember.RSVP.reject(error); });
     },
 
   }

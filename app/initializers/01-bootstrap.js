@@ -1,6 +1,6 @@
-import Ember from "ember";
-import config from "../config/environment";
-import PreloadStore from "../preload-store";
+import Ember from 'ember';
+import config from '../config/environment';
+import PreloadStore from '../preload-store';
 
 //const { log, info, warn, error, debug } = Ember.Logger;
 
@@ -16,7 +16,7 @@ export function initialize(application) {
   });
 
   application.deferReadiness();
-  Ember.$.getJSON(config.settings.path.bootstrap, function (bootstrapsPackage) {
+  Ember.$.getJSON(config.settings.path.bootstrap, function(bootstrapsPackage) {
     console.log(bootstrapsPackage);
     Object.keys(bootstrapsPackage).forEach((key) => {
       PreloadStore.store(key, bootstrapsPackage[ key ]);
@@ -27,6 +27,7 @@ export function initialize(application) {
 }
 
 export default {
-  name: '00-bootstrap',
-        initialize
+  name:  '01-bootstrap',
+  after: '00-error-handling',
+  initialize
 };

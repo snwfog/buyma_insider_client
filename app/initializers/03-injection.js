@@ -16,7 +16,7 @@ export function initialize(application) {
 }
 
 export default {
-  name:  '02-inject',
-  after: '01-environment',
+  name:  '03-inject',
+  after: '02-environment',
          initialize
 };

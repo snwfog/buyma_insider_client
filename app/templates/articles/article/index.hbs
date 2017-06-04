@@ -13,7 +13,7 @@
         {{#if currentUser}}
           {{article/watch-button article=article watch=(action '_watchArticle' article)}}
           {{article/sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
-                                                                   (action '_toast' 'Congratulation!'))}}
+                                                                   (toast 'Congratulation!' 'success'))}}
         {{/if}}
       </div>
     </nav>

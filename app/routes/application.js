@@ -1,13 +1,16 @@
-import Ember from "ember";
-import LoadingSliderMixin from "../mixins/loading-slider";
+import Ember from 'ember';
+import DS from 'ember-data';
+import LoadingSliderMixin from '../mixins/loading-slider';
 
 const { merge, computed, RSVP: { all, hash } } = Ember;
 
 export default Ember.Route.extend(
   LoadingSliderMixin, // Loading slider addon
   {
-    // Bubble the loading option so that we can restore original ember loading
+    // Bubble the loading option from the component
+    // so that default ember loading mechanism still works
     bubbleLoadingSlider: true,
+
     beforeModel() {
       return all([ this.get('exchangeRatesService').setup() ]);
     },
@@ -21,7 +24,7 @@ export default Ember.Route.extend(
       };
 
       if (!!this.currentUser) {
-        var currentUserModels = {
+        let currentUserModels = {
           articleNotifieds: this.currentUser.get('articleNotifieds'),
         };
 
@@ -35,5 +38,11 @@ export default Ember.Route.extend(
     setupController(controller, models) {
       controller.setProperties(models);
       return this._super(...arguments);
+    },
+
+    error(error, transition) {
+      if (error instanceof DS.UnauthorizedError) {
+        this.replaceWith('login');
+      }
     }
   });

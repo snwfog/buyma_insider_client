@@ -22,6 +22,6 @@ div.lt-body-wrap > table {
   opacity:    0.9;
 
   > *.success { background: $green; }
-  > *.error { background: $red; }
+  > *.error   { background: $red; }
   > *.default { background: $turquoise; }
 }
