@@ -146,8 +146,17 @@
     <hr>
     <div class="title is-3 has-text-right">Related</div>
     <div class="columns">
-      {{#each articleRelateds as |article|}}
-        <div class="column is-2">
+      {{#each (await articleRelateds) as |article|}}
+        <!--Mobile list-->
+        <div class="column is-2 is-hidden-tablet has-text-right">
+          <p class="title is-4">
+            {{#link-to 'articles.article.index' article.id}}
+              {{capitalize article.name}} - {{ui/-money article.price 'cad' showCode=false}}
+            {{/link-to}}
+          </p>
+        </div>
+        <!--Tablet desktop card-->
+        <div class="column is-2 is-hidden-mobile">
           <div class="card">
             <div class="card-header">
               <p class="card-header-title">
