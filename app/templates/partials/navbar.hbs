@@ -13,25 +13,26 @@
       {{/link-to}}
     </div>
 
-    <div class="nav-center">
-      <span class="nav-item is-hidden-tablet">
-        {{input class="input is-small"
+    <div id="nav-center-mobile" class="nav-center is-hidden-tablet">
+      <span class="nav-item">
+        {{input id="nav-search-input-mobile"
+                class="input"
                 type="text"
                 value=inputSearchArticleQuery
                 enter=(action '_searchArticles')
                 placeholder="Search..."}}
       </span>
 
-      {{#link-to 'notification' class='nav-item is-hidden-tablet'}}
-        {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
-          {{#if (gt unreadArticleNotifieds.length 0)}}
-            <span class="tag is-warning is-bold">
-              {{unreadArticleNotifieds.length}}
-            </span>
-          {{/if}}
-        {{/with}}
-      {{/link-to}}
+      {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
+        {{#link-to 'notification' class='nav-item'}}
+          <span class="tag is-warning is-bold">
+            {{unreadArticleNotifieds.length}}
+          </span>
+        {{/link-to}}
+      {{/with}}
+    </div>
 
+    <div class="nav-center is-hidden-tablet">
       <span class="nav-item is-hidden-mobile">
         <span class="title is-4">
           {{ui/-money oneDollar 'jpy'}}

@@ -10,7 +10,10 @@ export default Ember.Controller.extend({
       assert('Must have index page', !!indexPage);
       return this.store
           .createRecord('action/index-page/-refresh', { indexPage })
-          .save();
+          .save()
+          .then(() => {
+            return this.store
+              .findRecord('merchant/index-page', indexPage.id); });
     }
   }
 });

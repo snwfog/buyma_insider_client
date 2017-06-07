@@ -1,5 +1,6 @@
 {{#if (await (can 'sell article' article))}}
-  {{#ui/form/-async-button class='button is-success'
+  {{#ui/form/-async-button class='button'
+                           textState='is-success'
                            disableWhen=(not currentUser)
                            action=(action 'sell') as |component state|}}
     {{#if state.isRejected}}

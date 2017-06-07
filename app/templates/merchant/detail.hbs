@@ -81,20 +81,39 @@
                     </p>
                     {{#if indexPage.lastSyncedAt}}
                       <p class="help is-success">
-                        Last updated: {{moment-from-now indexPage.lastSyncedAt}}.
+                        Last updated: {{moment-from-now indexPage.lastSyncedAt}}
                       </p>
                     {{/if}}
                   </div>
                 </div>
                 <div class="column is-4">
-                  {{#ui/form/-async-button class='button is-warning'
-                                           disable=(cannot 'refresh indexPage' indexPage)
-                                           action=(action '_refreshIndexPage' indexPage)}}
-                    <span class="icon is-small">
-                      {{fa-icon 'bug'}}
-                    </span>
-                    <span>Update</span>
-                  {{/ui/form/-async-button}}
+                  {{#if indexPage.inprogress}}
+                    <button disabled class="button is-warning is-loading">
+                      Update
+                    </button>
+                  {{else}}
+                    {{#ui/form/-async-button class='button'
+                                             textState='is-warning'
+                                             disable=(cannot 'refresh indexPage' indexPage)
+                                             action=(action '_refreshIndexPage' indexPage) as |component state|}}
+                      {{#if state.isRejected}}
+                        <span class="icon is-small">
+                          {{fa-icon 'exclamation-circle'}}
+                        </span>
+                        <span>Error</span>
+                      {{else}}{{#if state.isFulfilled}}
+                        <span class="icon is-small">
+                          {{fa-icon 'check-circle'}}
+                        </span>
+                        <span>Updated</span>
+                      {{else}}
+                        <span class="icon is-small">
+                          {{fa-icon 'bug'}}
+                        </span>
+                        <span>Update</span>
+                      {{/if}}{{/if}}
+                    {{/ui/form/-async-button}}
+                  {{/if}}
                 </div>
               </div>
             {{/each}}

@@ -5,7 +5,8 @@
     </span>
   </a>
 {{else}}{{#if (await (can 'watch article' article))}}
-  {{#ui/form/-async-button class='button is-warning'
+  {{#ui/form/-async-button class='button'
+                           textState='is-warning'
                            disableWhen=(not currentUser)
                            action=(action 'watch') as |component state|}}
     {{#if state.isRejected}}

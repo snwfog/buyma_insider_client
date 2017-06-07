@@ -16,12 +16,12 @@ export default Ember.Controller.extend({
     },
 
     '_searchArticles'() {
-      var q = this.get('inputSearchArticleQuery');
+      let q = this.get('inputSearchArticleQuery');
       if (!q) {
         return Ember.RSVP.reject();
       }
 
-      var queryParams = { q, extension: '_search' };
+      let queryParams = { q, extension: '_search' };
       return this.transitionToRoute('articles._search.index', { queryParams });
     },
 

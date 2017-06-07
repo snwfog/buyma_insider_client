@@ -109,39 +109,41 @@
           </div>
         </div>
       </div>
-
-      <!--Tabs-->
-      <!--Article panel-->
-      {{#if currentUser}}
-        <div class="column is-8">
-          <div class="tabs is-left">
-            <ul>
-              {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
-                {{#link-to 'articles.article.index.information' article.id}}
-                  <span class="icon">{{fa-icon 'info'}}</span>
-                  <span>Information</span>
-                {{/link-to}}
-              {{/link-to}}
-
-              {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
-                {{#link-to 'articles.article.index.history' article.id}}
-                  <span class="icon">{{fa-icon 'history'}}</span>
-                  <span>Transaction History</span>
-                {{/link-to}}
-              {{/link-to}}
-            </ul>
-          </div>
-
-          {{outlet}}
-        </div>
-      {{/if}}
-
     </div>
   </div>
 </section>
 
+<!--Tabs-->
+<!--Article panel-->
+{{#if currentUser}}
+  <section class="section is-small">
+    <div class="column is-8">
+      <div class="tabs is-left">
+        <ul>
+          {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
+            {{#link-to 'articles.article.index.information' article.id}}
+              <span class="icon">{{fa-icon 'info'}}</span>
+              <span>Information</span>
+            {{/link-to}}
+          {{/link-to}}
+
+          {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
+            {{#link-to 'articles.article.index.history' article.id}}
+              <span class="icon">{{fa-icon 'history'}}</span>
+              <span>Transaction History</span>
+            {{/link-to}}
+          {{/link-to}}
+        </ul>
+      </div>
+
+      {{!--Tab outlet--}}
+      {{outlet}}
+    </div>
+  </section>
+{{/if}}
+
 <!--Related articles-->
-<section class="section">
+<section class="section is-small">
   <div class="container">
     <hr>
     <div class="title is-3 has-text-right">Related</div>
@@ -149,7 +151,7 @@
       {{#each (await articleRelateds) as |article|}}
         <!--Mobile list-->
         <div class="column is-2 is-hidden-tablet has-text-right">
-          <p class="title is-4">
+          <p class="title is-5">
             {{#link-to 'articles.article.index' article.id}}
               {{capitalize article.name}} - {{ui/-money article.price 'cad' showCode=false}}
             {{/link-to}}

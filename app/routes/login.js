@@ -1,26 +1,20 @@
 import Ember from "ember";
 
-export default Ember.Route.extend({
-  setupController(controller) {
-    controller.reopen({
-      login:    '',
-      password: '',
-      actions:  {
-        login(login, password) {
-          this.debug(login, password);
-          this.store
-            .createRecord('session', { login, password })
-            .save()
-            .then((session) => {
-              const $hidden_login_form = Ember.$('#hidden-login-form'); // or just '$', its present
-              $hidden_login_form.find('input[name=username]').val(login);
-              $hidden_login_form.find('input[name=password]').val(password);
-              $hidden_login_form.submit();
-            });
-        }
-      },
-    });
+const { log, info, warn, error, debug } = Ember.Logger;
 
+export default Ember.Route.extend({
+  beforeModel(transition) {
+    if (!!this.currentUser) {
+      info(`Already logged in [${this.currentUser.get('username')}]`);
+      info(`Transition intended for: ${transition.targetName}`);
+      transition.abort();
+      this.replaceWith('index');
+    }
+  },
+
+  // has controller
+  setupController(controller, models) {
+    controller.setProperties(models);
     return this._super(...arguments);
   },
 
