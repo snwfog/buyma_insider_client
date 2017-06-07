@@ -3,22 +3,22 @@
     Dashboard
   </p>
   <hr>
-  {{#with articleSolds as |articleSolds|}}
-    {{#each-in (group-by 'createdAtDay' articleSolds) as |createdAtDay articleSolds|}}
-      <article class="message is-primary">
-        <div class="message-header">
-          <p class="has-text-right">
-            {{moment-format createdAtDay 'LL' 'DDDD'}}
-          </p>
-        </div>
-      </article>
-      {{#each articleSolds as |articleSold|}}
+  {{#each-in (group-by 'createdAtDay' articleSolds) as |createdAtDay articleSolds|}}
+    <article class="message is-primary">
+      <div class="message-header">
+        <p class="has-text-right">
+          {{moment-format createdAtDay 'LL' 'DDDD'}}
+        </p>
+      </div>
+    </article>
+    {{#each articleSolds as |articleSold|}}
+      {{#with articleSold.article as |article|}}
         <div class="columns">
           <div class="column">
             <div class="card">
               <header class="card-header">
                 <div class="card-header-title">
-                  {{articleSold.article.name}}
+                  {{article.name}}
                 </div>
                 <div class="card-header-icon">
                   {{moment-format articleSold.createdAt 'LT'}}
@@ -40,9 +40,9 @@
                           {{#if (eq state articleSold.status)}}
                             {{inc index}}. {{state}}
                           {{else}}
-                            {{#ui.form.-async-button tagName='a' action=(action state articleSold)}}
+                            {{#ui/form/-async-button tagName='a' action=(action state articleSold)}}
                               {{inc index}}. {{state}}
-                            {{/ui.form.-async-button}}
+                            {{/ui/form/-async-button}}
                           {{/if}}
                         </span>
                       </div>
@@ -57,9 +57,10 @@
                           {{#if (eq state articleSold.status)}}
                             {{inc index}}. {{state}}
                           {{else}}
-                            {{#ui.form.-async-button tagName='a' action=(action state articleSold)}}
+                            {{#ui/form/-async-button tagName='a'
+                                                     action=(action state articleSold)}}
                               {{inc index}}. {{state}}
-                            {{/ui.form.-async-button}}
+                            {{/ui/form/-async-button}}
                           {{/if}}
                         </span>
                       </div>
@@ -69,19 +70,19 @@
               </footer>
               <footer class="card-footer">
                 <div class="card-footer-item">
-                  {{#link-to 'articles.article' articleSold.article.id}}
+                  {{#link-to 'articles.article' article.id}}
                     <span class="icon">{{fa-icon 'shopping-basket'}}</span>
                     <span>Article</span>
                   {{/link-to}}
                 </div>
                 <div class="card-footer-item">
-                  {{#link-to 'articles.article.sold' articleSold.article.id articleSold.id}}
+                  {{#link-to 'articles.article.sold' article.id articleSold.id}}
                     <span class="icon">{{fa-icon 'area-chart'}}</span>
                     <span>Detail</span>
                   {{/link-to}}
                 </div>
                 <div class="card-footer-item">
-                  {{#link-to 'articles.article.sold' articleSold.article.id articleSold.id}}
+                  {{#link-to 'articles.article.sold' article.id articleSold.id}}
                     <span class="icon">{{fa-icon 'handshake-o'}}</span>
                     <span>Archive</span>
                   {{/link-to}}
@@ -90,11 +91,14 @@
             </div>
           </div>
         </div>
-      {{/each}}
-    {{/each-in}}
-  {{/with}}
+      {{/with}}
+    {{/each}}
+  {{/each-in}}
 
   <p class="has-text-right">
-    {{#link-to 'index.dashboard-archive' class='button is-link'}}<span>Go to archived</span><span class="icon is-small">{{fa-icon 'angle-right'}}</span>{{/link-to}}
+    {{#link-to 'index.dashboard-archive' class='button is-link'}}
+      <span>Go to archived</span>
+      <span class="icon is-small">{{fa-icon 'angle-right'}}</span>
+    {{/link-to}}
   </p>
 </div>

@@ -48,9 +48,9 @@
                 </div>
                 <div class="field">
                   <div class="control">
-                    {{#ui/form/-async-button class='button is-success'
+                    {{#ui/form/-async-button class='button'
+                                             textState='is-light'
                                              action=(action '_addArticleNotificationCriterium')}}
-
                       <span class="icon">
                         {{fa-icon 'plus-circle'}}
                       </span>
@@ -74,7 +74,7 @@
           <div class="media-left"></div>
           <div class="media-content">
             {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
-              <span class="tag is-light">
+              <span class="tag is-info">
                 {{capitalize notificationCriterium.name}}
                 {{#ui/form/-async-button tagName='button'
                                          class='delete is-small'

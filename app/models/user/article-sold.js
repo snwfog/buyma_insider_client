@@ -32,7 +32,9 @@ const UserArticleSold = DS.Model.extend(statusAttrs, {
   createdAt:        attr('datetime'),
   updatedAt:        attr('datetime'),
 
-  createdAtDay: computed('createdAt', function () { return this.get('createdAt').format('DDDD'); }),
+  createdAtDay: computed('createdAt', function () {
+    return this.get('createdAt').format('DDDD');
+  }),
 });
 
 UserArticleSold.reopenClass({

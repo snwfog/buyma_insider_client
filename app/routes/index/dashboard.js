@@ -11,7 +11,7 @@ export default Ember.Route.extend({
 
   model() {
     return hash({
-      articleSolds: this.get('currentUser.articleSolds') || A(),
+      articleSolds: (this.get('currentUser.articleSolds') || A()),
     });
   },
 

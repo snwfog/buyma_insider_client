@@ -1,8 +1,11 @@
 import Ember from "ember";
 import ApplicationController from "../application";
 
+const { computed } = Ember;
+
 export default ApplicationController.extend({
   actions: {
+    // TODO: Simplify this
     'confirmed'(articleSold) {
       articleSold.set('status', 'confirmed');
       return articleSold.save().catch((error) => articleSold.rollbackAttributes());
