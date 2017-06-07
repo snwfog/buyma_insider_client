@@ -23,3 +23,10 @@
     }
   }
 }
+
+.ui-b-resp-hero {
+  .section.is-hidden-tablet {
+    padding-bottom: 0;
+    hr { margin: 0; }
+  }
+}
