@@ -8,7 +8,7 @@
 
 // http://codepen.io/Tbgse/details/oxbmmL
 .pulse-center {
-  background:    $black-bis;
+  background:    $turquoise;
   width:         15px;
   height:        15px;
   border-radius: 50%;
@@ -22,7 +22,7 @@
   content:       '';
   width:         15px;
   height:        15px;
-  background:    $black-ter;
+  background:    lighten($turquoise, 40%);
   border-radius: 50%;
   position:      absolute;
   animation:     pulse-radius 1.5s infinite;
