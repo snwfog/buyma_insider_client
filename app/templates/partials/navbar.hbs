@@ -6,21 +6,30 @@
         {{app-name}}
       {{/link-to}}
 
-      {{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
+      {{!--{{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}--}}
+      {{#side-menu-toggle class='nav-item is-brand is-hidden-tablet'}}
         <span class="icon">
           {{fa-icon 'bold'}}
         </span>
-      {{/link-to}}
+      {{/side-menu-toggle}}
+      {{!--{{/link-to}}--}}
     </div>
 
     <div id="nav-center-mobile" class="nav-center is-hidden-tablet">
       <span class="nav-item">
-        {{input id="nav-search-input-mobile"
-                class="input"
-                type="text"
-                value=inputSearchArticleQuery
-                enter=(action '_searchArticles')
-                placeholder="Search..."}}
+        <p class="control is-fullwidth">
+          {{input id="nav-search-input-mobile"
+                  class="input"
+                  type="text"
+                  value=inputSearchArticleQuery
+                  enter=(action '_searchArticles')
+                  placeholder="Search..."}}
+        </p>
+        {{#if inputSearchArticleQuery}}
+          <span class="icon">
+              <a class="delete" {{action (reset-prop 'inputSearchArticleQuery' this)}}></a>
+            </span>
+        {{/if}}
       </span>
 
       {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}

@@ -1,3 +1,4 @@
+@import 'ember-side-menu';
 @import './variables';
 @import './spinner';
 @import './components';
@@ -25,6 +26,12 @@ html {
 #nav-center-mobile {
   flex-grow: 5;
   span.nav-item { width: 100% }
+}
+
+#sidemenu {
+  * {
+    border-radius: 0;
+  }
 }
 
 .icon.status {
