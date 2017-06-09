@@ -3,6 +3,13 @@
     <p class="menu-label"></p>
     <ul class="menu-list">
       <li>
+        {{#side-menu-link-to 'index.dashboard'
+                             activeClass='is-active'}}
+          <span class="icon">{{fa-icon 'bold'}}</span>
+          <span>Dashboard</span>
+        {{/side-menu-link-to}}
+      </li>
+      <li>
         <a>
           <span class="icon">{{fa-icon 'shopping-bag'}}</span>
           <span>Merchants</span>
