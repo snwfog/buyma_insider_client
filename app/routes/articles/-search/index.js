@@ -50,14 +50,14 @@ export default Ember.Route.extend({
         let store                 = this.store;
         return searchedArticleScores.map(function(articleScoreDocument) {
           let articleId = articleScoreDocument[ 'article-id' ];
-          let article = store.peekRecord('article', articleId);
+          let article   = store.peekRecord('article', articleId);
           if (!article) {
             warn(`Article ${articleId} was returned by search but not present in database, this is mostly due to out of date elasticsearch documents`);
             return null;
           } else {
             return {
               article,
-              score:   articleScoreDocument[ 'score' ],
+              score: articleScoreDocument[ 'score' ],
             };
           }
         });
