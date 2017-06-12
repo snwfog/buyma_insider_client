@@ -10,6 +10,12 @@ module.exports = function (deployTarget) {
       keep: true,
     },
 
+    versioning: {
+      gitBranch:        'master',
+      gitTagMessage:    'Release %FV',
+      gitCommitMessage: 'Release %FV',
+    }
+
     // include other plugin configuration that applies to all deploy targets here
   };
 
