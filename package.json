@@ -1,6 +1,6 @@
 {
   "name": "buyma-insider-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Buyma Insider",
   "author": "Charles Yang",
   "license": "MIT",
@@ -29,6 +29,7 @@
     "ember-cli-deploy-redis": "1.0.2",
     "ember-cli-deploy-revision-data": "1.0.0",
     "ember-cli-deploy-sftp": "0.1.0",
+    "ember-cli-deploy-versioning": "^0.1.4",
     "ember-cli-document-title": "0.3.3",
     "ember-cli-eslint": "^3.0.0",
     "ember-cli-htmlbars": "^2.0.1",
