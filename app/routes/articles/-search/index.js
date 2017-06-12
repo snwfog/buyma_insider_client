@@ -52,7 +52,7 @@ export default Ember.Route.extend({
           let articleId = articleScoreDocument[ 'article-id' ];
           let article   = store.peekRecord('article', articleId);
           if (!article) {
-            warn(`Article ${articleId} was returned by search but not present in database, this is mostly due to out of date elasticsearch documents`);
+            warn(`Article ${articleId} was returned by search but was not included in the response, this is due to Elasticsearch returning deleted database documents`);
             return null;
           } else {
             return {
