@@ -2,6 +2,7 @@ import Ember from "ember";
 
 const { merge, getWithDefault, computed } = Ember;
 const { hash }                            = Ember.RSVP;
+const { warn }                            = Ember.Logger;
 
 export default Ember.Route.extend({
   queryParams: {
@@ -48,10 +49,17 @@ export default Ember.Route.extend({
         let searchedArticleScores = this.get('searchedArticles.meta.scores');
         let store                 = this.store;
         return searchedArticleScores.map(function(articleScoreDocument) {
-          return {
-            score:   articleScoreDocument[ 'score' ],
-            article: store.peekRecord('article', articleScoreDocument[ 'article-id' ])
-          };
+          let articleId = articleScoreDocument[ 'article-id' ];
+          let article = store.peekRecord('article', articleId);
+          if (!article) {
+            warn(`Article ${articleId} was returned by search but not present in database, this is mostly due to out of date elasticsearch documents`);
+            return null;
+          } else {
+            return {
+              article,
+              score:   articleScoreDocument[ 'score' ],
+            };
+          }
         });
       }),
 
