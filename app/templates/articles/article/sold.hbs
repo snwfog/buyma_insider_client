@@ -16,71 +16,82 @@
     <div class="columns">
       <!--Article price-balance sheet-->
       <div class="column is-half">
-
-        <div class="columns is-mobile">
+        <div class="columns">
           <div class="column is-4">
             <label class="label">Article Price</label>
           </div>
-          <div class="column is-3">
-            <span class="is-red">
-              ({{ui/-money articleSold.price 'jpy' showCode=false}})
-            </span>
-          </div>
-          <div class="column is-5">
-            {{ui/-money articleSold.price showCode=false}} @ {{ui/-money oneDollar 'jpy' showCode=false}}
+          <div class="column is-8">
+            <div class="columns is-mobile">
+              <div class="column is-6">
+                <span class="is-red">
+                  ({{ui/-money articleSold.price 'jpy' showCode=false}})
+                </span>
+              </div>
+              <div class="column is-6">
+                {{ui/-money articleSold.price showCode=false}} @ {{ui/-money oneDollar 'jpy' showCode=false}}
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="columns is-mobile">
+        <div class="columns">
           <div class="column is-4">
             <label class="label">With Sales Tax</label>
           </div>
-          <div class="column is-3">
-            <span class="is-red">
-              ({{ui/-money articleSoldPriceWithSaleTax 'jpy' showCode=false}})
-            </span>
-          </div>
-          <div class="column is-5">
-            {{ui/-money articleSoldPriceWithSaleTax showCode=false}} @ {{saleTaxPct}}%
+          <div class="column is-8">
+            <div class="columns is-mobile">
+              <div class="column is-6">
+                <span class="is-red">
+                  ({{ui/-money articleSoldPriceWithSaleTax 'jpy' showCode=false}})
+                </span>
+              </div>
+              <div class="column is-6">
+                {{ui/-money articleSoldPriceWithSaleTax showCode=false}} @ {{saleTaxPct}}%
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="columns is-mobile">
+        <div class="columns">
           <div class="column is-4">
             <label class="label">Sold Price</label>
           </div>
-          <div class="column is-3">
-            <span class="is-green">
-              {{ui/-money articleSold.soldPrice 'jpy' showCode=false}}
-            </span>
-          </div>
-          <div class="column is-5">
-            <div class="field has-addons">
-              <p class="control has-icons-left">
-                {{input class='input has-text-right'
-                        classBinding='allowEditArticleSoldPrice:is-success'
-                        value=articleSold.soldPrice.amount
-                        disabled=(not allowEditArticleSoldPrice)
-                        type='text'}}
-                <span class="icon is-left">
-                  {{fa-icon 'jpy'}}
+          <div class="column is-8">
+            <div class="columns is-mobile">
+              <div class="column is-6">
+                <span class="is-green">
+                  {{ui/-money articleSold.soldPrice 'jpy' showCode=false}}
                 </span>
-              </p>
-              <p class="control">
-                {{#if allowEditArticleSoldPrice}}
-                  <button class="button is-success is-outlined" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
-                    <span class="icon">
-                      {{fa-icon 'toggle-on'}}
+              </div>
+              <div class="column is-6">
+                <div class="field has-addons">
+                  <p class="control has-icons-left">
+                    {{input class='input has-text-right'
+                            classBinding='allowEditArticleSoldPrice:is-success'
+                            value=articleSold.soldPrice.amount
+                            disabled=(not allowEditArticleSoldPrice)
+                            type='text'}}
+                    <span class="icon is-left">
+                      {{fa-icon 'jpy'}}
                     </span>
-                  </button>
-                {{else}}
-                  <button class="button is-danger is-outlined" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
-                    <span class="icon">
-                      {{fa-icon 'toggle-off'}}
-                    </span>
-                  </button>
-                {{/if}}
-              </p>
+                  </p>
+                  <p class="control">
+                    {{#if allowEditArticleSoldPrice}}
+                      <button class="button is-success is-outlined" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
+                        <span class="icon">
+                          {{fa-icon 'toggle-on'}}
+                        </span>
+                      </button>
+                    {{else}}
+                      <button class="button is-danger is-outlined" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
+                        <span class="icon">
+                          {{fa-icon 'toggle-off'}}
+                        </span>
+                      </button>
+                    {{/if}}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -88,45 +99,53 @@
         <hr>
 
         <!--Profit-->
-        <div class="columns is-mobile">
+        <div class="columns">
           <div class="column is-4">
             <label class="label">Profit</label>
           </div>
-          <div class="column is-3">
-            {{#if (lte profit.amount 0)}}
-              <span class="is-red title is-5">
-                ({{ui/-money profit 'jpy' showCode=false}})
-              </span>
-            {{else}}
-              <span class="is-green title is-5">
-                {{ui/-money profit 'jpy' showCode=false}}
-              </span>
-            {{/if}}
-          </div>
-          <div class="column is-5">
-            {{priceMarginPct}}%
+          <div class="column is-8">
+            <div class="columns is-mobile">
+              <div class="column is-6">
+                {{#if (lte profit.amount 0)}}
+                  <span class="is-red title is-5">
+                    ({{ui/-money profit 'jpy' showCode=false}})
+                  </span>
+                {{else}}
+                  <span class="is-green title is-5">
+                    {{ui/-money profit 'jpy' showCode=false}}
+                  </span>
+                {{/if}}
+              </div>
+              <div class="column is-6">
+                {{priceMarginPct}}%
+              </div>
+            </div>
           </div>
         </div>
 
         <!--Buyma cut-->
-        <div class="columns is-mobile">
+        <div class="columns">
           <div class="column is-4">
             <label class="label">Buyma Cut</label>
           </div>
-          <div class="column is-3">
-            <span class="is-red">
-              ({{ui/-money buymaCut 'jpy' showCode=false}})
-            </span>
-          </div>
-          <div class="column is-5">
-            @ {{buymaCutPct}}%
+          <div class="column is-8">
+            <div class="columns is-mobile">
+              <div class="column is-6">
+                <span class="is-red">
+                  ({{ui/-money buymaCut 'jpy' showCode=false}})
+                </span>
+              </div>
+              <div class="column is-6">
+                @ {{buymaCutPct}}%
+              </div>
+            </div>
           </div>
         </div>
 
 
         <!--Shipping Services-->
         {{#each articleSoldShippingServices as |shippingService index|}}
-          <div class="columns is-mobile">
+          <div class="columns">
             {{#if (eq index 0)}}
               <div class="column is-4">
                 <label class="label">Shipping Costs</label>
@@ -134,68 +153,80 @@
             {{else}}
               <div class="column is-4"></div>
             {{/if}}
-            <div class="column is-3">
-              <span class="is-red">
-                ({{ui/-money shippingService.rate 'jpy' showCode=false}})
-              </span>
-            </div>
-            <div class="column is-4">
-              <div class="media">
-                <div class="media-left">
-                  {{#ui/form/-async-button class='button is-danger is-small'
-                                           action=(action '_removeShippingService' shippingService)}}
-                    <span class="icon is-small">
-                      {{fa-icon 'minus-circle'}}
-                    </span>
-                  {{/ui/form/-async-button}}
-                </div>
-                <div class="media-content">
-                  <span class="is-capitalize">
-                    {{shippingService.serviceName}}
+            <div class="column is-8">
+              <div class="columns is-mobile">
+                <div class="column is-6">
+                  <span class="is-red">
+                    ({{ui/-money shippingService.rate 'jpy' showCode=false}})
                   </span>
+                </div>
+                <div class="column is-6">
+                  <div class="media">
+                    <div class="media-left">
+                      {{#ui/form/-async-button class='button is-danger is-small'
+                                               action=(action '_removeShippingService' shippingService)}}
+                        <span class="icon is-small">
+                          {{fa-icon 'minus-circle'}}
+                        </span>
+                      {{/ui/form/-async-button}}
+                    </div>
+                    <div class="media-content">
+                      <span class="is-capitalize">
+                        {{shippingService.serviceName}}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         {{else}}
-          <div class="columns is-mobile">
+          <div class="columns">
             <div class="column is-4">
               <label class="label">Shipping Costs</label>
             </div>
-            <div class="column is-3">
-              -
+            <div class="column is-8">
+              <div class="columns is-mobile">
+                <div class="column is-6">
+                  -
+                </div>
+                <div class="column is-6"></div>
+              </div>
             </div>
-            <div class="column is-4"></div>
           </div>
         {{/each}}
         <hr>
 
         <!--Total Earned-->
-        <div class="columns is-mobile">
+        <div class="columns">
           <div class="column is-4">
             <label class="label">Total Earned</label>
           </div>
-          <div class="column is-3">
-            {{#if (lte totalEarned.amount 0)}}
-              <span class="is-red title is-5">
-                ({{ui/-money totalEarned 'jpy' showCode=false}})
-              </span>
-            {{else}}
-              <span class="is-green title is-5">
-                {{ui/-money totalEarned 'jpy' showCode=false}}
-              </span>
-            {{/if}}
-          </div>
-          <div class="column is-5">
-            {{#if (lte totalEarned.amount 0)}}
-              <span class="is-red title is-5">
-                ({{ui/-money totalEarned 'cad' showCode=false}})
-              </span>
-            {{else}}
-              <span class="is-green title is-5">
-                {{ui/-money totalEarned 'cad' showCode=false}}
-              </span>
-            {{/if}}
+          <div class="column is-8">
+            <div class="columns is-mobile">
+              <div class="column is-6">
+                {{#if (lte totalEarned.amount 0)}}
+                  <span class="is-red title is-5">
+                    ({{ui/-money totalEarned 'jpy' showCode=false}})
+                  </span>
+                {{else}}
+                  <span class="is-green title is-5">
+                    {{ui/-money totalEarned 'jpy' showCode=false}}
+                  </span>
+                {{/if}}
+              </div>
+              <div class="column is-6">
+                {{#if (lte totalEarned.amount 0)}}
+                  <span class="is-red title is-5">
+                    ({{ui/-money totalEarned 'cad' showCode=false}})
+                  </span>
+                {{else}}
+                  <span class="is-green title is-5">
+                    {{ui/-money totalEarned 'cad' showCode=false}}
+                  </span>
+                {{/if}}
+              </div>
+            </div>
           </div>
         </div>
 
