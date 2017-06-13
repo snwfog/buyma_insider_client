@@ -2,7 +2,7 @@
 <section class="section is-small">
   <div class="container">
     <div class="columns">
-      <div class="column is-4">
+      <div class="column is-4 is-hidden-mobile">
 
         <!-- Merchant panel -->
         <nav class="panel">
@@ -30,7 +30,7 @@
 
         <!-- Currency calculator -->
         <div class="columns">
-          <div class="column is-5">
+          <div class="column is-12">
             <div class="field is-grouped">
               <p class="control is-expanded has-icons-left">
                 {{input class='input has-text-right'
@@ -41,19 +41,15 @@
                   {{fa-icon 'dollar'}}
                 </span>
               </p>
-            </div>
-          </div>
-          <div class="column is-2 has-text-centered is-hidden-mobile">
-            <p class="field">
-              <a disabled class="button is-light">
+
+              <p class="control">
+                <a disabled class="button is-light">
                 <span class="icon">
                   {{fa-icon 'exchange'}}
                 </span>
-              </a>
-            </p>
-          </div>
-          <div class="column is-5">
-            <div class="field is-grouped">
+                </a>
+              </p>
+
               <p class="control is-expanded has-icons-left">
                 {{input class='input is-success has-text-right'
                         type='text'

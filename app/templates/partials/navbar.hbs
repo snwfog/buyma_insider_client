@@ -3,16 +3,14 @@
 
     <div class="nav-left">
       {{#link-to 'index.dashboard' class='nav-item is-brand is-hidden-mobile'}}
-        {{app-name}}
+        {{appName}}
       {{/link-to}}
 
-      {{!--{{#link-to 'index.dashboard' id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}--}}
-      {{#side-menu-toggle class='nav-item is-brand is-hidden-tablet'}}
+      {{#side-menu-toggle id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
         <span class="icon">
           {{fa-icon 'bold'}}
         </span>
       {{/side-menu-toggle}}
-      {{!--{{/link-to}}--}}
     </div>
 
     <div id="nav-center-mobile" class="nav-center is-hidden-tablet">
@@ -41,14 +39,14 @@
       {{/with}}
     </div>
 
-    <div class="nav-center is-hidden-tablet">
-      <span class="nav-item is-hidden-mobile">
+    <div class="nav-center is-hidden-mobile">
+      <span class="nav-item">
         <span class="title is-4">
           {{ui/-money oneDollar 'jpy'}}
         </span>
       </span>
 
-      <span class="nav-item is-hidden-mobile">
+      <span class="nav-item">
         <span class="title is-4">
           {{ui/-money oneDollar 'usd'}}
         </span>
@@ -62,7 +60,6 @@
     </span>
 
     <div class="nav-right nav-menu {{if navBarIsActive 'is-active'}}">
-      <!--Show these currency exchange on mobile+tablet-->
       <span class="nav-item is-hidden-tablet">
         <span class="level is-mobile is-fullwidth">
           <span class="level-item">
@@ -76,6 +73,31 @@
             </span>
           </span>
         </span>
+      </span>
+
+      <span class="nav-item is-hidden-tablet">
+        <div class="columns is-mobile">
+          <div class="column is-6">
+            <p class="control is-expanded has-icons-left">
+              {{input class='input has-text-right'
+                      type='text'
+                      value=cadValue
+                      placehodler='CAD'}}
+              <span class="icon is-left is-small">
+                {{fa-icon 'dollar'}}
+              </span>
+            </p>
+          </div>
+          <div class="column is-6">
+            <p class="control is-expanded">
+              {{input class='input is-success has-text-right'
+                      type='text'
+                      disabled=true
+                      value=jpyValue
+                      placehodler='JPY'}}
+            </p>
+          </div>
+        </div>
       </span>
 
       {{#link-to-with-action 'status'
@@ -116,13 +138,13 @@
         {{/link-to-with-action}}
 
         {{#link-to-with-action 'logout'
-                               class='is-tab nav-item'
+                               class='is-tab nav-item is-hidden-mobile'
                                invokeAction=(pipe-action (action '_logout')
                                                          (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Logout{{/link-to-with-action}}
       {{else}}
         {{#link-to-with-action 'login'
-                               class='is-tab nav-item'
+                               class='is-tab nav-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Login{{/link-to-with-action}}
       {{/if}}
