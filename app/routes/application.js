@@ -12,7 +12,8 @@ export default Ember.Route.extend(
     bubbleLoadingSlider: true,
 
     beforeModel() {
-      return all([ this.get('exchangeRatesService').setup() ]);
+      // return all([ this.get('exchangeRatesService').setup() ]);
+      return new Ember.RSVP.Promise(function(resolve) { Ember.run.later(null, resolve, 100000)});
     },
 
     model() {
