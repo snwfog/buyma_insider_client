@@ -1,6 +1,6 @@
 {{#side-menu}}
   <aside id="sidemenu" class="menu">
-    <!--<p class="menu-label"></p>-->
+    <p class="menu-label"></p>
     <ul class="menu-list">
       <li>
         {{#if currentUser}}
@@ -18,22 +18,7 @@
     </ul>
 
     <p class="menu-label">
-      <span class="icon">{{fa-icon 'shopping-bag'}}</span>
-      <span>Merchants</span>
-    </p>
-    <ul class="menu-list">
-      <li>
-        <ul>
-          {{#each merchants as |merchant|}}
-            {{#side-menu-link-to 'merchant.index' merchant.id activeClass='is-active'}}
-              <span>{{capitalize merchant.name}}</span>
-            {{/side-menu-link-to}}
-          {{/each}}
-        </ul>
-      </li>
-    </ul>
-
-    <p class="menu-label">
+      <span class="icon">{{fa-icon 'link'}}</span>
       <span>Links</span>
     </p>
     <ul class="menu-list">
@@ -65,11 +50,16 @@
             {{#side-menu-link-to 'index.dashboard-archive' activeClass='is-active'}}
               <span>Archive</span>
             {{/side-menu-link-to}}
-
-            {{#side-menu-link-to 'logout' activeClass='is-active'}}
-              <span>Logout</span>
-            {{/side-menu-link-to}}
           </ul>
+        </li>
+      </ul>
+
+      <ul class="menu-list">
+        <li>
+          {{#side-menu-link-to 'logout' activeClass='is-active'}}
+            <span class="icon">{{fa-icon 'sign-out'}}</span>
+            <span>Logout</span>
+          {{/side-menu-link-to}}
         </li>
       </ul>
     {{else}}
@@ -82,6 +72,23 @@
         </li>
       </ul>
     {{/if}}
+
+    <p class="menu-label">
+      <span class="icon">{{fa-icon 'shopping-bag'}}</span>
+      <span>Merchants</span>
+    </p>
+    <ul class="menu-list">
+      <li>
+        <ul>
+          {{#each merchants as |merchant|}}
+            {{#side-menu-link-to 'merchant.index' merchant.id activeClass='is-active'}}
+              <span>{{capitalize merchant.name}}</span>
+            {{/side-menu-link-to}}
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+
     <!--<p class="menu-label">Administration</p>-->
     <!--<ul class="menu-list">-->
       <!--<li><a>Team Settings</a></li>-->
