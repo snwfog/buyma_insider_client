@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section is-small">
   <div class="container">
     <div class="columns">
       <div class="column is-half">
@@ -7,6 +7,9 @@
       <div class="column is-half">
         <p class="title is-4 is-capitalize has-text-right">
           {{article.name}}
+        </p>
+        <p class="subtitle is-6 has-text-right">
+          Sold {{moment-from-now articleSold.createdAt}}
         </p>
       </div>
     </div>
@@ -244,7 +247,7 @@
               {{/ui.form.-async-button}}
               --}}
 
-              {{#ui.form.-async-button class='button is-success'
+              {{#ui/form/-async-button class='button is-success'
                                        action=(pipe-action (action '_saveArticleSold')
                                                            (toast 'Sold article is saved.' 'success')
                                                            (disable 'allowEditArticleSoldPrice' this))}}
@@ -252,11 +255,50 @@
                   {{fa-icon 'floppy-o'}}
                 </span>
                 <span>Save</span>
-              {{/ui.form.-async-button}}
+              {{/ui/form/-async-button}}
             </p>
           </div>
         </div>
 
+        <div class="columns">
+          <div class="column is-4">
+            <label class="label">Buyer</label>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-12">
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Name</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-grouped">
+                  <p class="control is-expanded has-icons-left">
+                    <input type="text" class="input" placeholder="Name">
+                    <span class="icon is-small is-left">
+                      {{fa-icon 'user'}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Email</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded has-icons-left">
+                    <input type="email" class="input" placeholder="Email Address">
+                    <span class="icon is-small is-left">
+                      {{fa-icon 'envelope'}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="column is-half">
