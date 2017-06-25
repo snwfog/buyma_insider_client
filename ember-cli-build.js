@@ -37,6 +37,8 @@ module.exports = function(defaults) {
 
   // Example of different import environment
   // @see https://guides.emberjs.com/v2.0.0/addons-and-dependencies/managing-dependencies/
+  app.import('vendor/message-bus.js');
+
   app.import({
     development: app.bowerDirectory + '/bulma/css/bulma.css',
     staging:     app.bowerDirectory + '/bulma/css/bulma.css',
@@ -52,5 +54,6 @@ module.exports = function(defaults) {
   app.import(app.bowerDirectory + '/alertifyjs/dist/js/alertify.js');
   app.import(app.bowerDirectory + '/alertifyjs/dist/css/alertify.css');
   app.import('vendor/shims/alertify.js');
+
   return app.toTree();
 };

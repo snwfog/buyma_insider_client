@@ -8,7 +8,7 @@ const { computed }                 = Ember;
 
 const User = DS.Model.extend({
   articleWatcheds:          hasMany('user/articleWatched'),
-  articleSolds:             hasMany('user/articleSold'),
+  articleSolds:             hasMany('user/articleSold', { inverse: 'user' }),
   articleNotifieds:         hasMany('user/articleNotified'),
   username:                 attr(),
   createdAt:                attr('datetime'),

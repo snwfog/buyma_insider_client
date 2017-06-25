@@ -1,7 +1,14 @@
+import Ember from "ember";
 import User from "../models/user";
+
+const { info } = Ember.Logger;
 
 export function initialize(appInstance) {
 //   const store         = appInstance.lookup('service:store');
+  const messageBus = window.MessageBus;
+  appInstance.register('message-bus:main', messageBus, { instantiate: false });
+  // Do not start anything till document is completed (discourse)
+
   const currentUser = User.current();
   appInstance.register('current-user:main', currentUser, { instantiate: false });
   appInstance.inject('route',      'currentUser', 'current-user:main');
