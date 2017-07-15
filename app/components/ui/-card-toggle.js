@@ -3,8 +3,6 @@ import Ember from 'ember';
 const { computed, assert, A } = Ember;
 
 export default Ember.Component.extend({
-  classNames:         'card',
-  displayCardContent: false,
   init() {
     this._super();
     this.debug('initiating ui/-card-toggle component');
@@ -22,13 +20,16 @@ export default Ember.Component.extend({
         this.actions[ actionItemName ] = () => {
           this.debug(`Calling card ${actionItemName} (actionName: ${actionName}).`);
           actionFn();
+          this.toggleProperty('displayCardContent');
         }
       });
 
     this.set('actionItems', actionItems);
   },
 
-  actionItems:    Ember.A(),
-  hasActionItems: computed.empty('actionItems'),
-  actions:        {}
+  classNames:         'card',
+  displayCardContent: false,
+  actionItems:        Ember.A(),
+  hasActionItems:     computed.empty('actionItems'),
+  actions:            {}
 });
