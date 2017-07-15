@@ -10,11 +10,11 @@ export default ApplicationAdapter.extend({
     // return this._super(modelName);
 
   urlForCreateRecord(modelName, snapshot) {
-    var dict = {
+    let dict = {
       'action/index-page/-refresh': `index_pages/${snapshot.record.get('indexPage.id')}/_refresh`
     };
 
-    var endpoint = dict[ modelName ];
+    let endpoint = dict[ modelName ];
     return this._super(endpoint, snapshot);
   }
 });

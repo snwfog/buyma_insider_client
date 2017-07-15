@@ -3,6 +3,60 @@
   display: none;
 }
 
+// bulma
+.content {
+  > blockquote {
+    background-color: whitesmoke;
+    border-left:      5px solid #dbdbdb;
+    padding:          1.25em 1.5em;
+  }
+}
+
+.nav-item {
+  input {
+    padding: 0.5em;
+  }
+}
+
+//.media:hover {
+//  p.title    { text-decoration: underline; }
+//  p.subtitle { text-decoration: underline;}
+//}
+
+.tag {
+  &.is-small {
+    font-size: 0.6em;
+  }
+}
+
+.section {
+  &.is-small {
+    padding: 1.5em 0.75em;
+  }
+}
+
+.message {
+  .message-body {
+    &.is-small {
+      padding: 0.5em 0.75em;
+    }
+  }
+}
+
+.card {
+  .card-content {
+    &.is-small {
+      padding: 0.75em; // Reduced by 0.5em
+    }
+  }
+  .card-footer {
+    .card-footer-item {
+      text-transform: capitalize;
+    }
+  }
+}
+
+
 .buyma-timeline-pager {
   display:         flex;
   justify-content: space-between;

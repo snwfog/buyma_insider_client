@@ -96,6 +96,9 @@ export default Ember.Controller.extend({
     return Math.round((articleSoldPriceConverted - articleSoldPriceAmount) / articleSoldPriceAmount * 100);
   }),
 
+  buyerNickname:     null,
+  buyerEmailAddress: null,
+
   actions: {
     '_saveArticleSold'() {
       const currentUser = this.currentUser;
@@ -123,6 +126,10 @@ export default Ember.Controller.extend({
 
     '_removeShippingService'(shippingService) {
       this.get('articleSold.shippingServices').removeObject(shippingService);
+    },
+
+    '_addBuyer'() {
+      this.debug('Adding buyer');
     }
   }
 });
