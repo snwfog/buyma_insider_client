@@ -3,7 +3,7 @@ import config from "../../../config/environment";
 import UserArticleSold from "../../../models/user/article-sold";
 
 const { APP: { saleTaxPct, buymaCutPct } }     = config;
-const { assign, computed, RSVP: { hash } } = Ember;
+const { assert, assign, computed, RSVP: { hash } } = Ember;
 
 export default Ember.Controller.extend({
   allowEditArticleSoldPrice: false,
@@ -116,9 +116,9 @@ export default Ember.Controller.extend({
     },
 
     '_addShippingService'() {
-      var shippingService = this.get('selectShippingService');
-      Ember.assert('Must have a valid shipping service', !!shippingService);
-      var articleSold = this.get('articleSold');
+      let shippingService = this.get('selectShippingService');
+      assert('Must have a valid shipping service', !!shippingService);
+      let articleSold = this.get('articleSold');
       articleSold.get('shippingServices').pushObject(shippingService);
       this.set('selectShippingService', null);
       return Ember.RSVP.resolve();
@@ -128,8 +128,30 @@ export default Ember.Controller.extend({
       this.get('articleSold.shippingServices').removeObject(shippingService);
     },
 
-    '_addBuyer'() {
-      this.debug('Adding buyer');
+    '_setBuyer'() {
+      let { buyerEmailAddress,
+            buyerNickname,
+            articleSold,
+            currentBuyer } = this.getProperties('buyerEmailAddress',
+                                                'buyerNickname',
+                                                'model.articleSold',
+                                                'model.articleSold.buyer');
+      if (currentBuyer) {
+        info('There is currently a buyer associated with this article.');
+      }
+
+      return this.store
+        .createRecord('buyer', {
+          firstName:    buyerNickname,
+          emailAddress: buyerEmailAddress })
+        .save()
+        .then((buyer) => {
+          return articleSold.set('buyer', buyer) || articleSold;
+        });
+    },
+
+    '_saveNotes'() {
+      this.debug('Saving notes');
     }
   }
 });

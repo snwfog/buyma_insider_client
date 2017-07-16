@@ -19,7 +19,7 @@
         <div class="column is-half"></div>
         <div class="column is-half">
           <article class="message is-info">
-            <div class="message-body">
+            <div class="message-body is-small">
               {{articleSold.notes}}
             </div>
           </article>
@@ -275,7 +275,8 @@
 
         <div class="columns">
           <div class="column is-12">
-            {{#ui/-card-toggle footerAction1='save' save=(action '_addBuyer')}}
+            {{#ui/-card-toggle footerItems='save'
+                               footerAction1=(action '_setBuyer')}}
               Buyer
             {{else}}
               <div class="field is-horizontal">
@@ -285,7 +286,7 @@
                 <div class="field-body">
                   <div class="field is-grouped">
                     <p class="control is-expanded has-icons-left">
-                      {{input type='text' class='input' placeholder='Name' value=buyerNickname}}
+                      {{input type='text' class='input' placeholder='Full Name' value=buyerNickname}}
                       <span class="icon is-small is-left">
                         {{fa-icon 'user'}}
                       </span>
@@ -305,6 +306,7 @@
                         {{fa-icon 'envelope'}}
                       </span>
                     </p>
+                    <p class="help is-info">The buyer email address must be unique.</p>
                   </div>
                 </div>
               </div>
@@ -314,7 +316,8 @@
 
         <div class="columns">
           <div class="column is-12">
-            {{#ui/-card-toggle}}
+            {{#ui/-card-toggle footerItems='save'
+                               footerAction1=(action '_saveNotes')}}
               Notes
             {{else}}
               <div class="field is-horizontal">
