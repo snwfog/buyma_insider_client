@@ -3,7 +3,7 @@ import config from "../../../config/environment";
 import UserArticleSold from "../../../models/user/article-sold";
 
 const { APP: { saleTaxPct, buymaCutPct } }     = config;
-const { assert, assign, computed, RSVP: { hash } } = Ember;
+const { assert, assign, computed, RSVP: { hash }, Logger: { info } } = Ember;
 
 export default Ember.Controller.extend({
   allowEditArticleSoldPrice: false,
@@ -96,7 +96,8 @@ export default Ember.Controller.extend({
     return Math.round((articleSoldPriceConverted - articleSoldPriceAmount) / articleSoldPriceAmount * 100);
   }),
 
-  buyerNickname:     null,
+  buyerFirstName:    null,
+  buyerLastName:     null,
   buyerEmailAddress: null,
 
   actions: {
@@ -129,25 +130,21 @@ export default Ember.Controller.extend({
     },
 
     '_setBuyer'() {
-      let { buyerEmailAddress,
-            buyerNickname,
-            articleSold,
-            currentBuyer } = this.getProperties('buyerEmailAddress',
-                                                'buyerNickname',
-                                                'model.articleSold',
-                                                'model.articleSold.buyer');
+      let { buyerEmailAddress, buyerFirstName, buyerLastName } = this.getProperties('buyerEmailAddress buyerFirstName buyerLastName'.w());
+      let articleSold                          = this.get('model.articleSold');
+      let currentBuyer                         = this.get('model.articleSold.buyer');
       if (currentBuyer) {
         info('There is currently a buyer associated with this article.');
       }
 
-      return this.store
-        .createRecord('buyer', {
-          firstName:    buyerNickname,
-          emailAddress: buyerEmailAddress })
-        .save()
-        .then((buyer) => {
-          return articleSold.set('buyer', buyer) || articleSold;
-        });
+      let buyer = this.store.createRecord('buyer', {
+        articleSold,
+        firstName:    buyerFirstName,
+        lastName:     buyerLastName,
+        emailAddress: buyerEmailAddress });
+
+      articleSold.set('buyer', buyer);
+      return articleSold.save();
     },
 
     '_saveNotes'() {

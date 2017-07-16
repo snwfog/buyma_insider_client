@@ -1,7 +1,9 @@
-import ApplicationSerializer from "../application";
-import UserArticleSold from "../../models/user/article-sold";
+import DS from 'ember-data';
+import ApplicationSerializer from '../application';
+import UserArticleSold from '../../models/user/article-sold';
 
 const attrs = {
+  buyer:     { embedded: 'always' },
   createdAt: { serialize: false },
   updatedAt: { serialize: false },
 };
@@ -12,10 +14,6 @@ Object.keys(UserArticleSold.STATUS)
     return memoAttrs;
   }, attrs);
 
-const UserArticleSoldSerializer = ApplicationSerializer
-  .extend({
-    attrs
-  });
-
+const UserArticleSoldSerializer = ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, { attrs });
 export default UserArticleSoldSerializer;
 

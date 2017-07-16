@@ -281,12 +281,27 @@
             {{else}}
               <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                  <label class="label">Name</label>
+                  <label class="label">First Name</label>
                 </div>
                 <div class="field-body">
                   <div class="field is-grouped">
                     <p class="control is-expanded has-icons-left">
-                      {{input type='text' class='input' placeholder='Full Name' value=buyerNickname}}
+                      {{input type='text' class='input' placeholder='First Name' value=buyerFirstName}}
+                      <span class="icon is-small is-left">
+                        {{fa-icon 'user'}}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label class="label">Last Name</label>
+                </div>
+                <div class="field-body">
+                  <div class="field is-grouped">
+                    <p class="control is-expanded has-icons-left">
+                      {{input type='text' class='input' placeholder='Last Name' value=buyerLastName}}
                       <span class="icon is-small is-left">
                         {{fa-icon 'user'}}
                       </span>
