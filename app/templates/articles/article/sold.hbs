@@ -499,6 +499,9 @@
                                                prompt='Extra Tariffs'
                                                selection=selectExtraTariff
                                                action=(action '_assignSelectExtraTariffs') as |extraTariff|}}
+                              <option value="{{extraTariff.id}}">
+                                {{capitalize extraTariff.name}}
+                              </option>
                             {{/ui/form/-select}}
                           </span>
                         </div>

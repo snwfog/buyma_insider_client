@@ -6,7 +6,7 @@ const { computed } = Ember;
 
 export default Ember.Route.extend({
   model() {
-    var { merchants } = this.modelFor('application');
+    let { merchants } = this.modelFor('application');
     return hash({ merchants });
   },
 

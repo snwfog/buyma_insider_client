@@ -3,6 +3,10 @@ import Ember from "ember";
 const { assign, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
+  titleToken(model) {
+    return model.article.get('name');
+  },
+
   model(params) {
     // If we pass {{#link-to 'articles' article}} to
     // link-to and to the route, then Ember do not

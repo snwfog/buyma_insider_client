@@ -31,7 +31,9 @@ export default Ember.Controller.extend({
     return this.get('articleSold.shippingServices');
   }).readOnly(),
 
-  allExtraTariffs:               A(),
+  allExtraTariffs: computed(function () {
+    return this.store.peekAll('extraTariff');
+  }).readOnly(),
   selectExtraTariffs:            null,
 
   // Article price-balance sheet variable

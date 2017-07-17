@@ -9,6 +9,10 @@ export function initialize(appInstance) {
   const shippingServicesPayload = PreloadStore.get('shipping_services');
   store.pushPayload('shippingService', shippingServicesPayload);
 
+  // Extra tariffs for shipping
+  const extraTariffsPayload = PreloadStore.get('extra_tariffs');
+  store.pushPayload('extraTariff', extraTariffsPayload);
+
   // Article notification criteria
   const articleNotificationCriteriaPayload = PreloadStore.get('article_notification_criteria');
   store.pushPayload('article/notificationCriterium', articleNotificationCriteriaPayload);

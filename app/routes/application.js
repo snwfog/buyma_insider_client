@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import config from '../config/environment';
 import LoadingSliderMixin from '../mixins/loading-slider';
 
 const { merge, computed, RSVP: { all, hash } } = Ember;
@@ -10,6 +11,11 @@ export default Ember.Route.extend(
     // Bubble the loading option from the component
     // so that default ember loading mechanism still works
     bubbleLoadingSlider: true,
+
+    title: function(tokens) {
+      tokens.unshift(config.appName);
+      return tokens.reverse().join(' - ');
+    },
 
     beforeModel() {
       return all([ this.get('exchangeRatesService').setup() ]);
