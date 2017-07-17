@@ -51,7 +51,9 @@
   }
   .card-footer {
     .card-footer-item {
-      text-transform: capitalize;
+      > a {
+        text-transform: capitalize;
+      }
     }
   }
 }

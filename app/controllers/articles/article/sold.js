@@ -2,8 +2,13 @@ import Ember from 'ember';
 import config from "../../../config/environment";
 import UserArticleSold from "../../../models/user/article-sold";
 
-const { APP: { saleTaxPct, buymaCutPct } }     = config;
-const { assert, assign, computed, RSVP: { hash }, Logger: { info } } = Ember;
+const { APP: { saleTaxPct, buymaCutPct } } = config;
+const { A,
+        assert,
+        assign,
+        computed,
+        RSVP: { hash },
+        Logger: { info } } = Ember;
 
 export default Ember.Controller.extend({
   allowEditArticleSoldPrice: false,
@@ -17,15 +22,17 @@ export default Ember.Controller.extend({
     }, statuses);
   }),
 
-  allShippingServices: computed(function() {
+  allShippingServices:           computed(function () {
     return this.store.peekAll('shippingService');
   }).readOnly(),
-
   selectShippingService:         null,
   articleSoldShippingServiceIds: computed.mapBy('articleSoldShippingServices', 'id'),
-  articleSoldShippingServices:   computed('model.articleSold.shippingServices.[]', function() {
+  articleSoldShippingServices:   computed('model.articleSold.shippingServices.[]', function () {
     return this.get('articleSold.shippingServices');
   }).readOnly(),
+
+  allExtraTariffs:               A(),
+  selectExtraTariffs:            null,
 
   // Article price-balance sheet variable
   articleSoldPrice: computed('articleSold.price.amount', function () {
@@ -96,9 +103,9 @@ export default Ember.Controller.extend({
     return Math.round((articleSoldPriceConverted - articleSoldPriceAmount) / articleSoldPriceAmount * 100);
   }),
 
-  buyerFirstName:    null,
-  buyerLastName:     null,
-  buyerEmailAddress: null,
+  buyerFirstName:    computed.alias('model.articleSold.buyer.firstName'),
+  buyerLastName:     computed.alias('model.articleSold.buyer.lastName'),
+  buyerEmailAddress: computed.alias('model.articleSold.buyer.emailAddress'),
 
   actions: {
     '_saveArticleSold'() {
@@ -129,6 +136,10 @@ export default Ember.Controller.extend({
       this.get('articleSold.shippingServices').removeObject(shippingService);
     },
 
+    '_assignSelectExtraTariffs'() {
+      this.debug('Adding extra tariffs');
+    },
+
     '_setBuyer'() {
       let { buyerEmailAddress, buyerFirstName, buyerLastName } = this.getProperties('buyerEmailAddress buyerFirstName buyerLastName'.w());
       let articleSold                          = this.get('model.articleSold');
@@ -148,7 +159,7 @@ export default Ember.Controller.extend({
     },
 
     '_saveNotes'() {
-      this.debug('Saving notes');
+      this.send('_saveArticleSold');
     }
   }
 });

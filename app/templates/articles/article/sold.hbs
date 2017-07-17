@@ -292,8 +292,7 @@
                       </span>
                     </p>
                   </div>
-                </div>
-              </div>
+                </div> </div>
               <div class="field is-horizontal">
                 <div class="field-label is-normal">
                   <label class="label">Last Name</label>
@@ -379,8 +378,8 @@
                     </div>
                     <div class="field-body">
                       <div class="field">
-                        <div class="control">
-                          <span class="select">
+                        <div class="control is-expanded">
+                          <span class="select is-fullwidth">
                             {{#ui/form/-select content=allShippingServices
                                                prompt='Shipping Services'
                                                selection=selectShippingService
@@ -479,6 +478,31 @@
                           <a class="button is-primary is-outlined">30%</a>
                           <a class="button is-primary is-outlined">40%</a>
                         </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+
+              <!--Extra tariffs-->
+              <footer class="card-footer">
+                <div class="card-footer-item">
+                  <div class="field is-horizontal is-fullwidth">
+                    <div class="field-label">
+                      <label class="label">Extra Tariffs</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control is-expanded">
+                          <span class="select is-fullwidth">
+                            {{#ui/form/-select content=allExtraTariffs
+                                               prompt='Extra Tariffs'
+                                               selection=selectExtraTariff
+                                               action=(action '_assignSelectExtraTariffs') as |extraTariff|}}
+                            {{/ui/form/-select}}
+                          </span>
+                        </div>
+                        <p class="help">Other tariffs? <a>Add more tariff presets</a>.</p>
                       </div>
                     </div>
                   </div>
