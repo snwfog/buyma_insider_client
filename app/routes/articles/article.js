@@ -3,8 +3,8 @@ import Ember from "ember";
 const { assign, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
-  titleToken(model) {
-    return model.article.get('name');
+  titleToken({ article }) {
+    return article.get('name');
   },
 
   model(params) {

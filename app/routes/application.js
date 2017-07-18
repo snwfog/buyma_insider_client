@@ -12,9 +12,12 @@ export default Ember.Route.extend(
     // so that default ember loading mechanism still works
     bubbleLoadingSlider: true,
 
-    title: function(tokens) {
+    title(tokens) {
       tokens.unshift(config.appName);
-      return tokens.reverse().join(' - ');
+      return tokens
+        .reverse()
+        .join(' - ')
+        .capitalize();
     },
 
     beforeModel() {

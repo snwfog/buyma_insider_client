@@ -142,6 +142,14 @@ export default Ember.Controller.extend({
       this.debug('Adding extra tariffs');
     },
 
+    '_addExtraTariff'() {
+      this.debug('Adding extra tariff');
+    },
+
+    '_removeExtraTariff'(extraTariff) {
+      this.debug('Remove extra tariff');
+    },
+
     '_setBuyer'() {
       let { buyerEmailAddress, buyerFirstName, buyerLastName } = this.getProperties('buyerEmailAddress buyerFirstName buyerLastName'.w());
       let articleSold                          = this.get('model.articleSold');
@@ -162,6 +170,6 @@ export default Ember.Controller.extend({
 
     '_saveNotes'() {
       this.send('_saveArticleSold');
-    }
+    },
   }
 });

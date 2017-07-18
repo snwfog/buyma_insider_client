@@ -18,7 +18,7 @@
 {{#each footerActionItems as |footerActionItem|}}
   <div class="card-footer {{if (not displayCardContent) 'is-hidden'}}">
     <a class="card-footer-item" {{action footerActionItem.footerActionName}}>
-      {{footerActionItem.footerItemName}}
+      {{capitalize footerActionItem.footerItemName}}
     </a>
   </div>
 {{/each}}

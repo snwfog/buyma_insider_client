@@ -6,3 +6,7 @@
   &.is-yellow  { color: $yellow !important; }
   &.is-red     { color: $red !important; }
 }
+
+hr.is-small {
+  margin: 0.75rem 0; // 0.75 reduction
+}

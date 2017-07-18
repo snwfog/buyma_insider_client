@@ -3,6 +3,9 @@ import Ember from 'ember';
 const { hash } = Ember.RSVP;
 
 export default Ember.Route.extend({
+  titleToken({ merchant }) {
+    return merchant.get('name');
+  },
 //  deserialize(params, transition) {
 //    var merchantId = params['merchant_metadata_id']
 //    delete params['merchant_metadata_id'];

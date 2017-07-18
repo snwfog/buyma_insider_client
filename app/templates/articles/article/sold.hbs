@@ -320,7 +320,7 @@
                         {{fa-icon 'envelope'}}
                       </span>
                     </p>
-                    <p class="help is-info">The buyer email address must be unique.</p>
+                    <p class="help is-info">Buyer's email address must be unique.</p>
                   </div>
                 </div>
               </div>
@@ -370,42 +370,41 @@
             <div class="card">
 
               <!--Shipping services-->
-              <footer class="card-footer">
-                <div class="card-footer-item">
-                  <div class="field is-horizontal is-fullwidth">
-                    <div class="field-label">
-                      <label class="label">Shipping</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control is-expanded">
-                          <span class="select is-fullwidth">
-                            {{#ui/form/-select content=allShippingServices
-                                               prompt='Shipping Services'
-                                               selection=selectShippingService
-                                               action=(action '_assignSelectShippingService') as |shippingService|}}
-                              {{#if (contains shippingService.id articleSoldShippingServiceIds)}}
-                                <option disabled value="{{shippingService.id}}">
-                                  {{capitalize shippingService.serviceName}}
-                                </option>
-                              {{else}}
-                                <option value="{{shippingService.id}}">
-                                  {{capitalize shippingService.serviceName}}
-                                </option>
-                              {{/if}}
-                            {{/ui/form/-select}}
-                          </span>
-                        </div>
-                        <p class="help">Nothing fit? <a>Add more shipping options</a>.</p>
+              <div class="card-content is-small">
+                <div class="field is-horizontal is-fullwidth">
+                  <div class="field-label">
+                    <label class="label">Shipping</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control is-expanded">
+                        <span class="select is-fullwidth">
+                          {{#ui/form/-select content=allShippingServices
+                                             prompt='Shipping Services'
+                                             selection=selectShippingService
+                                             action=(action '_assignSelectShippingService') as |shippingService|}}
+                            {{#if (contains shippingService.id articleSoldShippingServiceIds)}}
+                              <option disabled value="{{shippingService.id}}">
+                                {{capitalize shippingService.serviceName}}
+                              </option>
+                            {{else}}
+                              <option value="{{shippingService.id}}">
+                                {{capitalize shippingService.serviceName}}
+                              </option>
+                            {{/if}}
+                          {{/ui/form/-select}}
+                        </span>
                       </div>
+                      <p class="help">Nothing fit? <a>Add more shipping options</a>.</p>
                     </div>
                   </div>
                 </div>
-              </footer>
+              </div>
 
+              <hr class="is-small">
               <!--Selected shipping service-->
               {{#with selectShippingService as |service|}}
-                <div class="card-content padding-1">
+                <div class="card-content is-small">
                     <div class="field is-horizontal is-fullwidth">
                       <div class="field-label"><label class="label"></label></div>
                       <div class="field-body">
@@ -455,62 +454,82 @@
                             <span class="icon">
                               {{fa-icon 'plus-circle'}}
                             </span>
-                            <span>Add shipping</span>
+                            <span>Add Shipping</span>
                           {{/ui/form/-async-button}}
                         </p>
                       </div>
                     </div>
                 </div>
+                <hr class="is-small">
               {{/with}}
 
               <!--Margin options-->
-              <footer class="card-footer">
-                <div class="card-footer-item">
-                  <div class="field is-horizontal is-fullwidth">
-                    <div class="field-label">
-                      <label class="label">Profit Margins</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field is-grouped">
-                        <p class="control">
-                          <a class="button is-primary is-outlined">10%</a>
-                          <a class="button is-primary is-outlined">20%</a>
-                          <a class="button is-primary is-outlined">30%</a>
-                          <a class="button is-primary is-outlined">40%</a>
-                        </p>
-                      </div>
+              <div class="card-content is-small">
+                <div class="field is-horizontal is-fullwidth">
+                  <div class="field-label">
+                    <label class="label">Profit Margins</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field is-grouped">
+                      <p class="control">
+                        <a class="button is-primary is-outlined">10%</a>
+                        <a class="button is-primary is-outlined">20%</a>
+                        <a class="button is-primary is-outlined">30%</a>
+                        <a class="button is-primary is-outlined">40%</a>
+                      </p>
                     </div>
                   </div>
                 </div>
-              </footer>
+              </div>
+
+              <hr class="is-small">
 
               <!--Extra tariffs-->
-              <footer class="card-footer">
-                <div class="card-footer-item">
-                  <div class="field is-horizontal is-fullwidth">
-                    <div class="field-label">
-                      <label class="label">Extra Tariffs</label>
+              <div class="card-content is-small">
+
+                <div class="field is-horizontal is-fullwidth">
+                  <div class="field-label">
+                    <label class="label">Extra Tariffs</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control is-expanded">
+                        <span class="select is-fullwidth">
+                          {{#ui/form/-select content=allExtraTariffs
+                                             prompt='Extra Tariffs'
+                                             selection=selectExtraTariff
+                                             action=(action '_assignSelectExtraTariffs') as |extraTariff|}}
+                            <option value="{{extraTariff.id}}"
+                                    class="{{if extraTariff.isInFlow 'is-green' 'is-red'}}">
+                              <label class="label">
+                                {{capitalize extraTariff.name}} [ {{extraTariff.shortSummary}} ]
+                              </label>
+                            </option>
+                          {{/ui/form/-select}}
+                        </span>
+                      </div>
+                      <p class="help">Other tariffs? <a>Add more tariff presets</a>.</p>
                     </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control is-expanded">
-                          <span class="select is-fullwidth">
-                            {{#ui/form/-select content=allExtraTariffs
-                                               prompt='Extra Tariffs'
-                                               selection=selectExtraTariff
-                                               action=(action '_assignSelectExtraTariffs') as |extraTariff|}}
-                              <option value="{{extraTariff.id}}">
-                                {{capitalize extraTariff.name}}
-                              </option>
-                            {{/ui/form/-select}}
+                  </div>
+                </div>
+
+                <div class="field is-horizontal">
+                  <div class="field-label"><!--Spaceholder--></div>
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        {{#ui/form/-async-button class='button is-success'
+                                                 action=(action '_addExtraTariff')}}
+                          <span class="icon">
+                            {{fa-icon 'plus-circle'}}
                           </span>
-                        </div>
-                        <p class="help">Other tariffs? <a>Add more tariff presets</a>.</p>
+                          <span>Add Extra Tariff</span>
+                        {{/ui/form/-async-button}}
                       </div>
                     </div>
                   </div>
                 </div>
-              </footer>
+              </div>
 
               <!--Sold article actions-->
               <footer class="card-footer">

@@ -1,7 +1,11 @@
-import Ember from "ember";
+import Ember from 'ember';
 const { A, RSVP: { hash } } = Ember;
 
 export default Ember.Route.extend({
+  titleToken(models) {
+    return 'dashboard';
+  },
+
   beforeModel(transition) {
     if (!this.currentUser) {
       transition.abort();
