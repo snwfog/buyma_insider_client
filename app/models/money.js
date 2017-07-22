@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import config from '../config/environment';
 
 const { computed } = Ember;
 const { attr } = DS;
@@ -7,17 +8,22 @@ const { attr } = DS;
 /**
  * Private non-serializable model
  */
-var MoneyModel = DS.Model.extend({
+let MoneyModel = DS.Model.extend({
   base:   attr(),
   amount: attr(),
+
   whole:  computed('amount', function () {
     var amount = this.get('amount');
     return Math.floor(Number(amount));
   }),
 
+  isCad: computed.equal('base', config.APP.CURRENCIES.CAD),
+  isJpy: computed.equal('base', config.APP.CURRENCIES.JPY),
+  isUsd: computed.equal('base', config.APP.CURRENCIES.USD),
+
   change: computed('amount', function () {
-    var amount  = this.get('amount');
-    var decimal = Math.floor(Number(amount) * 100) % 100;
+    let amount  = this.get('amount');
+    let decimal = Math.floor(Number(amount) * 100) % 100;
     return decimal < 10 ? '0' + decimal : decimal;
   }),
 

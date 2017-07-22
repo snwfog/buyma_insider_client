@@ -22,9 +22,27 @@ module.exports = function (environment) {
       buymaCutPct: 5.5,
       saleTaxPct:  15,
       currencies:  [ 'cad', 'jpy', 'usd' ],
-
-      SERVER: {
+      CURRENCIES:  {
+        CAD: 'cad',
+        JPY: 'jpy',
+        USD: 'usd',
+      },
+      SERVER:      {
         namespace: 'api/v1',
+      }
+    },
+
+    MODEL: {
+      EXTRA_TARIFFS: {
+        RATE_TYPE: {
+          FLAT_RATE:    'float_rate',
+          PERCENT_RATE: 'percent_rate'
+        },
+
+        FLOW_DIRECTION: {
+          INFLOW:  'inflow',
+          OUTFLOW: 'outflow',
+        }
       }
     }
   };

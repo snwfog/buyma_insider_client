@@ -158,9 +158,8 @@
           </div>
         </div>
 
-
         <!--Shipping Services-->
-        {{#each articleSoldShippingServices as |shippingService index|}}
+        {{#each articleSold.shippingServices as |shippingService index|}}
           <div class="columns">
             {{#if (eq index 0)}}
               <div class="column is-4">
@@ -200,6 +199,59 @@
           <div class="columns">
             <div class="column is-4">
               <label class="label">Shipping Costs</label>
+            </div>
+            <div class="column is-8">
+              <div class="columns is-mobile">
+                <div class="column is-6">
+                  -
+                </div>
+                <div class="column is-6"></div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+
+        <!--Extra Tariffs-->
+        {{#each articleSold.extraTariffs as |extraTariff index|}}
+          <div class="columns">
+            {{#if (eq index 0)}}
+              <div class="column is-4">
+                <label class="label">Extra Tariffs</label>
+              </div>
+            {{else}}
+              <div class="column is-4"></div>
+            {{/if}}
+            <div class="column is-8">
+              <div class="columns is-mobile">
+                <div class="column is-6">
+                  <span class="{{if extraTariff.isInflow 'is-green' 'is-red'}}">
+                    ({{ui/-money extraTariff.computedRateMoney 'jpy' showCode=false}})
+                  </span>
+                </div>
+                <div class="column is-6">
+                  <div class="media">
+                    <div class="media-left">
+                      {{#ui/form/-async-button class='button is-danger is-small'
+                                               action=(action '_removeExtraTariff' extraTariff)}}
+                        <span class="icon is-small">
+                          {{fa-icon 'minus-circle'}}
+                        </span>
+                      {{/ui/form/-async-button}}
+                    </div>
+                    <div class="media-content">
+                      <span>
+                        {{extraTariff.description}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{else}}
+          <div class="columns">
+            <div class="column is-4">
+              <label class="label">Extra Tariffs</label>
             </div>
             <div class="column is-8">
               <div class="columns is-mobile">
@@ -500,10 +552,8 @@
                                              selection=selectExtraTariff
                                              action=(action '_assignSelectExtraTariffs') as |extraTariff|}}
                             <option value="{{extraTariff.id}}"
-                                    class="{{if extraTariff.isInFlow 'is-green' 'is-red'}}">
-                              <label class="label">
-                                {{capitalize extraTariff.name}} [ {{extraTariff.shortSummary}} ]
-                              </label>
+                                    class="{{if extraTariff.isInflow 'is-green' 'is-red'}}">
+                              {{capitalize extraTariff.name}} [ {{extraTariff.shortSummary}} ]
                             </option>
                           {{/ui/form/-select}}
                         </span>

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import config from "../../../config/environment";
+import ExtraTariff from '../../../models/extra-tariff';
 import UserArticleSold from "../../../models/user/article-sold";
 
 const { APP: { saleTaxPct, buymaCutPct } } = config;
@@ -22,19 +23,30 @@ export default Ember.Controller.extend({
     }, statuses);
   }),
 
-  allShippingServices:           computed(function () {
+  allShippingServices:             computed(function () {
     return this.store.peekAll('shippingService');
   }).readOnly(),
-  selectShippingService:         null,
-  articleSoldShippingServiceIds: computed.mapBy('articleSoldShippingServices', 'id'),
-  articleSoldShippingServices:   computed('model.articleSold.shippingServices.[]', function () {
-    return this.get('articleSold.shippingServices');
-  }).readOnly(),
+  selectShippingService:           null,
+  articleSoldShippingServiceIds:   computed.mapBy('articleSold.shippingServices', 'id'),
+  calculatedTotalShippingServices: computed('articleSold.shippingServices.[]', function () {
+    return this
+      .getWithDefault('articleSold.shippingServices', A())
+      .reduce((totalShippingCost, shippingService) => {
+        return totalShippingCost + shippingService.get('rate.amount');
+      }, 0.0);
+  }),
 
-  allExtraTariffs: computed(function () {
+  allExtraTariffs:             computed(function () {
     return this.store.peekAll('extraTariff');
   }).readOnly(),
-  selectExtraTariffs:            null,
+  selectExtraTariffs:          null,
+  calculatedTotalExtraTariffs: computed('articleSold.extraTariffs.[]', function () {
+    return this
+      .getWithDefault('articleSold.extraTariffs', A())
+      .reduce((totalExtraTariffs, extraTariff) => {
+        return totalExtraTariffs + extraTariff.get('_computedRate');
+      }, 0.0);
+  }),
 
   // Article price-balance sheet variable
   articleSoldPrice: computed('articleSold.price.amount', function () {
@@ -56,8 +68,7 @@ export default Ember.Controller.extend({
   _profit: null,
   profit:  computed('articleSoldPriceWithSaleTax.amount', 'articleSoldSoldPrice', function () {
     const profit                     = this.get('_profit') || this.store.createRecord('money', { base: 'jpy' });
-    const articleSoldPriceWithTaxJpy = this.exchangeRatesService.convertCurrency(
-      'cad', 'jpy', this.get('articleSoldPriceWithSaleTax.amount'));
+    const articleSoldPriceWithTaxJpy = this.exchangeRatesService.cad2jpy( this.get('articleSoldPriceWithSaleTax.amount'));
     profit.set('amount', -Number(articleSoldPriceWithTaxJpy) + Number(this.get('articleSoldSoldPrice')));
     this.set('_profit', profit);
     return profit;
@@ -73,20 +84,20 @@ export default Ember.Controller.extend({
   }),
 
   _totalEarned: null,
-  totalEarned:  computed('profit.amount', 'buymaCut.amount', 'articleSold.shippingServices.[]', function () {
-    const total  = this.get('_totalEarned') || this.store.createRecord('money', { base: 'jpy' });
-    const exchangeRatesService = this.exchangeRatesService;
-    const amount =
-            Number(this.get('profit.amount')) -
-            Number(this.get('buymaCut.amount')) -
-            this.get('articleSold.shippingServices').reduce((totalShippingCost, shippingService) => {
-              return totalShippingCost + exchangeRatesService.cad2jpy(shippingService.get('rate.amount'));
-            }, 0.0);
+  totalEarned:  computed('profit.amount', 'buymaCut.amount',
+    'calculatedTotalShippingServices', 'calculatedTotalExtraTariffs', function () {
+      let total  = this.get('_totalEarned') || this.store.createRecord('money', { base: 'jpy' });
+      let amount = Number(this.get('profit.amount'))
+                   - Number(this.get('buymaCut.amount'));
 
-    total.set('amount', amount);
-    this.set('_totalEarned', total);
-    return total;
-  }),
+      let extraTariffs = this.get('calculatedTotalExtraTariffs');
+      let totalShippings = this.get('calculatedTotalShippingServices');
+      // Use jpy
+      amount += this.exchangeRatesService.cad2jpy(- totalShippings + extraTariffs)
+      total.set('amount', amount);
+      this.set('_totalEarned', total);
+      return total;
+    }),
 
   priceMarginPct: computed('articleSold.soldPrice.amount', function () {
     var articleSoldSoldPrice = this.get('articleSold.soldPrice');
@@ -138,22 +149,34 @@ export default Ember.Controller.extend({
       this.get('articleSold.shippingServices').removeObject(shippingService);
     },
 
-    '_assignSelectExtraTariffs'() {
-      this.debug('Adding extra tariffs');
+    '_assignSelectExtraTariffs'(extraTariff, extraTariffId) {
+      let articleSold = this.get('articleSold');
+      assert('Must have an articleSold', !!this.get('articleSold'));
+      extraTariff.set('articleSold', this.get('articleSold'));
+      this.set('selectExtraTariff', extraTariff);
     },
 
     '_addExtraTariff'() {
-      this.debug('Adding extra tariff');
+      let extraTariff = this.get('selectExtraTariff');
+      assert('Must have a valid extra tariff', !!extraTariff);
+      this.get('articleSold.extraTariffs').pushObject(extraTariff);
+      this.set('selectExtraTariff', null);
+      return Ember.RSVP.resolve();
     },
 
     '_removeExtraTariff'(extraTariff) {
-      this.debug('Remove extra tariff');
+      this.debug('TODO: Remove extra tariff');
+      extraTariff.set('articleSold', null);
     },
 
     '_setBuyer'() {
-      let { buyerEmailAddress, buyerFirstName, buyerLastName } = this.getProperties('buyerEmailAddress buyerFirstName buyerLastName'.w());
-      let articleSold                          = this.get('model.articleSold');
-      let currentBuyer                         = this.get('model.articleSold.buyer');
+      let {
+            buyerEmailAddress,
+            buyerFirstName,
+            buyerLastName
+          }            = this.getProperties('buyerEmailAddress buyerFirstName buyerLastName'.w());
+      let articleSold  = this.get('model.articleSold');
+      let currentBuyer = this.get('model.articleSold.buyer');
       if (currentBuyer) {
         info('There is currently a buyer associated with this article.');
       }

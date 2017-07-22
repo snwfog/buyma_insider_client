@@ -4,11 +4,9 @@
     {{#if articleWatched}}
       <article class="media">
         <div class="media-left">
-          <p class="title is-2">
-            <span class="icon">
-              {{fa-icon 'star' class='is-yellow'}}
-            </span>
-          </p>
+          <span class="icon">
+            {{fa-icon 'star' class='is-yellow'}}
+          </span>
         </div>
         <div class="media-content">
           <div class="content">
@@ -24,8 +22,8 @@
               </div>
               <div class="field-body">
                 <div class="field">
-                  <div class="control">
-                    <span class="select">
+                  <div class="control is-expanded">
+                    <span class="select is-fullwidth">
                       {{#ui/form/-select content=allArticleNotificationCriteria
                                          prompt='Notification Criteria'
                                          optionValuePath='id'
@@ -93,11 +91,9 @@
     {{#each (sort-by 'createdAt:desc' articleSolds) as |articleSold|}}
       <article class="media">
         <div class="media-left">
-          <p class="title is-2">
           <span class="icon">
             {{fa-icon 'shopping-bag' class='is-success'}}
           </span>
-          </p>
         </div>
         <div class="media-content">
           <div class="content">

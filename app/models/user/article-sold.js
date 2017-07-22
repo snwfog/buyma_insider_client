@@ -22,12 +22,12 @@ const statusAttrs = Object
   }, Ember.copy(STATUS));
 
 const UserArticleSold = DS.Model.extend(statusAttrs, {
-  user:             belongsTo('user', { inverse: 'articleSolds' }),
+  user:             belongsTo('user',           { inverse: 'articleSolds' }),
   article:          belongsTo('article'),
-  exchangeRate:     belongsTo('exchange-rate', { async: false }),
-  buyer:            belongsTo('buyer', { async: false }),
-  shippingServices: hasMany('shipping-service'),
-  extraTariffs:     hasMany('extra-tariff'),
+  exchangeRate:     belongsTo('exchange-rate',  { async: false }),
+  buyer:            belongsTo('buyer',          { async: false }),
+  shippingServices: hasMany('shipping-service', { async: false }),
+  extraTariffs:     hasMany('extra-tariff',     { async: false }),
   status:           attr(),
   price:            attr('money', { code: 'cad' }),
   notes:            attr(),
