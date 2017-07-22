@@ -52,7 +52,7 @@
 
         <div class="columns">
           <div class="column is-4">
-            <label class="label">With Sales Tax</label>
+            <label class="label">+ Sales Tax</label>
           </div>
           <div class="column is-8">
             <div class="columns is-mobile">
@@ -522,13 +522,20 @@
                     <label class="label">Profit Margins</label>
                   </div>
                   <div class="field-body">
-                    <div class="field is-grouped">
-                      <p class="control">
-                        <a class="button is-primary is-outlined">10%</a>
-                        <a class="button is-primary is-outlined">20%</a>
-                        <a class="button is-primary is-outlined">30%</a>
-                        <a class="button is-primary is-outlined">40%</a>
-                      </p>
+                    <div class="field">
+                      <div class="control is-expanded">
+                        <span class="select is-fullwidth">
+                          {{#ui/form/-select content=autoProfitMargins
+                                             prompt='Auto Profit'
+                                             selection=selectAutoProfitMargin
+                                             action=(action '_assignSelectAutoProfitMargin') as |autoProfitMargin|}}
+                            <option class="is-green">
+                              {{autoProfitMargin.rate}}% (money)
+                            </option>
+                          {{/ui/form/-select}}
+                        </span>
+                      </div>
+                      <p class="help">Message......</p>
                     </div>
                   </div>
                 </div>

@@ -19,15 +19,15 @@ module.exports = function (environment) {
     },
 
     APP: {
-      buymaCutPct: 5.5,
-      saleTaxPct:  15,
-      currencies:  [ 'cad', 'jpy', 'usd' ],
-      CURRENCIES:  {
+      BUYMA_CUT_PCT:     5.5,
+      CAD_SALES_TAX_PCT: 15,
+      currencies:        [ 'cad', 'jpy', 'usd' ],
+      CURRENCIES:        {
         CAD: 'cad',
         JPY: 'jpy',
         USD: 'usd',
       },
-      SERVER:      {
+      SERVER:            {
         namespace: 'api/v1',
       }
     },
