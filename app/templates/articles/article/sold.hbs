@@ -529,8 +529,8 @@
                                              prompt='Auto Profit'
                                              selection=selectAutoProfitMargin
                                              action=(action '_assignSelectAutoProfitMargin') as |autoProfitMargin|}}
-                            <option class="is-green">
-                              {{autoProfitMargin.rate}}% (money)
+                            <option class="{{if (gte autoProfitMargin.profitMoney.amount 0) 'is-green' 'is-red'}}">
+                              {{autoProfitMargin.rate}}% (+{{ui/-money autoProfitMargin.profitMoney 'jpy' showCode=false}})
                             </option>
                           {{/ui/form/-select}}
                         </span>

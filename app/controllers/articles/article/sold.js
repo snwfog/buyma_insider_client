@@ -14,17 +14,29 @@ export default Ember.Controller.extend({
   allowEditArticleSoldPrice: false,
 
   selectAutoProfitMargin: null,
-  autoProfitMargins: [
-    { rate: 10, message: 'What a conservative' },
-    { rate: 20, message: 'I\'d say its quite decent' },
-    { rate: 30, message: 'Now you got my attention' },
-    { rate: 40, message: 'They see me rollin\', they hatin\'' },
-    { rate: 50, message: 'They see me rollin\', they hatin\'' },
-    { rate: 60, message: 'They see me rollin\', they hatin\'' },
-    { rate: 70, message: 'They see me rollin\', they hatin\'' },
-    { rate: 80, message: 'They see me rollin\', they hatin\'' },
-    { rate: 90, message: 'They see me rollin\', they hatin\'' },
-    { rate: 100, message: 'Woah woah' } ], // Percent
+  autoProfitMargins: computed(function() {
+    let rates = [
+      { rate: 10, message: 'What a conservative' },
+      { rate: 20, message: 'I\'d say its quite decent' },
+      { rate: 30, message: 'Now you got my attention' },
+      { rate: 40, message: 'They see me rollin\', they hatin\'' },
+      { rate: 50, message: 'They see me rollin\', they hatin\'' },
+      { rate: 60, message: 'They see me rollin\', they hatin\'' },
+      { rate: 70, message: 'They see me rollin\', they hatin\'' },
+      { rate: 80, message: 'They see me rollin\', they hatin\'' },
+      { rate: 90, message: 'They see me rollin\', they hatin\'' },
+      { rate: 100, message: 'Woah woah' } ]; // Percent
+
+    let articleSoldPriceAmount = this.get('articleSold.price.amount');
+    return rates.map((marginRate) => {
+      marginRate[ 'profitMoney' ] = this.store.createRecord('money', {
+        base:   config.APP.CURRENCIES.JPY,
+        amount: this.exchangeRatesService.cad2jpy(articleSoldPriceAmount * marginRate.rate / 100).toFixed(),
+      });
+
+      return marginRate;
+    });
+  }),
 
   articleSoldStatuses: computed(function () {
     const statuses    = Ember.copy(UserArticleSold.STATUS);
@@ -128,9 +140,9 @@ export default Ember.Controller.extend({
     return Math.round((articleSoldPriceConverted - articleSoldPriceAmount) / articleSoldPriceAmount * 100);
   }),
 
-  buyerFirstName:    computed.alias('model.articleSold.buyer.firstName'),
-  buyerLastName:     computed.alias('model.articleSold.buyer.lastName'),
-  buyerEmailAddress: computed.alias('model.articleSold.buyer.emailAddress'),
+  buyerFirstName:    computed.alias('articleSold.buyer.firstName'),
+  buyerLastName:     computed.alias('articleSold.buyer.lastName'),
+  buyerEmailAddress: computed.alias('articleSold.buyer.emailAddress'),
 
   actions: {
     '_saveArticleSold'() {
