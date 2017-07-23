@@ -7,6 +7,8 @@ export function initialize(appInstance) {
 //   const store         = appInstance.lookup('service:store');
   const messageBus = window.MessageBus;
   appInstance.register('message-bus:main', messageBus, { instantiate: false });
+  appInstance.inject('route',      'messageBus', 'message-bus:main');
+  appInstance.inject('controller', 'messageBus', 'message-bus:main');
   // Do not start anything till document is completed (discourse)
 
   const currentUser = User.current();

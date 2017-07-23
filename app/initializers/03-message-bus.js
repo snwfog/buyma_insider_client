@@ -20,7 +20,7 @@ export function initialize(application) {
 }
 
 export default {
-  name:  '04-message-bus',
-  after: '03-injection',
+  name:  '03-message-bus',
+  after: '02-environment',
   initialize
 };
