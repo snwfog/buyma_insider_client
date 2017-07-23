@@ -56,6 +56,10 @@ module.exports = function (environment) {
     },
   };
 
+  ENV.messageBus = {
+    backend: 'http://localhost:9292/',
+  }
+
   ENV.moment = {
     outputFormat: 'MM/DD/YY HH:mm:SS'
   };

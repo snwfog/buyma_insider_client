@@ -1,4 +1,5 @@
-import Ember from "ember";
+import Ember from 'ember';
+import config from '../config/environment';
 
 const { info } = Ember.Logger;
 
@@ -10,8 +11,10 @@ export function initialize(application) {
   application.reopen({
     ready() {
       this._super(...arguments);
+      messageBus.baseUrl = config.messageBus.backend;
+      messageBus.enableLongPolling = false; // disable long polling, webrick does not support partial rack hijack
       messageBus.start();
-      info("MessageBus started...");
+      info('MessageBus started...');
     }
   });
 }
