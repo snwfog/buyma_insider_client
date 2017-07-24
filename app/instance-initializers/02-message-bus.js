@@ -3,10 +3,10 @@ import Ember from 'ember';
 const { info } = Ember.Logger;
 
 export function initialize(appInstance) {
-  const messageBus         = appInstance.lookup('message-bus:main');
-  const applicationService = appInstance.lookup('service:application');
-  const store              = appInstance.lookup('service:store');
-  const toastService       = appInstance.lookup('service:toast');
+  const messageBus   = appInstance.lookup('message-bus:main');
+  const appService   = appInstance.lookup('service:application');
+  const store        = appInstance.lookup('service:store');
+  const toastService = appInstance.lookup('service:toast');
   messageBus.subscribe('/crawl-histories', function (crawl_history_data) {
     toastService.success('Crawl history updated');
     store.pushPayload(crawl_history_data);
@@ -27,7 +27,7 @@ export function initialize(appInstance) {
 
   messageBus.subscribe('/user-article-notifieds', function (user_article_notified_data) {
     toastService.success('You just got a new notification');
-    applicationService.set('isUpdated', true);
+    appService.set('isUpdated', true);
     store.pushPayload(user_article_notified_data);
     info(`user_article_notifieds: ${user_article_notified_data}`);
   });

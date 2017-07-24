@@ -1,10 +1,14 @@
-import Ember from "ember";
-import User from "../models/user";
+import Ember from 'ember';
+import User from '../models/user';
+import AppEvents from '../lib/app-events';
 
 const { info } = Ember.Logger;
 
 export function initialize(appInstance) {
 //   const store         = appInstance.lookup('service:store');
+  const appEvents = AppEvents.create();
+  appInstance.register('app-events:main', appEvents, { instantiate: false });
+
   const messageBus = window.MessageBus;
   appInstance.register('message-bus:main', messageBus, { instantiate: false });
   appInstance.inject('route',      'messageBus', 'message-bus:main');
