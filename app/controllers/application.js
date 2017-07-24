@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   loginPath:              config.settings.path.login,
   logoutPath:             config.settings.path.logout,
   navBarIsActive:         false,
+  applicationUpdated:     computed.alias('applicationService.isUpdated'),
   unreadArticleNotifieds: computed.filterBy('articleNotifieds', 'isRead', false),
 
   jpyValue: computed('cadValue', 'exchangeRatesService.exchangeRates', function () {

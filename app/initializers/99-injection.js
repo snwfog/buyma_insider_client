@@ -1,4 +1,7 @@
 export function initialize(application) {
+  // Backend application state service
+  application.inject('route',      'applicationService', 'service:application');
+  application.inject('controller', 'applicationService', 'service:application');
 
 //   var exchangeRatesService = ExchangeRatesService.create();
 //   application.register('service:exchange-rates', exchangeRatesService, { instantiate: false })
@@ -10,6 +13,7 @@ export function initialize(application) {
   application.inject('model',      'toastService', 'service:toast');
   application.inject('route',      'toastService', 'service:toast');
   application.inject('controller', 'toastService', 'service:toast');
+
 
 //   application.inject('route',      'currentUserService', 'service:current-user');
 //   application.inject('controller', 'currentUserService', 'service:current-user');

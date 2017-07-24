@@ -36,6 +36,13 @@
 }
 
 .message {
+  &.is-small {
+    > .message-body {
+      padding: 0.5em 0.75em;
+    }
+  }
+
+  // TODO: Deprecate this
   .message-body {
     &.is-small {
       padding: 0.5em 0.75em;

@@ -34,8 +34,15 @@ html {
   }
 
   .menu-label {
-    padding-left: 0.75rem;
+    padding-left:  0.75rem;
     padding-right: 0.75rem;
+  }
+}
+
+#global-application-updated.message {
+  margin: 0;
+  > .message-body {
+    border-radius: 0;
   }
 }
 
@@ -53,7 +60,7 @@ div.box.notification-message {
 
   &.is-read {
     background-color: whitesmoke;
-    box-shadow: none;
+    box-shadow:       none;
   }
 }
 

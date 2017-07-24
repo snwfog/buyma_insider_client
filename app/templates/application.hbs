@@ -1,6 +1,17 @@
 {{loading-slider isLoading=loading}}
 
 {{partial 'partials/sidemenu'}}
+
+{{#if applicationUpdated}}
+  <article id="global-application-updated" class="message is-small is-warning">
+    <article class="message-body">
+      <p class="content is-small">
+        You application has been updated, please refresh your browser or {{#link-to 'index'}}click here{{/link-to}} to retrieve the latest content.
+      </p>
+    </article>
+  </article>
+{{/if}}
+
 {{partial 'partials/navbar'}}
 
 {{outlet}}
