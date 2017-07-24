@@ -1,5 +1,5 @@
-import Ember from "ember";
-import { extractError } from "../../lib/ajax-error";
+import Ember from 'ember';
+import { extractError } from '../../lib/ajax-error';
 
 const { computed: { alias }, assert } = Ember;
 

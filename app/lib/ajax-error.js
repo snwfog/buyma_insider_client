@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 
 // From https://github.com/discourse/discourse/blob/master/app/assets/javascripts/discourse/lib/ajax-error.js.es6
 export function extractError(error, defaultMessage) {
@@ -6,7 +6,7 @@ export function extractError(error, defaultMessage) {
     Ember.Logger.error(error.stack);
   }
 
-  if (typeof error === "string") {
+  if (typeof error === 'string') {
     Ember.Logger.error(error);
   }
 
@@ -31,7 +31,7 @@ export function extractError(error, defaultMessage) {
 
   if (parsedJSON) {
     if (parsedJSON.errors && parsedJSON.errors.length > 0) {
-      parsedError = parsedJSON.errors.join("<br>");
+      parsedError = parsedJSON.errors.join('<br>');
     } else if (parsedJSON.error) {
       parsedError = parsedJSON.error;
     } else if (parsedJSON.failed) {
@@ -41,7 +41,7 @@ export function extractError(error, defaultMessage) {
 
   if (!parsedError) {
     if (error.status && error.status >= 400) {
-      parsedError = error.status + " " + error.statusText;
+      parsedError = error.status + ' ' + error.statusText;
     }
   }
 

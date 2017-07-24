@@ -45,6 +45,14 @@ html {
   &.out-dated { color: $red; }
 }
 
+// notification message is read
+div.box.notification-message {
+  &.is-read {
+    background-color: whitesmoke;
+    box-shadow: none;
+  }
+}
+
 .component-ui-sparkline.sparkline {
   display: inline;
   canvas {

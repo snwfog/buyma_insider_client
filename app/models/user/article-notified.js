@@ -6,10 +6,10 @@ const { hasMany, belongsTo, attr } = DS;
 
 export default DS.Model.extend({
   user:                 belongsTo('user'),
-  article:              belongsTo('article'),
-  notificationCriteria: hasMany('article/notificationCriterium'),
+  article:              belongsTo('article',                     { async: false }),
+  notificationCriteria: hasMany('article/notificationCriterium', { async: false }),
   readAt:               attr('datetime'),
   createdAt:            attr('datetime'),
   updatedAt:            attr('datetime'),
-  'read?':              computed.notEmpty('readAt'),
+  isRead:               computed.notEmpty('readAt'),
 });

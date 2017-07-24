@@ -2,135 +2,102 @@
   <div class="container">
     <div class="columns">
       <div class="column is-4">
-
       </div>
 
       <div class="column is-8">
-        <p class="title is-4 has-text-right">Notification</p>
+        <p class="title is-4 has-text-right">Notifications</p>
         <hr>
 
         <div class="columns">
           <div class="column">
-            {{#with articleNotifieds as |articleNotifieds|}}
-              <div class="box padding-one-half is-border-radius-2">
-                {{#each (sort-by 'createdAt:desc' articleNotifieds) as |articleNotified|}}
-                  {{#if articleNotified.read?}}
-                    <article class="media">
-                      <div class="media-left">
-                        <button disabled class="button is-warning is-small">
-                          <span class="icon is-small">
-                            {{fa-icon 'check'}}
-                          </span>
-                        </button>
-                      </div>
+            {{#each (sort-by 'createdAt:desc' articleNotifieds) as |articleNotified|}}
+              <div class="{{if articleNotified.isRead 'is-read'}} box notification-message padding-one-half is-border-radius-2">
+                <article class="media">
+                  {{#if articleNotified.isRead}}
+                    <div class="media-left">
+                      <button disabled class="button is-warning is-small">
+                        <span class="icon is-small">
+                          {{fa-icon 'check'}}
+                        </span>
+                      </button>
+                    </div>
 
-                      <div class="media-content">
-                        <div class="content">
-                          <p>
-                            {{#with articleNotified.article as |article|}}
-                              <p>
-                                {{articleNotified.article.name}}
-                                <small class="is-capitalize is-underline-dashed">
-                                  {{moment-from-now articleNotified.createdAt}}
-                                </small>
-                                <br>
-                                <span class="capitalize is-underline-dashed">
-                                  <small>
-                                    Read {{moment-from-now articleNotified.readAt}}
-                                  </small>
-                                </span>
-                              </p>
-                            {{/with}}
-                          </p>
+                    <div class="media-content">
+                      <p>
+                        {{articleNotified.article.name}}
+                        <small class="is-capitalize is-underline-dashed">
+                          {{moment-from-now articleNotified.createdAt}}
+                        </small>
+                        <br>
+                        <span class="capitalize is-underline-dashed">
+                          <small>
+                            Read {{moment-from-now articleNotified.readAt}}
+                          </small>
+                        </span>
+                      </p>
+                      <nav class="level is-mobile">
+                        <div class="level-left">
+                          {{#each articleNotified.notificationCriteria as |notificationCriterium|}}
+                            <div class="level-item">
+                              <span class="tag is-light is-small">
+                                {{notificationCriterium.name}}
+                              </span>
+                            </div>
+                          {{/each}}
                         </div>
-                        <nav class="level is-mobile">
-                          <div class="level-left">
-                            {{#with articleNotified.notificationCriteria as |notificationCriteria|}}
-                              {{#each notificationCriteria as |notificationCriterium|}}
-                                <div class="level-item">
-                                  <span class="tag is-light is-small">
-                                    {{notificationCriterium.name}}
-                                  </span>
-                                </div>
-                              {{/each}}
-                            {{/with}}
-                          </div>
-                        </nav>
-                      </div>
-                      <div class="media-right">
-                        <div class="content">
-                          {{#link-to 'articles.article' articleNotified.article.id
-                                     class='level-item button is-small'}}
-                            <span class="icon is-small">
-                              {{fa-icon 'mail-forward'}}
-                            </span>
-                          {{/link-to}}
-                        </div>
-                      </div>
-                    </article>
+                      </nav>
+                    </div>
                   {{else}}
-                    <article class="media">
-                      <div class="media-left">
-                        {{#ui/form/-async-button class='button is-warning is-small'
-                                                 action=(action '_readArticleNotified' articleNotified)}}
-                          <span class="icon is-small">
-                            {{fa-icon 'check'}}
-                          </span>
-                        {{/ui/form/-async-button}}
-                      </div>
-
-                      <div class="media-content">
-                        <div class="content">
-                          <p>
-                            {{#with articleNotified.article as |article|}}
-                              <p>
-                                <strong>{{articleNotified.article.name}}</strong>
-                                <small class="is-capitalize is-underline-dashed">
-                                  {{moment-from-now articleNotified.createdAt}}
-                                </small>
-                                <br>
-                                <span class="capitalize">
-                                  <strong>Unread</strong>
-                                </span>
-                              </p>
-                            {{/with}}
-                          </p>
+                    <div class="media-left">
+                      {{#ui/form/-async-button class='button is-warning is-small'
+                                               action=(action '_readArticleNotified' articleNotified)}}
+                        <span class="icon is-small">
+                          {{fa-icon 'check'}}
+                        </span>
+                      {{/ui/form/-async-button}}
+                    </div>
+                    <div class="media-content">
+                      <p>
+                        <strong>{{articleNotified.article.name}}</strong>
+                        <small class="is-capitalize is-underline-dashed">
+                          {{moment-from-now articleNotified.createdAt}}
+                        </small>
+                        <br>
+                        <span class="capitalize">
+                          <strong>Unread</strong>
+                        </span>
+                      </p>
+                      <nav class="level is-mobile">
+                        <div class="level-left">
+                          {{#each articleNotified.notificationCriteria as |notificationCriterium|}}
+                            <div class="level-item">
+                              <span class="tag is-info is-small">
+                                {{notificationCriterium.name}}
+                              </span>
+                            </div>
+                          {{/each}}
                         </div>
-                        <nav class="level is-mobile">
-                          <div class="level-left">
-                            {{#with articleNotified.notificationCriteria as |notificationCriteria|}}
-                              {{#each notificationCriteria as |notificationCriterium|}}
-                                <div class="level-item">
-                                  <span class="tag is-info is-small">
-                                    {{notificationCriterium.name}}
-                                  </span>
-                                </div>
-                              {{/each}}
-                            {{/with}}
-                          </div>
-                        </nav>
-                      </div>
-
-                      <div class="media-right">
-                        <div class="content">
-                          {{#link-to 'articles.article' articleNotified.article.id
-                                     class='level-item button is-small'}}
-                            <span class="icon is-small">
-                              {{fa-icon 'mail-forward'}}
-                            </span>
-                          {{/link-to}}
-                        </div>
-                      </div>
-                    </article>
+                      </nav>
+                    </div>
                   {{/if}}
-                {{/each}}
+                  <div class="media-right">
+                    <div class="content">
+                      {{#link-to 'articles.article' articleNotified.article.id
+                                 class='level-item button is-small'}}
+                        <span>View Article</span>
+                        <span class="icon is-small">
+                          {{fa-icon 'mail-forward'}}
+                        </span>
+                      {{/link-to}}
+                    </div>
+                  </div>
+                </article>
               </div>
             {{else}}
               <p class="title is-4">Hurray! No notifications!</p>
-            {{/with}}
+            {{/each}}
           </div>
         </div>
-
       </div>
     </div>
   </div>
