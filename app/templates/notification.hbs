@@ -10,12 +10,12 @@
 
         <div class="columns">
           <div class="column">
-            {{#each (sort-by 'createdAt:desc' articleNotifieds) as |articleNotified|}}
+            {{#each sortedArticleNotifieds as |articleNotified|}}
               <div class="{{if articleNotified.isRead 'is-read'}} box notification-message padding-one-half is-border-radius-2">
                 <article class="media">
                   {{#if articleNotified.isRead}}
                     <div class="media-left">
-                      <button disabled class="button is-warning is-small">
+                      <button disabled class="button is-white is-small">
                         <span class="icon is-small">
                           {{fa-icon 'check'}}
                         </span>
@@ -64,7 +64,7 @@
                         </small>
                         <br>
                         <span class="capitalize">
-                          <strong>Unread</strong>
+                          <strong>* New *</strong>
                         </span>
                       </p>
                       <nav class="level is-mobile">

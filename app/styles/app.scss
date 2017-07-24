@@ -47,6 +47,10 @@ html {
 
 // notification message is read
 div.box.notification-message {
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
   &.is-read {
     background-color: whitesmoke;
     box-shadow: none;
