@@ -1,10 +1,15 @@
 .icon i.fa {
-  &.is-success { color: $green !important; }
-  &.is-info    { color: $blue !important; }
+  &.is-success  { color: $green !important; }
+  &.is-info     { color: $blue !important; }
 
-  &.is-green   { color: $green !important; }
-  &.is-yellow  { color: $yellow !important; }
-  &.is-red     { color: $red !important; }
+  &.is-green    { color: $green !important; }
+  &.is-yellow   { color: $yellow !important; }
+  &.is-red      { color: $red !important; }
+}
+
+button.button.is-circular,
+a.button.is-circular {
+  border-radius: 9999px;
 }
 
 hr.is-small {

@@ -54,7 +54,7 @@ Router.map(function () {
 
   this.route('user', function () {
     this.route('profile', function () {
-      this.route('index', { path: '/' }, function () { }); }); });
+      this.route('profile_index', { path: '/' }, function () { }); }); });
 });
 
 export default Router;

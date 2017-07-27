@@ -62,10 +62,6 @@
                         <small class="is-capitalize is-underline-dashed">
                           {{moment-from-now articleNotified.createdAt}}
                         </small>
-                        <br>
-                        <span class="capitalize">
-                          <strong>* New *</strong>
-                        </span>
                       </p>
                       <nav class="level is-mobile">
                         <div class="level-left">
@@ -82,8 +78,7 @@
                   {{/if}}
                   <div class="media-right">
                     <div class="content">
-                      {{#link-to 'articles.article' articleNotified.article.id
-                                 class='level-item button is-small'}}
+                      {{#link-to 'articles.article' articleNotified.article.id class='level-item button is-small'}}
                         <span>View Article</span>
                         <span class="icon is-small">
                           {{fa-icon 'mail-forward'}}
