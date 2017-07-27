@@ -1,0 +1,32 @@
+<div class="columns">
+  <div class="column is-12">
+    <p class="title is-4 has-text-right">User Settings</p>
+    <hr>
+
+    <div class="field is-horizontal">
+      <div class="field-label is-normal is-flex-grow-3">
+        <label class="label">Displayed Username</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <p class="control is-expanded has-icons-left">
+            {{input class='input' type='text' value=currentUser.username}}
+            <span class="icon is-small is-left">
+              {{fa-icon 'user'}}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-label is-normal is-flex-grow-3"></div>
+      <div class="field-body">
+        <div class="field">
+          <p class="control"></p>
+          <p class="help is-info">Registered {{moment-from-now currentUser.createdAt}}.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
