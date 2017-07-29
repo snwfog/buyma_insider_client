@@ -1,10 +1,13 @@
-import Ember from "ember";
-import DS from "ember-data";
+import Ember from 'ember';
+import DS from 'ember-data';
+import config from '../config/environment';
 
-import moment from "moment";
+import moment from 'moment';
 
 const { attr, belongsTo, hasMany } = DS;
 const { computed } = Ember;
+
+const ARTICLE_IS_NEW_DAYS = config.MODEL.ARTICLES.IS_NEW_DAYS;
 
 export default DS.Model.extend({
   priceHistory:    belongsTo('article/price-history', { async: false }),
@@ -22,6 +25,11 @@ export default DS.Model.extend({
   updatedAt:    attr('datetime'),
 
   // computed
+  isNew: computed('createdAt', function() {
+    let refreshDeadline = this.get('createdAt').add(ARTICLE_IS_NEW_DAYS, 'days');
+    return moment().isBefore(refreshDeadline);
+  }),
+
   health: computed('syncedAt', function() {
     const syncedAt = this.get('syncedAt');
     if (!syncedAt) { return -1; }

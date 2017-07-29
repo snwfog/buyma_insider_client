@@ -25,13 +25,13 @@
                      activeClass='is-active'}}Name{{/link-to}}
           {{#link-to 'merchant' metadatum.id (query-params order='price')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'money'}}</span><span>Price</span>{{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'attach_money'}}</span><span>Price</span>{{/link-to}}
           {{#link-to 'merchant' metadatum.id (query-params order='created_at')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Created</span>{{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>Created</span>{{/link-to}}
           {{#link-to 'merchant' metadatum.id (query-params order='updated_at')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Updated</span>{{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>Updated</span>{{/link-to}}
         </div>
       </div>
 
@@ -49,7 +49,7 @@
         {{#each articles as |article|}}
           <div class="columns">
             <div class="column is-half">
-              <div class="media">
+              <div class="media bm-article {{if article.isNew 'is-new'}}">
                 <!--<div class="media-left">-->
                   <!--<button class="button is-light">-->
                     {{!--{{fa-icon 'eye'}}--}}
@@ -60,6 +60,12 @@
                     {{#link-to 'articles.article.index' article.id}}
                       <p class="title is-4">
                         {{article.name}}
+                        {{#if article.isNew}}
+                          <span class="icon">
+                            {{material-icon 'home' class='is-yellow'}}
+                            {{fa-icon 'star' class='is-yellow'}}
+                          </span>
+                        {{/if}}
                       </p>
                       <p class="subtitle is-6">
                         {{article.description}}

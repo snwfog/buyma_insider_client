@@ -33,6 +33,9 @@ module.exports = function (environment) {
     },
 
     MODEL: {
+      ARTICLES: {
+        IS_NEW_DAYS: 6, // Beyond this days, article will not be considered as new
+      },
       EXTRA_TARIFFS: {
         RATE_TYPE: {
           FLAT_RATE:    'float_rate',

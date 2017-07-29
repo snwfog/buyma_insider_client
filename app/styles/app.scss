@@ -77,9 +77,10 @@ div.box.notification-message {
   overflow:      hidden;
 }
 
-table td,
-table tr {
-  vertical-align: middle !important;
+.bm-article {
+  &.is-new {
+    p { font-weight: 400; }
+  }
 }
 
 

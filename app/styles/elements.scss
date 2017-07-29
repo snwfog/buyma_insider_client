@@ -1,3 +1,8 @@
+table td,
+table tr {
+  vertical-align: middle !important;
+}
+
 .icon i.fa {
   &.is-success  { color: $green !important; }
   &.is-info     { color: $blue !important; }
