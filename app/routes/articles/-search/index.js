@@ -20,9 +20,9 @@ export default Ember.Route.extend({
 //   },
 
   model(params, transition) {
-    var articlesModel    = this.modelFor('articles');
-    var applicationModel = this.modelFor('application');
-    var searchedArticles = {};
+    let articlesModel    = this.modelFor('articles');
+    let applicationModel = this.modelFor('application');
+    let searchedArticles = {};
     if (!!params.q) {
       searchedArticles = this.store.query('article', params);
     }
@@ -33,10 +33,10 @@ export default Ember.Route.extend({
 
   setupController(controller, models, transition) {
     this._super(...arguments);
-    controller.setProperties(models);
-    var queryParams = transition.queryParams;
+    let route       = this;
+    let queryParams = transition.queryParams;
 //     controller.set('inputSearchArticleQuery', getWithDefault(queryParams, 'q', ''));
-
+    controller.setProperties(models);
     controller.reopen({
       queryParams:                    [ 'q', 'page', 'count', 'order', 'extension' ],
       q:                              getWithDefault(queryParams, 'q', ''),
@@ -64,8 +64,10 @@ export default Ember.Route.extend({
       }),
 
       actions: {
-        '_pageChanged'() {
-
+        '_pageChanged'(nextPage, currPage) {
+          this.debug(`Page changed ${currPage} -> ${nextPage}`);
+          controller.set('page', nextPage);
+          route.transitionTo({ queryParams: { page: nextPage }});
         }
       }
     });
@@ -76,8 +78,9 @@ export default Ember.Route.extend({
       controller.set('q', '');
       controller.set('page', 1);
       controller.set('limit', 20);
-//       controller.set('filter', 'all');
-      controller.set('order', 'created_at:desc');
+//      controller.set('filter', 'all');
+//      controller.set('order', 'created_at:desc');
+      controller.set('order', null);
       controller.set('extension', '_search');
     }
 

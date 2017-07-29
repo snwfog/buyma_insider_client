@@ -1,88 +1,94 @@
-<section class="section">
+<section class="section is-small">
   <div class="container">
-
     {{!--Search article options--}}
     <div class="columns">
-      <div class="column is-half">
-        <div class="content">
+      <div class="column is-3">
+        <div class="content is-button-group">
+          <p class="title is-4">Filters</p>
           {{#link-to 'articles._search.index' (query-params filter='new')
-                     class='button is-outlined is-primary'
+                     class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}New{{/link-to}}
           {{#link-to 'articles._search.index' (query-params filter='sale')
-                     class='button is-outlined is-primary'
+                     class='button is-outlined is-primary is-small'
                      activeClass='is-primary is-active'}}Sale{{/link-to}}
           {{#link-to 'articles._search.index' (query-params filter='all')
-                     class='button is-outlined is-primary'
+                     class='button is-outlined is-primary is-small'
                      activeClass='is-primary'}}All{{/link-to}}
         </div>
-        <div class="content">
-          {{#link-to 'articles._search.index' (query-params order='name')
-                     class='button is-outlined is-primary'
-                     activeClass='is-active'}}Name{{/link-to}}
+        <div class="content is-button-group">
+          <!--Custom sorting will nullify the _score on elasticsearch docs-->
+          <p class="title is-4">Orderings</p>
+          <!--You cannot sort on name (type text) unless allow field data in elasticsearch-->
+          <!--https://www.elastic.co/guide/en/elasticsearch/reference/current/fielddata.html-->
+          {{!--{{#link-to 'articles._search.index' (query-params order='name')
+                     class='button is-outlined is-primary is-small'
+                     activeClass='is-active'}}Name{{/link-to}}--}}
           {{#link-to 'articles._search.index' (query-params order='price')
-                     class='button is-outlined is-primary'
+                     class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'money'}}</span><span>Price</span>{{/link-to}}
           {{#link-to 'articles._search.index' (query-params order='created_at')
-                     class='button is-outlined is-primary'
+                     class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Created</span>{{/link-to}}
           {{#link-to 'articles._search.index' (query-params order='updated_at')
-                     class='button is-outlined is-primary'
+                     class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Updated</span>{{/link-to}}
         </div>
       </div>
-    </div>
 
-    {{!--Pagination--}}
-    <div class="columns">
-      <div class="column">
-        {{ui/-pager current=searchArticles.meta.current-page
-                    count=searchArticles.meta.total-pages
+      <div class="column is-9">
+        {{!--Pagination--}}
+        <div class="columns">
+          <div class="column">
+            {{ui/-pager current=searchedArticles.meta.current-page
+                        count=searchedArticles.meta.total-pages
+                        change=(action '_pageChanged')}}
+          </div>
+        </div>
+
+        {{!--Articles list--}}
+        {{#each (compact searchedArticlesOrderedByScore) as |articleHash|}}
+          <div class="columns">
+            <div class="column is-half">
+              <div class="media">
+                <div class="media-left">
+                  <small>{{number-format articleHash.score decimals=2}}</small>
+                  <!--<button class="button is-light">-->
+                    {{!--{{fa-icon 'eye'}}--}}
+                  <!--</button>-->
+                </div>
+                <div class="media-content">
+                  <div class="content">
+                    {{#link-to 'articles.article.index' articleHash.article.id}}
+                      <p class="title is-4">
+                        {{articleHash.article.name}}
+                      </p>
+                      <p class="subtitle is-6">
+                        {{articleHash.article.description}}
+                      </p>
+                    {{/link-to}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-3">
+              <p class="title is-4">{{ui/-money articleHash.article.price}}</p>
+              <p class="subtitle is-6">{{ui/-money articleHash.article.price 'jpy'}}</p>
+            </div>
+            <div class="column is-3">
+              <p class="price-history">
+                {{ui/sparkline/-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' articleHash.article.priceHistory.history))))}}
+              </p>
+            </div>
+          </div>
+        {{/each}}
+
+        <hr>
+
+        {{!--Pagination--}}
+        {{ui/-pager current=searchedArticles.meta.current-page
+                    count=searchedArticles.meta.total-pages
                     change=(action '_pageChanged')}}
       </div>
     </div>
-
-    {{!--Articles list--}}
-    {{#each (compact searchedArticlesOrderedByScore) as |articleHash|}}
-      <div class="columns">
-        <div class="column is-half">
-          <div class="media">
-            <div class="media-left">
-              <small>{{number-format articleHash.score decimals=2}}</small>
-              <!--<button class="button is-light">-->
-                {{!--{{fa-icon 'eye'}}--}}
-              <!--</button>-->
-            </div>
-            <div class="media-content">
-              <div class="content">
-                {{#link-to 'articles.article.index' articleHash.article.id}}
-                  <p class="title is-4">
-                    {{articleHash.article.name}}
-                  </p>
-                  <p class="subtitle is-6">
-                    {{articleHash.article.description}}
-                  </p>
-                {{/link-to}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-3">
-          <p class="title is-4">{{ui/-money articleHash.article.price}}</p>
-          <p class="subtitle is-6">{{ui/-money articleHash.article.price 'jpy'}}</p>
-        </div>
-        <div class="column is-3">
-          <p class="price-history">
-            {{ui/sparkline/-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' articleHash.article.priceHistory.history))))}}
-          </p>
-        </div>
-      </div>
-    {{/each}}
-
-    <hr>
-
-    {{!--Pagination--}}
-    {{ui/-pager current=searchedArticles.meta.current-page
-                count=searchedArticles.meta.total-pages
-                change=(action '_pageChanged')}}
   </div>
 </section>

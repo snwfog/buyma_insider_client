@@ -7,9 +7,17 @@
   &.is-red      { color: $red !important; }
 }
 
-button.button.is-circular,
-a.button.is-circular {
-  border-radius: 9999px;
+.is-button-group {
+  .button {
+    margin-bottom: 0.5em;
+  }
+}
+
+button.button,
+a.button {
+  &.is-circular {
+    border-radius: 9999px;
+  }
 }
 
 hr.is-small {

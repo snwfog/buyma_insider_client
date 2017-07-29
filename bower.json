@@ -1,7 +1,7 @@
 {
   "name": "buyma-insider-client",
   "dependencies": {
-    "bulma": "^0.4.0",
+    "bulma": "^0.4.4",
     "font-awesome": "^4.7.0",
     "typicons.font": "typicons#^2.0.8",
     "chartjs": "2.1.6",

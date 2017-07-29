@@ -23,10 +23,9 @@ export default Ember.Route.extend({
 
   setupController(controller, models, transition) {
     this._super(...arguments);
-    var route       = this;
+    let route       = this;
+    let queryParams = transition.queryParams;
     controller.setProperties(models);
-
-    var queryParams = transition.queryParams;
     controller.reopen({
       queryParams: [ 'page', 'limit', 'filter' ],
       page:        getWithDefault(queryParams, 'page',   1),
