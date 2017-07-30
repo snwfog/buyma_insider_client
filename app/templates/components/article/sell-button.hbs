@@ -1,5 +1,6 @@
 {{#if (await (can 'sell article' article))}}
   {{#ui/form/-async-button class='button'
+                           data-badge='8'
                            textState='is-success'
                            disableWhen=(not currentUser)
                            action=(action 'sell') as |component state|}}
@@ -14,16 +15,16 @@
       </span>
       <span>Sold</span>
     {{else}}
-      <span class="icon is-small">
-        {{fa-icon 'shopping-bag'}}
+      <span class="icon">
+        {{ui/-icon 'shop'}}
       </span>
       <span>+1 Sell</span>
     {{/if}}{{/if}}
   {{/ui/form/-async-button}}
 {{else}}
   <a disabled class="button is-primary">
-    <span class="icon is-small">
-      {{fa-icon 'shopping-bag'}}
+    <span class="icon">
+      {{ui/-icon 'shopping-bag'}}
     </span>
     <span>+1 Sell</span>
   </a>

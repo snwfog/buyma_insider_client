@@ -7,7 +7,8 @@ import moment from 'moment';
 const { attr, belongsTo, hasMany } = DS;
 const { computed } = Ember;
 
-const ARTICLE_IS_NEW_DAYS = config.MODEL.ARTICLES.IS_NEW_DAYS;
+const { IS_NEW_DAYS,
+        SYNC_HEALTH: { NEWEST_DAYS, VERY_FRESH_DAYS, FRESH_DAYS, } } = config.MODEL.ARTICLES;
 
 export default DS.Model.extend({
   priceHistory:    belongsTo('article/price-history', { async: false }),
@@ -26,7 +27,7 @@ export default DS.Model.extend({
 
   // computed
   isNew: computed('createdAt', function() {
-    let refreshDeadline = this.get('createdAt').add(ARTICLE_IS_NEW_DAYS, 'days');
+    let refreshDeadline = this.get('createdAt').add(IS_NEW_DAYS, 'days');
     return moment().isBefore(refreshDeadline);
   }),
 
@@ -37,11 +38,11 @@ export default DS.Model.extend({
     const diffDays = now.diff(syncedAt, 'days');
     if (diffDays < 0) {
       return -1;
-    } else if (diffDays <= 1) {
+    } else if (diffDays <= NEWEST_DAYS) {
       return 1;
-    } else if (diffDays <= 7) {
+    } else if (diffDays <= VERY_FRESH_DAYS) {
       return 2;
-    } else if (diffDays <= 30) {
+    } else if (diffDays <= FRESH_DAYS) {
       return 3;
     } else {
       return 4;

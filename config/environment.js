@@ -35,6 +35,13 @@ module.exports = function (environment) {
     MODEL: {
       ARTICLES: {
         IS_NEW_DAYS: 6, // Beyond this days, article will not be considered as new
+        SYNC_HEALTH: {
+          NEWEST_DAYS:     1,
+          VERY_FRESH_DAYS: 7,
+          FRESH_DAYS:      30,
+          IN_SEASON_DAYS:  120,
+          LAST_YEARS_DAYS: 365,
+        }
       },
       EXTRA_TARIFFS: {
         RATE_TYPE: {

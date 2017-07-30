@@ -14,6 +14,8 @@
           {{article/watch-button article=article watch=(action '_watchArticle' article)}}
           {{article/sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
                                                                    (toast 'Congratulation!' 'success'))}}
+
+          <button class="button badge" data-badge="">Button</button>
         {{/if}}
       </div>
     </nav>

@@ -19,7 +19,15 @@ module.exports = function(defaults) {
 
     minifyCSS: {
       enabled: EmberApp.env() === 'production',
-    }
+    },
+
+    sassOptions: {
+      includePaths: [
+        'bower_components/bulma',
+        'bower_components/bulma-badge',
+        'bower_components/bulma-timeline',
+      ]
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -39,11 +47,29 @@ module.exports = function(defaults) {
   // @see https://guides.emberjs.com/v2.0.0/addons-and-dependencies/managing-dependencies/
   app.import('vendor/message-bus.js');
 
-  app.import({
-    development: app.bowerDirectory + '/bulma/css/bulma.css',
-    staging:     app.bowerDirectory + '/bulma/css/bulma.css',
-    production:  app.bowerDirectory + '/bulma/css/bulma.css',
-  });
+//  app.sassOptions = {
+//    includePaths: [
+//      app.bowerDirectory + '/bulma-badge/',
+//    ]
+//  };
+
+//  app.import({
+//    development: app.bowerDirectory + '/bulma/css/bulma.css',
+//    staging:     app.bowerDirectory + '/bulma/css/bulma.css',
+//    production:  app.bowerDirectory + '/bulma/css/bulma.css',
+//  });
+//
+//  app.import({
+//    development: app.bowerDirectory + '/bulma-badge/badge.sass',
+//    staging:     app.bowerDirectory + '/bulma-badge/badge.sass',
+//    production:  app.bowerDirectory + '/bulma-badge/badge.sass',
+//  });
+//
+//  app.import({
+//    development: app.bowerDirectory + '/bulma-timeline/timeline.sass',
+//    staging:     app.bowerDirectory + '/bulma-timeline/timeline.sass',
+//    production:  app.bowerDirectory + '/bulma-timeline/timeline.sass',
+//  });
 
   app.import({
     development: app.bowerDirectory + '/jquery.sparkline.bower/src/jquery.sparkline.js',

@@ -33,6 +33,11 @@
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>Updated</span>{{/link-to}}
         </div>
+
+        <div class="content">
+          <p class="title is-4">Legends</p>
+          <p><span><span class="icon">{{ui/-icon 'stars' class='is-green'}}</span> New Articles (7 days)</span></p>
+        </div>
       </div>
 
       <div class="column is-9">
@@ -62,8 +67,7 @@
                         {{article.name}}
                         {{#if article.isNew}}
                           <span class="icon">
-                            {{material-icon 'home' class='is-yellow'}}
-                            {{fa-icon 'star' class='is-yellow'}}
+                            {{ui/-icon 'stars' class='is-green'}}
                           </span>
                         {{/if}}
                       </p>

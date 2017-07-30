@@ -1,7 +1,7 @@
 {{#if (await (can 'unwatch article' article))}}
   <a disabled class="button is-warning">
-    <span class="icon is-small">
-      {{fa-icon 'star'}}
+    <span class="icon">
+      {{ui/-icon 'loyalty'}}
     </span>
   </a>
 {{else}}{{#if (await (can 'watch article' article))}}
@@ -19,8 +19,8 @@
         {{fa-icon 'check-circle-o'}}
       </span>
     {{else}}
-      <span class="icon is-small">
-        {{fa-icon 'star-o'}}
+      <span class="icon">
+        {{ui/-icon 'loyalty'}}
       </span>
       <span>Watch</span>
     {{/if}}{{/if}}

@@ -4,8 +4,8 @@ import layout from "ember-async-button/templates/components/async-button";
 
 const { equal } = Ember.computed;
 
-export default EmberAsyncButtonComponent.extend({
-  layout,
+let UiFormAsyncButton = EmberAsyncButtonComponent.extend({
+//  layout,
   tagName:           'a',
   classNameBindings: [
     'isLoading:is-loading',
@@ -19,8 +19,14 @@ export default EmberAsyncButtonComponent.extend({
     'isResolved:is-disabled',
   ],
 
+  attributeBindings: [
+    'data-badge' // bulma-badge
+  ],
+
   isLoading:   equal('textState', 'pending'),
   isRejected:  equal('textState', 'rejected'),
   isFulfilled: equal('textState', 'fulfilled'),
   isResolved:  equal('textState', 'resolved'),
 });
+
+export default UiFormAsyncButton;
