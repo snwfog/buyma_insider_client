@@ -8,7 +8,9 @@
       <div class="field-body">
         <div class="field">
           {{#each allMonths as |month|}}
-            <button class="button is-light mb-1">{{month}}</button>
+            {{#link-to 'index.dashboard-archive.year.index.month.index.overview' year month
+                       class='button is-small is-light mb-1'
+                       activeClass='is-active is-primary'}}{{month}}{{/link-to}}
           {{/each}}
         </div>
       </div>

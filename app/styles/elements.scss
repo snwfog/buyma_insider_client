@@ -12,6 +12,7 @@ table tr {
   &.is-red      { color: $red !important; }
 }
 
+// TODO: Use mb-1
 .is-button-group {
   .button {
     margin-bottom: 0.5em;

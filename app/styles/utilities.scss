@@ -1,4 +1,4 @@
-/* Spacing */
+// Spacing
 .mt-1 { margin-top:    1em; }
 .mr-1 { margin-right:  1em; }
 .ml-1 { margin-left:   1em; }
@@ -14,12 +14,12 @@
 .margin-one-half  { margin:  0.35em; }
 .margin-1         { margin:  0.75em; }
 
-/* Alignment */
+// Alignment
 .align-top, .is-align-top, .has-text-top          { vertical-align: top !important; }
 .align-middle, .is-align-middle, .has-text-middle { vertical-align: middle !important; }
 .align-bottom, .is-align-bottom, .has-text-bottom { vertical-align: bottom !important; }
 
-/* Flex utilities to go with Bulma */
+// flex utilities
 @each $flex in align-items align-self justify-content {
   @each $property in flex-start flex-end center space-between space-around {
     .is-flex-#{$flex}-#{$property} {
@@ -40,7 +40,7 @@
 .is-align-items-center { align-items: center; }
 .is-fullwidth          { width: 100% }
 
-/* Text */
+// Text
 .is-uppercase  { text-transform: uppercase !important; }
 .is-lowercase  { text-transform: lowercase !important; }
 .is-capitalize { text-transform: capitalize !important; }
@@ -50,9 +50,9 @@
 
 .is-underline-dashed { border-bottom: 1px dashed $grey; }
 
-/* Shadow */
+// Shadow
 
-/* Color */
+// Color
 .is-red      { color: $red; }
 .is-yellow   { color: $yellow; }
 .is-orange   { color: $orange; }
