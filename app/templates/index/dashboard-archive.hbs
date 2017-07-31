@@ -1,4 +1,4 @@
-<div class="columns is-mobile">
+<div class="columns">
   <div class="column one-half">
     <p class="title is-4 is-capitalize has-text-left">
       {{moment-format currentDate 'MMM-D-YYYY'}}
@@ -21,7 +21,7 @@
       <div class="field-body">
         <div class="field">
           {{#each allYears as |year|}}
-            {{#link-to 'index.dashboard-archive.year.index' year class='button is-light mb-1'}}{{year}}{{/link-to}}
+            {{#link-to 'index.dashboard-archive.year.index.overview' year class='button is-light mb-1'}}{{year}}{{/link-to}}
           {{/each}}
         </div>
       </div>
@@ -86,3 +86,4 @@
   {{/link-to}}
 
 </div>
+

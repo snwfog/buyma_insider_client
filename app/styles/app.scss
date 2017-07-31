@@ -2,6 +2,9 @@
 @import 'bulma';
 @import 'badge';
 @import 'timeline';
+@import 'ribbon';
+@import 'steps';
+@import 'tooltip';
 @import './spinner';
 @import './components';
 @import './elements';
@@ -9,7 +12,7 @@
 @import './overrides';
 
 html {
-  background-color: whitesmoke;
+  //background-color: whitesmoke;
 }
 
 #logo-mobile {
@@ -80,6 +83,10 @@ div.box.notification-message {
 }
 
 .bm-article {
+  p.title {
+    font-weight: 200;
+  }
+
   &.is-new {
     p { font-weight: 400; }
   }

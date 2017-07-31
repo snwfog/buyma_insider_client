@@ -26,6 +26,9 @@ module.exports = function(defaults) {
         'bower_components/bulma',
         'bower_components/bulma-badge',
         'bower_components/bulma-timeline',
+        'bower_components/bulma-ribbon',
+        'bower_components/bulma-steps',
+        'bower_components/bulma-tooltip',
       ]
     },
   });

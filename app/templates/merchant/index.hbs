@@ -22,16 +22,16 @@
           <p class="title is-4">Orderings</p>
           {{#link-to 'merchant' metadatum.id (query-params order='name')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}Name{{/link-to}}
+                     activeClass='is-active'}}By Name{{/link-to}}
           {{#link-to 'merchant' metadatum.id (query-params order='price')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'attach_money'}}</span><span>Price</span>{{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'attach_money'}}</span><span>By Price</span>{{/link-to}}
           {{#link-to 'merchant' metadatum.id (query-params order='created_at')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>Created</span>{{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Created</span>{{/link-to}}
           {{#link-to 'merchant' metadatum.id (query-params order='updated_at')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>Updated</span>{{/link-to}}
+                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Updated</span>{{/link-to}}
         </div>
 
         <div class="content">

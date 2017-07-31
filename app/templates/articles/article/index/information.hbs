@@ -71,17 +71,22 @@
         <article class="media">
           <div class="media-left"></div>
           <div class="media-content">
-            {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
-              <span class="tag is-info">
-                {{capitalize notificationCriterium.name}}
-                {{#ui/form/-async-button tagName='button'
-                                         class='delete is-small'
-                                         action=(pipe-action (action '_removeArticleNotificationCriterium' notificationCriterium)
-                                                             (toast 'Notification criterium was removed.'))}}
-                {{/ui/form/-async-button}}
-              </span>
-            {{else}}
-            {{/each}}
+            <div class="field is-grouped is-grouped-multiline">
+              {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-info">
+                      {{capitalize notificationCriterium.name}}
+                    </span>
+                    {{#ui/form/-async-button class='tag is-delete'
+                                             action=(pipe-action (action '_removeArticleNotificationCriterium' notificationCriterium)
+                                                                 (toast 'Notification criterium was removed.'))}}
+                    {{/ui/form/-async-button}}
+                  </div>
+                </div>
+              {{else}}
+              {{/each}}
+            </div>
           </div>
         </article>
       {{/with}}
@@ -117,30 +122,6 @@
             </div>
           </div>
           <div class="content">
-            <p class="title is-6">
-              Sold {{moment-from-now articleSold.createdAt}} on {{moment-format articleSold.createdAt 'LL'}}
-            </p>
-          </div>
-          <div class="content">
-            <p class="title is-6">
-              {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
-                Rates @ {{ui/-money oneDollar 'jpy'
-                                    exchangeRate=exchangeRate
-                                    showCode=false}} of {{moment-format exchangeRate.timestamp 'MMM-D-YY'}}
-              {{/with}}
-            </p>
-          </div>
-        </div>
-        <div class="media-right">
-          {{#ui/form/-async-button tagName='button'
-                                   class='delete is-small'
-                                   action=(action '_unsellArticle' articleSold)}}
-          {{/ui/form/-async-button}}
-        </div>
-      </article>
-      <article class="media">
-        <div class="media-content">
-          <div class="content">
             {{#if (eq articleSold.status 'confirmed')}}
               <span class="tag is-info is-capitalize">
                 {{articleSold.status}}
@@ -162,10 +143,31 @@
                 {{articleSold.status}}
               </span>
             {{/if}}
-            {{#link-to 'articles.article.sold' article.id articleSold.id class='button is-light is-small is-pill'}}
-              Detail
-            {{/link-to}}
           </div>
+          <div class="content">
+            <p class="title is-4">Sold {{moment-from-now articleSold.createdAt}} on {{moment-format articleSold.createdAt 'LL'}}</p>
+            <p class="subtitle is-6">
+              {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
+                Rates @ {{ui/-money oneDollar 'jpy'
+                                    exchangeRate=exchangeRate
+                                    showCode=false}} as on {{moment-format exchangeRate.timestamp 'MMM-D-YY'}}
+              {{/with}}
+            </p>
+            <div class="field">
+              <div class="control">
+                {{#link-to 'articles.article.sold' article.id articleSold.id
+                           class='button is-primary'}}
+                  <span>Detail</span>
+                {{/link-to}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="media-right">
+          {{#ui/form/-async-button tagName='button'
+                                   class='delete is-small'
+                                   action=(action '_unsellArticle' articleSold)}}
+          {{/ui/form/-async-button}}
         </div>
       </article>
     {{/each}}
