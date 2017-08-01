@@ -26,10 +26,13 @@ Router.map(function () {
       this.route('year',                    { path: '/:year' }, function () {
         this.route('year-index',            { path: '/' });
         this.route('month',                 { path: '/:month' }, function () {
-          this.route('month-index',         { path: '/' }, function () {
-            this.route('day',               { path: '/:day' }, function () {
-              this.route('day-index',       { path: '/' });
-            }); }); }); }); }); });
+          this.route('month-index',         { path: '/' });
+          this.route('day',                 { path: '/:day' }, function () {
+            this.route('day-index',         { path: '/' });
+          }); });
+        this.route('month-index');
+      }); }); });
+
 
   this.route('articles', { path: '/articles' }, function () {
     this.route('_search', function () {

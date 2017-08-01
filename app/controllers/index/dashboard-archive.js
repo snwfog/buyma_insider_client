@@ -1,5 +1,6 @@
-import Ember from "ember";
-import moment from "moment";
+import Ember from 'ember';
+
+import moment from 'moment';
 
 const { computed, }   = Ember;
 const MOMENT_TEMPLATE = 'M-D-YY';
@@ -7,8 +8,6 @@ const MOMENT_TEMPLATE = 'M-D-YY';
 export default Ember.Controller.extend({
 //   queryParams: [ 'date' ],
   count:       7,
-
-  allMonths: computed(() => moment.months().map((m) => m.toLowerCase())),
   allYears:  computed(() => [ 2016, 2017 ]),
 
   currentDate: computed('date', function () {
