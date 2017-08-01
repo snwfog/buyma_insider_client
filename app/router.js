@@ -21,20 +21,15 @@ Router.map(function () {
     this.route('hello');
     this.route('dashboard');
     this.route('dashboard-archive', { path: '/archive' }, function () {
-      this.route('index', { path: '/' });
 
-      // archives
-      this.route('year', { path: '/year' }, function () {
-        this.route('overview');         // all years overview
-        this.route('index', { path: '/:year' }, function () {
-          this.route('overview');       // year_overview
-          this.route('month', { path: '/month' }, function () {
-            this.route('overview');     // all months overview
-            this.route('index', { path: '/:month' }, function () {
-              this.route('overview');   // month_overview
-              this.route('day', { path: '/day/:day' }, function () {
-                this.route('overview'); // day_overview
-              }); }); }); }); }); }); });
+      this.route('dashboard-archive-index', { path: '/' });
+      this.route('year',                    { path: '/:year' }, function () {
+        this.route('year-index',            { path: '/' });
+        this.route('month',                 { path: '/:month' }, function () {
+          this.route('month-index',         { path: '/' }, function () {
+            this.route('day',               { path: '/:day' }, function () {
+              this.route('day-index',       { path: '/' });
+            }); }); }); }); }); });
 
   this.route('articles', { path: '/articles' }, function () {
     this.route('_search', function () {

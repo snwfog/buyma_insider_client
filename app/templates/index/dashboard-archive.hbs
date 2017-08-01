@@ -6,6 +6,7 @@
     </p>
   </div>
 </div>
+
 <hr>
 
 <div class="columns">
@@ -17,9 +18,28 @@
       <div class="field-body">
         <div class="field">
           {{#each allYears as |year|}}
-            {{#link-to 'index.dashboard-archive.year.index.overview' year
+            {{#link-to 'index.dashboard-archive.year.year-index' year
                        class='button is-small is-light'
                        activeClass='is-active is-primary'}}{{year}}{{/link-to}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Month</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          {{#each allMonths as |month|}}
+            {{#link-to 'index.dashboard-archive.year.month.month-index' year month
+                       class='button is-small is-light mb-1'
+                       activeClass='is-active is-primary'}}{{month}}{{/link-to}}
           {{/each}}
         </div>
       </div>

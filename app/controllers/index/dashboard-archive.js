@@ -8,11 +8,11 @@ export default Ember.Controller.extend({
 //   queryParams: [ 'date' ],
   count:       7,
 
-  allMonths: computed(() => moment.months()),
-  allYears:  computed(() => [ 2106, 2017 ]),
+  allMonths: computed(() => moment.months().map((m) => m.toLowerCase())),
+  allYears:  computed(() => [ 2016, 2017 ]),
 
   currentDate: computed('date', function () {
-    var dateQs = this.get('date');
+    let dateQs = this.get('date');
     if (dateQs) {
       return moment(dateQs, MOMENT_TEMPLATE);
     } else {
