@@ -8,7 +8,7 @@
         <div class="field">
           {{#each allMonths as |month|}}
             {{#link-to 'index.dashboard-archive.year.month.month-index' year month
-                       class='button is-small is-light mb-1'
+                       class='button is-small is-light is-capitalize mb-1'
                        activeClass='is-active is-primary'}}{{month}}{{/link-to}}
           {{/each}}
         </div>

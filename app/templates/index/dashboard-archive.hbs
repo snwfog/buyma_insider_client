@@ -19,6 +19,7 @@
         <div class="field">
           {{#each allYears as |year|}}
             {{#link-to 'index.dashboard-archive.year.year-index' year
+                       current-when='index.dashboard-archive.year'
                        class='button is-small is-light'
                        activeClass='is-active is-primary'}}{{year}}{{/link-to}}
           {{/each}}

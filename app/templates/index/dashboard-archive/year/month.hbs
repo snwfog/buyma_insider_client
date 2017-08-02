@@ -1,1 +1,19 @@
+<div class="columns">
+  <div class="column">
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Day</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          {{#each allDays as |day|}}
+            {{#link-to 'index.dashboard-archive.year.month.day.day-index' year month day
+                       class='button is-small is-light is-capitalize mb-1'}}{{day}}{{/link-to}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 {{outlet}}
