@@ -8,7 +8,9 @@
         <div class="field">
           {{#each allDays as |day|}}
             {{#link-to 'index.dashboard-archive.year.month.day.day-index' year month day
-                       class='button is-small is-light is-capitalize mb-1'}}{{day}}{{/link-to}}
+                       current-when='index.dashboard-archive.year.month.day'
+                       class='button is-small is-light mb-1'
+                       activeClass='is-active is-primary'}}{{day}}{{/link-to}}
           {{/each}}
         </div>
       </div>

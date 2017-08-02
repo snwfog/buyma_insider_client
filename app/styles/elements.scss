@@ -3,13 +3,15 @@ table tr {
   vertical-align: middle !important;
 }
 
-.icon i.fa {
+.icon {
+  vertical-align: middle;
   &.is-success  { color: $green !important; }
   &.is-info     { color: $blue !important; }
 
   &.is-green    { color: $green !important; }
   &.is-yellow   { color: $yellow !important; }
   &.is-red      { color: $red !important; }
+  &.is-blue     { color: $blue !important; }
 }
 
 // TODO: Use mb-1

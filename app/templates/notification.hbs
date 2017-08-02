@@ -23,29 +23,28 @@
                     </div>
 
                     <div class="media-content">
-                      <p>
-                        {{articleNotified.article.name}}
-                        <small class="is-capitalize is-underline-dashed">
-                          {{moment-from-now articleNotified.createdAt}}
-                        </small>
-                        <br>
-                        <span class="capitalize is-underline-dashed">
-                          <small>
-                            Read {{moment-from-now articleNotified.readAt}}
+                      <div class="content">
+                        <div>
+                          {{articleNotified.article.name}}
+                          <small class="is-capitalize is-underline-dashed">
+                            {{moment-from-now articleNotified.createdAt}}
                           </small>
-                        </span>
-                      </p>
-                      <nav class="level is-mobile">
-                        <div class="level-left">
+                        </div>
+                        <div>
+                          <span class="capitalize is-underline-dashed">
+                            <small>
+                              Read {{moment-from-now articleNotified.readAt}}
+                            </small>
+                          </span>
+                        </div>
+                        <div>
                           {{#each articleNotified.notificationCriteria as |notificationCriterium|}}
-                            <div class="level-item">
-                              <span class="tag is-light is-small">
-                                {{notificationCriterium.name}}
-                              </span>
-                            </div>
+                            <span class="tag is-dark is-small">
+                              {{notificationCriterium.name}}
+                            </span>
                           {{/each}}
                         </div>
-                      </nav>
+                      </div>
                     </div>
                   {{else}}
                     <div class="media-left">

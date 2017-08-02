@@ -4,8 +4,8 @@
     {{#if articleWatched}}
       <article class="media">
         <div class="media-left">
-          <span class="icon is-medium">
-            {{ui/-icon 'loyalty' class='is-red'}}
+          <span class="icon is-medium is-red">
+            {{ui/-icon 'loyalty'}}
           </span>
         </div>
         <div class="media-content">
@@ -49,8 +49,8 @@
                     {{#ui/form/-async-button class='button'
                                              textState='is-light'
                                              action=(action '_addArticleNotificationCriterium')}}
-                      <span class="icon">
-                        {{fa-icon 'plus-circle'}}
+                      <span class="icon is-small">
+                        {{ui/-icon 'add_alert'}}
                       </span>
                       <span>Add Criterium</span>
                     {{/ui/form/-async-button}}
@@ -69,7 +69,11 @@
       </article>
       {{#with (await articleWatchedNotificationCriteria) as |notificationCriteria|}}
         <article class="media">
-          <div class="media-left"></div>
+          <div class="media-left">
+            <span class="icon is-medium is-blue">
+              {{ui/-icon 'notifications_active'}}
+            </span>
+          </div>
           <div class="media-content">
             <div class="field is-grouped is-grouped-multiline">
               {{#each (sort-by 'name' notificationCriteria) as |notificationCriterium|}}
@@ -96,8 +100,8 @@
     {{#each (sort-by 'createdAt:desc' articleSolds) as |articleSold|}}
       <article class="media">
         <div class="media-left">
-          <span class="icon is-medium">
-            {{ui/-icon 'shop' class='is-success'}}
+          <span class="icon is-medium is-success">
+            {{ui/-icon 'shop'}}
           </span>
         </div>
         <div class="media-content">

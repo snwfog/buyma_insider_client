@@ -5,7 +5,9 @@
       <div class="field is-grouped">
         <p class="control">
           <a class="button" target="_blank" href="{{article.link}}">
-            <span class="icon is-small">{{fa-icon 'globe'}}</span>
+            <span class="icon">
+              {{ui/-icon 'link'}}
+            </span>
             <span>Link</span>
           </a>
         </p>
@@ -119,7 +121,9 @@
             {{#if currentUser}}
               {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
                 {{#link-to 'articles.article.index.information' article.id}}
-                  <span class="icon">{{fa-icon 'info'}}</span>
+                  <span class="icon is-medium">
+                    {{ui/-icon 'info_outline'}}
+                  </span>
                   <span class="is-hidden-mobile">
                     Information
                   </span>
@@ -128,7 +132,9 @@
 
               {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
                 {{#link-to 'articles.article.index.history' article.id}}
-                  <span class="icon">{{fa-icon 'history'}}</span>
+                  <span class="icon is-medium">
+                    {{ui/-icon 'history'}}
+                  </span>
                   <span class="is-hidden-mobile">
                     Transaction History
                   </span>
