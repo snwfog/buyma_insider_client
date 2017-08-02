@@ -7,8 +7,8 @@
       <div class="field-body">
         <div class="field">
           {{#each allDays as |day|}}
-            {{#link-to 'index.dashboard-archive.year.month.day.day-index' year month day
-                       current-when='index.dashboard-archive.year.month.day'
+            {{#link-to 'dashboard-archive.year.month.day.day-index' year month day
+                       current-when='dashboard-archive.year.month.day'
                        class='button is-small is-light mb-1'
                        activeClass='is-active is-primary'}}{{day}}{{/link-to}}
           {{/each}}

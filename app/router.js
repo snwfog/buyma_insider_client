@@ -20,19 +20,19 @@ Router.map(function () {
   this.route('index', { path: '/' }, function () {
     this.route('hello');
     this.route('dashboard');
-    this.route('dashboard-archive', { path: '/archive' }, function () {
+  });
 
-      this.route('dashboard-archive-index', { path: '/' });
-      this.route('year',                    { path: '/:year' }, function () {
-        this.route('year-index',            { path: '/' });
-        this.route('month',                 { path: '/:month' }, function () {
-          this.route('month-index',         { path: '/' });
-          this.route('day',                 { path: '/:day' }, function () {
-            this.route('day-index',         { path: '/' });
-          }); });
-        this.route('month-index');
-      }); }); });
-
+  this.route('dashboard-archive', { path: '/archive' }, function () {
+    this.route('dashboard-archive-index', { path: '/' });
+    this.route('year',                    { path: '/:year' }, function () {
+      this.route('year-index',            { path: '/' });
+      this.route('month',                 { path: '/:month' }, function () {
+        this.route('month-index',         { path: '/' });
+        this.route('day',                 { path: '/:day' }, function () {
+          this.route('day-index',         { path: '/' });
+        }); });
+      this.route('month-index');
+    }); });
 
   this.route('articles', { path: '/articles' }, function () {
     this.route('_search', function () {
