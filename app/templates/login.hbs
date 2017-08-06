@@ -51,7 +51,10 @@
           <div class="field-body">
             <div class="field is-grouped">
               <div class="control">
-                <button {{action 'login' login password}} class="button is-success">Login</button>
+                {{#ui/form/-async-button class='button is-primary is-medium'
+                                         action=(action 'login' login password)}}
+                                           Login
+                                         {{/ui/form/-async-button}}
               </div>
               <div class="control">
                 {{#link-to 'signup' class='button is-link'}}Register{{/link-to}}

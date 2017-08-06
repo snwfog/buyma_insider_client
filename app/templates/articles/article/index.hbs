@@ -31,15 +31,24 @@
       <div class="column is-4">
         <div class="columns">
           <div class="card is-fullwidth">
-            <header class="card-header">
-              <p class="card-header-title title is-4 is-capitalize is-flex-justify-content-flex-end">
-                {{article.name}}
-              </p>
-            </header>
+            <header class="card-header"></header>
 
-            <!--Last indexed at-->
-            <div class="card-header">
-              <p class="card-header-title">
+            <div class="card-content">
+              <div class="content is-medium">
+                {{article.description}}
+              </div>
+            </div>
+
+            <footer class="card-footer">
+              <!--Created at-->
+              <div class="card-footer-item">
+                <span class="tag">
+                  Created {{moment-from-now article.createdAt}}
+                </span>
+              </div>
+
+              <!--Last indexed at-->
+              <div class="card-footer-item">
                 {{#if (eq article.health 1)}}
                   <span class="tag is-success">Indexed {{moment-from-now article.syncedAt}}</span>
                 {{else}}{{#if (eq article.health 2)}}
@@ -51,23 +60,8 @@
                 {{else}}
                   <span class="tag">Never Indexed</span>
                 {{/if}}{{/if}}{{/if}}{{/if}}
-              </p>
-            </div>
-
-            <!--Created at-->
-            <div class="card-header">
-              <p class="card-header-title">
-                <span class="tag">
-                  Created {{moment-from-now article.createdAt}}
-                </span>
-              </p>
-            </div>
-
-            <div class="card-content">
-              <div class="content is-medium">
-                {{article.description}}
               </div>
-            </div>
+            </footer>
 
             <footer class="card-footer">
               <div class="card-footer-item">

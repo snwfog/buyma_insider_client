@@ -1,5 +1,5 @@
-import Ember from "ember";
-import config from "../config/environment";
+import Ember from 'ember';
+import config from '../config/environment';
 
 const { hash }     = Ember.RSVP;
 const { computed } = Ember;

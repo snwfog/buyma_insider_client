@@ -12,7 +12,7 @@ export default ApplicationController.extend({
   actions:             {
     login(login, password) {
       this.debug(login, password);
-      this.store
+      return this.store
         .createRecord('session', { login, password })
         .save()
         .then((session) => {

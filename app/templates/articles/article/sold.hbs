@@ -1,14 +1,41 @@
 <section class="section is-small">
   <div class="container">
     <div class="columns">
-      <div class="column is-half"></div>
       <div class="column is-half">
-        <p class="title is-4 is-capitalize has-text-right">
-          {{article.name}}
-        </p>
-        <p class="subtitle is-6 has-text-right">
-          Sold {{moment-from-now articleSold.createdAt}}
-        </p>
+        <div class="columns is-mobile">
+          <div class="column is-12 has-text-centered">
+            <p class="heading">Price</p>
+          </div>
+        </div>
+        <div class="columns is-mobile">
+          <div class="column is-half has-text-centered">
+            <p class="title">{{ui/-money articleSold.price 'cad'}}</p>
+          </div>
+
+          <div class="column is-half has-text-centered">
+            <p class="title">{{ui/-money articleSold.price 'jpy'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="columns is-mobile">
+          <div class="column is-12 has-text-centered">
+            <p class="heading">Earned</p>
+          </div>
+        </div>
+        <div class="columns is-mobile">
+          <div class="column is-half has-text-centered">
+            <div>
+              <p class="title">{{ui/-money totalEarned 'cad'}}</p>
+            </div>
+          </div>
+
+          <div class="column is-half has-text-centered">
+            <div>
+              <p class="title">{{ui/-money totalEarned 'jpy'}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -403,6 +430,11 @@
           <div class="column">
 
             <div class="card">
+              <div class="card-header">
+                <div class="card-header-title">
+                  Sold {{moment-from-now articleSold.createdAt}}
+                </div>
+              </div>
               <div class="card-footer">
                 <div class="card-footer-item">
                   <p class="title is-4">
