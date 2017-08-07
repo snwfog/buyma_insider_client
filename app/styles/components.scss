@@ -65,6 +65,10 @@
   }
 }
 
+// Secondary menu list is smaller
+aside.menu > ul.menu-list > li > ul > li {
+  font-size: 0.8rem;
+}
 
 .buyma-timeline-pager {
   display:         flex;

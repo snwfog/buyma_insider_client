@@ -1,12 +1,28 @@
 <div class="columns">
   <div class="column is-4">
     <aside class="menu">
-      <p class="menu-label">
-        User
-      </p>
+      <p class="menu-label">User</p>
       <ul class="menu-list">
-        <li>{{#link-to 'user.profile.profile_index.settings' activeClass='is-active'}}Settings{{/link-to}}</li>
+        <li>{{#link-to 'user.profile.profile_index.settings'
+                       activeClass='is-active'}}Settings{{/link-to}}</li>
       </ul>
+
+      <p class="menu-label">Application</p>
+      <ul class="menu-list">
+        <li><a>Configuration</a></li>
+        <li>
+          <ul>
+            <li>{{#link-to 'user.profile.profile_index.shipping_services_setting'
+                           activeClass='is-active'}}Shipping Services{{/link-to}}</li>
+            <li>{{#link-to 'user.profile.profile_index.extra_tariffs_setting'
+                           activeClass='is-active'}}Extra Tariffs{{/link-to}}</li>
+
+            <li>{{#link-to 'user.profile.profile_index.profit_margins_setting'
+                           activeClass='is-active'}}Profit Margins{{/link-to}}</li>
+          </ul>
+        </li>
+      </ul>
+
     </aside>
   </div>
 
