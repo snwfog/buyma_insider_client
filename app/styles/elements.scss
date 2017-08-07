@@ -3,7 +3,7 @@ table tr {
   vertical-align: middle !important;
 }
 
-.icon {
+.icon.fa {
   vertical-align: middle;
   &.is-success  { color: $green !important; }
   &.is-info     { color: $blue !important; }

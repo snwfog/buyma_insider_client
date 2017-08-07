@@ -1,25 +1,47 @@
 <section class="section is-small">
   <div class="container">
-    <!--Nav and article control-->
-    <nav>
-      <div class="field is-grouped">
-        <p class="control">
-          <a class="button" target="_blank" href="{{article.link}}">
-            <span class="icon">
-              {{ui/-icon 'link'}}
-            </span>
-            <span>Link</span>
-          </a>
-        </p>
+    <div class="columns">
+      <div class="column is-half">
+        <!--Nav and article control-->
+        <nav>
+          <div class="field is-grouped">
+            <p class="control">
+              <a class="button" target="_blank" href="{{article.link}}">
+                <span class="icon">
+                  {{ui/-icon 'link'}}
+                </span>
+                <span>Link</span>
+              </a>
+            </p>
 
-        {{#if currentUser}}
-          {{article/watch-button article=article watch=(action '_watchArticle' article)}}
-          {{article/sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
-                                                                   (toast 'Congratulation!' 'success'))}}
-
-        {{/if}}
+            {{#if currentUser}}
+              {{article/watch-button article=article watch=(action '_watchArticle' article)}}
+              {{article/sell-button  article=article sell=(pipe-action (action '_sellArticle' article)
+                                                                       (toast 'Congratulation!' 'success'))}}
+            {{/if}}
+          </div>
+        </nav>
       </div>
-    </nav>
+      <div class="column is-half">
+        <div class="columns">
+          <div class="column is-12 has-text-centered">
+            <p class="heading">Price</p>
+          </div>
+        </div>
+        <div class="columns is-mobile">
+          <div class="column is-half">
+            <p class="title is-1">
+              {{ui/-money article.price 'cad'}}
+            </p>
+          </div>
+          <div class="column is-half">
+            <p class="title is-1">
+              {{ui/-money article.price 'jpy'}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -39,42 +61,6 @@
               </div>
             </div>
 
-            <footer class="card-footer">
-              <!--Created at-->
-              <div class="card-footer-item">
-                <span class="tag">
-                  Created {{moment-from-now article.createdAt}}
-                </span>
-              </div>
-
-              <!--Last indexed at-->
-              <div class="card-footer-item">
-                {{#if (eq article.health 1)}}
-                  <span class="tag is-success">Indexed {{moment-from-now article.syncedAt}}</span>
-                {{else}}{{#if (eq article.health 2)}}
-                  <span class="tag is-warning">Indexed {{moment-from-now article.syncedAt}}</span>
-                {{else}}{{#if (eq article.health 3)}}
-                  <span class="tag is-danger">Indexed {{moment-from-now article.syncedAt}}</span>
-                {{else}}{{#if (eq article.health 4)}}
-                  <span class="tag">Indexed {{moment-from-now article.syncedAt}}</span>
-                {{else}}
-                  <span class="tag">Never Indexed</span>
-                {{/if}}{{/if}}{{/if}}{{/if}}
-              </div>
-            </footer>
-
-            <footer class="card-footer">
-              <div class="card-footer-item">
-                <p class="title is-4">
-                  {{ui/-money article.price 'cad' showCode=true}}
-                </p>
-              </div>
-              <div class="card-footer-item">
-                <p class="title is-4">
-                  {{ui/-money article.price 'jpy' showCode=true}}
-                </p>
-              </div>
-            </footer>
             <footer class="card-footer">
               <div class="card-footer-item">
                 <div class="level-item price-history">

@@ -1,5 +1,26 @@
 {{#ui/b/resp/-hero style='black'}}
-  {{article.name}}
+  <p class="title">
+    {{article.name}}
+  </p>
+  <p class="title">
+    <div class="tags">
+      <span class="tag">
+        Created {{moment-from-now article.createdAt}}
+      </span>
+
+      {{#if (eq article.health 1)}}
+        <span class="tag is-success">Indexed {{moment-from-now article.syncedAt}}</span>
+      {{else}}{{#if (eq article.health 2)}}
+        <span class="tag is-warning">Indexed {{moment-from-now article.syncedAt}}</span>
+      {{else}}{{#if (eq article.health 3)}}
+        <span class="tag is-danger">Indexed {{moment-from-now article.syncedAt}}</span>
+      {{else}}{{#if (eq article.health 4)}}
+        <span class="tag">Indexed {{moment-from-now article.syncedAt}}</span>
+      {{else}}
+        <span class="tag">Never Indexed</span>
+      {{/if}}{{/if}}{{/if}}{{/if}}
+    </div>
+  </p>
 {{/ui/b/resp/-hero}}
 
 {{outlet}}
