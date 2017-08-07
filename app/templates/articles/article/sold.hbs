@@ -56,7 +56,7 @@
 
     <div class="columns">
       <!--Article price-balance sheet-->
-      <div class="column is-half">
+      <div class="column is-8">
         <div class="columns">
           <div class="column is-4">
             <label class="label">Article Price</label>
@@ -425,7 +425,7 @@
         </div>
       </div>
 
-      <div class="column is-half">
+      <div class="column is-4">
         <div class="columns">
           <div class="column">
 
@@ -680,28 +680,24 @@
 
     <div class="columns">
       <div class="column">
-        <div class="card">
-          <div class="card-content">
-            <div class="level">
-              {{#each-in articleSoldStatuses as |status happenedAt|}}
-                <div class="level-item has-text-centered">
-                  <div>
-                <span class="tag is-medium {{if (eq status articleSold.status) 'is-success'}}">
-                  <p class="is-capitalize">{{status}}</p>
-                </span>
-                    {{#if happenedAt}}
-                      <p class="title is-5 is-uppercase mt-1">
-                        {{moment-format happenedAt 'MMM-D-YYYY'}}
-                      </p>
-                      <p class="title is-6 is-uppercase">
-                        {{moment-format happenedAt 'HH:mm'}}
-                      </p>
-                    {{/if}}
-                  </div>
-                </div>
-              {{/each-in}}
+        <div class="level">
+          {{#each-in articleSoldStatuses as |status happenedAt|}}
+            <div class="level-item has-text-centered">
+              <div>
+            <span class="tag is-medium {{if (eq status articleSold.status) 'is-success'}}">
+              <p class="is-capitalize">{{status}}</p>
+            </span>
+                {{#if happenedAt}}
+                  <p class="title is-5 is-uppercase mt-1">
+                    {{moment-format happenedAt 'MMM-D-YYYY'}}
+                  </p>
+                  <p class="title is-6 is-uppercase">
+                    {{moment-format happenedAt 'HH:mm'}}
+                  </p>
+                {{/if}}
+              </div>
             </div>
-          </div>
+          {{/each-in}}
         </div>
       </div>
     </div>
