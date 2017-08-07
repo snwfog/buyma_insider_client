@@ -23,6 +23,11 @@
         </nav>
       </div>
       <div class="column is-half">
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-8">
         <div class="columns">
           <div class="column is-12 has-text-centered">
             <p class="heading">Price</p>
@@ -40,103 +45,93 @@
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="container">
-
-    <div class="columns is-row-reverse">
-      <!--Price panel right side-->
-      <div class="column is-4">
         <div class="columns">
-          <div class="card is-fullwidth">
-            <header class="card-header"></header>
+          <div class="column is-12">
+            <!--Tabs-->
+            <!--Article panel-->
+            <div class="tabs is-left">
+              <ul>
+                {{#if currentUser}}
+                  {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
+                    {{#link-to 'articles.article.index.information' article.id}}
+                      <span class="icon is-medium">
+                        {{ui/-icon 'info_outline'}}
+                      </span>
+                      <span class="is-hidden-mobile">
+                      Information
+                    </span>
+                    {{/link-to}}
+                  {{/link-to}}
 
-            <div class="card-content">
-              <div class="content is-medium">
-                {{article.description}}
-              </div>
+                  {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
+                    {{#link-to 'articles.article.index.history' article.id}}
+                      <span class="icon is-medium">
+                        {{ui/-icon 'history'}}
+                      </span>
+                      <span class="is-hidden-mobile">
+                      Transaction History
+                    </span>
+                    {{/link-to}}
+                  {{/link-to}}
+                {{/if}}
+              </ul>
             </div>
 
-            <footer class="card-footer">
-              <div class="card-footer-item">
-                <div class="level-item price-history">
-                  {{ui/sparkline/-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
-                </div>
-              </div>
-            </footer>
-            <footer class="card-footer">
-              <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
-                <tbody>
-                {{#if article.priceSummary.max}}
-                  <tr>
-                    <td><b>Highest</b></td>
-                    <td>${{article.priceSummary.max.price}}</td>
-                    <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
-                  </tr>
-                {{/if}}
-
-                {{#if article.priceSummary.min}}
-                  <tr>
-                    <td><b>Lowest</b></td>
-                    <td>${{article.priceSummary.min.price}}</td>
-                    <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
-                  </tr>
-                {{/if}}
-                </tbody>
-              </table>
-            </footer>
+            {{!--Tab outlet--}}
+            {{outlet}}
           </div>
         </div>
       </div>
-      <div class="column is-8">
 
-        <!--Tabs-->
-        <!--Article panel-->
-        <div class="tabs is-left">
-          <ul>
-            {{#if currentUser}}
-              {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
-                {{#link-to 'articles.article.index.information' article.id}}
-                  <span class="icon is-medium">
-                    {{ui/-icon 'info_outline'}}
-                  </span>
-                  <span class="is-hidden-mobile">
-                    Information
-                  </span>
-                {{/link-to}}
-              {{/link-to}}
+      <div class="column is-4">
+        <div class="card is-fullwidth">
+          <header class="card-header"></header>
+          <div class="card-content">
+            <div class="content is-medium">
+              {{article.description}}
+            </div>
+          </div>
 
-              {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
-                {{#link-to 'articles.article.index.history' article.id}}
-                  <span class="icon is-medium">
-                    {{ui/-icon 'history'}}
-                  </span>
-                  <span class="is-hidden-mobile">
-                    Transaction History
-                  </span>
-                {{/link-to}}
-              {{/link-to}}
-            {{/if}}
-          </ul>
+          <footer class="card-footer">
+            <div class="card-footer-item">
+              <div class="level-item price-history">
+                {{ui/sparkline/-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
+              </div>
+            </div>
+          </footer>
+          <footer class="card-footer">
+            <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
+              <tbody>
+              {{#if article.priceSummary.max}}
+                <tr>
+                  <td><b>Highest</b></td>
+                  <td>${{article.priceSummary.max.price}}</td>
+                  <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
+                </tr>
+              {{/if}}
+
+              {{#if article.priceSummary.min}}
+                <tr>
+                  <td><b>Lowest</b></td>
+                  <td>${{article.priceSummary.min.price}}</td>
+                  <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
+                </tr>
+              {{/if}}
+              </tbody>
+            </table>
+          </footer>
         </div>
-
-        {{!--Tab outlet--}}
-        {{outlet}}
-
       </div>
     </div>
   </div>
 </section>
 
-<!--Related articles-->
+<!--Similar articles-->
 <section class="section is-small">
   <div class="container">
     <hr>
-    <div class="title is-3 has-text-right">Related</div>
+    <div class="title is-3 has-text-right">Similar</div>
     <div class="columns">
       {{#each (await articleRelateds) as |article|}}
         <!--Mobile list-->
