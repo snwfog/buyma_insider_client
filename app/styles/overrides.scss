@@ -23,3 +23,8 @@ div.lt-body-wrap > table {
   > *.error   { background: $red; }
   > *.default { background: $turquoise; }
 }
+
+// fixes
+a.align-fix > .icon {
+  padding-bottom: 0.4rem;
+}

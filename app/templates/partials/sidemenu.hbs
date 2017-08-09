@@ -3,32 +3,34 @@
     <p class="menu-label"></p>
     <ul class="menu-list">
       <li>
-        {{#side-menu-link-to 'index.hello' activeClass='is-active'}}
+        {{#ui/-side-menu-link-to 'index.hello'}}
           <span class="icon">{{fa-icon 'bold'}}</span>
           <span>Home</span>
-        {{/side-menu-link-to}}
+        {{/ui/-side-menu-link-to}}
       </li>
       {{#if currentUser}}
         <li>
-          {{#side-menu-link-to 'index.dashboard' activeClass='is-active'}}
+          {{#ui/-side-menu-link-to 'index.dashboard'}}
             <span class="icon">{{ui/-icon 'dashboard'}}</span>
             <span>Dashboard</span>
-          {{/side-menu-link-to}}
+          {{/ui/-side-menu-link-to}}
         </li>
       {{/if}}
     </ul>
 
     <p class="menu-label">
-      <span class="icon">{{ui/-icon 'link'}}</span>
-      <span>Links</span>
+      <a class="align-fix">
+        <span class="icon">{{ui/-icon 'link'}}</span>
+        <span>Links</span>
+      </a>
     </p>
     <ul class="menu-list">
       <li>
         <ul>
           <li>
-            {{#side-menu-link-to 'status' activeClass='is-active'}}
+            {{#ui/-side-menu-link-to 'status'}}
               <span>Status</span>
-            {{/side-menu-link-to}}
+            {{/ui/-side-menu-link-to}}
           </li>
         </ul>
       </li>
@@ -36,28 +38,30 @@
 
     {{#if currentUser}}
       <p class="menu-label">
-        <span class="icon">{{ui/-icon 'person'}}</span>
-        <span>{{currentUser.username}}</span>
+        <a class="align-fix">
+          <span class="icon">{{ui/-icon 'person'}}</span>
+          <span>{{currentUser.username}}</span>
+        </a>
       </p>
       <ul class="menu-list">
         <li>
           <ul>
             <li>
-              {{#side-menu-link-to 'user.profile' activeClass='is-active'}}
+              {{#ui/-side-menu-link-to 'user.profile'}}
                 <span>Profile</span>
-              {{/side-menu-link-to}}
+              {{/ui/-side-menu-link-to}}
             </li>
 
             <li>
-              {{#side-menu-link-to 'notification' activeClass='is-active'}}
+              {{#ui/-side-menu-link-to 'notification'}}
                 <span>Notifications</span>
-              {{/side-menu-link-to}}
+              {{/ui/-side-menu-link-to}}
             </li>
 
             <li>
-              {{#side-menu-link-to 'dashboard-archive' activeClass='is-active'}}
+              {{#ui/-side-menu-link-to 'dashboard-archive'}}
                 <span>Archive</span>
-              {{/side-menu-link-to}}
+              {{/ui/-side-menu-link-to}}
             </li>
           </ul>
         </li>
@@ -65,35 +69,37 @@
 
       <ul class="menu-list">
         <li>
-          {{#side-menu-link-to 'logout' activeClass='is-active'}}
+          {{#ui/-side-menu-link-to 'logout'}}
             <span class="icon">{{ui/-icon 'input'}}</span>
             <span>Logout</span>
-          {{/side-menu-link-to}}
+          {{/ui/-side-menu-link-to}}
         </li>
       </ul>
     {{else}}
       <ul class="menu-list">
         <li>
-          {{#side-menu-link-to 'login' activeClass='is-active'}}
+          {{#ui/-side-menu-link-to 'login'}}
             <span class="icon">{{fa-icon 'sign-in'}}</span>
             <span>Login</span>
-          {{/side-menu-link-to}}
+          {{/ui/-side-menu-link-to}}
         </li>
       </ul>
     {{/if}}
 
     <p class="menu-label">
-      <span class="icon">{{ui/-icon 'business'}}</span>
-      <span>Merchants</span>
+      <a class="align-fix">
+        <span class="icon">{{ui/-icon 'business'}}</span>
+        <span>Merchants</span>
+      </a>
     </p>
     <ul class="menu-list">
       <li>
         <ul>
           {{#each merchants as |merchant|}}
             <li>
-              {{#side-menu-link-to 'merchant.index' merchant.id activeClass='is-active'}}
+              {{#ui/-side-menu-link-to 'merchant.index' merchant.id}}
                 <span>{{capitalize merchant.name}}</span>
-              {{/side-menu-link-to}}
+              {{/ui/-side-menu-link-to}}
             </li>
           {{/each}}
         </ul>
