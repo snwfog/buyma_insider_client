@@ -3,18 +3,19 @@
     <p class="menu-label"></p>
     <ul class="menu-list">
       <li>
-        {{#if currentUser}}
-          {{#side-menu-link-to 'index.dashboard' activeClass='is-active'}}
-            <span class="icon">{{fa-icon 'bold'}}</span>
-            <span>Home</span>
-          {{/side-menu-link-to}}
-        {{else}}
-          {{#side-menu-link-to 'index.hello' activeClass='is-active'}}
-            <span class="icon">{{fa-icon 'bold'}}</span>
-            <span>Home</span>
-          {{/side-menu-link-to}}
-        {{/if}}
+        {{#side-menu-link-to 'index.hello' activeClass='is-active'}}
+          <span class="icon">{{fa-icon 'bold'}}</span>
+          <span>Home</span>
+        {{/side-menu-link-to}}
       </li>
+      {{#if currentUser}}
+        <li>
+          {{#side-menu-link-to 'index.dashboard' activeClass='is-active'}}
+            <span class="icon">{{ui/-icon 'dashboard'}}</span>
+            <span>Dashboard</span>
+          {{/side-menu-link-to}}
+        </li>
+      {{/if}}
     </ul>
 
     <p class="menu-label">

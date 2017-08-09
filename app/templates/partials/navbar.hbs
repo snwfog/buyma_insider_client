@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="nav-left">
-      {{#link-to 'index.dashboard' class='nav-item is-brand is-hidden-mobile'}}
+      {{#link-to 'index.hello' class='nav-item is-brand is-hidden-mobile'}}
         {{appName}}
       {{/link-to}}
 
@@ -110,6 +110,10 @@
                                class='is-tab nav-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Archive{{/link-to-with-action}}
+        {{#link-to-with-action 'index.dashboard'
+                               class='is-tab nav-item'
+                               invokeAction=(action (disable 'navBarIsActive' this))
+                               activeClass='is-active'}}Dashboard{{/link-to-with-action}}
         {{#link-to-with-action 'user.profile'
                                class='is-tab nav-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
