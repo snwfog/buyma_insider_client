@@ -24,6 +24,13 @@ div.lt-body-wrap > table {
   > *.default { background: $turquoise; }
 }
 
+// bulma.css
+// secondary menu list is smaller
+aside.menu > ul.menu-list > li > ul > li {
+  font-size:   0.9rem;
+  font-weight: bold;
+}
+
 // fixes
 a.align-fix > .icon {
   padding-bottom: 0.4rem;

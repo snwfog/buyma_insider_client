@@ -15,6 +15,7 @@ Router.map(function () {
   this.route('status');
   this.route('signup');
   this.route('notification');
+  this.route('exchange_rates', { path: 'rates' });
   this.route('estimator');
 
   this.route('index', { path: '/' }, function () {

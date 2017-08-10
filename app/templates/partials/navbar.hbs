@@ -41,15 +41,19 @@
 
     <div class="nav-center is-hidden-mobile">
       <span class="nav-item">
-        <span class="title is-4">
-          {{ui/-money oneDollar 'jpy'}}
-        </span>
+        {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
+          <span class="title is-4">
+            {{ui/-money oneDollar 'jpy'}}
+          </span>
+        {{/link-to-with-action}}
       </span>
 
       <span class="nav-item">
-        <span class="title is-4">
-          {{ui/-money oneDollar 'usd'}}
-        </span>
+        {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
+          <span class="title is-4">
+            {{ui/-money oneDollar 'usd'}}
+          </span>
+        {{/link-to-with-action}}
       </span>
     </div>
 
@@ -63,14 +67,18 @@
       <span class="nav-item is-hidden-tablet">
         <span class="level is-mobile is-fullwidth">
           <span class="level-item">
-            <span class="title is-5">
-              {{ui/-money oneDollar 'jpy'}}
-            </span>
+            {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
+              <span class="title is-5">
+                {{ui/-money oneDollar 'jpy'}}
+              </span>
+            {{/link-to-with-action}}
           </span>
           <span class="level-item">
-            <span class="title is-5">
-              {{ui/-money oneDollar 'usd'}}
-            </span>
+            {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
+              <span class="title is-5">
+                {{ui/-money oneDollar 'usd'}}
+              </span>
+            {{/link-to-with-action}}
           </span>
         </span>
       </span>
@@ -106,14 +114,14 @@
                              activeClass='is-active'}}Status{{/link-to-with-action}}
 
       {{#if currentUser}}
-        {{#link-to-with-action 'dashboard-archive'
-                               class='is-tab nav-item'
-                               invokeAction=(action (disable 'navBarIsActive' this))
-                               activeClass='is-active'}}Archive{{/link-to-with-action}}
         {{#link-to-with-action 'index.dashboard'
                                class='is-tab nav-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Dashboard{{/link-to-with-action}}
+        {{#link-to-with-action 'dashboard-archive'
+                               class='is-tab nav-item'
+                               invokeAction=(action (disable 'navBarIsActive' this))
+                               activeClass='is-active'}}Archive{{/link-to-with-action}}
         {{#link-to-with-action 'user.profile'
                                class='is-tab nav-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
