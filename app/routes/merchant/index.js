@@ -30,8 +30,8 @@ export default Ember.Route.extend({
       queryParams: [ 'page', 'limit', 'filter' ],
       page:        getWithDefault(queryParams, 'page',   1),
       limit:       getWithDefault(queryParams, 'limit',  20),
-      filter:      getWithDefault(queryParams, 'filter', 'all'),
       order:       getWithDefault(queryParams, 'order',  'created_at:desc'),
+      filter:      getWithDefault(queryParams, 'filter', 'all'),
 
       actions: {
         '_pageChanged'(nextPage, currPage) {

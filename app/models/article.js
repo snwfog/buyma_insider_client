@@ -11,7 +11,7 @@ const { IS_NEW_DAYS,
         SYNC_HEALTH: { NEWEST_DAYS, VERY_FRESH_DAYS, FRESH_DAYS, } } = config.MODEL.ARTICLES;
 
 export default DS.Model.extend({
-  priceHistory:    belongsTo('article/price-history', { async: false }),
+//  priceHistory:    belongsTo('article/price-history', { async: false }),
   articleRelateds: hasMany('article', { async: true }),
 
   name:         attr(),
@@ -19,6 +19,7 @@ export default DS.Model.extend({
   link:         attr('uri'),
   description:  attr(),
 
+  priceHistory: attr('price-history'),
   priceSummary: attr('price-summary'),
 
   syncedAt:     attr('datetime'),

@@ -108,15 +108,15 @@
           <div class="content">
             <div class="columns">
               <div class="column one-half">
-                {{#if articleSold.soldPrice}}
+                {{#if articleSold.priceSold}}
                   <p class="title is-4">
-                    {{ui/-money articleSold.soldPrice 'cad'}}
-                    {{ui/-money articleSold.soldPrice 'jpy'}}
+                    {{ui/-money articleSold.priceSold 'cad'}}
+                    {{ui/-money articleSold.priceSold 'jpy'}}
                   </p>
                 {{/if}}
               </div>
               <div class="column one-half">
-                <p class="{{if articleSold.soldPrice 'subtitle is-6' 'title is-4'}}">
+                <p class="{{if articleSold.priceSold 'subtitle is-6' 'title is-4'}}">
                   {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
                     {{ui/-money article.price 'cad' exchangeRate=(await articleSold.exchangeRate)}}
                     {{ui/-money article.price 'jpy' exchangeRate=(await articleSold.exchangeRate)}}

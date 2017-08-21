@@ -96,7 +96,7 @@
           <footer class="card-footer">
             <div class="card-footer-item">
               <div class="level-item price-history">
-                {{ui/sparkline/-line data=(map-by 'price' (sort-by 'createdAt' article.priceHistory.history))}}
+                {{ui/sparkline/-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory))}}
               </div>
             </div>
           </footer>

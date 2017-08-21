@@ -4,6 +4,7 @@ import UserArticleSold from '../../models/user/article-sold';
 
 const attrs = {
   buyer:     { embedded: 'always' },
+  price:     { serialize: false },
   createdAt: { serialize: false },
   updatedAt: { serialize: false },
 };

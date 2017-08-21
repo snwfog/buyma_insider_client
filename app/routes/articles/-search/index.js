@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 
 const { merge, getWithDefault, computed } = Ember;
 const { hash }                            = Ember.RSVP;
@@ -45,10 +45,10 @@ export default Ember.Route.extend({
 //       filter:      getWithDefault(queryParams, 'filter', 'all'),
       order:                          getWithDefault(queryParams, 'order', 'created_at:desc'),
       extension:                      getWithDefault(queryParams, 'extension', '_search'),
-      searchedArticlesOrderedByScore: computed('searchedArticles.[]', function() {
+      searchedArticlesOrderedByScore: computed('searchedArticles.[]', function () {
         let searchedArticleScores = this.get('searchedArticles.meta.scores');
         let store                 = this.store;
-        return searchedArticleScores.map(function(articleScoreDocument) {
+        return searchedArticleScores.map(function (articleScoreDocument) {
           let articleId = articleScoreDocument[ 'article-id' ];
           let article   = store.peekRecord('article', articleId);
           if (!article) {
@@ -67,7 +67,7 @@ export default Ember.Route.extend({
         '_pageChanged'(nextPage, currPage) {
           this.debug(`Page changed ${currPage} -> ${nextPage}`);
           controller.set('page', nextPage);
-          route.transitionTo({ queryParams: { page: nextPage }});
+          route.transitionTo({ queryParams: { page: nextPage } });
         }
       }
     });
@@ -79,8 +79,7 @@ export default Ember.Route.extend({
       controller.set('page', 1);
       controller.set('limit', 20);
 //      controller.set('filter', 'all');
-//      controller.set('order', 'created_at:desc');
-      controller.set('order', null);
+      controller.set('order', 'created_at:desc');
       controller.set('extension', '_search');
     }
 

@@ -77,7 +77,7 @@ export default Ember.Controller.extend({
     return this.exchangeRatesService.cad2jpy(this.get('articleSold.price.amount'));
   }),
 
-  articleSoldSoldPrice: computed.alias('articleSold.soldPrice.amount'),
+  articleSoldPriceSold: computed.alias('articleSold.priceSold.amount'),
 
   saleTaxPct:                   CAD_SALES_TAX_PCT,
   _articleSoldPriceWithSaleTax: null,
@@ -90,19 +90,19 @@ export default Ember.Controller.extend({
   }),
 
   _profit: null,
-  profit:  computed('articleSoldPriceWithSaleTax.amount', 'articleSoldSoldPrice', function () {
+  profit:  computed('articleSoldPriceWithSaleTax.amount', 'articleSoldPriceSold', function () {
     const profit                     = this.get('_profit') || this.store.createRecord('money', { base: 'jpy' });
     const articleSoldPriceWithTaxJpy = this.exchangeRatesService.cad2jpy( this.get('articleSoldPriceWithSaleTax.amount'));
-    profit.set('amount', -Number(articleSoldPriceWithTaxJpy) + Number(this.get('articleSoldSoldPrice')));
+    profit.set('amount', -Number(articleSoldPriceWithTaxJpy) + Number(this.get('articleSoldPriceSold')));
     this.set('_profit', profit);
     return profit;
   }),
 
   buymaCutPct:   BUYMA_CUT_PCT,
   _buymaCut:     null,
-  buymaCut:      computed('articleSoldSoldPrice', function () {
+  buymaCut:      computed('articleSoldPriceSold', function () {
     const buymaCut = this.get('_buymaCut') || this.store.createRecord('money', { base: 'jpy' });
-    buymaCut.set('amount', Number(this.get('articleSoldSoldPrice')) * (BUYMA_CUT_PCT / 100));
+    buymaCut.set('amount', Number(this.get('articleSoldPriceSold')) * (BUYMA_CUT_PCT / 100));
     this.set('_buymaCut', buymaCut);
     return buymaCut;
   }),
@@ -123,18 +123,18 @@ export default Ember.Controller.extend({
       return total;
     }),
 
-  priceMarginPct: computed('articleSold.soldPrice.amount', function () {
-    let articleSoldSoldPrice = this.get('articleSold.soldPrice');
-    if (articleSoldSoldPrice.get('amount') <= 0) {
+  priceMarginPct: computed('articleSold.priceSold.amount', function () {
+    let articleSoldPriceSold = this.get('articleSold.priceSold');
+    if (articleSoldPriceSold.get('amount') <= 0) {
       return 0.0;
     }
     const articleSoldPrice          = this.get('articleSold.price');
     const exchangeRatesService      = this.get('exchangeRatesService');
     const articleSoldPriceConverted = exchangeRatesService
       .convertCurrency(
-        articleSoldSoldPrice.get('base'),
+        articleSoldPriceSold.get('base'),
         articleSoldPrice.get('base'),
-        articleSoldSoldPrice.get('amount'));
+        articleSoldPriceSold.get('amount'));
 
     const articleSoldPriceAmount = articleSoldPrice.get('amount');
     return Math.round((articleSoldPriceConverted - articleSoldPriceAmount) / articleSoldPriceAmount * 100);
@@ -160,7 +160,7 @@ export default Ember.Controller.extend({
       this.set('selectedAutoProfitMargin', autoProfitMargin);
       let articleSoldPriceAmountJpy = this.exchangeRatesService.cad2jpy(this.get('articleSold.price.amount'));
       let soldPriceAmountJpy = articleSoldPriceAmountJpy * (1 + autoProfitMargin.rate / 100.0);
-      this.set('articleSold.soldPrice.amount', soldPriceAmountJpy.toFixed()); // Crude rounding
+      this.set('articleSold.priceSold.amount', soldPriceAmountJpy.toFixed()); // Crude rounding
     },
 
     '_assignSelectShippingService'(shippingService, shippingServiceId) {

@@ -6,13 +6,13 @@
       <div class="column is-3">
         <div class="content is-button-group">
           <p class="title is-4">Filters</p>
-          {{#link-to 'merchant' metadatum.id (query-params filter='new')
+          {{#link-to 'merchant' merchant.id (query-params filter='new')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}New{{/link-to}}
-          {{#link-to 'merchant' metadatum.id (query-params filter='sale')
+          {{#link-to 'merchant' merchant.id (query-params filter='sale')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-primary is-active'}}Sale{{/link-to}}
-          {{#link-to 'merchant' metadatum.id (query-params filter='all')
+          {{#link-to 'merchant' merchant.id (query-params filter='all')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-primary'}}All{{/link-to}}
 
@@ -20,16 +20,16 @@
 
         <div class="content is-button-group">
           <p class="title is-4">Orderings</p>
-          {{#link-to 'merchant' metadatum.id (query-params order='name')
+          {{#link-to 'merchant' merchant.id (query-params order='name')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}By Name{{/link-to}}
-          {{#link-to 'merchant' metadatum.id (query-params order='price')
+          {{#link-to 'merchant' merchant.id (query-params order='price')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'attach_money'}}</span><span>By Price</span>{{/link-to}}
-          {{#link-to 'merchant' metadatum.id (query-params order='created_at')
+          {{#link-to 'merchant' merchant.id (query-params order='created_at')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Created</span>{{/link-to}}
-          {{#link-to 'merchant' metadatum.id (query-params order='updated_at')
+          {{#link-to 'merchant' merchant.id (query-params order='updated_at')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Updated</span>{{/link-to}}
         </div>
@@ -91,7 +91,7 @@
               <p class="price-history">
                 {{ui/sparkline/-line data=(map-by 'price'
                                             (take 45
-                                              (sort-by 'createdAt:desc' article.priceHistory.history)))}}
+                                              (sort-by 'timestamp:desc' article.priceHistory)))}}
               </p>
             </div>
           </div>

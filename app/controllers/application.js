@@ -12,13 +12,13 @@ export default Ember.Controller.extend({
   unreadArticleNotifieds: computed.filterBy('articleNotifieds', 'isRead', false),
 
   jpyValue: computed('cadValue', 'exchangeRatesService.exchangeRates', function () {
-    var cadValue             = this.get('cadValue');
-    var { locale, code }     = this.exchangeRatesService.lookup('jpy');
-    var formatter            = new Intl.NumberFormat(locale, {
+    let cadValue             = this.get('cadValue');
+    let { locale, code }     = this.exchangeRatesService.lookup('jpy');
+    let formatter            = new Intl.NumberFormat(locale, {
       style:    'currency',
       currency: 'jpy'
     });
-    var convertedAmount      = this.exchangeRatesService.cad2jpy(cadValue);
+    let convertedAmount      = this.exchangeRatesService.cad2jpy(cadValue);
     return formatter.format(convertedAmount);
   }),
   cadValue: null,

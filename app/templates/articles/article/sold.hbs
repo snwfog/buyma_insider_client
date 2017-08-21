@@ -101,7 +101,7 @@
             <div class="columns is-mobile">
               <div class="column is-6">
                 <span class="is-green">
-                  {{ui/-money articleSold.soldPrice 'jpy' showCode=false}}
+                  {{ui/-money articleSold.priceSold 'jpy' showCode=false}}
                 </span>
               </div>
               <div class="column is-6">
@@ -109,7 +109,7 @@
                   <p class="control has-icons-left">
                     {{input class='input has-text-right'
                             classBinding='allowEditArticleSoldPrice:is-success'
-                            value=articleSold.soldPrice.amount
+                            value=articleSold.priceSold.amount
                             disabled=(not allowEditArticleSoldPrice)
                             type='number'}}
                     <span class="icon is-left">
@@ -438,12 +438,12 @@
               <div class="card-footer">
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui/-money articleSold.soldPrice 'cad'}}
+                    {{ui/-money articleSold.priceSold 'cad'}}
                   </p>
                 </div>
                 <div class="card-footer-item">
                   <p class="title is-4">
-                    {{ui/-money articleSold.soldPrice 'jpy'}}
+                    {{ui/-money articleSold.priceSold 'jpy'}}
                   </p>
                 </div>
               </div>

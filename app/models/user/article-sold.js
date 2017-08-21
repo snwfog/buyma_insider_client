@@ -31,7 +31,7 @@ const UserArticleSold = DS.Model.extend(statusAttrs, {
   status:           attr(),
   price:            attr('money', { code: 'cad' }), // Market price when it was sold
   notes:            attr(),
-  soldPrice:        attr('money', { code: 'jpy' }), // Price we sold at
+  priceSold:        attr('money', { code: 'jpy' }), // Price we sold at
   createdAt:        attr('datetime'),
   updatedAt:        attr('datetime'),
 
