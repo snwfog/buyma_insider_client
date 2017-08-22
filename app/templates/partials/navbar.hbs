@@ -62,9 +62,25 @@
 
     <div class="navbar-end">
 
+      {{#link-to-with-action 'exchange_rates' class='navbar-item is-hidden-tablet'
+                             invokeAction=(action (disable 'navBarIsActive' this))}}
+        <span class="level is-mobile">
+          <span class="level-item has-text-centered">
+            <span class="title is-4">
+              {{ui/-money oneDollar 'jpy'}}
+            </span>
+          </span>
+          <span class="level-item has-text-centered">
+            <span class="title is-4">
+              {{ui/-money oneDollar 'usd'}}
+            </span>
+          </span>
+        </span>
+      {{/link-to-with-action}}
+
       <span class="navbar-item is-hidden-tablet">
         <div class="columns is-mobile">
-          <div class="column is-6">
+          <div class="column is-half">
             <p class="control is-expanded has-icons-left">
               {{input class='input has-text-right'
                       type='number'
@@ -75,10 +91,10 @@
               </span>
             </p>
           </div>
-          <div class="column is-6">
+          <div class="column is-half">
             <p class="control is-expanded">
               {{input class='input is-success has-text-right'
-                      type='number'
+                      type='text'
                       disabled=true
                       value=jpyValue
                       placehodler='JPY'}}
