@@ -29,6 +29,7 @@ module.exports = function(defaults) {
         'bower_components/bulma-ribbon',
         'bower_components/bulma-steps',
         'bower_components/bulma-tooltip',
+        'bower_components/bulma-divider',
       ]
     },
   });

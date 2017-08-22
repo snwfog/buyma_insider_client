@@ -4,6 +4,7 @@
     "bulma": "jgthms/bulma",
     "bulma-timeline": "Wikiki/bulma-timeline",
     "bulma-badge": "Wikiki/bulma-badge",
+    "bulma-divider": "Wikiki/bulma-divider",
     "font-awesome": "^4.7.0",
     "typicons.font": "typicons#^2.0.8",
     "chartjs": "2.1.6",

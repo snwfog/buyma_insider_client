@@ -6,7 +6,7 @@ const { computed, assert } = Ember;
 const { belongsTo, attr } = DS;
 
 let ExtraTariff = DS.Model.extend({
-  soldArticle:    belongsTo('user/article-sold'),
+//  soldArticle:    belongsTo('user/article-sold'),
   name:           attr(),
   rate:           attr(),
   rateType:       attr({ defaultValue: 'flat' }),
