@@ -1,89 +1,68 @@
-<nav class="nav has-shadow">
-  <div class="container">
+<nav class="navbar has-shadow">
+  <div class="navbar-brand">
+    {{#link-to 'index.hello' class='navbar-item is-brand is-hidden-mobile'}}
+      {{appName}}
+    {{/link-to}}
 
-    <div class="nav-left">
-      {{#link-to 'index.hello' class='nav-item is-brand is-hidden-mobile'}}
-        {{appName}}
-      {{/link-to}}
+    {{#side-menu-toggle id='logo-mobile' class='navbar-item is-brand is-hidden-tablet'}}
+      <span class="icon">
+        {{fa-icon 'bold'}}
+      </span>
+    {{/side-menu-toggle}}
 
-      {{#side-menu-toggle id='logo-mobile' class='nav-item is-brand is-hidden-tablet'}}
+    <span class="navbar-item is-hidden-tablet">
+      <p class="control is-fullwidth">
+        {{input id="nav-search-input-mobile"
+                class="input"
+                type="text"
+                value=inputSearchArticleQuery
+                enter=(action '_searchArticles')
+                placeholder="Search..."}}
+      </p>
+      {{#if inputSearchArticleQuery}}
         <span class="icon">
-          {{fa-icon 'bold'}}
+            <a class="delete" {{action (reset-prop 'inputSearchArticleQuery' this)}}></a>
+          </span>
+      {{/if}}
+    </span>
+
+    {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
+      {{#link-to 'notification' class='navbar-item is-hidden-tablet'}}
+        <span class="tag is-warning is-bold">
+          {{unreadArticleNotifieds.length}}
         </span>
-      {{/side-menu-toggle}}
-    </div>
+      {{/link-to}}
+    {{/with}}
 
-    <div id="nav-center-mobile" class="nav-center is-hidden-tablet">
-      <span class="nav-item">
-        <p class="control is-fullwidth">
-          {{input id="nav-search-input-mobile"
-                  class="input"
-                  type="text"
-                  value=inputSearchArticleQuery
-                  enter=(action '_searchArticles')
-                  placeholder="Search..."}}
-        </p>
-        {{#if inputSearchArticleQuery}}
-          <span class="icon">
-              <a class="delete" {{action (reset-prop 'inputSearchArticleQuery' this)}}></a>
-            </span>
-        {{/if}}
-      </span>
-
-      {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
-        {{#link-to 'notification' class='nav-item'}}
-          <span class="tag is-warning is-bold">
-            {{unreadArticleNotifieds.length}}
-          </span>
-        {{/link-to}}
-      {{/with}}
-    </div>
-
-    <div class="nav-center is-hidden-mobile">
-      <span class="nav-item">
-        {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
-          <span class="title is-4">
-            {{ui/-money oneDollar 'jpy'}}
-          </span>
-        {{/link-to-with-action}}
-      </span>
-
-      <span class="nav-item">
-        {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
-          <span class="title is-4">
-            {{ui/-money oneDollar 'usd'}}
-          </span>
-        {{/link-to-with-action}}
-      </span>
-    </div>
-
-    <span class="nav-toggle {{if navBarIsActive 'is-active'}}" {{action (toggle 'navBarIsActive' this)}}>
+    <span class="navbar-burger {{if navBarIsActive 'is-active'}}" {{action (toggle 'navBarIsActive' this)}}>
       <span></span>
       <span></span>
       <span></span>
     </span>
+  </div>
 
-    <div class="nav-right nav-menu {{if navBarIsActive 'is-active'}}">
-      <span class="nav-item is-hidden-tablet">
-        <span class="level is-mobile is-fullwidth">
-          <span class="level-item">
-            {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
-              <span class="title is-5">
-                {{ui/-money oneDollar 'jpy'}}
-              </span>
-            {{/link-to-with-action}}
-          </span>
-          <span class="level-item">
-            {{#link-to-with-action 'exchange_rates' invokeAction=(action (disable 'navBarIsActive' this))}}
-              <span class="title is-5">
-                {{ui/-money oneDollar 'usd'}}
-              </span>
-            {{/link-to-with-action}}
-          </span>
+  <div class="navbar-menu {{if navBarIsActive 'is-active'}}">
+    <div class="navbar-start">
+
+      {{#link-to-with-action 'exchange_rates' class='navbar-item is-hidden-mobile'
+                             invokeAction=(action (disable 'navBarIsActive' this))}}
+        <span class="title is-4">
+          {{ui/-money oneDollar 'jpy'}}
         </span>
-      </span>
+      {{/link-to-with-action}}
 
-      <span class="nav-item is-hidden-tablet">
+      {{#link-to-with-action 'exchange_rates' class='navbar-item is-hidden-mobile'
+                             invokeAction=(action (disable 'navBarIsActive' this))}}
+        <span class="title is-4">
+          {{ui/-money oneDollar 'usd'}}
+        </span>
+      {{/link-to-with-action}}
+
+    </div>
+
+    <div class="navbar-end">
+
+      <span class="navbar-item is-hidden-tablet">
         <div class="columns is-mobile">
           <div class="column is-6">
             <p class="control is-expanded has-icons-left">
@@ -109,21 +88,21 @@
       </span>
 
       {{#link-to-with-action 'status'
-                             class='is-tab nav-item'
+                             class='navbar-item'
                              invokeAction=(action (disable 'navBarIsActive' this))
                              activeClass='is-active'}}Status{{/link-to-with-action}}
 
       {{#if currentUser}}
         {{#link-to-with-action 'index.dashboard'
-                               class='is-tab nav-item'
+                               class='navbar-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Dashboard{{/link-to-with-action}}
         {{#link-to-with-action 'dashboard-archive'
-                               class='is-tab nav-item'
+                               class='navbar-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Archive{{/link-to-with-action}}
         {{#link-to-with-action 'user.profile'
-                               class='is-tab nav-item'
+                               class='navbar-item'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}
           <figure class="image is-16x16 mr-1">
@@ -132,9 +111,9 @@
           {{currentUser.username}}
         {{/link-to-with-action}}
 
-        {{#link-to-with-action 'notification' class='is-tab nav-item'
-                                              invokeAction=(action (disable 'navBarIsActive' this))
-                                              actionClass='is-active'}}
+        {{#link-to-with-action 'notification' class='navbar-item'
+                               invokeAction=(action (disable 'navBarIsActive' this))
+                               actionClass='is-active'}}
           <span class="icon is-small">
             {{fa-icon 'envelope-o'}}
           </span>
@@ -150,18 +129,17 @@
         {{/link-to-with-action}}
 
         {{#link-to-with-action 'logout'
-                               class='is-tab nav-item is-hidden-mobile'
+                               class='navbar-item is-hidden-mobile'
                                invokeAction=(pipe-action (action '_logout')
                                                          (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Logout{{/link-to-with-action}}
       {{else}}
         {{#link-to-with-action 'login'
-                               class='is-tab nav-item is-hidden-mobile'
+                               class='navbar-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Login{{/link-to-with-action}}
       {{/if}}
+
     </div>
-
-
   </div>
 </nav>

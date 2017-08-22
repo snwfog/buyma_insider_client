@@ -73,55 +73,57 @@
           {{/if}}
         </div>
         <div class="field-body">
-          <div class="field is-grouped">
-            <p class="control has-icons-left is-expanded">
-              {{input class='input'
-                      value=indexPage.relativePath
-                      disabled=(cannot 'edit metadatum' metadatum)}}
-              <span class="icon is-small is-left">
-                {{#if (eq indexPage.health 'green')}}
-                  {{fa-icon 'check-circle' class='is-green'}}
-                {{else}}{{#if (eq indexPage.health 'orange')}}
-                  {{fa-icon 'exclamation-triangle' class='is-yellow'}}
-                {{else}}{{#if (eq indexPage.health 'red')}}
-                  {{fa-icon 'exclamation-circle' class='is-red'}}
-                {{/if}}{{/if}}{{/if}}
-              </span>
-            </p>
+          <div class="field">
+            <div class="field is-grouped">
+              <p class="control has-icons-left is-expanded">
+                {{input class='input'
+                        value=indexPage.relativePath
+                        disabled=(cannot 'edit metadatum' metadatum)}}
+                <span class="icon is-small is-left">
+                  {{#if (eq indexPage.health 'green')}}
+                    {{fa-icon 'check-circle' class='is-green'}}
+                  {{else}}{{#if (eq indexPage.health 'orange')}}
+                    {{fa-icon 'exclamation-triangle' class='is-yellow'}}
+                  {{else}}{{#if (eq indexPage.health 'red')}}
+                    {{fa-icon 'exclamation-circle' class='is-red'}}
+                  {{/if}}{{/if}}{{/if}}
+                </span>
+              </p>
+              <p class="control">
+                {{#if indexPage.inprogress}}
+                  <button disabled class="button is-warning is-loading">
+                    Update
+                  </button>
+                {{else}}
+                  {{#ui/form/-async-button class='button'
+                                           textState='is-warning'
+                                           disable=(cannot 'refresh indexPage' indexPage)
+                                           action=(action '_refreshIndexPage' indexPage) as |component state|}}
+                    {{#if state.isRejected}}
+                      <span class="icon is-small">
+                        {{fa-icon 'exclamation-circle'}}
+                      </span>
+                      <span>Error</span>
+                    {{else}}{{#if state.isFulfilled}}
+                      <span class="icon is-small">
+                        {{fa-icon 'check-circle'}}
+                      </span>
+                      <span>Updated</span>
+                    {{else}}
+                      <span class="icon is-small">
+                        {{fa-icon 'bug'}}
+                      </span>
+                      <span>Update</span>
+                    {{/if}}{{/if}}
+                  {{/ui/form/-async-button}}
+                {{/if}}
+              </p>
+            </div>
             {{#if indexPage.lastSyncedAt}}
               <p class="help is-success">
                 Last synchronized: {{moment-from-now indexPage.lastSyncedAt}}
               </p>
             {{/if}}
-            <p class="control">
-              {{#if indexPage.inprogress}}
-                <button disabled class="button is-warning is-loading">
-                  Update
-                </button>
-              {{else}}
-                {{#ui/form/-async-button class='button'
-                                         textState='is-warning'
-                                         disable=(cannot 'refresh indexPage' indexPage)
-                                         action=(action '_refreshIndexPage' indexPage) as |component state|}}
-                  {{#if state.isRejected}}
-                    <span class="icon is-small">
-                      {{fa-icon 'exclamation-circle'}}
-                    </span>
-                    <span>Error</span>
-                  {{else}}{{#if state.isFulfilled}}
-                    <span class="icon is-small">
-                      {{fa-icon 'check-circle'}}
-                    </span>
-                    <span>Updated</span>
-                  {{else}}
-                    <span class="icon is-small">
-                      {{fa-icon 'bug'}}
-                    </span>
-                    <span>Update</span>
-                  {{/if}}{{/if}}
-                {{/ui/form/-async-button}}
-              {{/if}}
-            </p>
           </div>
           <div class="field">
             <div class="control is-expanded">

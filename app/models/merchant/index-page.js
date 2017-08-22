@@ -13,5 +13,5 @@ export default DS.Model.extend({
   health:       attr(),
   lastSyncedAt: attr('datetime'),
 
-  isRoot: computed.notEmpty('indexPages'),
+  isRoot: computed.empty('indexPage'),
 });
