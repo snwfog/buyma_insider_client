@@ -42,7 +42,7 @@ export default Ember.Service.extend({
 
   setup() {
     return this.get('store')
-      .queryRecord('exchange-rate', {})
+      .queryRecord('exchange-rate', { _latest: true })
       .then((latestRates) => {
         this.set('exchangeRates', latestRates);
         this.debug(`Latest exchange rates updated on ${moment().local().toString()}`)
@@ -77,14 +77,14 @@ export default Ember.Service.extend({
       return amount;
     }
 
-    var exchangeRates  = rate || this.get('latest');
-    var exchangeBase = exchangeRates.get('base').toLowerCase();
+    let exchangeRates = rate || this.get('latest');
+    let exchangeBase  = exchangeRates.get('base').toLowerCase();
     if (from === exchangeBase) {
       return exchangeRates.get(`rates.${to}`) * amount;
     } else {
-      var fromRate    = exchangeRates.get(`rates.${from}`);
-      var toRate      = exchangeRates.get(`rates.${to}`);
-      var newBaseRate = toRate / Number(fromRate);
+      let fromRate    = exchangeRates.get(`rates.${from}`);
+      let toRate      = exchangeRates.get(`rates.${to}`);
+      let newBaseRate = toRate / Number(fromRate);
       return newBaseRate * amount;
     }
   },

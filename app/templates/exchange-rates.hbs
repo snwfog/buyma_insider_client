@@ -1,3 +1,54 @@
 {{#ui/b/resp/-hero}}
   Exchange Rates
 {{/ui/b/resp/-hero}}
+<div class="section is-small">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-12">
+        <div class="field is-horizontal has-addons-centered">
+          <div class="field-label is-medium"></div>
+          <div class="field-body">
+            <div class="field has-addons">
+              <p class="control">
+                <span class="select is-medium">
+                  <select>
+                    <option value="usd">USD $</option>
+                    <option value="cad">CAD #</option>
+                    <option value="yen">JPY &</option>
+                  </select>
+                </span>
+              </p>
+              <p class="control is-expanded">
+                {{input class='input is-medium'
+                        type='text'
+                        placeholder='Base amount'}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-12">
+        <table class="table is-striped is-bordered is-fullwidth">
+          <thead>
+            <tr>
+              <th><abbr title="Time">Time</abbr></th>
+              <th><abbr title="USD">USD</abbr></th>
+              <th><abbr title="JPY">JPY</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each sortedExchangeRates as |exchangeRate|}}
+              <tr>
+                <th>{{moment-format exchangeRate.timestamp 'MMM-D-YYYY HH:MM:SS'}}</th>
+                <td>{{ui/-money oneDollar 'usd' rate=exchangeRate showCode=false}}</td>
+                <td>{{ui/-money oneDollar 'jpy' rate=exchangeRate showCode=false}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

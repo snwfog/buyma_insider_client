@@ -89,7 +89,20 @@
                 </article>
               </div>
             {{else}}
-              <p class="title is-4">Hurray! No notifications!</p>
+              <article class="message">
+                <div class="message-body">
+                  <nav class="level">
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <span class="icon is-large">
+                          {{ui/-icon 'drafts'}}
+                        </span>
+                        <p class="title is-4">No notifications.</p>
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </article>
             {{/each}}
           </div>
         </div>

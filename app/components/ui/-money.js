@@ -14,20 +14,19 @@ let UiMoneyComponent = Ember.Component.extend({
     // Get with default only works with undefined
 //     const amountBase   = this.getWithDefault('amount.base', 'cad'); Get with default works with null only
 //     const displayBase  = this.getWithDefault('displayBase', 'cad');
-    const amount       = this.get('amountMoney');
+    let exchangeRatesService = this.get('exchangeRatesService');
+    const amount             = this.get('amountMoney');
     if (!amount) {
-      return '-';
+      return '- ERROR -';
     }
-
     const amountBase   = this.get('amountMoney.base') || 'cad';
     const displayBase  = this.get('displayBase') || 'cad';
-    const exchangeRate = this.get('exchangeRate');
+    const exchangeRate = this.get('exchangeRate') || exchangeRatesService.get('latest');
 
-    var exchangeRatesService = this.get('exchangeRatesService');
-    var { locale, code }     = exchangeRatesService.lookup(displayBase);
-    var convertedAmount      = exchangeRatesService.convertCurrency(amountBase, displayBase, amount.get('amount'), exchangeRate);
+    let { locale, code } = exchangeRatesService.lookup(displayBase);
+    let convertedAmount  = exchangeRatesService.convertCurrency(amountBase, displayBase, amount.get('amount'), exchangeRate);
 
-    var formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: code });
+    let formatter = new Intl.NumberFormat(locale, { style: 'currency', currency: code });
     return formatter.format(convertedAmount);
   }),
 });

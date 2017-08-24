@@ -1,11 +1,11 @@
-import Ember from "ember";
+import Ember from 'ember';
 
 const { hash }  = Ember.RSVP;
 const { alias } = Ember.computed;
 
 export default Ember.Route.extend({
   model() {
-    var { merchant } = this.modelFor('merchant');
+    let { merchant } = this.modelFor('merchant');
     return hash({
       merchant,
     });

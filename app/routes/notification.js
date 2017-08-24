@@ -17,7 +17,8 @@ export default Ember.Route.extend({
       // sort function not working event with comparable interface
       // installed ember-awesome-macros
       // https://github.com/jasonmit/ember-cli-moment-shim/issues/97
-      sortedArticleNotifieds: array.sort('articleNotifieds', (a, b) => moment.compare(b.get('createdAt'), a.get('createdAt'))),
+      sortedArticleNotifieds: array.sort('articleNotifieds',
+        (a, b) => moment.compare(b.get('createdAt'), a.get('createdAt'))),
       actions:                {
         '_readArticleNotified'(articleNotified) {
           articleNotified.set('readAt', moment());

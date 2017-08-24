@@ -116,41 +116,45 @@
                 {{/if}}
               </div>
               <div class="column one-half">
-                <p class="{{if articleSold.priceSold 'subtitle is-6' 'title is-4'}}">
-                  {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
-                    {{ui/-money article.price 'cad' exchangeRate=(await articleSold.exchangeRate)}}
-                    {{ui/-money article.price 'jpy' exchangeRate=(await articleSold.exchangeRate)}}
+                <p class="title is-4">
+                  {{#with articleSold.exchangeRate as |exchangeRate|}}
+                    {{ui/-money article.price 'cad' exchangeRate=articleSold.exchangeRate}}
+                    {{ui/-money article.price 'jpy' exchangeRate=articleSold.exchangeRate}}
                   {{/with}}
                 </p>
               </div>
             </div>
           </div>
           <div class="content">
-            {{#if (eq articleSold.status 'confirmed')}}
-              <span class="tag is-info is-capitalize">
-                {{articleSold.status}}
-              </span>
-            {{/if}}{{#if (eq articleSold.status 'shipped')}}
-              <span class="tag is-info is-warning is-capitalize">
-                {{articleSold.status}}
-              </span>
-            {{/if}}{{#if (eq articleSold.status 'received')}}
-              <span class="tag is-info is-success is-capitalize">
-                {{articleSold.status}}
-              </span>
-            {{/if}}{{#if (eq articleSold.status 'cancelled')}}
-              <span class="tag is-info is-danger is-capitalize">
-                {{articleSold.status}}
-              </span>
-            {{/if}}{{#if (eq articleSold.status 'returned')}}
-              <span class="tag is-info is-danger is-capitalize">
-                {{articleSold.status}}
-              </span>
-            {{/if}}
+            <div class="tags has-addons">
+              {{#if (eq articleSold.status 'confirmed')}}
+                <span class="tag is-info is-capitalize">
+                  {{articleSold.status}}
+                </span>
+                <span class="tag">
+                  {{moment-format articleSold.confirmedAt 'MMM-D-YYYY'}}
+                </span>
+              {{/if}}{{#if (eq articleSold.status 'shipped')}}
+                <span class="tag is-info is-warning is-capitalize">
+                  {{articleSold.status}}
+                </span>
+              {{/if}}{{#if (eq articleSold.status 'received')}}
+                <span class="tag is-info is-success is-capitalize">
+                  {{articleSold.status}}
+                </span>
+              {{/if}}{{#if (eq articleSold.status 'cancelled')}}
+                <span class="tag is-info is-danger is-capitalize">
+                  {{articleSold.status}}
+                </span>
+              {{/if}}{{#if (eq articleSold.status 'returned')}}
+                <span class="tag is-info is-danger is-capitalize">
+                  {{articleSold.status}}
+                </span>
+              {{/if}}
+            </div>
           </div>
           <div class="content">
-            <p class="title is-4">Sold {{moment-from-now articleSold.createdAt}} on {{moment-format articleSold.createdAt 'LL'}}</p>
-            <p class="subtitle is-6">
+            <p class="title is-5">
               {{#with (await articleSold.exchangeRate) as |exchangeRate|}}
                 Rates @ {{ui/-money oneDollar 'jpy'
                                     exchangeRate=exchangeRate

@@ -5,7 +5,7 @@ import moment from 'moment';
 const { isEmpty } = Ember;
 export default DS.Transform.extend({
   deserialize(serialized) {
-    var seenAt, price;
+    let seenAt, price;
     if (!isEmpty(serialized)) {
       if (serialized.hasOwnProperty('max')) {
         seenAt = moment.utc(serialized.max['seen-at'], 'YYYY-MM-DD HH:mm:ss Z').local();

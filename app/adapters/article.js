@@ -14,7 +14,7 @@ export default ApplicationAdapter.extend({
 
   urlForQuery(query, modelName) {
     if (!!query.merchant_id) {
-      var merchant_id = query.merchant_id;
+      let merchant_id = query.merchant_id;
       delete query.merchant_id;
       return this._buildURL(`merchants/${merchant_id}/articles`);
     } else {

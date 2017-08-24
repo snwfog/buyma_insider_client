@@ -1,5 +1,5 @@
-import Ember from "ember";
-import ApplicationController from "./application";
+import Ember from 'ember';
+import ApplicationController from './application';
 
 const { hash }     = Ember.RSVP;
 const { computed } = Ember;
