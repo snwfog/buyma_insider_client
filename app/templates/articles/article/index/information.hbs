@@ -10,7 +10,7 @@
         </div>
         <div class="media-content">
           <div class="content">
-            <p class="title is-4 is-capitalize">
+            <p class="title is-4 is-capitalized">
               {{moment-from-now articleWatched.createdAt}}
             </p>
             <p class="subtitle is-6">
@@ -128,26 +128,26 @@
           <div class="content">
             <div class="tags has-addons">
               {{#if (eq articleSold.status 'confirmed')}}
-                <span class="tag is-info is-capitalize">
+                <span class="tag is-info is-capitalized">
                   {{articleSold.status}}
                 </span>
                 <span class="tag">
                   {{moment-format articleSold.confirmedAt 'MMM-D-YYYY'}}
                 </span>
               {{/if}}{{#if (eq articleSold.status 'shipped')}}
-                <span class="tag is-info is-warning is-capitalize">
+                <span class="tag is-info is-warning is-capitalized">
                   {{articleSold.status}}
                 </span>
               {{/if}}{{#if (eq articleSold.status 'received')}}
-                <span class="tag is-info is-success is-capitalize">
+                <span class="tag is-info is-success is-capitalized">
                   {{articleSold.status}}
                 </span>
               {{/if}}{{#if (eq articleSold.status 'cancelled')}}
-                <span class="tag is-info is-danger is-capitalize">
+                <span class="tag is-info is-danger is-capitalized">
                   {{articleSold.status}}
                 </span>
               {{/if}}{{#if (eq articleSold.status 'returned')}}
-                <span class="tag is-info is-danger is-capitalize">
+                <span class="tag is-info is-danger is-capitalized">
                   {{articleSold.status}}
                 </span>
               {{/if}}

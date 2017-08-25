@@ -36,7 +36,7 @@
                   <div class="level is-fullwidth">
                     {{#each (array 'confirmed' 'shipped' 'received') as |state index|}}
                       <div class="level-item">
-                        <span class="tag {{if (eq state articleSold.status) 'is-success'}} is-capitalize">
+                        <span class="tag {{if (eq state articleSold.status) 'is-success'}} is-capitalized">
                           {{#if (eq state articleSold.status)}}
                             {{inc index}}. {{state}}
                           {{else}}
@@ -53,7 +53,7 @@
                   <div class="level is-fullwidth">
                     {{#each (array 'cancelled' 'returned') as |state index|}}
                       <div class="level-item">
-                        <span class="tag {{if (eq state articleSold.status) 'is-danger'}} is-capitalize">
+                        <span class="tag {{if (eq state articleSold.status) 'is-danger'}} is-capitalized">
                           {{#if (eq state articleSold.status)}}
                             {{inc index}}. {{state}}
                           {{else}}

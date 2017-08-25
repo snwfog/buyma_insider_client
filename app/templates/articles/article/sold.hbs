@@ -4,7 +4,7 @@
       <div class="column is-half">
         <div class="columns is-mobile">
           <div class="column is-12 has-text-centered">
-            <p class="heading">Price</p>
+            <p class="heading">Article Price</p>
           </div>
         </div>
         <div class="columns is-mobile">
@@ -39,6 +39,27 @@
       </div>
     </div>
 
+    <div class="is-divider" data-content="Order Status"></div>
+    <ul class="steps has-gaps has-content-centered is-hidden-mobile is-horizontal">
+      {{#each articleSoldStatuses as |status|}}
+        <li class="steps-segment {{if status.isActive 'is-active'}}">
+          <a class="steps-marker">
+            <span class="icon">
+              {{#if status.isActive}}
+                {{ui/-icon 'check'}}
+              {{/if}}
+            </span>
+          </a>
+          <div class="steps-content">
+            <p class="is-size-4 is-capitalized">{{status.status}}</p>
+            {{#if status.happenedAt}}
+              <p>{{moment-format status.happenedAt 'MMM-D-YYYY'}}</p>
+            {{/if}}
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+
     {{#with articleSold.notes}}
       <div class="columns">
         <div class="column is-half"></div>
@@ -55,8 +76,54 @@
     <hr>
 
     <div class="columns">
-      <!--Article price-balance sheet-->
       <div class="column is-8">
+        <div class="is-divider" data-content="Change Price"></div>
+        <div class="columns">
+          <div class="column is-12">
+            <div class="field is-horizontal">
+              <div class="field-label is-medium is-flex-grow-2">
+                <label class="label">Sold Price</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control is-expanded has-icons-left">
+                    {{input type='number'
+                            class='input is-medium has-text-right'
+                            placeholder='Article sold price in JPY'}}
+                    <span class="icon is-left has-text-success">
+                      {{fa-icon 'jpy'}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column is-12">
+            <div class="field is-horizontal">
+              <div class="field-label is-flex-grow-2">
+                <label class="label">Purchased Price</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control is-expanded has-icons-left">
+                    {{input type='number'
+                            class='input has-text-right'
+                            placeholder='Article purchased price in CAD'}}
+                    <span class="icon is-small is-left has-text-success">
+                      {{fa-icon 'dollar'}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Article price-balance sheet-->
+        <div class="is-divider" data-content="Sold Article Information"></div>
         <div class="columns">
           <div class="column is-4">
             <label class="label">Article Price</label>
@@ -77,7 +144,7 @@
 
         <div class="columns">
           <div class="column is-4">
-            <label class="label">Sales Tax</label>
+            <label class="label">Article Price with Sales Tax</label>
           </div>
           <div class="column is-8">
             <div class="columns is-mobile">
@@ -211,7 +278,7 @@
                       {{/ui/form/-async-button}}
                     </div>
                     <div class="media-content">
-                      <span class="is-capitalize">
+                      <span class="is-capitalized">
                         {{shippingService.serviceName}}
                       </span>
                     </div>
@@ -490,7 +557,7 @@
                     <div class="field is-horizontal is-fullwidth">
                       <div class="field-label"><label class="label"></label></div>
                       <div class="field-body">
-                        <p class="control is-capitalize">
+                        <p class="control is-capitalized">
                           {{service.serviceName}}
                         </p>
                       </div>
@@ -631,31 +698,9 @@
                 </div>
               </footer>
             </div>
-
           </div>
         </div>
 
-        <div class="columns">
-          <div class="column">
-            <p class="title is-6">Price</p>
-            <div class="card">
-              <div class="card-footer">
-                <div class="card-footer-item">
-                  <p class="title is-4">
-                    {{ui/-money articleSold.price}}
-                  </p>
-                </div>
-                <div class="card-footer-item">
-                  <p class="title is-4">
-                    {{ui/-money articleSold.price 'jpy'}}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {{log 'article' article}}
         <div class="columns">
           <div class="column">
             <p class="title is-6">Current Price</p>
@@ -674,30 +719,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns">
-      <div class="column">
-        <div class="level">
-          {{#each-in articleSoldStatuses as |status happenedAt|}}
-            <div class="level-item has-text-centered">
-              <div>
-            <span class="tag is-medium {{if (eq status articleSold.status) 'is-success'}}">
-              <p class="is-capitalize">{{status}}</p>
-            </span>
-                {{#if happenedAt}}
-                  <p class="title is-5 is-uppercase mt-1">
-                    {{moment-format happenedAt 'MMM-D-YYYY'}}
-                  </p>
-                  <p class="title is-6 is-uppercase">
-                    {{moment-format happenedAt 'HH:mm'}}
-                  </p>
-                {{/if}}
-              </div>
-            </div>
-          {{/each-in}}
         </div>
       </div>
     </div>

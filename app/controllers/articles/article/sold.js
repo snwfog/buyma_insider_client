@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import config from "../../../config/environment";
-import UserArticleSold from "../../../models/user/article-sold";
+import config from '../../../config/environment';
+import UserArticleSold from '../../../models/user/article-sold';
 
 const { APP: { CAD_SALES_TAX_PCT, BUYMA_CUT_PCT } } = config;
 const { A,
@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
   allowEditArticleSoldPrice: false,
 
   selectAutoProfitMargin: null,
-  autoProfitMargins: computed(function() {
+  autoProfitMargins: computed('totalCost', function() {
     let rates = [
       { rate: 10, message: 'What a conservative' },
       { rate: 20, message: 'I\'d say its quite decent' },
@@ -27,11 +27,11 @@ export default Ember.Controller.extend({
       { rate: 90, message: 'They see me rollin\', they hatin\'' },
       { rate: 100, message: 'Woah woah' } ]; // Percent
 
-    let articleSoldPriceAmount = this.get('articleSold.price.amount');
+    let totalCost = this.get('totalCost');
     return rates.map((marginRate) => {
       marginRate[ 'profitMoney' ] = this.store.createRecord('money', {
         base:   config.APP.CURRENCIES.JPY,
-        amount: this.exchangeRatesService.cad2jpy(articleSoldPriceAmount * marginRate.rate / 100).toFixed(),
+        amount: this.exchangeRatesService.cad2jpy(totalCost * marginRate.rate / 100).toFixed(),
       });
 
       return marginRate;
@@ -39,12 +39,23 @@ export default Ember.Controller.extend({
   }),
 
   articleSoldStatuses: computed(function () {
-    const statuses    = Ember.copy(UserArticleSold.STATUS);
-    const articleSold = this.get('articleSold');
-    return Object.keys(statuses).reduce((memoStatus, status) => {
-      memoStatus[ status ] = articleSold.get(`${status}At`);
-      return memoStatus;
-    }, statuses);
+    const statuses          = Ember.copy(UserArticleSold.STATUS);
+    const articleSold       = this.get('articleSold');
+    let isActive            = false;
+    let articleSoldStatuses = Ember.A();
+    Object
+      .keys(statuses)
+      .reverse()
+      .forEach((status) => {
+        isActive = isActive || !!articleSold.get(`${status}At`);
+        articleSoldStatuses.unshift({
+          status,
+          isActive,
+          happenedAt: articleSold.get(`${status}At`),
+        });
+      });
+
+    return articleSoldStatuses;
   }),
 
   allShippingServices:             computed(function () {
@@ -70,11 +81,6 @@ export default Ember.Controller.extend({
       .reduce((totalExtraTariffs, extraTariff) => {
         return totalExtraTariffs + extraTariff.get('_computedRate');
       }, 0.0);
-  }),
-
-  // Article price-balance sheet variable
-  articleSoldPrice: computed('articleSold.price.amount', function () {
-    return this.exchangeRatesService.cad2jpy(this.get('articleSold.price.amount'));
   }),
 
   articleSoldPriceSold: computed.alias('articleSold.priceSold.amount'),
@@ -108,8 +114,7 @@ export default Ember.Controller.extend({
   }),
 
   _totalEarned: null,
-  totalEarned:  computed('profit.amount', 'buymaCut.amount',
-    'calculatedTotalShippingServices', 'calculatedTotalExtraTariffs', function () {
+  totalEarned:  computed('profit.amount', 'buymaCut.amount', 'calculatedTotalShippingServices', 'calculatedTotalExtraTariffs', function () {
       let total  = this.get('_totalEarned') || this.store.createRecord('money', { base: 'jpy' });
       let amount = Number(this.get('profit.amount'))
                    - Number(this.get('buymaCut.amount'));
@@ -122,6 +127,15 @@ export default Ember.Controller.extend({
       this.set('_totalEarned', total);
       return total;
     }),
+
+  totalCost: computed('articleSoldPriceWithSaleTax.amount', 'buymaCut.amount', 'calculatedTotalShippingServices', 'calculatedTotalExtraTariffs', function() {
+    let articleSoldPriceWithSaleTax = this.get('articleSoldPriceWithSaleTax.amount');
+    let buymaCut = this.exchangeRatesService.jpy2cad(this.get('buymaCut.amount'));
+    let calculatedTotalShippingServices = this.get('calculatedTotalShippingServices');
+    let calculatedTotalExtraTariffs = this.get('calculatedTotalExtraTariffs');
+
+    return articleSoldPriceWithSaleTax + buymaCut + calculatedTotalShippingServices + calculatedTotalExtraTariffs;
+  }),
 
   priceMarginPct: computed('articleSold.priceSold.amount', function () {
     let articleSoldPriceSold = this.get('articleSold.priceSold');
@@ -158,9 +172,10 @@ export default Ember.Controller.extend({
 
     '_assignSelectAutoProfitMargin'(autoProfitMargin) {
       this.set('selectedAutoProfitMargin', autoProfitMargin);
-      let articleSoldPriceAmountJpy = this.exchangeRatesService.cad2jpy(this.get('articleSold.price.amount'));
-      let soldPriceAmountJpy = articleSoldPriceAmountJpy * (1 + autoProfitMargin.rate / 100.0);
-      this.set('articleSold.priceSold.amount', soldPriceAmountJpy.toFixed()); // Crude rounding
+      let totalCost         = this.get('totalCost');
+      let adjustedPriceSold = totalCost * (1 + autoProfitMargin.rate / 100.0);
+      this.set('articleSold.priceSold.amount',
+        this.exchangeRatesService.cad2jpy(adjustedPriceSold).toFixed()); // Crude rounding
     },
 
     '_assignSelectShippingService'(shippingService, shippingServiceId) {

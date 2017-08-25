@@ -5,16 +5,16 @@
     "bulma-timeline": "Wikiki/bulma-timeline",
     "bulma-badge": "Wikiki/bulma-badge",
     "bulma-divider": "Wikiki/bulma-divider",
+    "bulma-ribbon": "Wikiki/bulma-ribbon",
+    "bulma-steps": "aramvisser/bulma-steps",
+    "bulma-tooltip": "Wikiki/bulma-tooltip",
     "font-awesome": "^4.7.0",
     "typicons.font": "typicons#^2.0.8",
     "chartjs": "2.1.6",
     "selectize": "miguelcobain/selectize.js#master",
     "jquery.sparkline.bower": "lennonjesus/jquery.sparkline.bower#^2.1.2",
     "moment": "^2.16.0",
-    "alertifyjs": "~1.0.11",
-    "bulma-ribbon": "Wikiki/bulma-ribbon",
-    "bulma-steps": "Wikiki/bulma-steps",
-    "bulma-tooltip": "Wikiki/bulma-tooltip"
+    "alertifyjs": "~1.0.11"
   },
   "resolutions": {
     "jquery": "2.1.2"

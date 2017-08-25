@@ -30,8 +30,8 @@ const UserArticleSold = DS.Model.extend(statusAttrs, {
   extraTariffs:     hasMany('extra-tariff',     { async: false }),
   status:           attr(),
   price:            attr('money', { code: 'cad' }), // Market price when it was sold
-  notes:            attr(),
   priceSold:        attr('money', { code: 'jpy' }), // Price we sold at
+  notes:            attr(),
   createdAt:        attr('datetime'),
   updatedAt:        attr('datetime'),
 
