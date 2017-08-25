@@ -43,17 +43,17 @@
     <ul class="steps has-gaps has-content-centered is-hidden-mobile is-horizontal">
       {{#each articleSoldStatuses as |status|}}
         <li class="steps-segment {{if status.isActive 'is-active'}}">
-          <a class="steps-marker">
+          <a class="steps-marker" {{action '_setArticleSoldStatus' status.status}}>
             <span class="icon">
-              {{#if status.isActive}}
+              {{#if status.hasTransitioned}}
                 {{ui/-icon 'check'}}
               {{/if}}
             </span>
           </a>
           <div class="steps-content">
             <p class="is-size-4 is-capitalized">{{status.status}}</p>
-            {{#if status.happenedAt}}
-              <p>{{moment-format status.happenedAt 'MMM-D-YYYY'}}</p>
+            {{#if status.hasTransitioned}}
+              <p>{{moment-format status.updatedAt 'MMM-D-YYYY'}}</p>
             {{/if}}
           </div>
         </li>
@@ -73,11 +73,12 @@
       </div>
     {{/with}}
 
-    <hr>
-
     <div class="columns">
-      <div class="column is-8">
+      <div class="column is-7">
+
         <div class="is-divider" data-content="Change Price"></div>
+
+        <!--Change Price-->
         <div class="columns">
           <div class="column is-12">
             <div class="field is-horizontal">
@@ -115,11 +116,7 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="columns">
-          <div class="column is-12">
             <div class="field is-horizontal">
               <div class="field-label is-flex-grow-2">
                 <label class="label">Purchased Price</label>
@@ -129,6 +126,7 @@
                   <div class="control is-expanded has-icons-left">
                     {{input type='number'
                             class='input has-text-right'
+                            value=(readonly articleSoldPriceWithSaleTax.amount)
                             placeholder='Article purchased price in CAD'}}
                     <span class="icon is-small is-left has-text-success">
                       {{fa-icon 'dollar'}}
@@ -144,11 +142,40 @@
                 </div>
               </div>
             </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-flex-grow-2"></div>
+              <div class="field-body">
+                <p class="control is-grouped">
+                  {{!--
+                  {{#ui.form.-async-button class='button is-danger'
+                                           action=(action '_deleteArticleSold')}}
+                    <span class="icon">
+                      {{fa-icon 'trash-o'}}
+                    </span>
+                    <span>Delete</span>
+                  {{/ui.form.-async-button}}
+                  --}}
+
+                  {{#ui/form/-async-button class='button is-light is-medium'
+                                           action=(pipe-action (action '_saveArticleSold')
+                                                               (toast 'Sold article is saved.' 'success')
+                                                               (disable 'allowEditArticleSoldPrice' this))}}
+                    <span class="icon">
+                      {{fa-icon 'floppy-o'}}
+                    </span>
+                    <span>Save</span>
+                  {{/ui/form/-async-button}}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
         <!--Article price-balance sheet-->
         <div class="is-divider" data-content="Sold Article Information"></div>
+
+        <!--Article Price-->
         <div class="columns">
           <div class="column is-4">
             <label class="label">Article Price</label>
@@ -167,6 +194,7 @@
           </div>
         </div>
 
+        <!--Article Price With Sale Tax-->
         <div class="columns">
           <div class="column is-4">
             <label class="label">Article Price with Sales Tax</label>
@@ -185,6 +213,7 @@
           </div>
         </div>
 
+        <!--Article Sold Price-->
         <div class="columns">
           <div class="column is-4">
             <label class="label">Sold Price</label>
@@ -201,7 +230,7 @@
           </div>
         </div>
 
-        <hr>
+        <div class="is-divider"></div>
 
         <!--Profit-->
         <div class="columns">
@@ -352,7 +381,8 @@
             </div>
           </div>
         {{/each}}
-        <hr>
+
+        <div class="is-divider" data-content="Total"></div>
 
         <!--Total Earned-->
         <div class="columns">
@@ -386,36 +416,12 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <hr>
+      <div class="column is-5">
         <div class="columns">
           <div class="column">
-            <p class="control is-grouped">
-              {{!--
-              {{#ui.form.-async-button class='button is-danger'
-                                       action=(action '_deleteArticleSold')}}
-                <span class="icon">
-                  {{fa-icon 'trash-o'}}
-                </span>
-                <span>Delete</span>
-              {{/ui.form.-async-button}}
-              --}}
 
-              {{#ui/form/-async-button class='button is-success'
-                                       action=(pipe-action (action '_saveArticleSold')
-                                                           (toast 'Sold article is saved.' 'success')
-                                                           (disable 'allowEditArticleSoldPrice' this))}}
-                <span class="icon">
-                  {{fa-icon 'floppy-o'}}
-                </span>
-                <span>Save</span>
-              {{/ui/form/-async-button}}
-            </p>
-          </div>
-        </div>
-
-        <div class="columns">
-          <div class="column is-12">
             {{#ui/-card-toggle footerItems='save'
                                footerAction1=(action '_setBuyer')}}
               Buyer
@@ -466,11 +472,7 @@
                 </div>
               </div>
             {{/ui/-card-toggle}}
-          </div>
-        </div>
 
-        <div class="columns">
-          <div class="column is-12">
             {{#ui/-card-toggle footerItems='save'
                                footerAction1=(action '_saveNotes')}}
               Notes
@@ -485,36 +487,8 @@
                 </div>
               </div>
             {{/ui/-card-toggle}}
-          </div>
-        </div>
-      </div>
-
-      <div class="column is-4">
-        <div class="columns">
-          <div class="column">
 
             <div class="card">
-              <div class="card-header">
-                <div class="card-header-title">
-                  Sold {{moment-from-now articleSold.createdAt}}
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item">
-                  <p class="title is-4">
-                    {{ui/-money articleSold.priceSold 'cad'}}
-                  </p>
-                </div>
-                <div class="card-footer-item">
-                  <p class="title is-4">
-                    {{ui/-money articleSold.priceSold 'jpy'}}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-
               <!--Shipping services-->
               <div class="card-content is-small">
                 <div class="field is-horizontal is-fullwidth">

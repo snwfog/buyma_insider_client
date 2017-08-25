@@ -41,19 +41,26 @@ export default Ember.Controller.extend({
   articleSoldStatuses: computed(function () {
     const statuses          = Ember.copy(UserArticleSold.STATUS);
     const articleSold       = this.get('articleSold');
-    let isActive            = false;
     let articleSoldStatuses = Ember.A();
     Object
       .keys(statuses)
       .reverse()
-      .forEach((status) => {
-        isActive = isActive || !!articleSold.get(`${status}At`);
+      .reduce((latestIsActive, status) => {
+        let statusActivatedAt = articleSold.get(`${status}At`);
+        let isActive          = false;
+        if (!latestIsActive) {
+          isActive ^= !!statusActivatedAt;
+          latestIsActive = isActive;
+        }
         articleSoldStatuses.unshift({
           status,
-          isActive,
-          happenedAt: articleSold.get(`${status}At`),
+          isActive:        isActive,
+          hasTransitioned: !!statusActivatedAt,
+          updatedAt:       statusActivatedAt,
         });
-      });
+
+        return latestIsActive;
+      }, false);
 
     return articleSoldStatuses;
   }),
@@ -213,6 +220,10 @@ export default Ember.Controller.extend({
     '_removeExtraTariff'(extraTariff) {
       this.debug('TODO: Remove extra tariff');
       extraTariff.set('articleSold', null);
+    },
+
+    '_setArticleSoldStatus'(status) {
+      this.set('articleSold.status', status);
     },
 
     '_setBuyer'() {
