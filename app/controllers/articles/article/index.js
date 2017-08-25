@@ -1,8 +1,8 @@
-import Ember from "ember";
+import Ember from 'ember';
 import DS from 'ember-data';
-import config from "../../../config/environment";
-import { extractError } from "../../../lib/ajax-error";
-import ApplicationController from "../../application";
+import config from '../../../config/environment';
+import { extractError } from '../../../lib/ajax-error';
+import ApplicationController from '../../application';
 
 const { UnauthorizedError } = DS;
 const { computed, assert, A } = Ember;

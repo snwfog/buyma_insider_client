@@ -89,9 +89,7 @@
             </div>
             <div class="column is-3">
               <p class="price-history">
-                {{ui/sparkline/-line data=(map-by 'price'
-                                            (take 45
-                                              (sort-by 'timestamp:desc' article.priceHistory)))}}
+                {{ui/sparkline/-line data=(map-by 'price' article.sortedPriceHistory)}}
               </p>
             </div>
           </div>

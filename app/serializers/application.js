@@ -1,8 +1,8 @@
-import DS from "ember-data";
+import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
   modelNameFromPayloadKey(payloadKey) {
-    var dict = {
+    let dict = {
       'merchant-metadata':                              'merchant/metadatum',
       'crawl-sessions':                                 'merchant/crawl-session',
       'index-pages':                                    'merchant/index-page',
@@ -16,7 +16,7 @@ export default DS.JSONAPISerializer.extend({
       'user-article-sold-shipping-services':            'user/article-sold-shipping-service',
     };
 
-    var modelKey = dict[ payloadKey ];
+    let modelKey = dict[ payloadKey ];
     return !!modelKey ? modelKey : this._super(payloadKey);
   },
 

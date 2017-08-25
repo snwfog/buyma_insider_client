@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('adapter:action/index-page/-crawl', 'Unit | Adapter | action/index page/ crawl', {
+moduleFor('adapter:action/index-pages/-crawl', 'Unit | Adapter | action/index page/ crawl', {
   // Specify the other units that are required for this test.
   // needs: ['serializer:foo']
 });

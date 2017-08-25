@@ -59,7 +59,12 @@
       <div class="field-body">
         <div class="field">
           <div class="control is-expanded">
-            <div class="is-divider"></div>
+            <div class="is-divider" data-content="Index Pages"></div>
+
+            {{#ui/form/-async-button class='button is-light'
+                                     action=(action '_pruneIndexPages' merchant)}}
+              Refresh All Index Pages
+            {{/ui/form/-async-button}}
           </div>
         </div>
       </div>

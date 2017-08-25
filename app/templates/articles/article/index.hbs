@@ -96,7 +96,10 @@
           <footer class="card-footer">
             <div class="card-footer-item">
               <div class="level-item price-history">
-                {{ui/sparkline/-line data=(map-by 'price' (sort-by 'createdAt:desc' article.priceHistory))}}
+                <!--Because the computed property is lazy, use `with` guard to pass empty array initially-->
+                {{#with article.sortedPriceHistory}}
+                  {{ui/sparkline/-line data=(map-by 'price' article.sortedPriceHistory)}}
+                {{/with}}
               </div>
             </div>
           </footer>

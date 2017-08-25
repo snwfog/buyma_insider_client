@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import config from '../config/environment';
-
+import array from 'ember-awesome-macros/array';
 import moment from 'moment';
+import { momentAsc } from '../lib/moment-comparable-shim';
 
 const { attr, belongsTo, hasMany } = DS;
 const { computed } = Ember;
@@ -11,7 +12,6 @@ const { IS_NEW_DAYS,
         SYNC_HEALTH: { NEWEST_DAYS, VERY_FRESH_DAYS, FRESH_DAYS, } } = config.MODEL.ARTICLES;
 
 export default DS.Model.extend({
-//  priceHistory:    belongsTo('article/price-history', { async: false }),
   articleRelateds: hasMany('article', { async: true }),
 
   name:         attr(),
@@ -49,4 +49,6 @@ export default DS.Model.extend({
       return 4;
     }
   }),
+
+  sortedPriceHistory: array.sort('priceHistory', momentAsc),
 });
