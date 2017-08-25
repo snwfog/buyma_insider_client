@@ -147,11 +147,13 @@
           <div class="card">
             <div class="card-header">
               <p class="card-header-title">
-                {{ui/-money article.price 'cad' showCode=false}}
+                {{article.name}}
               </p>
             </div>
             <div class="card-content padding-1">
-              <p class="title is-6">{{article.name}}</p>
+              <p class="title is-6 has-text-right">
+                {{ui/-money article.price 'cad' showCode=false}}
+              </p>
             </div>
             <div class="card-footer">
               <div class="card-footer-item">
