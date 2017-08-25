@@ -60,10 +60,10 @@
         <div class="field">
           <div class="control is-expanded">
             <div class="is-divider" data-content="Index Pages"></div>
-
-            {{#ui/form/-async-button class='button is-light'
-                                     action=(action '_pruneIndexPages' merchant)}}
-              Refresh All Index Pages
+            {{#ui/form/-async-button class='button is-primary'
+                                     action=(action '_groomIndexPages' merchant)}}
+              <span class="icon">{{ui/-icon 'restore_page'}}</span>
+              <span>Refresh All Index Pages</span>
             {{/ui/form/-async-button}}
           </div>
         </div>
@@ -126,7 +126,7 @@
               <div class="control">
                 <a class="button" target="_blank" href="{{indexPage.fullUrl}}">
                   <span class="icon">
-                    {{ui/-icon 'link'}}
+                    {{ui/-icon 'open_in_new'}}
                   </span>
                   <span>Link</span>
                 </a>

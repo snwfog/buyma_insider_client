@@ -12,7 +12,7 @@ export default ApplicationAdapter.extend({
   urlForCreateRecord(modelName, snapshot) {
     let dict = {
       'action/index-pages/-refresh':         `index_pages/${snapshot.record.get('indexPage.id')}/_refresh`,
-      'action/merchants/-prune-index-pages': `merchants/${snapshot.record.get('merchant.id')}/_prune_index_pages`
+      'action/merchants/-groom-index-pages': `merchants/${snapshot.record.get('merchant.id')}/_groom_index_pages`
     };
 
     let endpoint = dict[ modelName ];
