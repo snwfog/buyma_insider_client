@@ -85,15 +85,33 @@
                 <label class="label">Sold Price</label>
               </div>
               <div class="field-body">
-                <div class="field">
+                <div class="field has-addons">
                   <div class="control is-expanded has-icons-left">
-                    {{input type='number'
-                            class='input is-medium has-text-right'
+                    {{input class='input is-medium has-text-right'
+                            type='number'
+                            classBinding='allowEditArticleSoldPrice:is-success'
+                            value=articleSold.priceSold.amount
+                            disabled=(not allowEditArticleSoldPrice)
                             placeholder='Article sold price in JPY'}}
                     <span class="icon is-left has-text-success">
                       {{fa-icon 'jpy'}}
                     </span>
                   </div>
+                  <p class="control">
+                    {{#if allowEditArticleSoldPrice}}
+                      <button class="button is-success is-outlined is-medium" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
+                        <span class="icon">
+                          {{fa-icon 'toggle-on'}}
+                        </span>
+                      </button>
+                    {{else}}
+                      <button class="button is-danger is-outlined is-medium" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
+                        <span class="icon">
+                          {{fa-icon 'toggle-off'}}
+                        </span>
+                      </button>
+                    {{/if}}
+                  </p>
                 </div>
               </div>
             </div>
@@ -107,7 +125,7 @@
                 <label class="label">Purchased Price</label>
               </div>
               <div class="field-body">
-                <div class="field">
+                <div class="field has-addons">
                   <div class="control is-expanded has-icons-left">
                     {{input type='number'
                             class='input has-text-right'
@@ -116,6 +134,13 @@
                       {{fa-icon 'dollar'}}
                     </span>
                   </div>
+                  <p class="control">
+                    <button class="button is-success is-outlined">
+                      <span class="icon">
+                        {{fa-icon 'toggle-on'}}
+                      </span>
+                    </button>
+                  </p>
                 </div>
               </div>
             </div>
@@ -171,35 +196,7 @@
                   {{ui/-money articleSold.priceSold 'jpy' showCode=false}}
                 </span>
               </div>
-              <div class="column is-6">
-                <div class="field has-addons">
-                  <p class="control has-icons-left">
-                    {{input class='input has-text-right'
-                            classBinding='allowEditArticleSoldPrice:is-success'
-                            value=articleSold.priceSold.amount
-                            disabled=(not allowEditArticleSoldPrice)
-                            type='number'}}
-                    <span class="icon is-left">
-                      {{fa-icon 'jpy'}}
-                    </span>
-                  </p>
-                  <p class="control">
-                    {{#if allowEditArticleSoldPrice}}
-                      <button class="button is-success is-outlined" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
-                        <span class="icon">
-                          {{fa-icon 'toggle-on'}}
-                        </span>
-                      </button>
-                    {{else}}
-                      <button class="button is-danger is-outlined" {{action (toggle 'allowEditArticleSoldPrice' this)}}>
-                        <span class="icon">
-                          {{fa-icon 'toggle-off'}}
-                        </span>
-                      </button>
-                    {{/if}}
-                  </p>
-                </div>
-              </div>
+              <div class="column is-6"></div>
             </div>
           </div>
         </div>
