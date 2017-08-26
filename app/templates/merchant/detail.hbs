@@ -54,12 +54,24 @@
       </div>
     </div>
 
+    <!--Divider-->
     <div class="field is-horizontal">
       <div class="field-label"></div>
       <div class="field-body">
         <div class="field">
+          <div class="is-divider" data-content="Index Pages"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--Refresh all index pages-->
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label title is-4">Index Pages</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
           <div class="control is-expanded">
-            <div class="is-divider" data-content="Index Pages"></div>
             {{#ui/form/-async-button class='button is-primary'
                                      action=(action '_groomIndexPages' merchant)}}
               <span class="icon">{{ui/-icon 'restore_page'}}</span>
@@ -70,88 +82,99 @@
       </div>
     </div>
 
-    {{#each (filter-by 'isRoot' merchant.indexPages) as |indexPage index|}}
+    {{#each (filter-by 'isRoot' merchant.indexPages) as |indexPage|}}
+
       <div class="field is-horizontal">
-        <div class="field-label">
-          {{#if (eq index 0)}}
-            <label class="label title is-4">Index Pages</label>
-          {{/if}}
-        </div>
+        <div class="field-label"></div>
         <div class="field-body">
+
           <div class="field">
-            <div class="field is-grouped">
-              <p class="control has-icons-left is-expanded">
-                {{input class='input'
-                        value=indexPage.relativePath
-                        disabled=(cannot 'edit metadatum' metadatum)}}
-                <span class="icon is-small is-left">
-                  {{#if (eq indexPage.health 'green')}}
-                    {{fa-icon 'check-circle' class='is-green'}}
-                  {{else}}{{#if (eq indexPage.health 'orange')}}
-                    {{fa-icon 'exclamation-triangle' class='is-yellow'}}
-                  {{else}}{{#if (eq indexPage.health 'red')}}
-                    {{fa-icon 'exclamation-circle' class='is-red'}}
-                  {{/if}}{{/if}}{{/if}}
-                </span>
-              </p>
-              <p class="control">
-                {{#if indexPage.inprogress}}
-                  <button disabled class="button is-warning is-loading">
-                    Update
-                  </button>
-                {{else}}
-                  {{#ui/form/-async-button class='button'
-                                           textState='is-warning'
-                                           disable=(cannot 'refresh indexPage' indexPage)
-                                           action=(action '_refreshIndexPage' indexPage) as |component state|}}
-                    {{#if state.isRejected}}
-                      <span class="icon is-small">
-                        {{fa-icon 'exclamation-circle'}}
-                      </span>
-                      <span>Error</span>
-                    {{else}}{{#if state.isFulfilled}}
-                      <span class="icon is-small">
-                        {{fa-icon 'check-circle'}}
-                      </span>
-                      <span>Updated</span>
-                    {{else}}
-                      <span class="icon is-small">
-                        {{fa-icon 'bug'}}
-                      </span>
-                      <span>Update</span>
-                    {{/if}}{{/if}}
-                  {{/ui/form/-async-button}}
-                {{/if}}
-              </p>
-              <div class="control">
-                <a class="button" target="_blank" href="{{indexPage.fullUrl}}">
-                  <span class="icon">
-                    {{ui/-icon 'open_in_new'}}
-                  </span>
-                  <span>Link</span>
-                </a>
-              </div>
-            </div>
+            <p class="control has-icons-left is-expanded">
+              {{input class='input'
+                      value=indexPage.relativePath
+                      disabled=(cannot 'edit metadatum' metadatum)}}
+              <span class="icon is-small is-left">
+                {{#if (eq indexPage.health 'green')}}
+                  {{fa-icon 'check-circle' class='is-green'}}
+                {{else}}{{#if (eq indexPage.health 'orange')}}
+                  {{fa-icon 'exclamation-triangle' class='is-yellow'}}
+                {{else}}{{#if (eq indexPage.health 'red')}}
+                  {{fa-icon 'exclamation-circle' class='is-red'}}
+                {{/if}}{{/if}}{{/if}}
+              </span>
+            </p>
             {{#if indexPage.lastSyncedAt}}
               <p class="help is-success">
                 Last synchronized: {{moment-from-now indexPage.lastSyncedAt}}
               </p>
             {{/if}}
           </div>
+
           <div class="field">
-            <div class="control is-expanded">
-            <span class="select is-fullwidth">
-              {{#ui/form/-select content=indexPage.indexPages
-                                 prompt='Included Index Pages' as |subIndexPage|}}
-                <option value="{{subIndexPage.id}}">
-                  {{subIndexPage.relativePath}}
-                </option>
-              {{/ui/form/-select}}
-            </span>
-            </div>
+            <p class="control is-expanded">
+              <span class="select is-fullwidth">
+                {{#ui/form/-select content=indexPage.indexPages
+                                   action=(action '_updateIndexPage')
+                                   prompt='Included Index Pages' as |childIndexPage|}}
+                  <option value="{{childIndexPage.id}}">
+                    {{childIndexPage.relativePath}}
+                  </option>
+                {{/ui/form/-select}}
+              </span>
+            </p>
           </div>
+
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+
+          <div class="field is-grouped">
+            <p class="control">
+              {{#if indexPage.inprogress}}
+                <button disabled class="button is-warning is-loading">
+                  Update
+                </button>
+              {{else}}
+                {{#ui/form/-async-button class='button'
+                                         textState='is-warning'
+                                         disable=(cannot 'refresh indexPage' indexPage)
+                                         action=(action '_refreshIndexPage' indexPage) as |component state|}}
+                  {{#if state.isRejected}}
+                    <span class="icon is-small">
+                      {{fa-icon 'exclamation-circle'}}
+                    </span>
+                    <span>Error</span>
+                  {{else}}{{#if state.isFulfilled}}
+                    <span class="icon is-small">
+                      {{fa-icon 'check-circle'}}
+                    </span>
+                    <span>Updated</span>
+                  {{else}}
+                    <span class="icon is-small">
+                      {{fa-icon 'bug'}}
+                    </span>
+                    <span>Update</span>
+                  {{/if}}{{/if}}
+                {{/ui/form/-async-button}}
+              {{/if}}
+            </p>
+
+            <p class="control">
+              <a class="button" target="_blank" href="{{indexPage.fullUrl}}">
+                  <span class="icon">
+                    {{ui/-icon 'open_in_new'}}
+                  </span>
+                <span>Link</span>
+              </a>
+            </p>
+          </div>
+
         </div>
       </div>
     {{/each}}
+
   </div>
 </section>

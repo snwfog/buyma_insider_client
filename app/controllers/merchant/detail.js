@@ -6,6 +6,10 @@ const { computed: { alias }, assert } = Ember;
 export default Ember.Controller.extend({
   metadatum: alias('merchant.metadatum'),
   actions:   {
+    '_updateIndexPage'(selection, value) {
+      this.debug(selection, value);
+    },
+
     '_groomIndexPages'(merchant) {
       return this.store
         .createRecord('action/merchants/-groom-index-pages', { merchant })

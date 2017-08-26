@@ -137,14 +137,21 @@
     <div class="title is-3 has-text-right">Similar</div>
     <div class="columns">
       {{#each (await articleRelateds) as |article|}}
+
         <!--Mobile list-->
-        <div class="column is-2 is-hidden-tablet has-text-right">
-          <p class="title is-5">
-            {{#link-to 'articles.article.index' article.id}}
-              {{capitalize article.name}} - {{ui/-money article.price 'cad' showCode=false}}
-            {{/link-to}}
-          </p>
+        <div class="column is-2 is-hidden-tablet">
+          <div class="tags has-addons">
+            <span class="tag is-white is-size-5">
+              {{#link-to 'articles.article.index' article.id}}
+                {{capitalize article.name}}
+              {{/link-to}}
+            </span>
+            <span class="tag is-light is-medium">
+              {{ui/-money article.price 'cad' showCode=false}}
+            </span>
+          </div>
         </div>
+
         <!--Tablet desktop card-->
         <div class="column is-2 is-hidden-mobile">
           <div class="card">
@@ -155,7 +162,9 @@
             </div>
             <div class="card-content padding-1">
               <p class="title is-6 has-text-right">
-                {{ui/-money article.price 'cad' showCode=false}}
+                <span class="tag is-light is-medium is-size-5">
+                  {{ui/-money article.price 'cad' showCode=false}}
+                </span>
               </p>
             </div>
             <div class="card-footer">
