@@ -7,22 +7,23 @@
 
         <!-- Merchant panel -->
         <nav class="panel">
-          <p class="panel-heading">Merchants</p>
+          <p class="panel-heading">
+            <span class="icon">{{ui/-icon 'business'}}</span>
+            <span>Merchants</span>
+          </p>
           <p class="panel-tabs"></p>
           {{#each merchants as |merchant|}}
             {{#link-to 'merchant.index' merchant.id class='panel-block'}}
-              <span class="panel-icon">
-                {{ui/-icon 'shopping_basket'}}
-              </span>
               <div class="media is-fullwidth">
                 <div class="media-left">
                   {{capitalize merchant.name}}
                 </div>
                 <div class="media-content"></div>
                 <div class="media-right">
-                  <span class="tag is-success">
-                    {{merchant.id}}:{{merchant.totalArticlesCount}}
-                  </span>
+                  <div class="tags has-addons">
+                    <span class="tag">{{merchant.id}}</span>
+                    <span class="tag is-dark">{{merchant.totalArticlesCount}}</span>
+                  </div>
                 </div>
               </div>
             {{/link-to}}
@@ -38,7 +39,7 @@
                         type='text'
                         value=cadValue
                         placehodler='CAD'}}
-                <span class="icon is-left">
+                <span class="icon is-left is-small">
                   {{fa-icon 'dollar'}}
                 </span>
               </p>
@@ -57,7 +58,7 @@
                         disabled=true
                         value=jpyValue
                         placehodler='JPY'}}
-                <span class="icon is-left">
+                <span class="icon is-left is-small">
                   {{fa-icon 'jpy'}}
                 </span>
               </p>
