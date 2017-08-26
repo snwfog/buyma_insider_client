@@ -41,7 +41,7 @@
 
     <div class="is-divider" data-content="Order Status"></div>
     <ul class="steps has-gaps has-content-centered is-hidden-mobile is-horizontal">
-      {{#each articleSoldStatuses as |status|}}
+      {{#each articleSold.statuses as |status|}}
         <li class="steps-segment {{if status.isActive 'is-active'}}">
           <a class="steps-marker" {{action '_setArticleSoldStatus' status.status}}>
             <span class="icon">
@@ -54,13 +54,15 @@
             <p class="is-size-4 is-capitalized">{{status.status}}</p>
             {{#if status.hasTransitioned}}
               <p>{{moment-format status.updatedAt 'MMM-D-YYYY'}}</p>
+              <p>{{moment-format status.updatedAt 'H:MM A'}}</p>
             {{/if}}
           </div>
         </li>
       {{/each}}
     </ul>
+    {{log articleSold.statuses}}
     <ul class="steps is-horizontal has-content-centered is-hidden-tablet">
-      {{#each articleSoldStatuses as |status|}}
+      {{#each articleSold.statuses as |status|}}
         {{#if status.isActive}}
           <li class="steps-segment is-active">
             <a class="steps-marker">

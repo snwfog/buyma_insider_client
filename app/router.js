@@ -53,11 +53,11 @@ Router.map(function () {
 
   this.route('user', function () {
     this.route('profile', function () {
-      this.route('profile_index', { path: '/' }, function () {
+      this.route('profile-index', { path: '/' }, function () {
         this.route('settings');
-        this.route('extra_tariffs_setting', { path: 'extra_tariffs' });
-        this.route('shipping_services_setting', { path: 'shipping_services' });
-        this.route('profit_margins_setting', { path: 'profit_margins' });
+        this.route('extra-tariffs-setting', { path: 'extra_tariffs' });
+        this.route('shipping-services-setting', { path: 'shipping_services' });
+        this.route('profit-margins-setting', { path: 'profit_margins' });
       }); }); });
 });
 

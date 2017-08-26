@@ -33,59 +33,32 @@
               </div>
               <footer class="card-footer">
                 <div class="card-footer-item">
-                  <div class="level is-fullwidth">
-                    {{#each (array 'confirmed' 'shipped' 'received') as |state index|}}
-                      <div class="level-item">
-                        <span class="tag {{if (eq state articleSold.status) 'is-success'}} is-capitalized">
-                          {{#if (eq state articleSold.status)}}
-                            {{inc index}}. {{state}}
-                          {{else}}
-                            {{#ui/form/-async-button tagName='a' action=(action state articleSold)}}
-                              {{inc index}}. {{state}}
-                            {{/ui/form/-async-button}}
-                          {{/if}}
-                        </span>
-                      </div>
-                    {{/each}}
-                  </div>
-                </div>
-                <div class="card-footer-item">
-                  <div class="level is-fullwidth">
-                    {{#each (array 'cancelled' 'returned') as |state index|}}
-                      <div class="level-item">
-                        <span class="tag {{if (eq state articleSold.status) 'is-danger'}} is-capitalized">
-                          {{#if (eq state articleSold.status)}}
-                            {{inc index}}. {{state}}
-                          {{else}}
-                            {{#ui/form/-async-button tagName='a'
-                                                     action=(action state articleSold)}}
-                              {{inc index}}. {{state}}
-                            {{/ui/form/-async-button}}
-                          {{/if}}
-                        </span>
-                      </div>
-                    {{/each}}
-                  </div>
+                  {{articleSold.status}}
                 </div>
               </footer>
               <footer class="card-footer">
+                <div class="card-footer-item is-size-4">
+                  {{#link-to 'articles.article.sold' article.id articleSold.id}}
+                    <span>Order Detail</span>
+                  {{/link-to}}
+                </div>
                 <div class="card-footer-item">
                   {{#link-to 'articles.article' article.id}}
-                    <span class="icon">{{fa-icon 'shopping-basket'}}</span>
-                    <span>Article</span>
+                    <span class="icon">{{ui/-icon 'details'}}</span>
+                    <span>View Article</span>
                   {{/link-to}}
                 </div>
                 <div class="card-footer-item">
                   {{#link-to 'articles.article.sold' article.id articleSold.id}}
-                    <span class="icon">{{fa-icon 'area-chart'}}</span>
-                    <span>Detail</span>
+                    <span class="icon">{{ui/-icon 'archive'}}</span>
+                    <span>Archive Order</span>
                   {{/link-to}}
                 </div>
                 <div class="card-footer-item">
-                  {{#link-to 'articles.article.sold' article.id articleSold.id}}
-                    <span class="icon">{{fa-icon 'handshake-o'}}</span>
-                    <span>Archive</span>
-                  {{/link-to}}
+                  <a target="_blank" href="{{article.link}}">
+                    <span class="icon">{{ui/-icon 'open_in_new'}}</span>
+                    <span>Link</span>
+                  </a>
                 </div>
               </footer>
             </div>

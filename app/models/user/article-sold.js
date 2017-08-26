@@ -38,6 +38,34 @@ const UserArticleSold = DS.Model.extend(statusAttrs, {
   createdAtDay: computed('createdAt', function () {
     return this.get('createdAt').format('DDDD');
   }),
+
+  statuses: computed('status', function() {
+    let statuses = Ember.A();
+    let articleSold = this;
+
+    Object
+      .keys(STATUS)
+      .reverse()
+      .reduce((latestIsActive, status) => {
+        let statusActivatedAt = articleSold.get(`${status}At`);
+        let isActive          = false;
+        if (!latestIsActive) {
+          isActive ^= !!statusActivatedAt;
+          latestIsActive = isActive;
+        }
+
+        statuses.unshift({
+          status,
+          isActive:        isActive,
+          hasTransitioned: !!statusActivatedAt,
+          updatedAt:       statusActivatedAt,
+        });
+
+        return latestIsActive;
+      }, false);
+
+    return statuses;
+  }),
 });
 
 UserArticleSold.reopenClass({

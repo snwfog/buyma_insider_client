@@ -38,33 +38,6 @@ export default Ember.Controller.extend({
     });
   }),
 
-  articleSoldStatuses: computed(function () {
-    const statuses          = Ember.copy(UserArticleSold.STATUS);
-    const articleSold       = this.get('articleSold');
-    let articleSoldStatuses = Ember.A();
-    Object
-      .keys(statuses)
-      .reverse()
-      .reduce((latestIsActive, status) => {
-        let statusActivatedAt = articleSold.get(`${status}At`);
-        let isActive          = false;
-        if (!latestIsActive) {
-          isActive ^= !!statusActivatedAt;
-          latestIsActive = isActive;
-        }
-        articleSoldStatuses.unshift({
-          status,
-          isActive:        isActive,
-          hasTransitioned: !!statusActivatedAt,
-          updatedAt:       statusActivatedAt,
-        });
-
-        return latestIsActive;
-      }, false);
-
-    return articleSoldStatuses;
-  }),
-
   allShippingServices:             computed(function () {
     return this.store.peekAll('shippingService');
   }).readOnly(),
