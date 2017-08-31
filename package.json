@@ -1,6 +1,6 @@
 {
   "name": "buyma-insider-client",
-  "version": "0.1.14",
+  "version": "0.1.19",
   "description": "Buyma Insider",
   "author": "Charles Yang",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-string-helpers": "^1.4.0",
     "ember-cli-test-loader": "^2.1.0",
-    "ember-cli-uglify": "^1.2.0",
+    "ember-cli-uglify-es": "github:fusion2004/ember-cli-uglify-es",
     "ember-composable-helpers": "github:DockYard/ember-composable-helpers",
     "ember-data": "emberjs/data#master",
     "ember-debug-logger": "0.3.1",
