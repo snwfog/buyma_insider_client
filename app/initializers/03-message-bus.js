@@ -11,7 +11,7 @@ export function initialize(application) {
   application.reopen({
     ready() {
       this._super(...arguments);
-      messageBus.baseUrl = config.messageBus.backend;
+      messageBus.baseUrl = config.messageBus.backend + '/';
       messageBus.enableLongPolling = false; // disable long polling, webrick does not support partial rack hijack
       messageBus.start();
       info('MessageBus started...');

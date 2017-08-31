@@ -2,23 +2,29 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   var app = new EmberApp(defaults, {
     sourcemaps: {
-      enabled: EmberApp.env() !== 'production',
-      extensions: ['js'],
+      enabled:    EmberApp.env() !== 'production',
+      extensions: [ 'js' ],
     },
     // Add options here
-    SRI: {
+    SRI:        {
       enabled: false,
     },
 
     minifyJS: {
       enabled: EmberApp.env() === 'production',
+      options: {
+        'mx-line-len': 50000,
+      }
     },
 
     minifyCSS: {
       enabled: EmberApp.env() === 'production',
+      options: {
+        'mx-line-len': 50000,
+      }
     },
 
     sassOptions: {

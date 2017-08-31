@@ -9,7 +9,7 @@
           <div class="card is-fullwidth">
             <header class="card-header">
               <p class="card-header-title">
-              <h3 class="title is-3">{{capitalize merchant.name}}</h3>
+                <p class="title is-5 is-capitalized">{{merchant.name}}</p>
               </p>
             </header>
             <div class="card-content">
@@ -20,14 +20,16 @@
                 <!--</div>-->
                 <div class="level-item has-text-centered">
                   <div>
-                    <p class="heading">Total Articles</p>
-                    <p class="title">{{merchant.totalArticlesCount}}</p>
+                    <p class="heading">Articles</p>
+                    <p class="is-size-5">
+                      {{merchant.totalArticlesCount}}
+                    </p>
                   </div>
                 </div>
                 <div class="level-item has-text-centered">
                   <div>
                     <p class="heading">Index Pages</p>
-                    <p class="title">
+                    <p class="is-size-4">
                       {{merchant.indexPages.length}}
                     </p>
                   </div>
@@ -35,11 +37,11 @@
               </nav>
             </div>
             <footer class="card-footer">
+              {{#link-to 'merchant.detail' merchant.id class='card-footer-item'}}
+                View Detail
+              {{/link-to}}
               {{#link-to 'merchant.history' merchant.id class='card-footer-item'}}
                 Histories
-              {{/link-to}}
-              {{#link-to 'merchant.detail' merchant.id class='card-footer-item'}}
-                Detail
               {{/link-to}}
             </footer>
           </div>

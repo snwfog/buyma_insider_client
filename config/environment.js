@@ -33,7 +33,7 @@ module.exports = function (environment) {
     },
 
     MODEL: {
-      ARTICLES: {
+      ARTICLES:      {
         IS_NEW_DAYS: 6, // Beyond this days, article will not be considered as new
         SYNC_HEALTH: {
           NEWEST_DAYS:     1,
@@ -48,7 +48,6 @@ module.exports = function (environment) {
           FLAT_RATE:    'float_rate',
           PERCENT_RATE: 'percent_rate'
         },
-
         FLOW_DIRECTION: {
           INFLOW:  'inflow',
           OUTFLOW: 'outflow',
@@ -57,7 +56,6 @@ module.exports = function (environment) {
     }
   };
 
-  // TODO: Merge this with endpoint
   ENV.settings = {
     path: {
       login:     '/login',
@@ -66,18 +64,9 @@ module.exports = function (environment) {
     },
   };
 
-  ENV.messageBus = {
-    backend: 'http://localhost:9292/',
-  }
-
-  ENV.moment = {
-    outputFormat: 'MM/DD/YY HH:mm:SS'
-  };
-
   if (environment === 'development') {
     // Using bonjour DNS will slow from 2-3s on
     // windows machine trying to connect to mac
-    //     endpoint: 'http://192.168.0.16:9292', // air.local
     ENV.APP.SERVER.endpoint     = 'http://localhost:9292';
     ENV.settings.path.login     = ENV.APP.SERVER.endpoint + ENV.settings.path.login;
     ENV.settings.path.logout    = ENV.APP.SERVER.endpoint + ENV.settings.path.logout;
@@ -101,12 +90,21 @@ module.exports = function (environment) {
   }
 
   if (environment === 'staging') {
-    // ENV.APP.SERVER.endpoint = 'http://retina.local:9292';
+    ENV.APP.SERVER.endpoint = 'http://retina:8080';
   }
 
   if (environment === 'production') {
-
+    ENV.APP.SERVER.endpoint = 'http://mini:8080'
   }
+
+  // Addons and plugins configuration
+  ENV.messageBus = {
+    backend: ENV.APP.SERVER.endpoint,
+  }
+
+  ENV.moment = {
+    outputFormat: 'MM/DD/YY HH:mm:SS'
+  };
 
   // Addons
 //  ENV.moment = {

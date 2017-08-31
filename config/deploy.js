@@ -49,6 +49,18 @@ module.exports = function (deployTarget) {
 
   if (deployTarget === 'production') {
     ENV.build.environment = 'production';
+
+    ENV.redis = {
+      host:           process.env.PRODUCTION_HOST,
+      allowOverwrite: true
+    };
+
+    ENV.sftp = {
+      host:       process.env.PRODUCTION_HOST,
+      remoteUser: process.env.PRODUCTION_REMOTE_USER,
+      remoteDir:  process.env.PRODUCTION_REMOTE_DIR,
+      privateKey: process.env.PRODUCTION_PRIVATE_KEY,
+    };
     // configure other plugins for production deploy target here
   }
 
