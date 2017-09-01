@@ -44,7 +44,7 @@ module.exports = function (environment) {
         }
       },
       EXTRA_TARIFFS: {
-        RATE_TYPE: {
+        RATE_TYPE:      {
           FLAT_RATE:    'float_rate',
           PERCENT_RATE: 'percent_rate'
         },
@@ -90,11 +90,11 @@ module.exports = function (environment) {
   }
 
   if (environment === 'staging') {
-    ENV.APP.SERVER.endpoint = 'http://retina:8080';
+    ENV.APP.SERVER.endpoint = `http://${process.env.STAGING_HOST}.local:${process.env.STAGING_PORT}`;
   }
 
   if (environment === 'production') {
-    ENV.APP.SERVER.endpoint = 'http://mini:8080'
+    ENV.APP.SERVER.endpoint = `http://${process.env.PRODUCTION_HOST}.local:${process.env.PRODUCTION_PORT}`;
   }
 
   // Addons and plugins configuration
