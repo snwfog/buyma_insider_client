@@ -3,7 +3,11 @@ import PreloadStore from "../preload-store";
 export function initialize(appInstance) {
   window.BuymaInsider = appInstance;
 
-  const store                   = appInstance.lookup('service:store');
+  const store = appInstance.lookup('service:store');
+
+  // Merchants
+  const merchantsPayload = PreloadStore.get('merchants');
+  store.pushPayload('merchant', merchantsPayload);
 
   // Shipping services
   const shippingServicesPayload = PreloadStore.get('shipping_services');
@@ -21,5 +25,5 @@ export function initialize(appInstance) {
 export default {
   name:  '00-bootstrap',
   after: 'ember-data',
-         initialize
+  initialize
 };

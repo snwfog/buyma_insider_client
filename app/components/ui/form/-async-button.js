@@ -1,6 +1,6 @@
-import Ember from "ember";
-import EmberAsyncButtonComponent from "ember-async-button/components/async-button";
-import layout from "ember-async-button/templates/components/async-button";
+import Ember from 'ember';
+import EmberAsyncButtonComponent from 'ember-async-button/components/async-button';
+import layout from 'ember-async-button/templates/components/async-button';
 
 const { equal } = Ember.computed;
 

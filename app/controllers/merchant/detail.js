@@ -22,6 +22,8 @@ export default Ember.Controller.extend({
         .createRecord('action/index-pages/-refresh', { indexPage })
         .save()
         .then(() => {
+          // TODO: Refresh the index page properly
+          // TODO: Is it even necessary to refresh/reload?
           return this.store
             .findRecord('merchant/index-page', indexPage.id);
         });

@@ -9,7 +9,7 @@ export default DS.JSONAPISerializer.extend({
       'price-histories':                                'article/price-history',
       'article-notification-criteria':                  'article/notification-criterium',
       'discount-percent-article-notification-criteria': 'article/notification-criterium/discount-percent',
-      'user-auth-tokens':                            'user/auth-token',
+      'user-auth-tokens':                               'user/auth-token',
       'user-article-watcheds':                          'user/article-watched',
       'user-article-solds':                             'user/article-sold',
       'user-article-notifieds':                         'user/article-notified',
@@ -21,7 +21,7 @@ export default DS.JSONAPISerializer.extend({
   },
 
   payloadKeyFromModelName(key) {
-    var pluralizeKey = this._super(...arguments);
+    let pluralizeKey = this._super(...arguments);
     // TODO: This do for now, but probably should be more sophisticated
     // info(`payloadKeyFromModelName ${key}`);
     return pluralizeKey.split('/').join('_');

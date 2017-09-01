@@ -11,4 +11,13 @@ export default ApplicationSerializer.extend({
     // info(`payloadKeyFromModelName ${key}`);
     return key.split(/[^A-z_]/).join('_')
   },
+
+  modelNameFromPayloadKey(key) {
+    let dict = {
+      'index_pages_refresh':        'action/index-pages/-refresh',
+      'merchant_groom_index_pages': 'action/merchants/-groom-index-pages',
+    };
+
+    return !!dict[ key ] ? dict[ key ] : this._super(...arguments);
+  }
 });

@@ -1,5 +1,5 @@
-import DS from "ember-data";
-import config from "../config/environment";
+import DS from 'ember-data';
+import config from '../config/environment';
 
 const { log, info, warn, error, debug } = Ember.Logger;
 

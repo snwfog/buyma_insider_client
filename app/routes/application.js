@@ -26,7 +26,7 @@ export default Ember.Route.extend(
 
     model() {
       let applicationModels = {
-        merchants:   this.store.findAll('merchant'),
+        merchants:   this.store.peekAll('merchant'),
         oneDollar:   this.store.createRecord('money', { base: config.APP.CURRENCIES.CAD, amount: 1 }),
         oneUsDollar: this.store.createRecord('money', { base: config.APP.CURRENCIES.USD, amount: 1 }),
         oneYen:      this.store.createRecord('money', { base: config.APP.CURRENCIES.JPY, amount: 1 }),
