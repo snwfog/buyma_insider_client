@@ -1,8 +1,9 @@
-import Ember from "ember";
+import Ember from 'ember';
+import ResetScrollMixin from 'ember-cli-reset-scroll';
 
 const { assign, RSVP: { hash } } = Ember;
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ResetScrollMixin, {
   model(params) {
     // If we pass {{#link-to 'articles' article}} to
     // link-to and to the route, then Ember do not
