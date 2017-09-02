@@ -3,7 +3,7 @@
 {{/ui/b/resp/-hero}}
 <div class="section is-small">
   <div class="container">
-    {{#each model.merchants as |merchant|}}
+    {{#each (sort-by 'name' model.merchants) as |merchant|}}
       <div class="columns">
         <div class="column is-full">
           <div class="card is-fullwidth">
