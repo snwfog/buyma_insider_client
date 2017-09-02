@@ -101,7 +101,7 @@
     <ul class="menu-list">
       <li>
         <ul>
-          {{#each merchants as |merchant|}}
+          {{#each (sort-by 'name' merchants) as |merchant|}}
             <li>
               {{#ui/-side-menu-link-to 'merchant.index' merchant.id}}
                 <span>{{capitalize merchant.name}}</span>
