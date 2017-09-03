@@ -59,7 +59,7 @@
                 <div class="media-content">
                   <div class="content">
                     {{#link-to 'articles.article.index' articleHash.article.id}}
-                      <p class="title is-4">
+                      <p class="title is-4 is-capitalized">
                         {{articleHash.article.name}}
                       </p>
                       <p class="subtitle is-6">
@@ -70,13 +70,17 @@
                 </div>
               </div>
             </div>
-            <div class="column is-3">
-              <p class="title is-4">{{ui/-money articleHash.article.price}}</p>
-              <p class="subtitle is-6">{{ui/-money articleHash.article.price 'jpy'}}</p>
+            <div class="column is-3 has-text-right">
+              <p class="title is-4">
+                {{ui/-money articleHash.article.price}}
+              </p>
+              <p class="subtitle is-6">
+                {{ui/-money articleHash.article.price 'jpy'}}
+              </p>
             </div>
             <div class="column is-3">
               <p class="price-history">
-                {{ui/sparkline/-line data=(map-by 'price' (reverse (take 45 (sort-by 'createdAt:desc' articleHash.article.priceHistory))))}}
+                {{ui/sparkline/-line data=(map-by 'price' (take 45 articleHash.article.sortedPriceHistory))}}
               </p>
             </div>
           </div>

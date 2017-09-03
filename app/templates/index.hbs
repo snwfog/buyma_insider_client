@@ -12,7 +12,7 @@
             <span>Merchants</span>
           </p>
           <p class="panel-tabs"></p>
-          {{#each merchants as |merchant|}}
+          {{#each (sort-by 'name' merchants) as |merchant|}}
             {{#link-to 'merchant.index' merchant.id class='panel-block'}}
               <div class="media is-fullwidth">
                 <div class="media-left">

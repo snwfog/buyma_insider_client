@@ -134,12 +134,11 @@
           <div class="field is-grouped">
             <p class="control">
               {{#if indexPage.inprogress}}
-                <button disabled class="button is-warning is-loading">
+                <button disabled class="button is-loading">
                   Update
                 </button>
               {{else}}
-                {{#ui/form/-async-button class='button'
-                                         textState='is-warning'
+                {{#ui/form/-async-button class='button is-primary is-outlined'
                                          disable=(cannot 'refresh indexPage' indexPage)
                                          action=(action '_refreshIndexPage' indexPage) as |component state|}}
                   {{#if state.isRejected}}

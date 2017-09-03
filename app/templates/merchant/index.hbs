@@ -63,7 +63,7 @@
                 <div class="media-content">
                   <div class="content">
                     {{#link-to 'articles.article.index' article.id}}
-                      <p class="title is-4">
+                      <p class="title is-4 is-capitalized">
                         {{article.name}}
                         {{#if article.isNew}}
                           <span class="icon">
@@ -79,7 +79,7 @@
                 </div>
               </div>
             </div>
-            <div class="column is-3">
+            <div class="column is-3 has-text-right">
               <p class="title is-4">
                 {{ui/-money article.price}}
               </p>
