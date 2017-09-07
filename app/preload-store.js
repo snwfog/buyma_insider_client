@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 // Copy pasted from discourse preload store
 // 1. Used on app boots to store json data, reason for not using store is
 // to avoid calling serialization codes.
@@ -14,7 +14,7 @@ export default {
   data: {},
 
   store(key, value) {
-    this.data[key] = value;
+    this.data[ key ] = value;
   },
 
   /**
@@ -24,14 +24,14 @@ export default {
    So, for example, you can't load a preloaded topic more than once.
    **/
   getAndRemove(key, finder) {
-    if (this.data[key]) {
-      var promise = Em.RSVP.resolve(this.data[key]);
-      delete this.data[key];
+    if (this.data[ key ]) {
+      var promise = Em.RSVP.resolve(this.data[ key ]);
+      delete this.data[ key ];
       return promise;
     }
 
     if (finder) {
-      return new Ember.RSVP.Promise(function(resolve, reject) {
+      return new Ember.RSVP.Promise(function (resolve, reject) {
         var result = finder();
 
         // If the finder returns a promise, we support that too
@@ -47,11 +47,11 @@ export default {
   },
 
   get(key) {
-    return this.data[key];
+    return this.data[ key ];
   },
 
   remove(key) {
-    if (this.data[key]) {
+    if (this.data[ key ]) {
       delete this.data[ key ];
     }
   },

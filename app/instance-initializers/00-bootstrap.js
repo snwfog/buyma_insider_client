@@ -1,4 +1,4 @@
-import PreloadStore from "../preload-store";
+import PreloadStore from '../preload-store';
 
 export function initialize(appInstance) {
   window.BuymaInsider = appInstance;

@@ -124,7 +124,9 @@
           <figure class="image is-16x16 mr-1">
             <img src="http://bulma.io/images/jgthms.png" alt="">
           </figure>
-          {{currentUser.username}}
+          <span>
+            {{currentUser.username}}
+          </span>
         {{/link-to-with-action}}
 
         {{#link-to-with-action 'notification' class='navbar-item'
@@ -147,7 +149,7 @@
         {{#link-to-with-action 'logout'
                                class='navbar-item is-hidden-mobile'
                                invokeAction=(pipe-action (action '_logout')
-                                                         (disable 'navBarIsActive' this))
+                                   (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Logout{{/link-to-with-action}}
       {{else}}
         {{#link-to-with-action 'login'

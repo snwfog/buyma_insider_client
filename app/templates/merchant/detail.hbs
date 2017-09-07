@@ -113,7 +113,7 @@
           <div class="field">
             <p class="control is-expanded">
               <span class="select is-fullwidth">
-                {{#ui/form/-select content=indexPage.indexPages
+                {{#ui/form/-select content=(sort-by 'relativePath' indexPage.indexPages)
                                    action=(action '_updateIndexPage')
                                    prompt='Included Index Pages' as |childIndexPage|}}
                   <option value="{{childIndexPage.id}}">

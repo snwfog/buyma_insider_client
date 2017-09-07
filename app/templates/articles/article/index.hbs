@@ -87,12 +87,15 @@
       <div class="column is-4">
         <div class="card is-fullwidth">
           <header class="card-header"></header>
+
+          <!--Article description-->
           <div class="card-content">
             <div class="content is-medium">
               {{article.description}}
             </div>
           </div>
 
+          <!--Article price line-->
           <footer class="card-footer">
             <div class="card-footer-item">
               <div class="level-item price-history">
@@ -103,28 +106,25 @@
               </div>
             </div>
           </footer>
-          <footer class="card-footer">
-            <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
-              <tbody>
-              {{#if article.priceSummary.max}}
-                <tr>
-                  <td><b>Highest</b></td>
-                  <td>${{article.priceSummary.max.price}}</td>
-                  <td>{{moment-from-now article.priceSummary.max.seenAt}}</td>
-                </tr>
-              {{/if}}
-
-              {{#if article.priceSummary.min}}
-                <tr>
-                  <td><b>Lowest</b></td>
-                  <td>${{article.priceSummary.min.price}}</td>
-                  <td>{{moment-from-now article.priceSummary.min.seenAt}}</td>
-                </tr>
-              {{/if}}
-              </tbody>
-            </table>
-          </footer>
         </div>
+
+        <!--Article price table-->
+        <table class="table is-bordered is-narrow is-striped mt-2 is-fullwidth">
+          <thead>
+          <tr>
+            <th><abbr class="is-size-5" title="Time">Time</abbr></th>
+            <th><abbr class="is-size-5" title="Price">Price</abbr></th>
+          </tr>
+          </thead>
+          <tbody>
+          {{#each article.sortedPriceHistory as |priceHistory|}}
+            <tr>
+              <td>{{moment-format priceHistory.timestamp 'MMM-D-YYYY'}}</td>
+              <td>{{ui/-money priceHistory.priceAmount showCode=false}}</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -133,7 +133,8 @@
 <!--Similar articles-->
 <section class="section is-small">
   <div class="container">
-    <hr>
+    <div class="is-divider" data-content="Similar Articles"></div>
+
     <div class="title is-3 has-text-right">Similar</div>
     <div class="columns">
       {{#each (await articleRelateds) as |article|}}
