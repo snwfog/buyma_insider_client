@@ -86,10 +86,14 @@
 
       <div class="column is-4">
         <div class="card is-fullwidth">
-          <header class="card-header"></header>
+          <header class="card-header">
+            <p class="card-header-title">
+              {{article.merchant.name}}
+            </p>
+          </header>
 
           <!--Article description-->
-          <div class="card-content">
+          <div class="card-content is-small">
             <div class="content is-medium">
               {{article.description}}
             </div>

@@ -12,15 +12,15 @@ const { IS_NEW_DAYS,
         SYNC_HEALTH: { NEWEST_DAYS, VERY_FRESH_DAYS, FRESH_DAYS, } } = config.MODEL.ARTICLES;
 
 export default DS.Model.extend({
-  articleRelateds: hasMany('article', { async: true }),
+  articleRelateds: hasMany('article',    { async: true }),
+  merchant:        belongsTo('merchant', { async: true, inverse: 'articles' }),
 
-  name:         attr(),
-  price:        attr('money', { code: 'cad' }),
-  link:         attr('uri'),
-  description:  attr(),
-
-  priceHistory: attr('price-history'),
-  priceSummary: attr('price-summary'),
+  name:            attr(),
+  price:           attr('money', { code: 'cad' }),
+  link:            attr('uri'),
+  description:     attr(),
+  priceHistory:    attr('price-history'),
+  priceSummary:    attr('price-summary'),
 
   syncedAt:     attr('datetime'),
   createdAt:    attr('datetime'),
