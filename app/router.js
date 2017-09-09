@@ -23,7 +23,7 @@ Router.map(function () {
     this.route('dashboard');
   });
 
-  this.route('dashboard-archive', { path: '/archive' }, function () {
+  this.route('dashboard-archive',         { path: '/archive' }, function () {
     this.route('dashboard-archive-index', { path: '/' });
     this.route('year',                    { path: '/:year' }, function () {
       this.route('year-index',            { path: '/' });
@@ -35,12 +35,12 @@ Router.map(function () {
       this.route('month-index');
     }); });
 
-  this.route('articles', { path: '/articles' }, function () {
+  this.route('articles',                  { path: '/articles' }, function () {
     this.route('_search', function () {
-      this.route('index', { path: '/' }); });
+      this.route('index',                 { path: '/' }); });
 
-    this.route('article', { path: '/:article_id' }, function () {
-      this.route('index', { path: '/' }, function () {
+    this.route('article',                 { path: '/:article_id' }, function () {
+      this.route('article-index',         { path: '/' }, function () {
         this.route('information');
         this.route('history'); });
 

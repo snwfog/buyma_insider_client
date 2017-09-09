@@ -53,8 +53,8 @@
             <div class="tabs is-left">
               <ul>
                 {{#if currentUser}}
-                  {{#link-to 'articles.article.index.information' article.id tagName='li' activeClass='is-active'}}
-                    {{#link-to 'articles.article.index.information' article.id}}
+                  {{#link-to 'articles.article.article-index.information' article.id tagName='li' activeClass='is-active'}}
+                    {{#link-to 'articles.article.article-index.information' article.id}}
                       <span class="icon is-medium">
                         {{ui/-icon 'info_outline'}}
                       </span>
@@ -64,8 +64,8 @@
                     {{/link-to}}
                   {{/link-to}}
 
-                  {{#link-to 'articles.article.index.history' article.id tagName='li' activeClass='is-active'}}
-                    {{#link-to 'articles.article.index.history' article.id}}
+                  {{#link-to 'articles.article.article-index.history' article.id tagName='li' activeClass='is-active'}}
+                    {{#link-to 'articles.article.article-index.history' article.id}}
                       <span class="icon is-medium">
                         {{ui/-icon 'history'}}
                       </span>
@@ -146,7 +146,7 @@
         <!--Mobile list-->
         <div class="column is-2 is-hidden-tablet">
           <p class="content is-size-5 is-capitalized">
-            {{#link-to 'articles.article.index' article.id}}
+            {{#link-to 'articles.article.article-index' article.id}}
               {{capitalize article.name}}
             {{/link-to}}
           </p>
@@ -172,7 +172,7 @@
             </div>
             <div class="card-footer">
               <div class="card-footer-item">
-                {{#link-to 'articles.article.index' article.id}}View{{/link-to}}
+                {{#link-to 'articles.article.article-index' article.id}}View{{/link-to}}
               </div>
             </div>
           </div>

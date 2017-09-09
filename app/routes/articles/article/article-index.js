@@ -33,6 +33,6 @@ export default Ember.Route.extend(ResetScrollMixin, {
   // Always default to information route
   // Update: This redirect messed up all subroute modelFor methods...
   // redirect(models, transition) {
-  //   this.transitionTo('articles.article.index.information', models.article);
+  //   this.transitionTo('articles.article.article-index.information', models.article);
   // }
 });

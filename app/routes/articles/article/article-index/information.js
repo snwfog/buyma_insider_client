@@ -5,7 +5,7 @@ const { assign, RSVP: { hash } } = Ember;
 export default Ember.Route.extend({
   model(params, transition) {
     const models                     = {};
-    const articlesArticleIndexModels = this.modelFor('articles.article.index');
+    const articlesArticleIndexModels = this.modelFor('articles.article.article-index');
     assign(models, articlesArticleIndexModels);
     return hash(models);
   },

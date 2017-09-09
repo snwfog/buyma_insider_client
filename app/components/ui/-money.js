@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 const { computed, inject } = Ember;
 
 let UiMoneyComponent = Ember.Component.extend({
