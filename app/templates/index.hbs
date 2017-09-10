@@ -13,10 +13,10 @@
           </p>
           <p class="panel-tabs"></p>
           {{#each (sort-by 'name' merchants) as |merchant|}}
-            {{#link-to 'merchant.index' merchant.id class='panel-block'}}
+            {{#link-to 'merchant.merchant-index' merchant.id class='panel-block'}}
               <div class="media is-fullwidth">
-                <div class="media-left">
-                  {{capitalize merchant.name}}
+                <div class="media-left is-capitalized">
+                  {{merchant.name}}
                 </div>
                 <div class="media-content"></div>
                 <div class="media-right">

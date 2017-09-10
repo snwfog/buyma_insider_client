@@ -36,6 +36,7 @@ module.exports = function (defaults) {
         'bower_components/bulma-steps',
         'bower_components/bulma-tooltip',
         'bower_components/bulma-divider',
+        'bower_components/bulma-megamenu',
       ]
     },
   });

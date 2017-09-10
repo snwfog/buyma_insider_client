@@ -20,18 +20,80 @@
 
         <div class="content is-button-group">
           <p class="title is-4">Orderings</p>
-          {{#link-to 'merchant' merchant.id (query-params order='name')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}By Name{{/link-to}}
-          {{#link-to 'merchant' merchant.id (query-params order='price')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'attach_money'}}</span><span>By Price</span>{{/link-to}}
-          {{#link-to 'merchant' merchant.id (query-params order='created_at')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Created</span>{{/link-to}}
-          {{#link-to 'merchant' merchant.id (query-params order='updated_at')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Updated</span>{{/link-to}}
+
+          <!--Ordering name-->
+          <div class="field has-addons">
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='name')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}By Name{{/link-to}}
+            </p>
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='name:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
+
+          <!--Ordering price-->
+          <div class="field has-addons">
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='price')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span class="icon is-small">{{ui/-icon 'attach_money'}}</span>
+                <span>By Price</span>
+              {{/link-to}}
+            </p>
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='price:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
+
+          <!--Ordering created at-->
+          <div class="field has-addons">
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='created_at')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span class="icon is-small">{{ui/-icon 'date_range'}}</span>
+                <span>By Date Created</span>
+              {{/link-to}}
+            </p>
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='created_at:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
+
+          <!--Ordering updated at-->
+          <div class="field has-addons">
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='updated_at')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Updated</span>{{/link-to}}
+            </p>
+            <p class="control">
+              {{#link-to 'merchant' merchant.id (query-params order='updated_at:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
         </div>
 
         <div class="content">

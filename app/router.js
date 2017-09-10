@@ -44,20 +44,20 @@ Router.map(function () {
         this.route('information');
         this.route('history'); });
 
-      this.route('sold', { path: '/sold/:user_article_sold_id' }); }); });
+      this.route('sold',                  { path: '/sold/:user_article_sold_id' }); }); });
 
-  this.route('merchant', { path: '/m/:merchant_id' }, function () {
-    this.route('index', { path: '/' });
+  this.route('merchant',                  { path: '/m/:merchant_id' }, function () {
+    this.route('merchant-index',          { path: '/' });
     this.route('history');
     this.route('detail'); });
 
   this.route('user', function () {
     this.route('profile', function () {
-      this.route('profile-index', { path: '/' }, function () {
+      this.route('profile-index',         { path: '/' }, function () {
         this.route('settings');
-        this.route('extra-tariffs-setting', { path: 'extra_tariffs' });
+        this.route('extra-tariffs-setting',     { path: 'extra_tariffs' });
         this.route('shipping-services-setting', { path: 'shipping_services' });
-        this.route('profit-margins-setting', { path: 'profit_margins' });
+        this.route('profit-margins-setting',    { path: 'profit_margins' });
       }); }); });
 });
 

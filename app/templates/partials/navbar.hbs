@@ -78,6 +78,34 @@
         </span>
       {{/link-to-with-action}}
 
+      <!--Merchant dropdown + megamenu-->
+      <div class="navbar-item has-dropdown is-hoverable is-mega is-hidden-mobile">
+        <div class="navbar-link">Merchants</div>
+        <div class="navbar-dropdown is-radiusless">
+          <div class="container is-fluid">
+            {{#each (chunk 4 (sort-by 'name' merchants)) as |merchants_chunk|}}
+              <div class="columns">
+                {{#each merchants_chunk as |merchant|}}
+                  <div class="column is-3">
+                    <p class="title is-size-4 is-mega-menu-title">
+                      {{merchant.name}}
+                    </p>
+                    {{#link-to 'merchant.merchant-index' merchant.id class='navbar-item'}}
+                      <div class="navbar-content">
+                        <p class="is-uppercase is-size-5">
+                          {{merchant.id}}
+                        </p>
+                        <p>Articles: {{merchant.totalArticlesCount}}</p>
+                      </div>
+                    {{/link-to}}
+                  </div>
+                {{/each}}
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
       <span class="navbar-item is-hidden-tablet">
         <div class="columns is-mobile">
           <div class="column is-half">
@@ -104,21 +132,21 @@
       </span>
 
       {{#link-to-with-action 'status'
-                             class='navbar-item'
+                             class='navbar-item is-hidden-mobile'
                              invokeAction=(action (disable 'navBarIsActive' this))
                              activeClass='is-active'}}Status{{/link-to-with-action}}
 
       {{#if currentUser}}
         {{#link-to-with-action 'index.dashboard'
-                               class='navbar-item'
+                               class='navbar-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Dashboard{{/link-to-with-action}}
         {{#link-to-with-action 'dashboard-archive'
-                               class='navbar-item'
+                               class='navbar-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}Archive{{/link-to-with-action}}
         {{#link-to-with-action 'user.profile.profile-index.settings'
-                               class='navbar-item'
+                               class='navbar-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                activeClass='is-active'}}
           <figure class="image is-16x16 mr-1">
@@ -129,7 +157,8 @@
           </span>
         {{/link-to-with-action}}
 
-        {{#link-to-with-action 'notification' class='navbar-item'
+        {{#link-to-with-action 'notification'
+                               class='navbar-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                actionClass='is-active'}}
           <span class="icon is-small">
