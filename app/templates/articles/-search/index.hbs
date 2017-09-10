@@ -7,7 +7,12 @@
           <p class="title is-4">Filters</p>
           {{#link-to 'articles._search.index' (query-params filter='new')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}New{{/link-to}}
+                     activeClass='is-active'}}
+            <span class="icon is-small">
+              {{ui/-icon 'stars'}}
+            </span>
+            <span>New</span>
+          {{/link-to}}
           {{#link-to 'articles._search.index' (query-params filter='sale')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-primary is-active'}}Sale{{/link-to}}
@@ -23,15 +28,65 @@
           {{!--{{#link-to 'articles._search.index' (query-params order='name')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-active'}}Name{{/link-to}}--}}
-          {{#link-to 'articles._search.index' (query-params order='price')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'money'}}</span><span>Price</span>{{/link-to}}
-          {{#link-to 'articles._search.index' (query-params order='created_at')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Created</span>{{/link-to}}
-          {{#link-to 'articles._search.index' (query-params order='updated_at')
-                     class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}<span class="icon is-small">{{fa-icon 'calendar-o'}}</span><span>Updated</span>{{/link-to}}
+          <!--Ordering by price-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
+              {{#link-to 'articles._search.index' (query-params order='price')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span class="icon is-small">{{ui/-icon 'attach_money'}}</span>
+                <span>By Price</span>
+              {{/link-to}}
+            </p>
+            <p class="control is-marginless">
+              {{#link-to 'articles._search.index' (query-params order='price:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
+
+          <!--Ordering by created at-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
+              {{#link-to 'articles._search.index' (query-params order='created_at')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span class="icon is-small">{{ui/-icon 'date_range'}}</span>
+                <span>By Date Created</span>
+              {{/link-to}}
+            </p>
+            <p class="control is-marginless">
+              {{#link-to 'articles._search.index' (query-params order='created_at:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
+
+          <!--Ordering by updated at-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
+              {{#link-to 'articles._search.index' (query-params order='updated_at')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span class="icon is-small">{{ui/-icon 'date_range'}}</span>
+                <span>By Date Updated</span>
+              {{/link-to}}
+            </p>
+            <p class="control is-marginless">
+              {{#link-to 'articles._search.index' (query-params order='updated_at:desc')
+                         class='button is-outlined is-primary is-small'
+                         activeClass='is-active'}}
+                <span>Descending</span>
+                <span class="icon is-small">{{ui/-icon 'arrow_downward'}}</span>
+              {{/link-to}}
+            </p>
+          </div>
         </div>
       </div>
 

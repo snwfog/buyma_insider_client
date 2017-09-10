@@ -10,24 +10,28 @@
       </span>
     {{/side-menu-toggle}}
 
-    <span class="navbar-item is-hidden-tablet">
-      <p class="control is-fullwidth">
-        {{input id="nav-search-input-mobile"
-                class="input"
-                type="text"
-                value=inputSearchArticleQuery
-                enter=(action '_searchArticles')
-                placeholder="Search..."}}
-      </p>
-      {{#if inputSearchArticleQuery}}
-        <span class="icon">
-            <a class="delete" {{action (reset-prop 'inputSearchArticleQuery' this)}}></a>
-          </span>
-      {{/if}}
+    <span id="nav-search-item" class="navbar-item navbar-item-mobile is-hidden-tablet">
+      <div class="field has-addons">
+        <p class="control">
+          {{input id="nav-search-input"
+                  class="input is-radiusless"
+                  type="text"
+                  value=inputSearchArticleQuery
+                  enter=(action '_searchArticles')
+                  placeholder="Search..."}}
+        </p>
+        <div class="control">
+          <a class="button is-white" {{action (reset-prop 'inputSearchArticleQuery' this)}}>
+            <span class="icon {{if inputSearchArticleQuery 'has-text-primary' 'has-text-light'}}">
+              {{ui/-icon 'cancel'}}
+            </span>
+          </a>
+        </div>
+      </div>
     </span>
 
     {{#with unreadArticleNotifieds as |unreadArticleNotifieds|}}
-      {{#link-to 'notification' class='navbar-item is-hidden-tablet'}}
+      {{#link-to 'notification' class='navbar-item navbar-item-mobile is-hidden-tablet'}}
         <span class="tag is-warning is-bold">
           {{unreadArticleNotifieds.length}}
         </span>
@@ -88,7 +92,12 @@
                 {{#each merchants_chunk as |merchant|}}
                   <div class="column is-3">
                     <p class="title is-size-4 is-mega-menu-title">
-                      {{merchant.name}}
+                      <span class="icon">
+                        {{ui/-icon 'domain'}}
+                      </span>
+                      <span>
+                        {{merchant.name}}
+                      </span>
                     </p>
                     {{#link-to 'merchant.merchant-index' merchant.id class='navbar-item'}}
                       <div class="navbar-content">
@@ -161,7 +170,7 @@
                                class='navbar-item is-hidden-mobile'
                                invokeAction=(action (disable 'navBarIsActive' this))
                                actionClass='is-active'}}
-          <span class="icon is-small">
+          <span class="icon is-small mr-1">
             {{fa-icon 'envelope-o'}}
           </span>
 

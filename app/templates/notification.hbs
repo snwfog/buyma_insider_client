@@ -57,12 +57,12 @@
                       {{/ui/form/-async-button}}
                     </div>
                     <div class="media-content">
-                      <p>
+                      <div>
                         <strong>{{articleNotified.article.name}}</strong>
                         <small class="is-capitalized is-underline-dashed">
                           {{moment-from-now articleNotified.createdAt}}
                         </small>
-                      </p>
+                      </div>
                       <nav class="level is-mobile">
                         <div class="level-left">
                           {{#each articleNotified.notificationCriteria as |notificationCriterium|}}
@@ -78,7 +78,8 @@
                   {{/if}}
                   <div class="media-right">
                     <div class="content">
-                      {{#link-to 'articles.article' articleNotified.article.id class='level-item button is-small'}}
+                      {{#link-to 'articles.article' articleNotified.article.id
+                                 class='level-item button is-small'}}
                         <span>View Article</span>
                         <span class="icon is-small">
                           {{fa-icon 'mail-forward'}}

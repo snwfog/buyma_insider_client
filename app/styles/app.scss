@@ -21,13 +21,17 @@ html {
   text-shadow: 2px 1px $grey-lighter;
 }
 
-#nav-search-input-mobile {
-  padding:       0;
-  border-radius: 0;
-  border-top:    none;
-  border-left:   none;
-  border-right:  none;
-  box-shadow:    none;
+.navbar-item-mobile {
+  padding-right: 0;
+  padding-left:  0;
+
+  #nav-search-input {
+    padding:      0;
+    border-top:   none;
+    border-left:  none;
+    border-right: none;
+    box-shadow:   none;
+  }
 }
 
 #nav-center-mobile {

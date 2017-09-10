@@ -8,7 +8,12 @@
           <p class="title is-4">Filters</p>
           {{#link-to 'merchant' merchant.id (query-params filter='new')
                      class='button is-outlined is-primary is-small'
-                     activeClass='is-active'}}New{{/link-to}}
+                     activeClass='is-active'}}
+            <span class="icon is-small">
+              {{ui/-icon 'stars'}}
+            </span>
+            <span>New</span>
+          {{/link-to}}
           {{#link-to 'merchant' merchant.id (query-params filter='sale')
                      class='button is-outlined is-primary is-small'
                      activeClass='is-primary is-active'}}Sale{{/link-to}}
@@ -21,14 +26,17 @@
         <div class="content is-button-group">
           <p class="title is-4">Orderings</p>
 
-          <!--Ordering name-->
-          <div class="field has-addons">
-            <p class="control">
+          <!--Ordering by name-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='name')
                          class='button is-outlined is-primary is-small'
-                         activeClass='is-active'}}By Name{{/link-to}}
+                         activeClass='is-active'}}
+                <span class="icon is-small">{{ui/-icon 'arrow_upward'}}</span>
+                <span>By Name</span>
+              {{/link-to}}
             </p>
-            <p class="control">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='name:desc')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}
@@ -38,9 +46,9 @@
             </p>
           </div>
 
-          <!--Ordering price-->
-          <div class="field has-addons">
-            <p class="control">
+          <!--Ordering by price-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='price')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}
@@ -48,7 +56,7 @@
                 <span>By Price</span>
               {{/link-to}}
             </p>
-            <p class="control">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='price:desc')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}
@@ -58,9 +66,9 @@
             </p>
           </div>
 
-          <!--Ordering created at-->
-          <div class="field has-addons">
-            <p class="control">
+          <!--Ordering by created at-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='created_at')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}
@@ -68,7 +76,7 @@
                 <span>By Date Created</span>
               {{/link-to}}
             </p>
-            <p class="control">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='created_at:desc')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}
@@ -78,14 +86,14 @@
             </p>
           </div>
 
-          <!--Ordering updated at-->
-          <div class="field has-addons">
-            <p class="control">
+          <!--Ordering by updated at-->
+          <div class="field has-addons is-marginless">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='updated_at')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}<span class="icon is-small">{{ui/-icon 'date_range'}}</span><span>By Date Updated</span>{{/link-to}}
             </p>
-            <p class="control">
+            <p class="control is-marginless">
               {{#link-to 'merchant' merchant.id (query-params order='updated_at:desc')
                          class='button is-outlined is-primary is-small'
                          activeClass='is-active'}}
@@ -98,7 +106,14 @@
 
         <div class="content">
           <p class="title is-4">Legends</p>
-          <p><span><span class="icon">{{ui/-icon 'stars' class='is-green'}}</span> New Articles (7 days)</span></p>
+          <p>
+            <span class="icon">
+              {{ui/-icon 'stars' class='is-green'}}
+            </span>
+            <span>
+              New Articles (7 days)
+            </span>
+          </p>
         </div>
       </div>
 

@@ -10,15 +10,16 @@ export default Ember.Controller.extend({
   navBarIsActive:         false,
   applicationUpdated:     computed.alias('applicationService.isUpdated'),
   unreadArticleNotifieds: computed.filterBy('articleNotifieds', 'isRead', false),
+  inputSearchQueryQuery:  null,
 
   jpyValue: computed('cadValue', 'exchangeRatesService.exchangeRates', function () {
-    let cadValue             = this.get('cadValue');
-    let { locale, code }     = this.exchangeRatesService.lookup('jpy');
-    let formatter            = new Intl.NumberFormat(locale, {
+    let cadValue         = this.get('cadValue');
+    let { locale, code } = this.exchangeRatesService.lookup('jpy');
+    let formatter        = new Intl.NumberFormat(locale, {
       style:    'currency',
       currency: 'jpy'
     });
-    let convertedAmount      = this.exchangeRatesService.cad2jpy(cadValue);
+    let convertedAmount  = this.exchangeRatesService.cad2jpy(cadValue);
     return formatter.format(convertedAmount);
   }),
   cadValue: null,
@@ -28,7 +29,7 @@ export default Ember.Controller.extend({
 //         return this.exchangeRatesService.convertCurrency('jpy', 'cad', jpyValue);
 //       }),
 
-  actions:                {
+  actions: {
     '_toast'(message, severity) {
       severity = severity || 'log';
       this.toastService[ severity ](message);
