@@ -1,10 +1,16 @@
-<a class="pagination-previous {{if isFirstDisabled 'is-disabled'}}"
+<a class="button is-outlined is-primary pagination-previous {{if isFirstDisabled 'is-disabled'}}"
    href="{{previousUrl}}" {{action 'previous'}}>
-  {{{pagerPrevious}}}
+  <span class="icon">
+    {{ui/-icon 'navigate_before'}}
+  </span>
+  <span>{{{pagerPrevious}}}</span>
 </a>
-<a class="pagination-next {{if isLastDisabled 'is-disabled'}}"
+<a class="button is-outlined is-primary pagination-next {{if isLastDisabled 'is-disabled'}}"
    href="{{nextUrl}}" {{action 'next'}}>
-  {{{pagerNext}}}
+  <span>{{{pagerNext}}}</span>
+  <span class="icon">
+    {{ui/-icon 'navigate_next'}}
+  </span>
 </a>
 <ul class="pagination-list is-fullwidth">
   {{#each pages key='@index' as |page|}}

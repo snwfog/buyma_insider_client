@@ -1,6 +1,7 @@
 export function initialize(application) {
   // Store injection
   application.inject('transform',  'store', 'service:store');
+
   // Backend application state service
   application.inject('route',      'applicationService', 'service:application');
   application.inject('controller', 'applicationService', 'service:application');
@@ -15,6 +16,9 @@ export function initialize(application) {
   application.inject('model',      'toastService', 'service:toast');
   application.inject('route',      'toastService', 'service:toast');
   application.inject('controller', 'toastService', 'service:toast');
+
+  // Search service
+  application.inject('controller', 'searchService', 'service:search');
 
 
 //   application.inject('route',      'currentUserService', 'service:current-user');

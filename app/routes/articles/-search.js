@@ -12,6 +12,5 @@ export default Ember.Route.extend({
   setupController(controller, models, transition) {
     return this._super(...arguments);
 //     var { q } = controller.get('target.router.activeTransition.queryParams');
-//     controller.set('inputSearchArticleQuery', q);
   }
 });

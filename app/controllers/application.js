@@ -10,7 +10,6 @@ export default Ember.Controller.extend({
   navBarIsActive:         false,
   applicationUpdated:     computed.alias('applicationService.isUpdated'),
   unreadArticleNotifieds: computed.filterBy('articleNotifieds', 'isRead', false),
-  inputSearchQueryQuery:  null,
 
   jpyValue: computed('cadValue', 'exchangeRatesService.exchangeRates', function () {
     let cadValue         = this.get('cadValue');
@@ -36,7 +35,7 @@ export default Ember.Controller.extend({
     },
 
     '_searchArticles'() {
-      let q = this.get('inputSearchArticleQuery');
+      let q = this.get('searchService.searchTerm');
       if (!q) {
         return Ember.RSVP.reject();
       }

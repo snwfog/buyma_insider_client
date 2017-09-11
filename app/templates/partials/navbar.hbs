@@ -16,13 +16,13 @@
           {{input id="nav-search-input"
                   class="input is-radiusless"
                   type="text"
-                  value=inputSearchArticleQuery
+                  value=searchService.searchTerm
                   enter=(action '_searchArticles')
                   placeholder="Search..."}}
         </p>
         <div class="control">
-          <a class="button is-white" {{action (reset-prop 'inputSearchArticleQuery' this)}}>
-            <span class="icon {{if inputSearchArticleQuery 'has-text-primary' 'has-text-light'}}">
+          <a class="button is-white" {{action (reset-prop 'searchService.searchTerm' this)}}>
+            <span class="icon {{if searchService.searchTerm 'has-text-primary' 'has-text-light'}}">
               {{ui/-icon 'cancel'}}
             </span>
           </a>
@@ -91,7 +91,7 @@
               <div class="columns">
                 {{#each merchants_chunk as |merchant|}}
                   <div class="column is-3">
-                    <p class="title is-size-4 is-mega-menu-title">
+                    <p class="title is-size-5 is-mega-menu-title">
                       <span class="icon">
                         {{ui/-icon 'domain'}}
                       </span>
