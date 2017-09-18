@@ -91,10 +91,10 @@
               <div class="columns">
                 {{#each merchants_chunk as |merchant|}}
                   <div class="column is-3">
-                    <p class="title is-size-5 is-mega-menu-title">
-                      <span class="icon">
-                        {{ui/-icon 'domain'}}
-                      </span>
+                    <p class="title is-size-5 is-mega-menu-title is-flex is-align-items-center">
+                      <figure class="image is-16x16 mr-0_5">
+                        <img src="/images/favicon_{{underscore merchant.name}}.ico" alt="">
+                      </figure>
                       <span>
                         {{merchant.name}}
                       </span>

@@ -3,6 +3,8 @@ import moment from 'moment';
 import array from 'ember-awesome-macros/array';
 import { extractError } from '../lib/ajax-error';
 
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+
 const { computed, RSVP: { all, hash } } = Ember;
 
 export default Ember.Route.extend({

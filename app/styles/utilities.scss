@@ -1,13 +1,20 @@
-// Spacing
-.mt-1 { margin-top:    1em; }
-.mr-1 { margin-right:  1em; }
-.ml-1 { margin-left:   1em; }
-.mb-1 { margin-bottom: 1em; }
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
 
-.mt-2 { margin-top:    2em; }
-.mr-2 { margin-right:  2em; }
-.ml-2 { margin-left:   2em; }
-.mb-2 { margin-bottom: 2em; }
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// Spacing
+@each $spacing in '0.5', '1', '2', '3' {
+  .mt-#{str-replace($spacing, '.', '_')} { margin-top:    #{$spacing}em; }
+  .mr-#{str-replace($spacing, '.', '_')} { margin-right:  #{$spacing}em; }
+  .ml-#{str-replace($spacing, '.', '_')} { margin-left:   #{$spacing}em; }
+  .mb-#{str-replace($spacing, '.', '_')} { margin-bottom: #{$spacing}em; }
+}
 
 .padding-one-half { padding: 0.35em; }
 .padding-1        { padding: 0.75em; }

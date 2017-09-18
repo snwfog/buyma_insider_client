@@ -103,8 +103,16 @@
         <ul>
           {{#each (sort-by 'name' merchants) as |merchant|}}
             <li>
-              {{#ui/-side-menu-link-to 'merchant.merchant-index' merchant.id}}
-                <span>{{capitalize merchant.name}}</span>
+              {{#ui/-side-menu-link-to 'merchant.merchant-index' merchant.id
+                                       class='is-radiusless'}}
+                <p class="title is-6">
+                  {{merchant.name}}
+                </p>
+                <p class="subtitle">
+                  <span class="tag is-gray">
+                    {{merchant.totalArticlesCount}}
+                  </span>
+                </p>
               {{/ui/-side-menu-link-to}}
             </li>
           {{/each}}

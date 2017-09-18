@@ -1,5 +1,6 @@
 import Ember from 'ember';
 const { A, RSVP: { hash } } = Ember;
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend({
   titleToken(models) {
