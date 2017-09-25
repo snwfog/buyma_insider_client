@@ -1,17 +1,27 @@
-<a class="button is-outlined is-primary pagination-previous {{if isFirstDisabled 'is-disabled'}}"
-   href="{{previousUrl}}" {{action 'previous'}}>
-  <span class="icon">
-    {{ui/-icon 'navigate_before'}}
-  </span>
-  <span>{{{pagerPrevious}}}</span>
-</a>
-<a class="button is-outlined is-primary pagination-next {{if isLastDisabled 'is-disabled'}}"
-   href="{{nextUrl}}" {{action 'next'}}>
-  <span>{{{pagerNext}}}</span>
-  <span class="icon">
-    {{ui/-icon 'navigate_next'}}
-  </span>
-</a>
+{{#if isFirstDisabled}}
+  <a class="button is-outlined is-dark pagination-previous" disabled href="{{previousUrl}}" {{action 'previous'}}>
+    <span class="icon">{{ui/-icon 'navigate_before'}}</span>
+    <span>{{{pagerPrevious}}}</span>
+  </a>
+{{else}}
+  <a class="button is-primary pagination-previous" href="{{previousUrl}}" {{action 'previous'}}>
+    <span class="icon">{{ui/-icon 'navigate_before'}}</span>
+    <span>{{{pagerPrevious}}}</span>
+  </a>
+{{/if}}
+
+{{#if isLastDisabled}}
+  <a class="button is-outlined is-dark pagination-next" disabled href="{{nextUrl}}" {{action 'next'}}>
+    <span>{{{pagerNext}}}</span>
+    <span class="icon">{{ui/-icon 'navigate_next'}}</span>
+  </a>
+{{else}}
+  <a class="button is-primary pagination-next" href="{{nextUrl}}" {{action 'next'}}>
+    <span>{{{pagerNext}}}</span>
+    <span class="icon">{{ui/-icon 'navigate_next'}}</span>
+  </a>
+{{/if}}
+
 <ul class="pagination-list is-fullwidth">
   {{#each pages key='@index' as |page|}}
     {{ui/-pager-item disabled=disabled page=page
