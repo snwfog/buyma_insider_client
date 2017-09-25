@@ -23,7 +23,7 @@ export default Ember.Route.extend({
 
   model(params) {
     return hash({
-      merchant: this.store.find('merchant', params['merchant_id'])
+      merchant: this.store.findRecord('merchant', params['merchant_id'])
     });
   },
 

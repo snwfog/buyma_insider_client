@@ -8,6 +8,7 @@ export default Ember.Route.extend({
     let { merchant } = this.modelFor('merchant');
     return hash({
       merchant,
+      metadatum: merchant.get('metadatum'),
     });
   },
 

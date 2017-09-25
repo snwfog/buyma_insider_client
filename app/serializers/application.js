@@ -26,4 +26,13 @@ export default DS.JSONAPISerializer.extend({
     // info(`payloadKeyFromModelName ${key}`);
     return pluralizeKey.split('/').join('_');
   },
+
+  keyForRelationship(key, relationship, method) {
+    let dict = {
+      'metadatum': 'merchant-metadatum',
+    }
+
+    let relationKey = dict[ key ];
+    return !!relationKey ? relationKey : this._super(key, relationship, method);
+  },
 });
