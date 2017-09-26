@@ -13,19 +13,15 @@
           </p>
           <p class="panel-tabs"></p>
           {{#each (sort-by 'name' merchants) as |merchant|}}
-            {{#link-to 'merchant.merchant-index' merchant.id class='panel-block'}}
-              <div class="media is-fullwidth">
-                <div class="media-left is-capitalized">
-                  {{merchant.name}}
+            {{#link-to 'merchant.merchant-index' merchant.id
+                       class='panel-block is-flex-justify-content-space-between'}}
+              <p class="is-size-5">{{merchant.name}}</p>
+              <p class="is-size-6">
+                <div class="tags has-addons">
+                  <span class="tag">{{merchant.id}}</span>
+                  <span class="tag is-dark">{{merchant.totalArticlesCount}}</span>
                 </div>
-                <div class="media-content"></div>
-                <div class="media-right">
-                  <div class="tags has-addons">
-                    <span class="tag">{{merchant.id}}</span>
-                    <span class="tag is-dark">{{merchant.totalArticlesCount}}</span>
-                  </div>
-                </div>
-              </div>
+              </p>
             {{/link-to}}
           {{/each}}
         </nav>
